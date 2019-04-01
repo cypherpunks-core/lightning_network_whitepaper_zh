@@ -24,8 +24,8 @@ rx@awsomnet.org
       - [3.1.4 承諾交易：指出禍源 | Commitment Transactions: Ascribing Blame](#314-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%8C%87%E5%87%BA%E7%A6%8D%E6%BA%90--commitment-transactions-ascribing-blame)
     - [3.2 創建撤銷合同的管道 | Creating a Channel with Contract Revocation](#32-%E5%89%B5%E5%BB%BA%E6%92%A4%E9%8A%B7%E5%90%88%E5%90%8C%E7%9A%84%E7%AE%A1%E9%81%93--creating-a-channel-with-contract-revocation)
     - [3.3 nSequence 成熟度 | Sequence Number Maturity](#33-nsequence-%E6%88%90%E7%86%9F%E5%BA%A6--sequence-number-maturity)
-      - [3.3.1 timestop](#331-timestop)
-      - [3.3.2 撤銷承諾交易](#332-%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93)
+      - [3.3.1 Timestop](#331-timestop)
+      - [3.3.2 撤銷承諾交易 | Revocable Commitment Transactions](#332-%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93--revocable-commitment-transactions)
       - [3.3.3 從管道兌換基金：合作交易方](#333-%E5%BE%9E%E7%AE%A1%E9%81%93%E5%85%8C%E6%8F%9B%E5%9F%BA%E9%87%91%E5%90%88%E4%BD%9C%E4%BA%A4%E6%98%93%E6%96%B9)
       - [3.3.5 創建可撤銷承諾交易流程](#335-%E5%89%B5%E5%BB%BA%E5%8F%AF%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B)
     - [3.4 協同關閉管道](#34-%E5%8D%94%E5%90%8C%E9%97%9C%E9%96%89%E7%AE%A1%E9%81%93)
@@ -476,34 +476,73 @@ The pre-signed child transaction can be redeemed after the parent transaction ha
 
 ---
 
-為了撤銷這個簽署的子交易，雙方只是同意創建另一個子交易，該子交易的 nSequence 為
-MAX INT，它有特殊的行為，允許在任何時候支出。
+In order to revoke this signed child transaction, both parties just agree to create another child transaction with the default field of the nSequence number of MAX INT, which has special behavior permitting spending at any time.
+
+為了撤銷這個簽署的子交易，雙方只是同意創建另一個子交易，該子交易的 nSequence 為 MAX INT，它有特殊的行為，允許在任何時候支出。
+
+---
+
+This new signed spend supersedes the revocable spend so long as the new signed spend enters into the blockchain within 1000 confirmations of the parent transaction entering into the blockchain. In effect, if Alice and Bob agree to monitor the blockchain for incorrect broadcast of Commitment Transactions, the moment the transaction gets broadcast, they are able to spend using the superseding transaction immediately. In order to broadcast the revocable spend (deprecated transaction), which spends from the same output  as the superseding transaction,  they must wait 1000  confirmations. 
 
 只要新簽署的支出進入父交易已經進入的有 1000 個確認的 blockchain 中，這個新簽署的支 出將取代可撤銷的花費。事實上，如果 Alice 和 Bob 同意監測 blockchain，以防其對承諾交 易進行不正確公佈，當下交易一公佈，他們能夠立即使用替代交易進行花費。為了公佈可撤 銷支出（不建議的交易），其花費與替代交易相同，他們必須等待 1000 個確認。
 
-採用這種結構，任何人都可以創建一個交易，不公佈交易，再後來建立激勵機制，使其在未 來不通過處罰來公佈交易。這使得比特幣網路上的參與者可以推遲許多在 blockchain 上的交 易。
+---
 
-#### 3.3.1 timestop
-
-要減輕一個惡意的攻擊者製造的信度威脅。Greg Maxwell 提出使用停止狀態以減輕對
-blockchain 惡意攻擊：
- 
+**待處理：~~So long as both parties watch the blockchain, the revocable spend will never enter into the transaction if either party prefers the superseding transaction.~~**
 
 
-有很多方法可以解決這個問題[洪水風險]，這個問題尚未得到充分的探討- 例如，在區塊充 足時候時鐘可以停止;在  Dos 攻擊事件[15]發生時，把安全風險轉化為更多的延遲。
+Using this construction, anyone could create a transaction, not broadcast the transaction, and then later create incentives to not ever broadcast that transaction in the future via penalties. This permits participants on the Bitcoin network to defer many transactions from ever hitting the blockchain.
+
+採用這種結構，任何人都可以創建一個交易，不公佈交易，再後來建立激勵機制，使其在未來不通過處罰來公佈交易。這使得比特幣網路上的參與者可以推遲許多在 blockchain 上的交 易。
+
+#### 3.3.1 Timestop
+
+To mitigate a flood of transactions by a malicious attacker requires a credible threat that the attack will  fail.
+
+要減輕一個惡意的攻擊者製造的信度威脅。
+
+---
+
+Greg Maxwell proposed using a timestop to mitigate a malicious flood on the blockchain:
+> There are many ways to address this [flood risk] which haven’t been adequately explored yet —for example, the clock can stop when blocks are full; turning the security risk into more hold-up delay in the event of a dos   attack.[15]
+
+Greg Maxwell 提出使用停止狀態以減輕對 blockchain 惡意攻擊：
+> 有很多方法可以解決這個問題[洪水風險]，這個問題尚未得到充分的探討- 例如，在區塊充 足時候時鐘可以停止;在  Dos 攻擊事件[15]發生時，把安全風險轉化為更多的延遲。
+
+---
+
+This can be mitigated by allowing the miner to specify whether the current (fee paid) mempool is presently being flooded  with transactions. They can enter a “1” value into the last bit in the version number of the block header. If the last bit in the block header contains a “1”, then that block will not count towards the relative height maturity for the nSequence value and the block is designated as a congested block. There is an uncongested block height (which is always lower than the normal block height). This block height is used for the nSequence value, which only counts block maturity (confirmations).
 
 這可以通過讓礦工確認現有的（費用支付）記憶體池目前是否交易氾濫來得到緩解。他們可以 輸入一個“1”值到塊標題的版本號的最後一位。如果在塊標題的最後一位包含一個“1”， 則該塊將不計入的相對成熟高度的 nSequence 值，並且該區塊被指定為一個擁擠區塊。有一 不擁擠區塊高度（它總是比正常塊高度低）。此區塊高度用於確定 nSequence 價值，這只能 算作區塊成熟（確認條件）。
 
+---
+
+A miner can elect to define the block as a congested block or not. The default code could automatically set the congested block flag as “1” if the mempool is above some size and the average fee for that set size is above some value. However, a miner has full discretion to change the rules on what automatically sets as a congested block, or can select to permanently set the congestion flag to be permanently on or off. It’s expected that most honest miners would use the default behavior defined in their miner and not organize a 51% attack.
+
 一名礦工可以選擇區塊是否擁擠。如果記憶體池大於一定的規模或者對於確定大小的記憶體池的 平均費用大於一定的值，默認代碼可以自動設置擁擠區塊為“1”。然而，一個礦工有完全 的決定權來改變確定自動設置為擁擠塊的規則，或者可以選擇是否設置為永久的擁擠。最誠 實的礦工將使用默認的行為去定義他們的礦工，而不是組織一次 51％的攻擊。
+
+---
+
+For example, if a parent transaction output is spent by a child with a nSequence value of 10, one must wait 10 confirmations before the transaction becomes valid. However, if the timestop flag has been set, the counting of confirmations stops, even with new blocks. If 6 confirmations have elapsed (4 more are necessary for the transaction to be valid), and the timestop block has been set on the 7th block, that block does not count towards the nSequence requirement of 10 confirmations; the child is still at 6 blocks for the relative confirmation value.
+Functionally, this  will  be stored  as some kind of auxiliary timestop block height which is used only for tracking the timestop value. When the timestop bit is set, all transactions using an nSe- quence value will stop counting until the timestop bit has been unset. This gives sufficient time and block-space for transactions at the current auxil- iary timestop block height to enter into the blockchain, which can prevent systemic attackers from successfully attacking the   system.
 
 例如，如果一個父交易輸出由一個 nSequence 值為 10 的子交易花費，在交易生效之前我們 必須等待 10 次確認。然而，如果 timestop 已經確定，即使採用新的區塊，計算的確認也應 當停止。如果 6 次確認已經完成（再需要 4 次確認交易才是有效的），並且 timestop 區塊已 設置的第七區塊上，該塊不要求 10 次 nSequence 的確認，孩子目前仍處於第 6 區塊相對確 認值。在功能上，這將被存儲為某種輔助 timestop 區塊高度，僅用於跟蹤 timestop 值。當 timestop 位數已經設置，使用 nSequence 值的所有交易將停止計數，直到 timestop 位數恢復 未設置狀態。這給當前輔助 timestop 區塊高度中的交易提供了充分的時間和區塊空間來進入 blockchain，它可以防止系統攻擊者成功地攻擊系統。
 
+---
+
+However, this requires some kind of flag in the block to designate whether it is a timestop block. For full SPV compatibility (Simple Payment Verification; lightweight clients), it is desirable for this to be within the 80- byte block header instead of in the coinbase. There are two places which may be a good place to put in this flag in the block header: in the block time and in the block version. The block time may not be safe due to the last bits being used as an entropy source for some ASIC miners, therefore a bit may need to be consumed for timestop flags. Another option would be to hardcode timestop activation as a hard consensus rule (e.g. via block size), however this may make things less flexible. By setting sane defaults for timestop rules, these rules can be changed without consensus soft-forks.
+
 然而，這需要區塊中的某種標誌指定它是否是一個 timestop 區塊。對於 SPV 完全相容性（簡 單付款確認;羽量級用戶端），它要求在 80 位元組的區塊標頭內，而不是在 coinbase。在區塊 標頭存放這一標誌的可能的兩個地方：區塊時間和區塊版本。區塊時間可能不安全，由於最 後一位被一些 ASIC 的礦工用作熵源，因此可能需要一位元被消耗用於 timestop 標誌。另一種 選擇是硬編碼 timestop 啟動，作為硬協商一致規則（例如，通過區塊大小），但是這可能使 事情變得不太靈活。通過設置 timestop 的健全的預設規則，這些規則可以不通過一致的 soft-forks 來改變。
+
+---
+
+If the block version is used as a flag, the contextual information must match the Chain ID used in some merge-mined   coins.
 
 如果區塊的版本被用作標誌，上下文資訊必須以某種合併開採硬幣中使用的鏈 ID 相匹配。
 
+---
 
-#### 3.3.2 撤銷承諾交易
+#### 3.3.2 撤銷承諾交易 | Revocable Commitment Transactions
 
 通過結合錯誤來源以及可撤銷交易，能夠確定什麼時候一方不遵守合同的條款，並不信任對 方的實施處罰。
 
