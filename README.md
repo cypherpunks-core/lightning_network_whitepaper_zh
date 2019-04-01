@@ -17,7 +17,7 @@ rx@awsomnet.org
     - [2.1 小額支付管道不要求信託 | Micropayment Channels Do Not Require Trust](#21-%E5%B0%8F%E9%A1%8D%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93%E4%B8%8D%E8%A6%81%E6%B1%82%E4%BF%A1%E8%A8%97--micropayment-channels-do-not-require-trust)
     - [2.2 管道網路 | A Network of Channels](#22-%E7%AE%A1%E9%81%93%E7%B6%B2%E8%B7%AF--a-network-of-channels)
   - [3 雙向支付管道 | Bidirectional Payment Channels](#3-%E9%9B%99%E5%90%91%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93--bidirectional-payment-channels)
-    - [3.1 頻道創建中存在的問題 為了參加本次支付網路，我們必須與其他參與者創建這個網路上的小額支付管道。](#31-%E9%A0%BB%E9%81%93%E5%89%B5%E5%BB%BA%E4%B8%AD%E5%AD%98%E5%9C%A8%E7%9A%84%E5%95%8F%E9%A1%8C-%E7%82%BA%E4%BA%86%E5%8F%83%E5%8A%A0%E6%9C%AC%E6%AC%A1%E6%94%AF%E4%BB%98%E7%B6%B2%E8%B7%AF%E6%88%91%E5%80%91%E5%BF%85%E9%A0%88%E8%88%87%E5%85%B6%E4%BB%96%E5%8F%83%E8%88%87%E8%80%85%E5%89%B5%E5%BB%BA%E9%80%99%E5%80%8B%E7%B6%B2%E8%B7%AF%E4%B8%8A%E7%9A%84%E5%B0%8F%E9%A1%8D%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93)
+    - [3.1 頻道創建中存在的問題](#31-%E9%A0%BB%E9%81%93%E5%89%B5%E5%BB%BA%E4%B8%AD%E5%AD%98%E5%9C%A8%E7%9A%84%E5%95%8F%E9%A1%8C)
       - [3.1.1 創建無簽署的資金交易 | The Problem of Blame in Channel Creation](#311-%E5%89%B5%E5%BB%BA%E7%84%A1%E7%B0%BD%E7%BD%B2%E7%9A%84%E8%B3%87%E9%87%91%E4%BA%A4%E6%98%93--the-problem-of-blame-in-channel-creation)
       - [3.1.2 來自未簽署交易的消費](#312-%E4%BE%86%E8%87%AA%E6%9C%AA%E7%B0%BD%E7%BD%B2%E4%BA%A4%E6%98%93%E7%9A%84%E6%B6%88%E8%B2%BB)
       - [3.1.3 承諾交易：不可執行的建設](#313-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E4%B8%8D%E5%8F%AF%E5%9F%B7%E8%A1%8C%E7%9A%84%E5%BB%BA%E8%A8%AD)
@@ -228,11 +228,17 @@ By chaining together multiple micropayment channels, it is possible to create a 
 
 ---
 
-### 3.1 頻道創建中存在的問題 為了參加本次支付網路，我們必須與其他參與者創建這個網路上的小額支付管道。      
+### 3.1 頻道創建中存在的問題 
+
+In order to participate in this payment network, one must create a micro- payment channel with another participant on this network.
+
+為了參加本次支付網路，我們必須與其他參與者創建這個網路上的小額支付管道。      
+
+---
 
 #### 3.1.1 創建無簽署的資金交易 | The Problem of Blame in Channel Creation
 
-In order to participate in this payment network, one must create a micro- payment channel with another participant on this network.
+An initial channel Funding Transaction is created whereby one or both chan- nel counterparties fund the inputs of this transaction. Both parties create the inputs and outputs for this transaction but do not sign the transaction. 
 
 最初的提供的資金交易的管道創建起來是由管道的一方或者雙方輸入本次交易的基金。雙方 建立這項交易的輸入和輸出，但不簽署交易。
 
