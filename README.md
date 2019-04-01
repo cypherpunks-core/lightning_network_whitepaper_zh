@@ -19,11 +19,11 @@ rx@awsomnet.org
   - [3 雙向支付管道 | Bidirectional Payment Channels](#3-%E9%9B%99%E5%90%91%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93--bidirectional-payment-channels)
     - [3.1 頻道創建中存在的問題](#31-%E9%A0%BB%E9%81%93%E5%89%B5%E5%BB%BA%E4%B8%AD%E5%AD%98%E5%9C%A8%E7%9A%84%E5%95%8F%E9%A1%8C)
       - [3.1.1 創建無簽署的資金交易 | The Problem of Blame in Channel Creation](#311-%E5%89%B5%E5%BB%BA%E7%84%A1%E7%B0%BD%E7%BD%B2%E7%9A%84%E8%B3%87%E9%87%91%E4%BA%A4%E6%98%93--the-problem-of-blame-in-channel-creation)
-      - [3.1.2 來自未簽署交易的消費](#312-%E4%BE%86%E8%87%AA%E6%9C%AA%E7%B0%BD%E7%BD%B2%E4%BA%A4%E6%98%93%E7%9A%84%E6%B6%88%E8%B2%BB)
-      - [3.1.3 承諾交易：不可執行的建設](#313-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E4%B8%8D%E5%8F%AF%E5%9F%B7%E8%A1%8C%E7%9A%84%E5%BB%BA%E8%A8%AD)
-      - [3.1.4 承諾交易：指出禍源](#314-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%8C%87%E5%87%BA%E7%A6%8D%E6%BA%90)
-    - [3.2 創建撤銷合同的管道](#32-%E5%89%B5%E5%BB%BA%E6%92%A4%E9%8A%B7%E5%90%88%E5%90%8C%E7%9A%84%E7%AE%A1%E9%81%93)
-    - [3.3 nSequence 成熟度](#33-nsequence-%E6%88%90%E7%86%9F%E5%BA%A6)
+      - [3.1.2 來自未簽署交易的消費 | Spending from an Unsigned Transaction](#312-%E4%BE%86%E8%87%AA%E6%9C%AA%E7%B0%BD%E7%BD%B2%E4%BA%A4%E6%98%93%E7%9A%84%E6%B6%88%E8%B2%BB--spending-from-an-unsigned-transaction)
+      - [3.1.3 承諾交易：不可執行的建設 | Commitment Transactions: Unenforcible Construction](#313-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E4%B8%8D%E5%8F%AF%E5%9F%B7%E8%A1%8C%E7%9A%84%E5%BB%BA%E8%A8%AD--commitment-transactions-unenforcible-construction)
+      - [3.1.4 承諾交易：指出禍源 | Commitment Transactions: Ascribing Blame](#314-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%8C%87%E5%87%BA%E7%A6%8D%E6%BA%90--commitment-transactions-ascribing-blame)
+    - [3.2 創建撤銷合同的管道 | Creating a Channel with Contract Revocation](#32-%E5%89%B5%E5%BB%BA%E6%92%A4%E9%8A%B7%E5%90%88%E5%90%8C%E7%9A%84%E7%AE%A1%E9%81%93--creating-a-channel-with-contract-revocation)
+    - [3.3 nSequence 成熟度 | Sequence Number Maturity](#33-nsequence-%E6%88%90%E7%86%9F%E5%BA%A6--sequence-number-maturity)
       - [3.3.1 timestop](#331-timestop)
       - [3.3.2 撤銷承諾交易](#332-%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93)
       - [3.3.3 從管道兌換基金：合作交易方](#333-%E5%BE%9E%E7%AE%A1%E9%81%93%E5%85%8C%E6%8F%9B%E5%9F%BA%E9%87%91%E5%90%88%E4%BD%9C%E4%BA%A4%E6%98%93%E6%96%B9)
@@ -257,9 +257,23 @@ Alice 和 Bob 雙方交換輸入來提供資金交易所需基金（知道哪些
 
 ---
 
-#### 3.1.2 來自未簽署交易的消費
+#### 3.1.2 來自未簽署交易的消費 | Spending from an Unsigned Transaction
+
+The Lightning Network uses a SIGHASH NOINPUT  transaction  to spend from this 2-of-2 Funding Transaction output, as it is necessary to spend from a transaction for which the signatures are not yet exchanged. SIGHASH NOINPUT, implemented using a soft-fork, ensures transactions can be spent from before it is signed by all parties, as transactions would need to be signed to get a transaction ID without new sighash flags. Without SIGHASH NOINPUT, Bitcoin transactions cannot be spent from before they may be broadcast —it’s as if one could not draft a contract without paying the other party first. SIGHASH NOINPUT resolves this problem. See Appendix A for more information and implementation.
 
 閃電網路使用的是 SIGHASH NOINPUT 交易，從 2-OF-2 輸出資金交易花費，因為這對於從 尚未交換其簽名的交易上花費是必須的。 SIGHASH NOINPUT，用 Softfork 實施，確保交 易能夠在各方簽署之前執行，因為交易需要登錄才能獲取沒有新的 sighash flags 交易。如果 沒有 SIGHASH NOINPUT，比特幣交易無法在公佈之前進行-就好像一個人不能在沒有支付 對方的前提下得到草本。 SIGHASH NOINPUT 解決了這一問題。更多的資訊和實施見附錄 A。
+
+---
+
+Without SIGHASH NOINPUT, it is not possible to generate a spend from a transaction without exchanging signatures, since spending the Fund- ing Transaction requires a transaction ID as part of the signature in the child’s input. A component of the Transaction ID is the parent’s (Funding Transaction’s) signature, so both parties need to exchange their signatures of the parent transaction before the child can be spent. Since one or both par- ties must know the parent’s signatures to spend from it, that means one or both parties are able to broadcast the parent (Funding Transaction) before the child even exists. SIGHASH NOINPUT gets around this by permitting the child to spend without signing the input. With SIGHASH NOINPUT, the order of operations are   to:
+1.	Create the parent (Funding Transaction)
+2.	Create the children (Commitment Transactions and all spends from the commitment transactions)
+3.	Sign the children
+4.	Exchange the signatures for the children
+5.	Sign the parent
+6.	Exchange the signatures for the parent
+7.	Broadcast the parent on the blockchain
+
 
 如果沒有 SIGHASH NOINPUT，不可能產生在不交換簽名的情況下進行交易支出，因為花 費的資金交易需要一個交易 ID 作為子輸入簽名的一部分。交易 ID 的一個組成部分是父（交 易資金的來源）的簽名，因此雙方需要交換自己的父簽名子輸入才可以花費。由於一方或雙 方必須知道父簽名因而由它來消費，這意味著一方或雙方都能夠在子輸入存在之前公佈父簽 名（融資交易）。 SIGHASH NOINPUT 通過允許子輸入無需登錄輸入就可消費來解決這個 問題。SIGHASH NOINPUT 的操作順序是：
 
@@ -271,66 +285,150 @@ Alice 和 Bob 雙方交換輸入來提供資金交易所需基金（知道哪些
 6. 交換父簽名
 7. 公佈 blockchain 上的父簽名
 
+---
+
+One is not able to broadcast the parent (Step 7) until Step 6 is com- plete. Both parties have not given their signature to spend from the Funding Transaction until step 6. Further, if one party fails during Step 6, the parent can either be spent to become the parent transaction or the inputs to the parent transaction can be double-spent (so that this entire transaction path is invalidated).
+
 一方不能夠公佈父簽名（步驟 7），直到步驟 6 完成。雙方直到步驟 6 才交換他們資金交易
 的簽名。此外，如果步驟 6 中一方出現故障，父輸入可以成為父交易或者父交易會產生雙倍 的花銷（這樣，整個交易路徑無效）。
 
-#### 3.1.3 承諾交易：不可執行的建設
+---
+
+#### 3.1.3 承諾交易：不可執行的建設 | Commitment Transactions: Unenforcible Construction
+
+After the unsigned (and unbroadcasted) Funding Transaction has been cre- ated, both parties sign and exchange an initial Commitment Transaction. These Commitment Transactions spends from the 2-of-2 output of the Fund- ing Transaction (parent). However, only the Funding Transaction is broad- cast on the blockchain.
 
 無簽署（和無公佈）資金交易創建後，雙方簽署並交換了最初的承諾交易。這些承諾交易花 費來自於 2-OF-2 的資金交易（父）輸出。但是，只有資金交易在 blockchain 上公佈。
 
+---
+
+Since the Funding Transaction has already entered into the blockchain, and the output is a 2-of-2 multisignature transaction which requires the agreement of both parties to spend from, Commitment Trans- actions are used to express the present balance. If only one 2-of-2 signed Commitment Transaction is exchanged between both parties, then both parties will be sure that they are able to get their money back after the Funding Transaction enters the blockchain. Both parties do not broadcast the Commitment Transactions onto the blockchain until they want to close out the current balance in the channel. They do so by broadcasting the present Commitment Transaction.
+
 由於資金交易已經進入 blockchain，輸出為需要雙方的協定的 2-OF-2 的多重簽名交易，承 諾交易是用來表達目前的平衡。只有一個 2-OF-2 簽字承諾交易在雙方之間進行交換，那麼 雙方將確保他們能拿回自己投入 blockchain 資金交易的錢。雙方不在 blockchain 公佈承諾交 易到直到他們想從管道中停止現有的平衡。他們通過公佈現有的承諾交易來達到此目的。
+
+---
+
+Commitment Transactions pay out the respective current balances to each party. A naive (broken) implementation would construct an unbroad- casted transaction whereby there is a 2-of-2 spend from a single transaction which have two outputs that return all current balances to both channel counterparties. This will return all funds to the original party when creat- ing an initial Commitment Transaction.
 
 承諾交易支付當前平衡的相應每一方。一個單純（破碎）的實施將構建一個不公佈交易，借 此有從單一的交易方到交易對方的 2-OF-2 的支出，這個單一的交易方具有兩個返回當前平 衡的輸出。這將創建一個初始的承諾交易，返回原方所有的資金。
 
-圖 1：一個真正破碎的資金交易將在本圖中描述。資金交易（F），被標記為綠色，在所有
- 
-其他交易簽署後被公佈被 blockchain 上。從資金交易支出的所有其他交易都還沒有公佈，以 防對方想要更新自己的平衡。只有在這個時候，資金交易才能公佈在 blockchain 上。
+---
+
+![](image/figure1.png)
+
+Figure 1: A naive broken funding transaction is described in this diagram. The Funding Transaction (F), designated in green, is broadcast on the blockchain after all other trans- actions are signed. All other transactions spending from the funding transactions are not yet broadcast, in case the counterparties wish to update their balance. Only the Funding Transaction is broadcast on the blockchain at this time.
+
+圖 1：一個真正破碎的資金交易將在本圖中描述。資金交易（F），被標記為綠色，在所有其他交易簽署後被公佈被 blockchain 上。從資金交易支出的所有其他交易都還沒有公佈，以 防對方想要更新自己的平衡。只有在這個時候，資金交易才能公佈在 blockchain 上。
+
+---
+
+For instance, if Alice and Bob agree to create a Funding Transac- tion with a single 2-of-2 output worth 1.0 BTC (with 0.5 BTC contribution from each), they create a Commitment Transaction where there are two 0.5 BTC outputs for Alice and Bob. The Commitment Transactions are signed first and keys are exchanged so either is able to broadcast the Commitment Transaction at any time contingent upon the Funding Transaction enter- ing into the blockchain. At this point, the Funding Transaction signatures can safely be exchanged, as either party is able to redeem their funds by broadcasting the Commitment Transaction.
 
 例如，如果 Alice 和 Bob 同意用 2-OF-2 輸出來創建一個價值 1.0 BTC（各自貢獻 0.5 BTC） 的資金交易，他們創造一個有分別來自 Alice 和 Bob 兩個輸出的承諾交易。該承諾首先應被 簽署，並且交換金鑰，因此交易雙方能在與資金交易進入 blockchain 的任意合適的時間來公 布承諾交易。在這一點上，資金交易簽名可以安全地進行交換，因為任何一方能夠通過公佈 的承諾交易贖回自己的資金。
 
+---
+
+This construction breaks, however, when one wishes to update the present balance. In order to update the balance, they must update their Commitment Transaction output values (the Funding Transaction has al- ready entered into the blockchain and cannot be changed).
+
 但是，這種結構在當一個人希望更新平衡時會斷裂。為了更新平衡，就必須更新自己的承諾 交易的輸出值（融資交易已經進入 blockchain，不能更改）。
+
+---
+
+When both parties agree to a new Commitment Transaction and ex- change signatures for the new Commitment Transaction, either Commit- ment Transactions can be broadcast. As the output from the Funding Transaction can only be redeemed once, only one of those transactions will be valid. For instance, if Alice and Bob agree that the balance of the channel is now 0.4 to Alice and 0.6 to Bob, and a new Commitment Transaction is created to reflect that, either Commitment Transaction can be broadcast. In effect, one would be unable to restrict which Commitment Transaction is broadcast, since both parties have signed and exchanged the signatures for either balance to be broadcast.
 
 當雙方都同意一個新的承諾交易並且為了新承諾交易交換簽名，任意承諾交易可以被公佈。 輸出從資金交易中只能被贖回一次，這些交易中只有一個將是有效的。例如，如果 Alice 和 Bob 同意管道的平衡為 0.4 給 Alice 和 0.6 給 Bob，一個新的交易承諾將被重新創建並且任何 承諾交易可以被公佈。事實上，為了被公佈的任何平衡，雙方都已經簽署了並交換了簽名， 一方將無法限制其承諾交易是否公佈。
 
+---
+
+![](image/figure2.png)
+
+Figure 2: Either of the Commitment Transactions can be broadcast any any time by either party, only one will successfully spend from the single Funding Transaction. This cannot work because one party will not want to broadcast the most recent transaction.
+
 圖 2：承諾交易可由任何一方在任何時間公佈，只有一方會從單一的資金交易中成功花費。 這樣不行，因為一方不想公佈最新的交易。
+
+---
+
+Since either party may broadcast the Commitment Transaction at any time, the result would be after the new Commitment Transaction is gener- ated, the one who receives less funds has significant incentive to broadcast the transaction which has greater values for themselves in the Commitment Transaction outputs. As a result, the channel would be immediately closed and funds stolen. Therefore, one cannot create payment channels under this model.
 
 因為任何一方都可以在任何時間公佈承諾交易，其結果是，產生了新的承諾後，獲得資金少 的人想公佈這承諾交易，在這承諾交易產出中對他們具有更大的價值。其結果是，該管道將 被立即關閉並且資金被盜。因此，人們不能在這種模式下建立支付管道。
 
-#### 3.1.4 承諾交易：指出禍源
+---
+
+#### 3.1.4 承諾交易：指出禍源 | Commitment Transactions: Ascribing Blame
+
+Since any signed Commitment Transaction may be broadcast on the blockchain,  and only one can be successfully broadcast,  it is  necessary to prevent old Commitment  Transactions  from  being  broadcast.  It is not possible to revoke tens of thousands of transactions in Bitcoin, so an alternate method is necessary. Instead of active revocation enforced  by the blockchain, it’s necessary to construct the channel itself in similar manner to a Fidelity Bond, whereby both parties make commitments, and violations of these commitments are enforced by penalties. If one party violates their agreement, then they will lose all the money in the channel.
 
 因為任何簽署的承諾交易可以被公佈在 blockchain 上，並且只有一個可以成功地公佈，有必 要防止舊承諾交易被公佈。撤銷在比特幣上的幾萬交易是不可能的，所以另一種方法是必要 的。相反，主動撤銷 blockchain 強制執行的交易，有必要以與富達債券類似的方式建立管道， 即雙方都作出承諾，違反這些承諾被強制實施處罰。如果一方違反了他們的協議，那麼他們 將失去所有在管道中的錢。
 
+---
+
+For this payment channel, the contract terms are that both parties commit to broadcasting only the most recent transaction. Any broadcast of older transactions will cause a violation of the contract, and all funds are given to the other party as a  penalty.
+
 對於這種支付管道，合同條款是：雙方承諾只公佈最近的交易，對舊交易的任何公佈將導致 對合同的違反，所有的資金都作為懲罰送給對方。
+
+---
+
+This can only be enforced if one is able to ascribe blame for broad- casting an old transaction. In order to do so, one must be able to uniquely identify who broadcast an older transaction. This can be done if each coun- terparty has a uniquely identifiable Commitment Transaction. Both parties must sign the inputs to the Commitment Transaction which the other party is responsible for broadcasting. Since one has a version of the Commitment Transaction that is signed by the other party, one can only broadcast one’s own version of the Commitment Transaction.
 
 這只有在一方能夠將責任歸咎於公佈舊交易的情況下才可以被執行。為了做到這一點，必須 能夠準確的識別是誰公佈了一個舊交易。這是可以做到，如果雙方擁有唯一地可鑒定的承諾 交易。雙方必須簽署承諾交易，而對方負責公佈。因為一方由對方簽署的一份交易承諾，一 方只能公佈自己承諾交易的版本。
 
-對於閃電網，一切花費從資金交易輸出，承諾交易有兩個半簽名交易。Alice 簽署一份承諾 交易，給 Bob（C1b），另一半由 Bob 簽署，給 Alice（C1a）。這兩個承諾的花費來自於相 同的輸出（融資交易），並有不同的內容;只有一個可以在 blockchain 公佈，因為交易承諾
- 
+---
 
-的兩部分來自同一交易的資金支出。任何一方都可以通過登錄包括交易對方簽名自己的版 本，公佈其收到的承諾交易。例如，Bob 可以公佈承諾 C1b，因為他已經從 Alice 那裡收到 了 C1b 的簽名- 它包含了 Alice 的簽名和 C1b 的自己的簽名。該交易將會從 2-OF-2 資金交 易的輸出要求 Alice 和 Bob 的簽名有效支出。
+For the Lightning Network, all spends from the Funding Transaction output, Commitment Transactions, have two half-signed transactions. One Commitment Transaction in which Alice signs and gives to Bob (C1b), and another which Bob signs and gives to Alice (C1a). These two Commitment Transactions spend from the same output (Funding Transaction), and have different contents; only one can be broadcast on the blockchain, as both pairs of Commitment Transactions spend from the same Funding Transac- tion. Either party may broadcast their received Commitment Transaction by signing their version and including the counterparty’s signature. For ex- ample, Bob can broadcast Commitment C1b, since he has already received the signature for C1b from Alice —he includes Alice’s signature and signs C1b himself. The transaction will be a valid spend from the Funding Trans- action’s 2-of-2 output requiring both Alice and Bob’s signature.
 
+對於閃電網，一切花費從資金交易輸出，承諾交易有兩個半簽名交易。Alice 簽署一份承諾 交易，給 Bob（C1b），另一半由 Bob 簽署，給 Alice（C1a）。這兩個承諾的花費來自於相 同的輸出（融資交易），並有不同的內容;只有一個可以在 blockchain 公佈，因為交易承諾的兩部分來自同一交易的資金支出。任何一方都可以通過登錄包括交易對方簽名自己的版 本，公佈其收到的承諾交易。例如，Bob 可以公佈承諾 C1b，因為他已經從 Alice 那裡收到 了 C1b 的簽名- 它包含了 Alice 的簽名和 C1b 的自己的簽名。該交易將會從 2-OF-2 資金交 易的輸出要求 Alice 和 Bob 的簽名有效支出。
+
+---
+
+![](image/figure3.png)
+
+Figure 3: Purple boxes are unbroadcasted transactions which only Alice can broadcast. Blue boxes are unbroadcasted transaction which only Bob can broadcast. Alice can only broadcast Commitment 1a, Bob can only broadcast Commitment 1b. Only one Commit- ment Transaction can be spent from the Funding Transaction output. Blame is ascribed, but either one can still be spent with no   penalty.
 
 圖 3：紫框裡代表未被公佈只有 Alice 可以公佈的交易。籃框裡代表未被公佈只有 Bob 可以 公佈的交易。Alice 只能公佈承諾 1A，Bob 只能公佈承諾 1B。只有一個承諾交易可以從交 易資金輸出中支出。錯誤根源已找出，但任何一方仍然可以花費並且不受懲罰。
 
+---
+
+However, even with this construction, one has only merely allocated blame. It is not yet possible to enforce this contract on the Bitcoin blockchain. Bob still trusts Alice not to broadcast an old Commitment Transaction. At this time, he is only able to prove that Alice has done so via a half-signed transaction proof.
+
 然而，即使有這樣的結構，一個人僅僅只是被分配了責任。目前尚不可能在比特幣 blockchain 上執行本合同。Bob 仍然相信 Alice 不會公佈舊承諾交易。在這個時候，他只能夠證明，Alice 這樣做已經通過半簽名的交易證明。
 
-### 3.2 創建撤銷合同的管道
+---
+
+### 3.2 創建撤銷合同的管道 | Creating a Channel with Contract Revocation
+
+To be able to actually enforce the terms of the contract, it’s necessary to construct a Commitment Transaction (along with its spends) where one is able to revoke a transaction. This revocation is achievable by using data about when a transaction enters into a blockchain and using the maturity of the transaction to determine validation paths.
 
 為了能夠真正執行合同規定的條款，有必要構建一個承諾交易（連同其支出），為此其中一 方就能夠撤銷交易。這個撤銷是可以通過使用交易進入一個 blockchain 資料來實現的，並通 過使用該交易的成熟度來確定驗證路徑。
 
-### 3.3 nSequence 成熟度
+---
 
-Mark Freidenbach 曾提出，nSequence 可以由父交易的相對區塊成熟度通過 Softfork[12] 執 行。這將允許一些基本的能力來確保在消費腳本上的某種形式的相對區塊確認時間鏈。此外， 額	外	的	操	作	碼	，	OP	CHECKSEQUENCEVERIFY	[13]	（	又	名	OP
-RELATIVECHECKLOCKTIMEVERIFY）[14]，將允許更多的能力，包括允許一個權宜的解 決方案，在更長久的解決方案提出之前用於解決交易延展性問題。本文的未來版本將包括提 出的解決方案。
+### 3.3 nSequence 成熟度 | Sequence Number Maturity
+
+Mark Freidenbach has proposed  that  Sequence  Numbers  can  be en- forcible via a relative block maturity of the parent transaction via a soft-fork[12]. This  would  allow  some  basic  ability  to  ensure  some form of relative block confirmation time lock on the spending script.   In addition, an additional opcode, OP CHECKSEQUENCEVERIFY[13]  (a.k.a. OP RELATIVECHECKLOCKTIMEVERIFY)[14], would permit further abilities, including allowing a stop-gap solution before a more permanent solution for resolving transaction malleability. A future  version  of  this paper will include proposed  solutions.
+
+Mark Freidenbach 曾提出，nSequence 可以由父交易的相對區塊成熟度通過 Softfork[12] 執 行。這將允許一些基本的能力來確保在消費腳本上的某種形式的相對區塊確認時間鏈。此外， 額	外	的	操	作	碼	，	OP	CHECKSEQUENCEVERIFY	[13]（	又	名	OP RELATIVECHECKLOCKTIMEVERIFY）[14]，將允許更多的能力，包括允許一個權宜的解 決方案，在更長久的解決方案提出之前用於解決交易延展性問題。本文的未來版本將包括提 出的解決方案。
+
+---
+
+To summarize, Bitcoin was released with a sequence number which was only enforced in the mempool of unconfirmed transactions. The origi- nal behavior permitted transaction replacement by replacing transactions in the mempool with newer transactions if they have a higher sequence num- ber. Due to transaction replacement rules, it is not enforced due to denial of service attack risks. It appears as though the intended purpose of the sequence number is to replace unbroadcasted transactions. However, this higher sequence number replacement behavior is unenforcible. One cannot be assured that old versions of transactions were replaced in the mempool and a block contains the most recent version of the transaction. A way to enforce transaction versions off-chain is via time commitments.
 
 概括地說，具有順序號的比特幣被發行，這些順序號在無確認條件的記憶體池中被執行。原來 的行為允許交易置換，如果他們具有較高的 nSequence，可通過在記憶體池中與較新的交易替 換。根據交易替換規則，這不是由拒絕服務攻擊風險來執行。nSequence 的預期目的是替代 未公佈的交易。然而，這種較高 nSequence 的替換行為是不可執行的。人們不能得到保證， 交易的舊版本在記憶體池內已經被替換，一個區塊包含的是最新的版本。一種以 off-chain 形 式執行交易版本的方法是通過時間承諾。
 
+---
+
+A Revocable Transaction spends from a unique output where the transaction has a unique type  of  output  script.  This  parent’s  output has two redemption paths where the first can be redeemed immediately, and the second can only be redeemed if the child has a minimum number of con- firmations between transactions. This is achieved by making the sequence number of the child transaction require a minimum number of confirmations from the parent. In essence, this new sequence number behavior will only permit a spend from this output to be valid if the number of blocks between the output and the redeeming transaction is above a specified block height. 
+
 可撤銷交易花費從一個獨特輸出中支出，在此獨特的輸出中，交易具有一個獨特類型的輸出 腳本。父交易有 2 條贖回的路徑，其中第一個可以立即贖回，第二個是只有子交易達到一個 最小確認值才可贖回。子交易的 nSequence 的確定需要父交易的最小確認值。從本質上說， 這種新的 nSequence 的行為將只能確認從特定輸出的支出是有效的，如果在輸出和贖回交易 之間的區塊的數量超過了一個特定的區塊高度。
 
-交易可以通過這些 nSequence 數位行為來贖回，通過一些特定數量的在 nSequence 中確認的 區塊創建一個限制，這將導致支出只有在父交易為了一些特定數量的區塊進入    blockchain    之
- 
+---
 
-後是有效的。這就產生了一個結構，其中父交易和該輸出變成粘結存款，證明沒有撤銷。在 一段時間內區塊鏈上的任何人可以通過公佈交易之後立即公佈支出駁斥這種認證。
+A transaction can be revoked with this sequence number behavior by creating a restriction with some defined number of blocks defined in the sequence number, which will result in the spend being only valid after the parent has entered into the blockchain for some defined number of blocks. 
+
+交易可以通過這些 nSequence 數位行為來贖回，通過一些特定數量的在 nSequence 中確認的 區塊創建一個限制，這將導致支出只有在父交易為了一些特定數量的區塊進入 blockchain 之後是有效的。這就產生了一個結構，其中父交易和該輸出變成粘結存款，證明沒有撤銷。在 一段時間內區塊鏈上的任何人可以通過公佈交易之後立即公佈支出駁斥這種認證。
+
+---
+
+This creates a structure whereby the parent transaction with this output becomes a bonded deposit, attesting that there is no revocation.  A time period exists which anyone on the blockchain can refute this attestation by broadcasting a spend immediately after the transaction is broadcast.
 
 如果希望允許撤銷交易，這個交易有 1000 個確認延遲，該輸出交易結構將持有 2-OF-2 的多 信號結構：
 2	<A L I 權證 1> <Bob1> 2 OP CHECKMULTISIG
