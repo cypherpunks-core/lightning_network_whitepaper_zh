@@ -424,25 +424,57 @@ A Revocable Transaction spends from a unique output where the transaction has a 
 
 A transaction can be revoked with this sequence number behavior by creating a restriction with some defined number of blocks defined in the sequence number, which will result in the spend being only valid after the parent has entered into the blockchain for some defined number of blocks. 
 
-交易可以通過這些 nSequence 數位行為來贖回，通過一些特定數量的在 nSequence 中確認的 區塊創建一個限制，這將導致支出只有在父交易為了一些特定數量的區塊進入 blockchain 之後是有效的。這就產生了一個結構，其中父交易和該輸出變成粘結存款，證明沒有撤銷。在 一段時間內區塊鏈上的任何人可以通過公佈交易之後立即公佈支出駁斥這種認證。
+交易可以通過這些 nSequence 數位行為來贖回，通過一些特定數量的在 nSequence 中確認的 區塊創建一個限制，這將導致支出只有在父交易為了一些特定數量的區塊進入 blockchain 之後是有效的。
 
 ---
 
 This creates a structure whereby the parent transaction with this output becomes a bonded deposit, attesting that there is no revocation.  A time period exists which anyone on the blockchain can refute this attestation by broadcasting a spend immediately after the transaction is broadcast.
 
+這就產生了一個結構，其中父交易和該輸出變成粘結存款，證明沒有撤銷。在 一段時間內區塊鏈上的任何人可以通過公佈交易之後立即公佈支出駁斥這種認證。
+
+---
+
+If one wishes to permit revocable transactions with a 1000- confirmation delay, the output transaction construction would remain a 2-of-2 multisig:
+
+2 <Alice 1 > <Bob1> 2  OP CHECKMULTISIG
+
 如果希望允許撤銷交易，這個交易有 1000 個確認延遲，該輸出交易結構將持有 2-OF-2 的多 信號結構：
+
 2	<A L I 權證 1> <Bob1> 2 OP CHECKMULTISIG
+
+---
+
+However, the child spending transaction would contain a nSequence value of 1000. Since this transaction requires the signature of both coun- terparties to be valid, both parties include the nSequence number of 1000 as part of the signature. Both parties may, at their discretion, agree to create another transaction which supersedes that transaction without any nSequence number.
 
 然而，子消費交易將包含 1000 個 nSequence 值，由於該交易需要雙方簽名來確認其有效性， 雙方包括 1000 個 nSequence 作為簽名的一部分。雙方當事人可以自行決定，同意創建另一 個交易來取代沒有 nSequence 的交易。
 
+This construction, a Revocable Sequence Maturity Contract (RSMC), creates two paths, with very specific contract terms.
+
 這種結構，可撤銷 nSequence 成熟合同（RSMC），通過非常確定的合同條款，創建兩個路 徑。
+
+---
+
+The contract terms are:
+1.	All parties pay into a contract with an output enforcing this contract
+2.	Both parties may agree to send funds to some contract, with some waiting period (1000 confirmations in our example script). This is the revocable output balance.
+3.	One or both parties may elect to not broadcast (enforce) the payouts until some future date; either party may redeem the funds after the waiting period at any time.
+4.	If neither party has broadcast this transaction (redeemed the funds), they may revoke the above payouts if and only if both parties agree to do so by placing in a new payout term in a superseding transaction pay- out. The new transaction payout can be immediately redeemed after the contract is disclosed to the world (broadcast on the blockchain).
+5.	In the event that the contract is disclosed and the new payout structure is not redeemed, the prior revoked payout terms may be redeemed by either party (so it is the responsibility of either party to enforce the new terms).
+
 該合同的條款是：
 1. 所有各方簽訂一份合同，該合同有一個輸出來執行本合同
-2. 雙方當事人同意在一個等待期（在我們的示例腳本中是 1000 個確認）內為一些合同集資， 有。這是可撤銷的輸出平衡。 3.一方或雙方當事人可以選擇不公佈（執行）的支出，直到將來某個日期;任何一方都可以在 等待期後隨時贖回基金。 4.如果雙方都沒有公佈本次交易（贖回基金），他們可能會撤銷上述支出，當且僅當雙方都 同意通過在取代交易支付中放置一個新的支付期限。新的交易支付可以在該合同披露給世界 後立即贖回（公佈在 blockchain 上）。 5.在合同被披露但新的支出結構不贖回的情況下，之前撤銷的支付條款可以由任何一方贖回
-（所以執行新條款是雙方中任何一方的責任）。
+2. 雙方當事人同意在一個等待期（在我們的示例腳本中是 1000 個確認）內為一些合同集資， 有。這是可撤銷的輸出平衡。 
+3. 一方或雙方當事人可以選擇不公佈（執行）的支出，直到將來某個日期;任何一方都可以在 等待期後隨時贖回基金。 
+4. 如果雙方都沒有公佈本次交易（贖回基金），他們可能會撤銷上述支出，當且僅當雙方都 同意通過在取代交易支付中放置一個新的支付期限。新的交易支付可以在該合同披露給世界 後立即贖回（公佈在 blockchain 上）。 
+5. 在合同被披露但新的支出結構不贖回的情況下，之前撤銷的支付條款可以由任何一方贖回（所以執行新條款是雙方中任何一方的責任）。
 
-預籤子交易可以在父交易已進入有 1000 個確認的 blockchain 之後被贖回，由於子 nSequence
-取決於父交易的花費。
+---
+
+The pre-signed child transaction can be redeemed after the parent transaction has entered into the blockchain with 1000 confirmations, due to the child’s nSequence number on the input spending the parent.
+
+預籤子交易可以在父交易已進入有 1000 個確認的 blockchain 之後被贖回，由於子 nSequence 取決於父交易的花費。
+
+---
 
 為了撤銷這個簽署的子交易，雙方只是同意創建另一個子交易，該子交易的 nSequence 為
 MAX INT，它有特殊的行為，允許在任何時候支出。
