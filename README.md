@@ -1,60 +1,64 @@
+# 比特幣閃電網路：可擴展的 off-chain 即時支付 | The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments
 
-比特幣閃電網路：可擴展的 off-chain 即時支付
+Joseph Poon  
+joseph@lightning.network 
 
-Joseph Poon joseph@lightning.network Thaddeus Dryja rx@awsomnet.org
+Thaddeus Dryja  
+rx@awsomnet.org
 
 二零一五年十一月二十日 草案版本 0.5.9.1
 
 ## 目錄
-- [目錄](#%E7%9B%AE%E9%8C%84)
-- [摘要 | Abstract](#%E6%91%98%E8%A6%81--abstract)
-- [1 比特幣 Blockchain 可擴展性問題 | The Bitcoin Blockchain Scalability Problem](#1-%E6%AF%94%E7%89%B9%E5%B9%A3-blockchain-%E5%8F%AF%E6%93%B4%E5%B1%95%E6%80%A7%E5%95%8F%E9%A1%8C--the-bitcoin-blockchain-scalability-problem)
-- [2 小額支付管道可以解決可擴展性問題 | A	Network	of	Micropayment	Channels	Can Solve Scalability](#2-%E5%B0%8F%E9%A1%8D%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93%E5%8F%AF%E4%BB%A5%E8%A7%A3%E6%B1%BA%E5%8F%AF%E6%93%B4%E5%B1%95%E6%80%A7%E5%95%8F%E9%A1%8C--a-network-of-micropayment-channels-can-solve-scalability)
-  - [2.1 小額支付管道不要求信託 | Micropayment Channels Do Not Require Trust](#21-%E5%B0%8F%E9%A1%8D%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93%E4%B8%8D%E8%A6%81%E6%B1%82%E4%BF%A1%E8%A8%97--micropayment-channels-do-not-require-trust)
-  - [2.2 管道網路](#22-%E7%AE%A1%E9%81%93%E7%B6%B2%E8%B7%AF)
-- [3 雙向支付管道](#3-%E9%9B%99%E5%90%91%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93)
-  - [3.1 頻道創建中存在的問題 為了參加本次支付網路，我們必須與其他參與者創建這個網路上的小額支付管道。](#31-%E9%A0%BB%E9%81%93%E5%89%B5%E5%BB%BA%E4%B8%AD%E5%AD%98%E5%9C%A8%E7%9A%84%E5%95%8F%E9%A1%8C-%E7%82%BA%E4%BA%86%E5%8F%83%E5%8A%A0%E6%9C%AC%E6%AC%A1%E6%94%AF%E4%BB%98%E7%B6%B2%E8%B7%AF%E6%88%91%E5%80%91%E5%BF%85%E9%A0%88%E8%88%87%E5%85%B6%E4%BB%96%E5%8F%83%E8%88%87%E8%80%85%E5%89%B5%E5%BB%BA%E9%80%99%E5%80%8B%E7%B6%B2%E8%B7%AF%E4%B8%8A%E7%9A%84%E5%B0%8F%E9%A1%8D%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93)
-    - [3.1.1 創建無簽署的資金交易](#311-%E5%89%B5%E5%BB%BA%E7%84%A1%E7%B0%BD%E7%BD%B2%E7%9A%84%E8%B3%87%E9%87%91%E4%BA%A4%E6%98%93)
-    - [3.1.2 來自未簽署交易的消費](#312-%E4%BE%86%E8%87%AA%E6%9C%AA%E7%B0%BD%E7%BD%B2%E4%BA%A4%E6%98%93%E7%9A%84%E6%B6%88%E8%B2%BB)
-    - [3.1.3 承諾交易：不可執行的建設](#313-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E4%B8%8D%E5%8F%AF%E5%9F%B7%E8%A1%8C%E7%9A%84%E5%BB%BA%E8%A8%AD)
-    - [3.1.4 承諾交易：指出禍源](#314-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%8C%87%E5%87%BA%E7%A6%8D%E6%BA%90)
-  - [3.2 創建撤銷合同的管道](#32-%E5%89%B5%E5%BB%BA%E6%92%A4%E9%8A%B7%E5%90%88%E5%90%8C%E7%9A%84%E7%AE%A1%E9%81%93)
-  - [3.3 nSequence 成熟度](#33-nsequence-%E6%88%90%E7%86%9F%E5%BA%A6)
-    - [3.3.1 timestop](#331-timestop)
-    - [3.3.2 撤銷承諾交易](#332-%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93)
-    - [3.3.3 從管道兌換基金：合作交易方](#333-%E5%BE%9E%E7%AE%A1%E9%81%93%E5%85%8C%E6%8F%9B%E5%9F%BA%E9%87%91%E5%90%88%E4%BD%9C%E4%BA%A4%E6%98%93%E6%96%B9)
-    - [3.3.5 創建可撤銷承諾交易流程](#335-%E5%89%B5%E5%BB%BA%E5%8F%AF%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B)
-  - [3.4 協同關閉管道](#34-%E5%8D%94%E5%90%8C%E9%97%9C%E9%96%89%E7%AE%A1%E9%81%93)
-  - [3.5 雙向管道的啟示與總結](#35-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84%E5%95%9F%E7%A4%BA%E8%88%87%E7%B8%BD%E7%B5%90)
-- [4 散列 Timelock 合同（HTLC）](#4-%E6%95%A3%E5%88%97-timelock-%E5%90%88%E5%90%8Chtlc)
-  - [4.1 不可撤銷的 HTLC 建設](#41-%E4%B8%8D%E5%8F%AF%E6%92%A4%E9%8A%B7%E7%9A%84-htlc-%E5%BB%BA%E8%A8%AD)
-  - [4.2	Off-chain 可撤銷 HTLC](#42-off-chain-%E5%8F%AF%E6%92%A4%E9%8A%B7-htlc)
-    - [4.2.1 當寄件者播的承諾交易 HTLC](#421-%E7%95%B6%E5%AF%84%E4%BB%B6%E8%80%85%E6%92%AD%E7%9A%84%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93-htlc)
-    - [4.2.2 接收者公佈承諾交易時的 HTLC](#422-%E6%8E%A5%E6%94%B6%E8%80%85%E5%85%AC%E4%BD%88%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%99%82%E7%9A%84-htlc)
-  - [4.3	HTLC Off-chain 終止](#43-htlc-off-chain-%E7%B5%82%E6%AD%A2)
-  - [4.4 HTLC 形成和封閉令](#44-htlc-%E5%BD%A2%E6%88%90%E5%92%8C%E5%B0%81%E9%96%89%E4%BB%A4)
-- [5 金鑰存儲](#5-%E9%87%91%E9%91%B0%E5%AD%98%E5%84%B2)
-- [6 雙向管道的 Blockchain 交易費](#6-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84-blockchain-%E4%BA%A4%E6%98%93%E8%B2%BB)
-- [7 薪酬合約](#7-%E8%96%AA%E9%85%AC%E5%90%88%E7%B4%84)
-- [8 比特幣閃電網路](#8-%E6%AF%94%E7%89%B9%E5%B9%A3%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF)
-  - [8.1 遞減的 Timelocks](#81-%E9%81%9E%E6%B8%9B%E7%9A%84-timelocks)
-  - [8.2 付款金額](#82-%E4%BB%98%E6%AC%BE%E9%87%91%E9%A1%8D)
-  - [8.3 清除故障和重新路由 如果交易無法到達其網路連接最終目的地，接收應以相同散列發送同等數量的支付給發送](#83-%E6%B8%85%E9%99%A4%E6%95%85%E9%9A%9C%E5%92%8C%E9%87%8D%E6%96%B0%E8%B7%AF%E7%94%B1-%E5%A6%82%E6%9E%9C%E4%BA%A4%E6%98%93%E7%84%A1%E6%B3%95%E5%88%B0%E9%81%94%E5%85%B6%E7%B6%B2%E8%B7%AF%E9%80%A3%E6%8E%A5%E6%9C%80%E7%B5%82%E7%9B%AE%E7%9A%84%E5%9C%B0%E6%8E%A5%E6%94%B6%E6%87%89%E4%BB%A5%E7%9B%B8%E5%90%8C%E6%95%A3%E5%88%97%E7%99%BC%E9%80%81%E5%90%8C%E7%AD%89%E6%95%B8%E9%87%8F%E7%9A%84%E6%94%AF%E4%BB%98%E7%B5%A6%E7%99%BC%E9%80%81)
-  - [8.4 付款路由](#84-%E4%BB%98%E6%AC%BE%E8%B7%AF%E7%94%B1)
-  - [8.5 費用](#85-%E8%B2%BB%E7%94%A8)
-- [9 風險](#9-%E9%A2%A8%E9%9A%AA)
-  - [9.1 不當 Timelocks](#91-%E4%B8%8D%E7%95%B6-timelocks)
-  - [9.2 被迫滿期的垃圾郵件](#92-%E8%A2%AB%E8%BF%AB%E6%BB%BF%E6%9C%9F%E7%9A%84%E5%9E%83%E5%9C%BE%E9%83%B5%E4%BB%B6)
-  - [9.3 通過分裂盜竊資金](#93-%E9%80%9A%E9%81%8E%E5%88%86%E8%A3%82%E7%9B%9C%E7%AB%8A%E8%B3%87%E9%87%91)
-  - [9.4 資料丟失](#94-%E8%B3%87%E6%96%99%E4%B8%9F%E5%A4%B1)
-  - [9.5 忘記及時公佈交易](#95-%E5%BF%98%E8%A8%98%E5%8F%8A%E6%99%82%E5%85%AC%E4%BD%88%E4%BA%A4%E6%98%93)
-  - [9.6 無法做出必要的 Soft-Forks](#96-%E7%84%A1%E6%B3%95%E5%81%9A%E5%87%BA%E5%BF%85%E8%A6%81%E7%9A%84-soft-forks)
-  - [9.7 勾結礦工攻擊](#97-%E5%8B%BE%E7%B5%90%E7%A4%A6%E5%B7%A5%E6%94%BB%E6%93%8A)
-- [10 區塊大小增加與共識](#10-%E5%8D%80%E5%A1%8A%E5%A4%A7%E5%B0%8F%E5%A2%9E%E5%8A%A0%E8%88%87%E5%85%B1%E8%AD%98)
-- [11 用例 除了説明比特幣規模，對閃電網路上的交易也是很有用的：](#11-%E7%94%A8%E4%BE%8B-%E9%99%A4%E4%BA%86%E8%AA%AC%E6%98%8E%E6%AF%94%E7%89%B9%E5%B9%A3%E8%A6%8F%E6%A8%A1%E5%B0%8D%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E4%B8%8A%E7%9A%84%E4%BA%A4%E6%98%93%E4%B9%9F%E6%98%AF%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84)
-- [12 結論](#12-%E7%B5%90%E8%AB%96)
-- [13 致謝](#13-%E8%87%B4%E8%AC%9D)
-- [附錄 A 解決延展性](#%E9%99%84%E9%8C%84-a-%E8%A7%A3%E6%B1%BA%E5%BB%B6%E5%B1%95%E6%80%A7)
+- [比特幣閃電網路：可擴展的 off-chain 即時支付 | The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments](#%E6%AF%94%E7%89%B9%E5%B9%A3%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E5%8F%AF%E6%93%B4%E5%B1%95%E7%9A%84-off-chain-%E5%8D%B3%E6%99%82%E6%94%AF%E4%BB%98--the-bitcoin-lightning-network-scalable-off-chain-instant-payments)
+  - [目錄](#%E7%9B%AE%E9%8C%84)
+  - [摘要 | Abstract](#%E6%91%98%E8%A6%81--abstract)
+  - [1 比特幣 Blockchain 可擴展性問題 | The Bitcoin Blockchain Scalability Problem](#1-%E6%AF%94%E7%89%B9%E5%B9%A3-blockchain-%E5%8F%AF%E6%93%B4%E5%B1%95%E6%80%A7%E5%95%8F%E9%A1%8C--the-bitcoin-blockchain-scalability-problem)
+  - [2 小額支付管道可以解決可擴展性問題 | A	Network	of	Micropayment	Channels	Can Solve Scalability](#2-%E5%B0%8F%E9%A1%8D%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93%E5%8F%AF%E4%BB%A5%E8%A7%A3%E6%B1%BA%E5%8F%AF%E6%93%B4%E5%B1%95%E6%80%A7%E5%95%8F%E9%A1%8C--a-network-of-micropayment-channels-can-solve-scalability)
+    - [2.1 小額支付管道不要求信託 | Micropayment Channels Do Not Require Trust](#21-%E5%B0%8F%E9%A1%8D%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93%E4%B8%8D%E8%A6%81%E6%B1%82%E4%BF%A1%E8%A8%97--micropayment-channels-do-not-require-trust)
+    - [2.2 管道網路 | A Network of Channels](#22-%E7%AE%A1%E9%81%93%E7%B6%B2%E8%B7%AF--a-network-of-channels)
+  - [3 雙向支付管道 | Bidirectional Payment Channels](#3-%E9%9B%99%E5%90%91%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93--bidirectional-payment-channels)
+    - [3.1 頻道創建中存在的問題 為了參加本次支付網路，我們必須與其他參與者創建這個網路上的小額支付管道。](#31-%E9%A0%BB%E9%81%93%E5%89%B5%E5%BB%BA%E4%B8%AD%E5%AD%98%E5%9C%A8%E7%9A%84%E5%95%8F%E9%A1%8C-%E7%82%BA%E4%BA%86%E5%8F%83%E5%8A%A0%E6%9C%AC%E6%AC%A1%E6%94%AF%E4%BB%98%E7%B6%B2%E8%B7%AF%E6%88%91%E5%80%91%E5%BF%85%E9%A0%88%E8%88%87%E5%85%B6%E4%BB%96%E5%8F%83%E8%88%87%E8%80%85%E5%89%B5%E5%BB%BA%E9%80%99%E5%80%8B%E7%B6%B2%E8%B7%AF%E4%B8%8A%E7%9A%84%E5%B0%8F%E9%A1%8D%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93)
+      - [3.1.1 創建無簽署的資金交易 | The Problem of Blame in Channel Creation](#311-%E5%89%B5%E5%BB%BA%E7%84%A1%E7%B0%BD%E7%BD%B2%E7%9A%84%E8%B3%87%E9%87%91%E4%BA%A4%E6%98%93--the-problem-of-blame-in-channel-creation)
+      - [3.1.2 來自未簽署交易的消費](#312-%E4%BE%86%E8%87%AA%E6%9C%AA%E7%B0%BD%E7%BD%B2%E4%BA%A4%E6%98%93%E7%9A%84%E6%B6%88%E8%B2%BB)
+      - [3.1.3 承諾交易：不可執行的建設](#313-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E4%B8%8D%E5%8F%AF%E5%9F%B7%E8%A1%8C%E7%9A%84%E5%BB%BA%E8%A8%AD)
+      - [3.1.4 承諾交易：指出禍源](#314-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%8C%87%E5%87%BA%E7%A6%8D%E6%BA%90)
+    - [3.2 創建撤銷合同的管道](#32-%E5%89%B5%E5%BB%BA%E6%92%A4%E9%8A%B7%E5%90%88%E5%90%8C%E7%9A%84%E7%AE%A1%E9%81%93)
+    - [3.3 nSequence 成熟度](#33-nsequence-%E6%88%90%E7%86%9F%E5%BA%A6)
+      - [3.3.1 timestop](#331-timestop)
+      - [3.3.2 撤銷承諾交易](#332-%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93)
+      - [3.3.3 從管道兌換基金：合作交易方](#333-%E5%BE%9E%E7%AE%A1%E9%81%93%E5%85%8C%E6%8F%9B%E5%9F%BA%E9%87%91%E5%90%88%E4%BD%9C%E4%BA%A4%E6%98%93%E6%96%B9)
+      - [3.3.5 創建可撤銷承諾交易流程](#335-%E5%89%B5%E5%BB%BA%E5%8F%AF%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B)
+    - [3.4 協同關閉管道](#34-%E5%8D%94%E5%90%8C%E9%97%9C%E9%96%89%E7%AE%A1%E9%81%93)
+    - [3.5 雙向管道的啟示與總結](#35-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84%E5%95%9F%E7%A4%BA%E8%88%87%E7%B8%BD%E7%B5%90)
+  - [4 散列 Timelock 合同（HTLC）](#4-%E6%95%A3%E5%88%97-timelock-%E5%90%88%E5%90%8Chtlc)
+    - [4.1 不可撤銷的 HTLC 建設](#41-%E4%B8%8D%E5%8F%AF%E6%92%A4%E9%8A%B7%E7%9A%84-htlc-%E5%BB%BA%E8%A8%AD)
+    - [4.2	Off-chain 可撤銷 HTLC](#42-off-chain-%E5%8F%AF%E6%92%A4%E9%8A%B7-htlc)
+      - [4.2.1 當寄件者播的承諾交易 HTLC](#421-%E7%95%B6%E5%AF%84%E4%BB%B6%E8%80%85%E6%92%AD%E7%9A%84%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93-htlc)
+      - [4.2.2 接收者公佈承諾交易時的 HTLC](#422-%E6%8E%A5%E6%94%B6%E8%80%85%E5%85%AC%E4%BD%88%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%99%82%E7%9A%84-htlc)
+    - [4.3	HTLC Off-chain 終止](#43-htlc-off-chain-%E7%B5%82%E6%AD%A2)
+    - [4.4 HTLC 形成和封閉令](#44-htlc-%E5%BD%A2%E6%88%90%E5%92%8C%E5%B0%81%E9%96%89%E4%BB%A4)
+  - [5 金鑰存儲](#5-%E9%87%91%E9%91%B0%E5%AD%98%E5%84%B2)
+  - [6 雙向管道的 Blockchain 交易費](#6-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84-blockchain-%E4%BA%A4%E6%98%93%E8%B2%BB)
+  - [7 薪酬合約](#7-%E8%96%AA%E9%85%AC%E5%90%88%E7%B4%84)
+  - [8 比特幣閃電網路](#8-%E6%AF%94%E7%89%B9%E5%B9%A3%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF)
+    - [8.1 遞減的 Timelocks](#81-%E9%81%9E%E6%B8%9B%E7%9A%84-timelocks)
+    - [8.2 付款金額](#82-%E4%BB%98%E6%AC%BE%E9%87%91%E9%A1%8D)
+    - [8.3 清除故障和重新路由 如果交易無法到達其網路連接最終目的地，接收應以相同散列發送同等數量的支付給發送](#83-%E6%B8%85%E9%99%A4%E6%95%85%E9%9A%9C%E5%92%8C%E9%87%8D%E6%96%B0%E8%B7%AF%E7%94%B1-%E5%A6%82%E6%9E%9C%E4%BA%A4%E6%98%93%E7%84%A1%E6%B3%95%E5%88%B0%E9%81%94%E5%85%B6%E7%B6%B2%E8%B7%AF%E9%80%A3%E6%8E%A5%E6%9C%80%E7%B5%82%E7%9B%AE%E7%9A%84%E5%9C%B0%E6%8E%A5%E6%94%B6%E6%87%89%E4%BB%A5%E7%9B%B8%E5%90%8C%E6%95%A3%E5%88%97%E7%99%BC%E9%80%81%E5%90%8C%E7%AD%89%E6%95%B8%E9%87%8F%E7%9A%84%E6%94%AF%E4%BB%98%E7%B5%A6%E7%99%BC%E9%80%81)
+    - [8.4 付款路由](#84-%E4%BB%98%E6%AC%BE%E8%B7%AF%E7%94%B1)
+    - [8.5 費用](#85-%E8%B2%BB%E7%94%A8)
+  - [9 風險](#9-%E9%A2%A8%E9%9A%AA)
+    - [9.1 不當 Timelocks](#91-%E4%B8%8D%E7%95%B6-timelocks)
+    - [9.2 被迫滿期的垃圾郵件](#92-%E8%A2%AB%E8%BF%AB%E6%BB%BF%E6%9C%9F%E7%9A%84%E5%9E%83%E5%9C%BE%E9%83%B5%E4%BB%B6)
+    - [9.3 通過分裂盜竊資金](#93-%E9%80%9A%E9%81%8E%E5%88%86%E8%A3%82%E7%9B%9C%E7%AB%8A%E8%B3%87%E9%87%91)
+    - [9.4 資料丟失](#94-%E8%B3%87%E6%96%99%E4%B8%9F%E5%A4%B1)
+    - [9.5 忘記及時公佈交易](#95-%E5%BF%98%E8%A8%98%E5%8F%8A%E6%99%82%E5%85%AC%E4%BD%88%E4%BA%A4%E6%98%93)
+    - [9.6 無法做出必要的 Soft-Forks](#96-%E7%84%A1%E6%B3%95%E5%81%9A%E5%87%BA%E5%BF%85%E8%A6%81%E7%9A%84-soft-forks)
+    - [9.7 勾結礦工攻擊](#97-%E5%8B%BE%E7%B5%90%E7%A4%A6%E5%B7%A5%E6%94%BB%E6%93%8A)
+  - [10 區塊大小增加與共識](#10-%E5%8D%80%E5%A1%8A%E5%A4%A7%E5%B0%8F%E5%A2%9E%E5%8A%A0%E8%88%87%E5%85%B1%E8%AD%98)
+  - [11 用例 除了説明比特幣規模，對閃電網路上的交易也是很有用的：](#11-%E7%94%A8%E4%BE%8B-%E9%99%A4%E4%BA%86%E8%AA%AC%E6%98%8E%E6%AF%94%E7%89%B9%E5%B9%A3%E8%A6%8F%E6%A8%A1%E5%B0%8D%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E4%B8%8A%E7%9A%84%E4%BA%A4%E6%98%93%E4%B9%9F%E6%98%AF%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84)
+  - [12 結論](#12-%E7%B5%90%E8%AB%96)
+  - [13 致謝](#13-%E8%87%B4%E8%AC%9D)
+  - [附錄 A 解決延展性](#%E9%99%84%E9%8C%84-a-%E8%A7%A3%E6%B1%BA%E5%BB%B6%E5%B1%95%E6%80%A7)
 
 ## 摘要 | Abstract
 
@@ -184,28 +188,55 @@ This invalidation process can exist through a process of channel con- sensus whe
 
 ---
 
-### 2.2 管道網路
+### 2.2 管道網路 | A Network of Channels
+
+Thus, micropayment channels only create a relationship between two parties. Requiring everyone to create channels with everyone else does not solve the scalability problem. Bitcoin scalability can be achieved using a large network of micropayment channels.
 
 因此，小額支付管道只創立雙方之間的關係。要求大家與其他人建立管道不解決擴展性問題。 比特幣的可擴展性可以通過小額支付管道的一個大的網路來實現。
  
+---
+
+If we presume a large network of channels on the Bitcoin blockchain, and all Bitcoin users are participating on this graph by having at least one channel open on the Bitcoin blockchain, it is possible to create a near-infinite amount of transactions inside this network. The only transactions that are broadcasted on the Bitcoin blockchain prematurely are with uncooperative channel  counterparties.
 
 如果我們假定一個比特幣 blockchain 管道的大型網路，並且所有參與的比特幣用戶在比特幣 blockchain 上具有至少一個開放管道，在該網路內可以創建近於無限量的交易。在比特幣 blockchain 上過早地公佈的唯一的交易是存在不合作管道對手的交易。
 
+---
+
+By encumbering the Bitcoin transaction outputs with a hashlock and timelock, the channel counterparty will be unable to outright steal funds and Bitcoins can be exchanged without outright counterparty theft. Fur- ther, by using staggered timeouts, it’s possible to send funds via multiple intermediaries in a network without the risk of intermediary theft of funds.
+
 通過雜湊鏈和時間鏈延遲比特幣交易輸出，管道對方將無法直接竊取資金和比特幣可以在無 對方竊取的情況下直接交換。此外，通過使用交錯休息，在沒有資金仲介竊取的風險的條件 下通過多個在網路中的仲介機構發送資金成為可能。
 
+---
 
-## 3 雙向支付管道
+## 3 雙向支付管道 | Bidirectional Payment Channels
+
+Micropayment channels permit a simple  deferral  of  a  transaction state  to be broadcast at a later time. The contracts are enforced by creating a responsibility for one party to broadcast transactions before or after certain dates. If the blockchain is a decentralized timestamping system, it is possible to use clocks as a component of decentralized consensus[5] to determine data validity,  as well as present states as a method to order events[6].
 
 小額支付管道允許交易狀態簡單推遲至稍後時間公佈。該合同是以這樣的方式執行，創造一 方在一定日期之前或之後公佈交易的責任。如果 blockchain 是一個分散化的時間戳記系統，它 可以使用時鐘作為分散共識[5]的組成部分，以確定資料有效性，以及展示當前狀態作為訂 購事件的方法 [6]。
 
+---
+
+By creating timeframes where certain states can  be  broadcast and later invalidated, it is possible to create complex contracts using bitcoin transaction scripts. There has been prior work for Hub-and-Spoke Micro- payment Channels[7][8][9] (and trusted payment channel networks[10][11]) looking at building a hub-and-spoke network today. However, Lightning Network’s bidirectional micropayment channel requires the malleability soft- fork described in Appendix A to enable near-infinite scalability while miti- gating risks of intermediate node default.
+
 通過創建特定狀態的公佈或失效的時間表，就可以使用比特幣交易腳本創建複雜的合同。已 經有前期工作的中心輻射型小額支付管道[7] [8] [9]（和值得信賴的支付管道網路[10] [11]） 監控今日建立樞紐和輻射網路的過程。然而，閃電定位網路的雙向小額管道要求在附錄 A 中所述的可塑性 Softfork，使在控制中間節點出錯風險時有近乎於無限的可擴展性。
 
-通過把多個微支付管道串聯起來，有可能創建交易路徑的網路。路徑可以使用類似 BGP 的 系統進行路由，並且發送方可以指定一個特殊的路徑給收件人。輸出腳本由接收者產生的散 列密碼限制。通過公開的輸入散列密碼，收件人的對方就能沿線拉動資金。
+---
+
+By chaining together multiple micropayment channels, it is possible to create a network of transaction paths. Paths can be routed using a BGP- like system, and the sender may designate a particular path to the recipient. The output scripts are encumbered by a hash, which is generated by the recipient. By disclosing the input to that hash, the recipient’s counterparty will be able to pull funds along the route.
+
+通過把多個微支付管道串聯起來，有可能創建交易路徑的網路。路徑可以使用類似 BGP 的 系統進行路由，並且發送方可以指定一個特殊的路徑給收件人。輸出腳本由接收者產生的散列密碼限制。通過公開的輸入散列密碼，收件人的對方就能沿線拉動資金。
+
+---
 
 ### 3.1 頻道創建中存在的問題 為了參加本次支付網路，我們必須與其他參與者創建這個網路上的小額支付管道。      
 
-#### 3.1.1 創建無簽署的資金交易
+#### 3.1.1 創建無簽署的資金交易 | The Problem of Blame in Channel Creation
+
+In order to participate in this payment network, one must create a micro- payment channel with another participant on this network.
+
 最初的提供的資金交易的管道創建起來是由管道的一方或者雙方輸入本次交易的基金。雙方 建立這項交易的輸入和輸出，但不簽署交易。
+
+---
 
 對於這筆資金交易的輸出是參加這個管道雙方的 2-OF-2 的多重簽名，今後命名為 Alice 和 Bob 腳本。這兩個參與者沒有為資金交易交換簽名，直到他們已經從 2-OF-2 得到了與原來 金額相等的退還金額。未簽署交易的目的，是允許從一個尚不存在一個交易中花費。如果 Alice 和 Bob 在資金交易中交換了簽名，而不能得到資金交易的公佈，而且如果 Alice 和 Bob 不配合，資金可能會被永久的鎖定（或由一方承擔不合作的損失）。
 
