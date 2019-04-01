@@ -751,6 +751,8 @@ HT1A 進入 blockchain 並且 1000 次確認完成後，一個 HTLC Timeout 撤�
 
 HTLC 構造之後，為了終止 HTLC Off-chain 需要雙方同意管道的狀態。如果收件人可以向 對方證明 R 的資訊，證明他們能夠立即關閉比特幣 blockchain 上的管道並且接收資金。在這 一點上，如果雙方都希望保持管道打開，就應終止 HTLC Off-chain，並創建一個新的承諾交 易反應新的平衡。
 
+![](image/figure13.png)
+
 圖 13：由於 Bob 向 Alice 證明，以告訴 Alice R 的有關資訊來告訴 Alice，Alice 願意用新的 承諾交易更新平衡。此時不管公佈 C2 或 C3，支付將是相同的。
 
 同樣，如果收件人不能夠通過公開 R 來證明 R 的資訊，雙方應同意終止 HTLC 並創建一個 新的承諾交易，  HTLC 中的餘額退還給寄件者。
@@ -760,6 +762,8 @@ HTLC 構造之後，為了終止 HTLC Off-chain 需要雙方同意管道的狀�
 但是，如果他們合作，他們可以通過首先生成具有新的平衡的承諾交易，然後通過交換違約 補救交易（BR2a / BR2b）使先前承諾失效。此外，如果他們終止特定的 HTLC，也要交換 一些在 HTLC 交易中使用的自己的私密金鑰。
 
 例如，Alice 希望終止 HTLC，Alice 將披露 KAlice1 和 KAlice4 給 Bob。相應地，如果 Bob 希望終止 HTLC，Bob 將披露 KBob6 和 KBob8 給 Alice。私密金鑰透露給對方之後，如果 Alice 公佈 C2A，Bob 就能夠立即從 HTLC 拿走一切資金。如果 Bob 公佈 C2b，Alice 將能夠立即 拿走 HTLC 上的一切資金。需要注意的是，當一個 HTLC 終止時，較舊的承諾交易必須也 被撤銷。
+
+![](image/figure14.png)
 
 圖 14：一個完全撤銷的承諾交易及終止的 HTLC。如果任何一方公佈承諾 2，他們將失去所 有的錢，交給對方。簡潔為了，其他承諾（例如，如果承諾 3 是當前承諾）不顯示。
 
@@ -827,6 +831,8 @@ HTLC 合同會發生的。相反，雙方都選擇 Off-chain 更新並在管道�
 
 假設 Alice 希望發送 0.001 BTC 給 Dave。她通過 Bob 和 Carol 找到途徑。傳輸路徑將是從
 Alice 到 Bob 到 Carol 再到 Dave。
+
+![](image/figure15.png)
 
 圖 15：使用 HTLCs 在閃電網路中付款。
 
