@@ -63,6 +63,7 @@ While it is possible to scale at a small level, it is absolutely not possible to
 
 ## 2 小額支付管道可以解決可擴展性問題 | A	Network	of	Micropayment	Channels	Can Solve Scalability
 > “If a tree falls in the forest and no one is around to hear it, does it make a  sound?”
+> 
 > “如果一棵樹倒在森林中，沒有一個人去其周圍聽聲音，它會發出聲音麼？
 
 ---
@@ -73,13 +74,25 @@ The above quote questions the relevance of unobserved events —if nobody hears 
 
 ---
 
+Currently the solution to micropayments and scalability is to offload the transactions to a custodian, whereby one is trusting third party custodi- ans to hold one’s coins and to update balances with other parties. Trusting third parties to hold all of one’s funds creates counterparty risk and trans- action costs.
+
 目前的小額支付和可擴展性解決方案將交易轉交給一個託管人，由一個被信任的協力廠商託管 來持有硬幣並更新與其他各方的平衡情況。信任協力廠商來保存所有的人的資金可能產生交易 對手風險和交易成本。
+
+---
+
+Instead, using a network of these micropayment channels, Bitcoin can scale to billions of transactions per day with the computational power available on a modern desktop computer today. Sending many payments inside a given micropayment channel enables one to send large amounts of funds to another party in a decentralized manner. These channels are not a separate trusted network on top of bitcoin. They are real bitcoin transactions.
 
 相反，使用這些小額支付管道的網路，比特幣可以擴展到當今在現代筆記型電腦上以強大的 計算能力進行數十億美元的交易。在一個小額支付管道中進行大量支付使人們能夠以分散的 方式發送大量的資金給另一方。這些管道在比特幣上不是一個單獨的可信網路。他們是真正 的比特幣交易。
 
+---
+
+Micropayment channels[3][4] create a relationship between two par- ties to perpetually update balances, deferring what is broadcast to the blockchain in a single transaction netting out the total balance between those two parties. This permits the financial relationships between two par- ties to be trustlessly deferred to a later date, without risk of counterparty default. Micropayment channels use real bitcoin transactions, only electing to defer the broadcast to the blockchain in such a way that both parties can guarantee their current balance on the blockchain; this is not a trusted overlay network —payments in micropayment channels are real bitcoin com- municated and exchanged off-chain.
+
 小額支付管道[3] [4]在雙方之間建立起關係，來更新平衡，決定在雙方交易時產生的總餘額 中被推遲公佈到 blockchain 的部分。這使得雙方之間的財務關係被不可信地推遲到以後的日 子，沒有交易對方違約的風險。小額支付管道使用真實的比特幣交易，只有通過選舉的方式 來決定推遲在 blockchain 中公佈的部分，雙方才可以保證其在 blockchain 上現有的平衡;這不是值得信賴的覆蓋網路-在小額支付管道發生的支付是真正比特幣 off chain 的溝通與交換。
 
-### 2.1 小額支付管道不要求信託
+---
+
+### 2.1 小額支付管道不要求信託 | Micropayment Channels Do Not Require Trust
 
 就像樹倒在樹林裡是否發出聲音的老問題，如各方均同意該樹在 2:45 倒下，那麼該樹確實 在下午 2:45 倒下。同樣，如果雙方均同意，管道內現有的平衡為 0.07 BTC 給 Alice 和 0.03 BTC 給 Bob，那麼這就是真正的平衡。然而，如果沒有密碼，一個有趣的問題產生了：如果其中 一方不同意有關基金的當前平衡（樹倒下的時間），那麼雙方就產生了分歧。如果沒有加密 的簽名，blockchain 就不知道誰擁有什麼。
 
