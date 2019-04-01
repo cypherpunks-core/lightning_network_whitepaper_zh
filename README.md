@@ -6,7 +6,44 @@ Joseph Poon joseph@lightning.network Thaddeus Dryja rx@awsomnet.org
 二零一五年十一月二十日 草案版本 0.5.9.1
 
 ## 目錄
-
+- [目錄](#%E7%9B%AE%E9%8C%84)
+- [摘要 | Abstract](#%E6%91%98%E8%A6%81--abstract)
+- [1 比特幣 Blockchain 可擴展性問題 | The Bitcoin Blockchain Scalability Problem](#1-%E6%AF%94%E7%89%B9%E5%B9%A3-blockchain-%E5%8F%AF%E6%93%B4%E5%B1%95%E6%80%A7%E5%95%8F%E9%A1%8C--the-bitcoin-blockchain-scalability-problem)
+- [2 小額支付管道可以解決可擴展性問題 | A	Network	of	Micropayment	Channels	Can Solve Scalability](#2-%E5%B0%8F%E9%A1%8D%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93%E5%8F%AF%E4%BB%A5%E8%A7%A3%E6%B1%BA%E5%8F%AF%E6%93%B4%E5%B1%95%E6%80%A7%E5%95%8F%E9%A1%8C--a-network-of-micropayment-channels-can-solve-scalability)
+  - [2.1 小額支付管道不要求信託 | Micropayment Channels Do Not Require Trust](#21-%E5%B0%8F%E9%A1%8D%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93%E4%B8%8D%E8%A6%81%E6%B1%82%E4%BF%A1%E8%A8%97--micropayment-channels-do-not-require-trust)
+  - [2.2 管道網路](#22-%E7%AE%A1%E9%81%93%E7%B6%B2%E8%B7%AF)
+- [3 雙向支付管道](#3-%E9%9B%99%E5%90%91%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93)
+  - [3.1 頻道創建中存在的問題 為了參加本次支付網路，我們必須與其他參與者創建這個網路上的小額支付管道。](#31-%E9%A0%BB%E9%81%93%E5%89%B5%E5%BB%BA%E4%B8%AD%E5%AD%98%E5%9C%A8%E7%9A%84%E5%95%8F%E9%A1%8C-%E7%82%BA%E4%BA%86%E5%8F%83%E5%8A%A0%E6%9C%AC%E6%AC%A1%E6%94%AF%E4%BB%98%E7%B6%B2%E8%B7%AF%E6%88%91%E5%80%91%E5%BF%85%E9%A0%88%E8%88%87%E5%85%B6%E4%BB%96%E5%8F%83%E8%88%87%E8%80%85%E5%89%B5%E5%BB%BA%E9%80%99%E5%80%8B%E7%B6%B2%E8%B7%AF%E4%B8%8A%E7%9A%84%E5%B0%8F%E9%A1%8D%E6%94%AF%E4%BB%98%E7%AE%A1%E9%81%93)
+  - [3.2 創建撤銷合同的管道](#32-%E5%89%B5%E5%BB%BA%E6%92%A4%E9%8A%B7%E5%90%88%E5%90%8C%E7%9A%84%E7%AE%A1%E9%81%93)
+  - [3.3 nSequence 成熟度](#33-nsequence-%E6%88%90%E7%86%9F%E5%BA%A6)
+  - [3.4 協同關閉管道](#34-%E5%8D%94%E5%90%8C%E9%97%9C%E9%96%89%E7%AE%A1%E9%81%93)
+  - [3.5 雙向管道的啟示與總結](#35-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84%E5%95%9F%E7%A4%BA%E8%88%87%E7%B8%BD%E7%B5%90)
+- [4 散列 Timelock 合同（HTLC）](#4-%E6%95%A3%E5%88%97-timelock-%E5%90%88%E5%90%8Chtlc)
+  - [4.1 不可撤銷的 HTLC 建設](#41-%E4%B8%8D%E5%8F%AF%E6%92%A4%E9%8A%B7%E7%9A%84-htlc-%E5%BB%BA%E8%A8%AD)
+  - [4.2	Off-chain 可撤銷 HTLC](#42-off-chain-%E5%8F%AF%E6%92%A4%E9%8A%B7-htlc)
+  - [4.3	HTLC Off-chain 終止](#43-htlc-off-chain-%E7%B5%82%E6%AD%A2)
+  - [4.4 HTLC 形成和封閉令](#44-htlc-%E5%BD%A2%E6%88%90%E5%92%8C%E5%B0%81%E9%96%89%E4%BB%A4)
+- [5 金鑰存儲](#5-%E9%87%91%E9%91%B0%E5%AD%98%E5%84%B2)
+- [6 雙向管道的 Blockchain 交易費](#6-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84-blockchain-%E4%BA%A4%E6%98%93%E8%B2%BB)
+- [7 薪酬合約](#7-%E8%96%AA%E9%85%AC%E5%90%88%E7%B4%84)
+- [8 比特幣閃電網路](#8-%E6%AF%94%E7%89%B9%E5%B9%A3%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF)
+  - [8.1 遞減的 Timelocks](#81-%E9%81%9E%E6%B8%9B%E7%9A%84-timelocks)
+  - [8.2 付款金額](#82-%E4%BB%98%E6%AC%BE%E9%87%91%E9%A1%8D)
+  - [8.4 付款路由](#84-%E4%BB%98%E6%AC%BE%E8%B7%AF%E7%94%B1)
+  - [8.5 費用](#85-%E8%B2%BB%E7%94%A8)
+- [9 風險](#9-%E9%A2%A8%E9%9A%AA)
+  - [9.1 不當 Timelocks](#91-%E4%B8%8D%E7%95%B6-timelocks)
+  - [9.2 被迫滿期的垃圾郵件](#92-%E8%A2%AB%E8%BF%AB%E6%BB%BF%E6%9C%9F%E7%9A%84%E5%9E%83%E5%9C%BE%E9%83%B5%E4%BB%B6)
+  - [9.3 通過分裂盜竊資金](#93-%E9%80%9A%E9%81%8E%E5%88%86%E8%A3%82%E7%9B%9C%E7%AB%8A%E8%B3%87%E9%87%91)
+  - [9.4 資料丟失](#94-%E8%B3%87%E6%96%99%E4%B8%9F%E5%A4%B1)
+  - [9.5 忘記及時公佈交易](#95-%E5%BF%98%E8%A8%98%E5%8F%8A%E6%99%82%E5%85%AC%E4%BD%88%E4%BA%A4%E6%98%93)
+  - [9.6 無法做出必要的 Soft-Forks](#96-%E7%84%A1%E6%B3%95%E5%81%9A%E5%87%BA%E5%BF%85%E8%A6%81%E7%9A%84-soft-forks)
+  - [9.7 勾結礦工攻擊](#97-%E5%8B%BE%E7%B5%90%E7%A4%A6%E5%B7%A5%E6%94%BB%E6%93%8A)
+- [10 區塊大小增加與共識](#10-%E5%8D%80%E5%A1%8A%E5%A4%A7%E5%B0%8F%E5%A2%9E%E5%8A%A0%E8%88%87%E5%85%B1%E8%AD%98)
+- [11 用例 除了説明比特幣規模，對閃電網路上的交易也是很有用的：](#11-%E7%94%A8%E4%BE%8B-%E9%99%A4%E4%BA%86%E8%AA%AC%E6%98%8E%E6%AF%94%E7%89%B9%E5%B9%A3%E8%A6%8F%E6%A8%A1%E5%B0%8D%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E4%B8%8A%E7%9A%84%E4%BA%A4%E6%98%93%E4%B9%9F%E6%98%AF%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84)
+- [12 結論](#12-%E7%B5%90%E8%AB%96)
+- [13 致謝](#13-%E8%87%B4%E8%AC%9D)
+- [附錄 A 解決延展性](#%E9%99%84%E9%8C%84-a-%E8%A7%A3%E6%B1%BA%E5%BB%B6%E5%B1%95%E6%80%A7)
 
 ## 摘要 | Abstract
 
@@ -94,7 +131,11 @@ Micropayment channels[3][4] create a relationship between two par- ties to perpe
 
 ### 2.1 小額支付管道不要求信託 | Micropayment Channels Do Not Require Trust
 
+Like the age-old question of whether the tree falling in the woods makes a sound, if all parties agree that the tree fell at 2:45 in the afternoon, then the tree really did fall at 2:45 in the afternoon. Similarly, if both counterparties agree that the current balance inside a channel is 0.07 BTC to Alice and 0.03 BTC to Bob, then that’s the true balance. However, without cryptography, an interesting problem is created: If one’s counterparty disagrees about the current balance of funds (or time the tree fell), then it is one’s word against another. Without cryptographic signatures, the blockchain will not know who owns what.
+
 就像樹倒在樹林裡是否發出聲音的老問題，如各方均同意該樹在 2:45 倒下，那麼該樹確實 在下午 2:45 倒下。同樣，如果雙方均同意，管道內現有的平衡為 0.07 BTC 給 Alice 和 0.03 BTC 給 Bob，那麼這就是真正的平衡。然而，如果沒有密碼，一個有趣的問題產生了：如果其中 一方不同意有關基金的當前平衡（樹倒下的時間），那麼雙方就產生了分歧。如果沒有加密 的簽名，blockchain 就不知道誰擁有什麼。
+
+---
 
 如果在管道中的平衡為 0.05 BTC 給 Alice 和 0.05 BTC 給 Bob，一個交易後的平衡為 0.07 BTC 給 Alice 和 0.03 BTC 給 Bob，網路需要知道哪個平衡集是正確的。 Blockchain 交易通過使 用 blockchain 總帳作為時間系統解決了這個問題。與此同時，希望建立一個系統，該系統除 必要情況不積極地使用該時間戳記系統，因為它對於網路來說是昂貴的。
 
