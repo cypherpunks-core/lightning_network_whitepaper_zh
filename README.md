@@ -244,10 +244,18 @@ An initial channel Funding Transaction is created whereby one or both chan- nel 
 
 ---
 
+The output for this Funding Transaction is a single 2-of-2 multisigna-
+ture script with both participants in this channel, henceforth named Alice and Bob. Both participants do not exchange signatures for the Funding Transaction until they have created spends from this 2-of-2 output refund- ing the original amount back to its respective funders. The purpose of not signing the transaction allows for one to spend from a transaction which does not yet exist. If Alice and Bob exchange the signatures from the Fund- ing Transaction without being able to broadcast spends from the Funding Transaction, the funds may be locked up forever if Alice and Bob do not cooperate (or other coin loss may occur through hostage scenarios whereby one pays for the cooperation from the counterparty).
+
 對於這筆資金交易的輸出是參加這個管道雙方的 2-OF-2 的多重簽名，今後命名為 Alice 和 Bob 腳本。這兩個參與者沒有為資金交易交換簽名，直到他們已經從 2-OF-2 得到了與原來 金額相等的退還金額。未簽署交易的目的，是允許從一個尚不存在一個交易中花費。如果 Alice 和 Bob 在資金交易中交換了簽名，而不能得到資金交易的公佈，而且如果 Alice 和 Bob 不配合，資金可能會被永久的鎖定（或由一方承擔不合作的損失）。
 
+---
+
+Alice and Bob both exchange inputs to fund the Funding Transaction (to know which inputs are used to determine the total value of the channel), and exchange one key to use to sign with later. This key is used for the 2-of-2 output for the Funding Transaction; both signatures are needed to spend from the Funding Transaction, in other words, both Alice and Bob need to agree to spend from the Funding Transaction.
+
 Alice 和 Bob 雙方交換輸入來提供資金交易所需基金（知道哪些輸入用於確定管道的總價 值），來交換之後用來簽署的鑰匙。此鑰匙用於資金交易的 2-OF-2 輸出; 資金花費的產生 需要雙方的簽署，換句話說， Alice 和 Bob 必須同意從資金交易中的資金花費。
- 
+
+---
 
 #### 3.1.2 來自未簽署交易的消費
 
