@@ -1,4 +1,5 @@
-# 比特幣閃電網路：可擴展的 off-chain 即時支付 | The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments
+# 比特幣閃電網路：可擴展的 off-chain 即時支付
+# The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments
 
 Joseph Poon  
 joseph@lightning.network 
@@ -9,7 +10,8 @@ rx@awsomnet.org
 二零一五年十一月二十日 草案版本 0.5.9.1
 
 ## 目錄
-- [比特幣閃電網路：可擴展的 off-chain 即時支付 | The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments](#%E6%AF%94%E7%89%B9%E5%B9%A3%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E5%8F%AF%E6%93%B4%E5%B1%95%E7%9A%84-off-chain-%E5%8D%B3%E6%99%82%E6%94%AF%E4%BB%98--the-bitcoin-lightning-network-scalable-off-chain-instant-payments)
+- [比特幣閃電網路：可擴展的 off-chain 即時支付](#%E6%AF%94%E7%89%B9%E5%B9%A3%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E5%8F%AF%E6%93%B4%E5%B1%95%E7%9A%84-off-chain-%E5%8D%B3%E6%99%82%E6%94%AF%E4%BB%98)
+- [The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments](#the-bitcoin-lightning-network-scalable-off-chain-instant-payments)
   - [目錄](#%E7%9B%AE%E9%8C%84)
   - [摘要 | Abstract](#%E6%91%98%E8%A6%81--abstract)
   - [1 比特幣 Blockchain 可擴展性問題 | The Bitcoin Blockchain Scalability Problem](#1-%E6%AF%94%E7%89%B9%E5%B9%A3-blockchain-%E5%8F%AF%E6%93%B4%E5%B1%95%E6%80%A7%E5%95%8F%E9%A1%8C--the-bitcoin-blockchain-scalability-problem)
