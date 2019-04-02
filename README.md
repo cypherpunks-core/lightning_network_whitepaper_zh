@@ -27,7 +27,8 @@ rx@awsomnet.org
     - [3.3 nSequence 成熟度 | Sequence Number Maturity](#33-nsequence-%E6%88%90%E7%86%9F%E5%BA%A6--sequence-number-maturity)
       - [3.3.1 Timestop](#331-timestop)
       - [3.3.2 撤銷承諾交易 | Revocable Commitment Transactions](#332-%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93--revocable-commitment-transactions)
-      - [3.3.3 從管道兌換基金：合作交易方](#333-%E5%BE%9E%E7%AE%A1%E9%81%93%E5%85%8C%E6%8F%9B%E5%9F%BA%E9%87%91%E5%90%88%E4%BD%9C%E4%BA%A4%E6%98%93%E6%96%B9)
+      - [3.3.3 從管道兌換基金：合作交易方 | Redeeming Funds from the Channel: Cooperative Coun- terparties](#333-%E5%BE%9E%E7%AE%A1%E9%81%93%E5%85%8C%E6%8F%9B%E5%9F%BA%E9%87%91%E5%90%88%E4%BD%9C%E4%BA%A4%E6%98%93%E6%96%B9--redeeming-funds-from-the-channel-cooperative-coun--terparties)
+      - [3.3.4 創建一個新的交易承諾，並撤銷先前的承諾 | Creating a new Commitment Transaction and Revoking Prior Commitments](#334-%E5%89%B5%E5%BB%BA%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E4%BA%A4%E6%98%93%E6%89%BF%E8%AB%BE%E4%B8%A6%E6%92%A4%E9%8A%B7%E5%85%88%E5%89%8D%E7%9A%84%E6%89%BF%E8%AB%BE--creating-a-new-commitment-transaction-and-revoking-prior-commitments)
       - [3.3.5 創建可撤銷承諾交易流程](#335-%E5%89%B5%E5%BB%BA%E5%8F%AF%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B)
     - [3.4 協同關閉管道](#34-%E5%8D%94%E5%90%8C%E9%97%9C%E9%96%89%E7%AE%A1%E9%81%93)
     - [3.5 雙向管道的啟示與總結](#35-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84%E5%95%9F%E7%A4%BA%E8%88%87%E7%B8%BD%E7%B5%90)
@@ -589,30 +590,68 @@ By knowing who broadcast the Commitment Transaction and encum- bering one’s ow
 
 ---
 
-#### 3.3.3 從管道兌換基金：合作交易方
+#### 3.3.3 從管道兌換基金：合作交易方 | Redeeming Funds from the Channel: Cooperative Coun- terparties
+
+Either party may redeem the funds from the channel. However, the party that broadcasts the Commitment Transaction must wait for the predefined number of confirmations described in the RSMC. The counterparty which did not broadcast the Commitment Transaction may redeem the funds im- mediately.
 
 任何一方都可以從管道贖回基金。然而，公佈承諾交易的一方必須等待在 RSMC 描述的提 前確定好的交易數量。沒有公佈的承諾交易的交易對手可以立即贖回基金。
 
+---
+
+For example, if the Funding Transaction is committed with 1 BTC (half to each counterparty) and Bob broadcasts the most recent Commit- ment Transaction, C1b, he must wait 1000 confirmations to receive his 0.5 BTC, while Alice can spend 0.5 BTC. For Alice, this transaction is fully closed if Alice agrees that Bob broadcast the correct Commitment Transac- tion (C1b).
+
 例如，如果資金交易承諾 1 BTC（每個交易對手一半），並且 Bob 公佈最新的承諾交易 C1b， 他必須等 1000 次確認才能得到他的 0.5 BTC，Alice 可以花費 0.5 BTC。對於 Alice，本次交 易是完全封閉的，如果 Alice 同意 Bob 公佈的承諾交易（C1b）是正確的。
+
+---
 
 ![](image/figure5.png)
 
+Figure 5: When Bob broadcasts C1b, Alice can immediately redeem her portion. Bob must wait 1000 confirmations. When the block is immediately broadcast, it is in this state.  Transactions in green are transactions which are committed into the   blockchain.
+
 圖 5：當 Bob 公佈 C1b 時，Alice 可以立即贖回她的部分。Bob 必須等到 1000 次確認。當區 塊被立即公佈，它是在該狀態下。綠色交易是它們提交到 blockchain 的交易。
+
+---
+
+After the Commitment Transaction has been in the  blockchain for 1000 blocks, Bob can then broadcast the Revocable Delivery transaction. He must wait 1000 blocks to prove he has not revoked this Commitment Transaction (C1b). After 1000 blocks, the Revocable Delivery transaction will be able to be included in a block. If a party attempt to include the Revocable Delivery transaction in a block before 1000 confirmations, the transaction will be invalid up until after 1000 confirmations have passed (at which point it will become valid if the output has not yet been redeemed).
 
 承諾交易已經在 blockchain 1000 區塊之後，Bob 就可以公佈可撤銷的交貨交易。他必須等到 1000 區塊，以證明他並沒有撤銷該承諾交易（C1b）。1000 區塊後，可撤銷的交貨交易將 能夠被包括在一個區塊中。如果一方企圖包括在 1000 次確認之前將可撤銷的交貨交易納入 區塊，1000 次確認後該交易將是無效的（如果輸出尚未贖回，此時它就會成為有效的）。
 
+---
+
 ![](image/figure6.png)
+
+Figure 6: Alice agrees that Bob broadcast the correct Commitment Transaction and 1000 confirmations have passed. Bob then is able to broadcast the Revocable Delivery (RD1b) transaction on the  blockchain.
 
 圖 6：Alice 同意，Bob 公佈正確的承諾交易並且 1000  次確認已經過去了。Bob 能夠在
 blockchain 上公佈可撤銷交貨交易（RD1b）。
 
+---
+
+After Bob broadcasts the Revocable Delivery transaction, the channel is fully closed for both Alice and Bob, everyone has received the funds which they both agree are the current balance they each own in the channel.
+
 Bob 公佈可撤銷交貨的交易後，對於 Alice 和 Bob，該管道完全關閉，每個人都收到了資金， 他們都同意在當前平衡下，他們在管道內分別擁有的資金。
 
-如果是 Alice 公佈承諾交易（C1a），她必須等到 1000 次確認，而不是 Bob。 3.3.4 創建一個新的交易承諾，並撤銷先前的承諾
+---
+
+If it was instead Alice who broadcast the Commitment Transaction (C1a), she is the one who must wait 1000 confirmations instead of Bob.
+
+如果是 Alice 公佈承諾交易（C1a），她必須等到 1000 次確認，而不是 Bob。 
+
+---
+
+#### 3.3.4 創建一個新的交易承諾，並撤銷先前的承諾 | Creating a new Commitment Transaction and Revoking Prior Commitments
+
+While each party may close out the most recent Commitment Transaction at any time, they may also elect to create a new Commitment Transaction and invalidate the old one.
+
 雖然任何一方都可以在任何時候收回最近交易承諾，他們也可以選擇創建一個新的承諾交易 並且使舊的交易無效。
 
-假設 Alice 和 Bob 現在要更新每人 0.5 BTC 的平衡，並且退還 0.6 BTC 給 Bob 和 0.4 BTC 給
-Alice。當他們都同意這樣做，它們產生了一對新承諾交易。
+---
+
+Suppose Alice and Bob now want to update  their  current balances from 0.5 BTC each refunded to 0.6 BTC for Bob and 0.4 BTC for Alice.When they both agree to do so, they generate a new pair of Commitment Transactions.
+
+假設 Alice 和 Bob 現在要更新每人 0.5 BTC 的平衡，並且退還 0.6 BTC 給 Bob 和 0.4 BTC 給Alice。當他們都同意這樣做，它們產生了一對新承諾交易。
+
+---
 
 ![](image/figure7.png)
 
