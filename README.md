@@ -690,9 +690,17 @@ Figure 9: Transactions in green are committed to the blockchain. Bob incorrectly
 
 ---
 
+However, if Alice does not broadcast BR1b within 1000 blocks, Bob may be able to steal some money, since his Revocable Delivery Transac- tion (RD1b) becomes valid after 1000 blocks. When an incorrect Commit- ment Transaction is broadcast, only the Breach Remedy Transaction can be broadcast for 1000 blocks (or whatever number of confirmations both parties agree to). After 1000 block confirmations, both the Breach Remedy (BR1b) and Revocable Delivery Transactions (RD1b) are able to be broad- cast at any time. Breach Remedy transactions only have exclusivity within this predefined time period, and any time after of that is functionally an expiration of the statute of limitations —according to Bitcoin blockchain consensus, the time for dispute has   ended.
+
 但是，如果 Alice 不在 C1b 公佈 1000 區塊以後公佈 BR1b，Bob 也許能偷一些錢，因為他的 撤銷交貨交易（RD1b）在 1000 區塊後有效。當一個不正確的交易承諾被公佈，只有違約補 救交易可公佈 1000 區塊（或其他的雙方同意的確認數量）。經過 1000 次確認，無論是違約 補救措施（BR1b）還是可撤銷的交付交易（RD1b）能夠在任何時間公佈。違約補救交易只 有在這個提前定義的時間段內具有排他性，之後的任何時間在功能上受到限制 - 根據比特 幣 blockchain 共識，爭論的時間已經結束。
 
+---
+
+For this reason, one should periodically monitor the blockchain to see if one’s counterparty has broadcast an invalidated Commitment Transaction, or delegate a third party to do so. A third party can be delegated by only giving the Breach Remedy transaction to this third party. They can be incentivized to watch the blockchain broadcast such a transaction in the event of counterparty maliciousness by giving these third parties some fee in the output. Since the third party is only able to take action when the counterparty is acting maliciously, this third party does not have any power to force close of the channel.
+
 為此，應定期監測 blockchain，監控其對手是否公佈了無效的承諾交易，或委託協力廠商這樣 做。只能通過向這個協力廠商提供違約補救交易來對其進行委託。協力廠商被激勵去監控 blockchain 中這樣的對手惡意公佈的交易，通過給這些協力廠商一些輸出中的費用。由於第三 人只能在對方惡意行為時採取行動，該協力廠商沒有任何強制關閉管道的權力。
+
+---
 
 #### 3.3.5 創建可撤銷承諾交易流程
 
