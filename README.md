@@ -919,7 +919,7 @@ If R is produced within 3 days, then Bob can redeem the funds by broadcast- ing 
 
 It is within both parties individual responsibility to ensure that they can get their transaction into the blockchain in order to ensure the balances are correct. For Bob, in order to receive the funds, he must either broadcast the “Delivery” transaction on the Bitcoin blockchain,  or  otherwise settle with Alice (while cancelling the HTLC). For Alice, she must broadcast the “Timeout” 3 days from now to receive the refund, or cancel the HTLC entirely with Bob.
 
-這是雙方個人範圍內的責任，以確保他們的交易進入 blockchain，以保證平衡是正確的。對 於 Bob，為了獲得資金，他必須要麼公佈比特幣 blockchain 的“交付”交易，或與 Alice 結 算（同時取消 HTLC）。對於 Alice，她必須從即日起 3 天內公佈的“Timeout”交易，以收 到退款，或與 Bob 完全取消 HTLC。
+這是雙方個人範圍內的責任，以確保他們的交易進入 blockchain，以保證平衡是正確的。對於 Bob，為了獲得資金，他必須要麼公佈比特幣 blockchain 的“交付”交易，或與 Alice 結算（同時取消 HTLC）。對於 Alice，她必須從即日起 3 天內公佈的“Timeout”交易，以收到退款，或與 Bob 完全取消 HTLC。
 
 ---
 
