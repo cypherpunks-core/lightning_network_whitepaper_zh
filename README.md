@@ -57,7 +57,7 @@ rx@awsomnet.org
     - [9.6 無法做出必要的 Soft-Forks | Inability to Make Necessary Soft-Forks](#96-%E7%84%A1%E6%B3%95%E5%81%9A%E5%87%BA%E5%BF%85%E8%A6%81%E7%9A%84-soft-forks--inability-to-make-necessary-soft-forks)
     - [9.7 勾結礦工攻擊 | Colluding Miner Attacks](#97-%E5%8B%BE%E7%B5%90%E7%A4%A6%E5%B7%A5%E6%94%BB%E6%93%8A--colluding-miner-attacks)
   - [10 區塊大小增加與共識 | Block Size Increases and Consensus](#10-%E5%8D%80%E5%A1%8A%E5%A4%A7%E5%B0%8F%E5%A2%9E%E5%8A%A0%E8%88%87%E5%85%B1%E8%AD%98--block-size-increases-and-consensus)
-  - [11 用例](#11-%E7%94%A8%E4%BE%8B)
+  - [11 用例 | Use case](#11-%E7%94%A8%E4%BE%8B--use-case)
   - [12 結論 | Conclusion](#12-%E7%B5%90%E8%AB%96--conclusion)
   - [13 致謝 | Acknowledgements](#13-%E8%87%B4%E8%AC%9D--acknowledgements)
   - [附錄 A 解決延展性 | Resolving Malleability](#%E9%99%84%E9%8C%84-a-%E8%A7%A3%E6%B1%BA%E5%BB%B6%E5%B1%95%E6%80%A7--resolving-malleability)
@@ -1476,7 +1476,7 @@ When transactions are viewed as circuits and contracts instead of transaction pa
 
 ---
 
-## 11 用例 
+## 11 用例 | Use case
 
 In addition to helping bitcoin scale, there are many uses for transactions on the Lightning Network:
 * Instant Transactions. Using Lightning, Bitcoin transactions are now nearly instant with any party. It is possible to pay for a cup of coffee with direct non-revocable payment in milliseconds to seconds.
