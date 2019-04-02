@@ -29,7 +29,7 @@ rx@awsomnet.org
       - [3.3.2 撤銷承諾交易 | Revocable Commitment Transactions](#332-%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93--revocable-commitment-transactions)
       - [3.3.3 從管道兌換基金：合作交易方 | Redeeming Funds from the Channel: Cooperative Coun- terparties](#333-%E5%BE%9E%E7%AE%A1%E9%81%93%E5%85%8C%E6%8F%9B%E5%9F%BA%E9%87%91%E5%90%88%E4%BD%9C%E4%BA%A4%E6%98%93%E6%96%B9--redeeming-funds-from-the-channel-cooperative-coun--terparties)
       - [3.3.4 創建一個新的交易承諾，並撤銷先前的承諾 | Creating a new Commitment Transaction and Revoking Prior Commitments](#334-%E5%89%B5%E5%BB%BA%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E4%BA%A4%E6%98%93%E6%89%BF%E8%AB%BE%E4%B8%A6%E6%92%A4%E9%8A%B7%E5%85%88%E5%89%8D%E7%9A%84%E6%89%BF%E8%AB%BE--creating-a-new-commitment-transaction-and-revoking-prior-commitments)
-      - [3.3.5 創建可撤銷承諾交易流程](#335-%E5%89%B5%E5%BB%BA%E5%8F%AF%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B)
+      - [3.3.5 創建可撤銷承諾交易流程 | Process for Creating Revocable Commitment Transactions](#335-%E5%89%B5%E5%BB%BA%E5%8F%AF%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B--process-for-creating-revocable-commitment-transactions)
     - [3.4 協同關閉管道](#34-%E5%8D%94%E5%90%8C%E9%97%9C%E9%96%89%E7%AE%A1%E9%81%93)
     - [3.5 雙向管道的啟示與總結](#35-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84%E5%95%9F%E7%A4%BA%E8%88%87%E7%B8%BD%E7%B5%90)
   - [4 散列 Timelock 合同（HTLC）](#4-%E6%95%A3%E5%88%97-timelock-%E5%90%88%E5%90%8Chtlc)
@@ -702,28 +702,63 @@ For this reason, one should periodically monitor the blockchain to see if one’
 
 ---
 
-#### 3.3.5 創建可撤銷承諾交易流程
+#### 3.3.5 創建可撤銷承諾交易流程 | Process for Creating Revocable Commitment Transactions
+
+To create revocable Commitment Transactions, it requires proper construc- tion of the channel from the beginning, and only signing transactions which may be broadcast at any time in the future, while ensuring that one will not lose out due to uncooperative or malicious counterparties. This re- quires determining which public key to use for new commitments, as us- ing SIGHASH NOINPUT requires using unique keys for each Commitment Transaction RSMC (and HTLC) output. We use P to designate pubkeys and K to designate the corresponding private key used to sign.
 
 要創建可撤銷承諾交易，首先它需要正確的建設管道，並且僅僅簽訂可能在未來任何時間公 布的交易，同時確保一方不會因不合作或惡意的對手而吃虧。這需要確定新的承諾要使用的 公開金鑰，如使用 SIGHASH NOINPUT 要求每一個承諾交易 RSMC（和 HTLC）輸出使用特殊 鑰。我們用 P 來指定公開金鑰，K 來指定用於簽署的相應的私密金鑰。
 
+---
+
+When generating the first Commitment Transaction, Alice and Bob agree to create a multisig output from a Funding Transaction with a single multisig(PAliceF , PBobF ) output, funded with 0.5 BTC from Alice and Bob for a total of 1 BTC. This output is a Pay to Script Hash[16] transaction, which requires both Alice and Bob to both agree to spend from the Funding Transaction. They do not yet make the Funding Transaction (F) spendable. Additionally, PAliceF and PBobF are only used for the Funding Transaction, they are not used for anything else.
+
 當生成第一個承諾交易時，Alice 和 Bob 同意從一個資金交易一具有單一 multisig（PAliceF， PBobF）輸出中創建一個 multisig 輸出，提供來自 Alice 和 Bob 各 0.5 BT C，共 1 BTC 的資 金。該輸出是一種給雜湊腳本[16]交易的付費，這需要雙方 Alice 和 Bob 同意從交易資金花 費。他們還沒有使資金交易（F）可支配。此外，PAliceF 和 PBobF 僅用於資金交易，它們 不用於其他任何東西。
+
+---
+
+Since the Delivery transaction is just a P2PKH output (bitcoin ad- dresses beginning with 1) or P2SH transaction (commonly recognized as ad- dresses beginning with the 3) which the counterparties designate beforehand, this can be generated as an output of PAliceD and PBobD . For simplicity, these output addresses will remain the same throughout the channel, since its funds are fully controlled by its designated recipient after the Commit- ment Transaction enters the blockchain. If desired, but not necessary, both parties may update and change PAliceD and PBobD for future Commitment Transactions.
 
 由於交付交易僅僅是一個 P2PKH 輸出（比特幣位址從 1 開始）或 P2SH 交易（通常認為地 址從 3 開始），這需要對方事先指定，這可以由 PAliceD 和 PBobD 的輸出生成。簡單起見， 這些輸出位址將在整個管道過程保持不變，因為其資金是由它的指定接收方的承諾交易進入 blockchain 後完全控制。如果需要，但不是必要的話，雙方可以為未來的承諾交易更新改變 PAliceD 和 PBobD。
 
+---
+
+Both parties exchange pubkeys they intend to use for the RSMC (and HTLC described in future sections) for the Commitment Transaction. Each set of Commitment Transactions use their own public keys and are not ever reused.  Both parties may already know all future pubkeys by  using a BIP 0032[17] HD Wallet construction by exchanging Master Public Keys during channel construction. If they wish to generate a new Commitment Transaction pair C2a/C2b, they use multisig(PAliceRSMC2, PBobRSMC2) for the RSMC output.
+
 雙方交換他們打算為承諾交易的 RSMC（和在以後的章節描述的 HTLC）使用的公開金鑰。每套 承諾交易用自己的公開金鑰並且永遠不重複使用。雙方可能已經知道未來所有的公開金鑰，通過使用      BIP 0032 [17] HD 錢包建設管道過程中交換主公共金鑰。如果他們希望生成一個新的承諾交 易對 C2A / C2b，他們為 RSMC 輸出使用 multisig（PAliceRSMC2，PBobRSMC2）。
 
-雙方都知道承諾交易的輸出值之後，雙方建立了交易承諾對，如 C2A / C2b，但不為承諾交 易交換簽名。他們都簽署撤銷交付交易（RD2a / RD2b），並交換了簽名。Bob 簽署 RD1a
- 
+---
 
-並將其交給 Alice （ 使 用 KBobRSMC2 ） ， Alice 簽 名 RD1b 並 將 其 交 給 Bob （ 使 用 KAliceRSMC2）。
+After both parties know the output values from the Commitment Transactions,  both parties create the pair of Commitment    Transactions,
+e.g. C2a/C2b, but do not exchange signatures for the Commitment Trans- actions. They both sign the Revocable Delivery transaction (RD2a/RD2b) and exchange the signatures. Bob signs RD1a and  gives  it  to Alice (using KBobRSMC2), while Alice signs RD1b and gives it to Bob (using KAliceRSMC2).
+
+雙方都知道承諾交易的輸出值之後，雙方建立了交易承諾對，如 C2A / C2b，但不為承諾交 易交換簽名。他們都簽署撤銷交付交易（RD2a / RD2b），並交換了簽名。Bob 簽署 RD1a並將其交給 Alice （ 使 用 KBobRSMC2 ） ， Alice 簽 名 RD1b 並 將 其 交 給 Bob （ 使 用 KAliceRSMC2）。
+
+---
+
+When both parties have the Revocable Delivery transaction, they ex-
+change signatures for the Commitment Transactions. Bob signs C1a using KBobF and gives it to Alice, and Alice signs C1b using KAliceF and gives it to Bob.
 
 當雙方都有可撤銷的交付交易時，它們為承諾交易交換簽名。Bob 使用 KBobF 簽署 C1a 並 將其交給 Alice， Alice 使用 KAliceF 簽署 C1b 並將其交給 Bob。
 
+---
+
+At this point, the prior Commitment Transaction as well as the new Commitment Transaction can be broadcast; both C1a/C1b and C2a/C2b are valid. (Note that Commitments older than the prior Commitment are invalidated via penalties.) In order to invalidate C1a and C1b, both parties exchange Breach Remedy Transaction (BR1a/BR1b) signatures for the prior commitment C1a/C1b. Alice sends BR1a to Bob using KAliceRSMC1, and Bob sends BR1b to Alice using KBobRSMC1. When both Breach Remedy signatures have been exchanged, the channel state is now at the current Commitment C2a/C2b and the balances are now committed.
+
 在這一點上，先前的承諾交易以及新的承諾交易能夠被公佈; C1a / C1b 和 C2A / C2b 上都是 有效的。 （注意，早於先前承諾的承諾通過處罰被判定為無效的。）為了使 C1a 和 C1b 無 效， 雙方為先前承諾 C1a / C1b 交換違約補救交易（ BR1a / BR1b） 簽名。 Alice 使用 KAliceRSMC1 發送 BR1a 給 Bob，Bob 使用 KBobRSMC1 發送 BR1b 給 Alice。當兩個違約 補救簽名進行了交換，管道狀態是在當前承諾 C2A / C2b 上的平衡。
+
+---
+
+However, instead of disclosing the BR1a/BR1b signatures, it’s also possible to just disclose the private keys to the counterparty.  This is more effective as described later in the key storage section. One can disclose the private keys used in one’s own Commitment Transaction. For example, if Bob wishes to invalidate C1b, he sends his private keys used in C1b to Alice (he does NOT disclose his keys used in C1a, as that would permit coin theft). Similarly, Alice discloses all her private key outputs in C1a to Bob to invalidate C1a.
 
 然而，不公開 BR1a / BR1b 簽名，也可能只是透露私密金鑰給對手。在後面介紹的金鑰存儲部分 會說明這樣是更有效率的。一方可以公開在自己的承諾交易中使用的私有金鑰。例如，如果      Bob 希望使 C1b 無效，他將他用於 C1b 的私密金鑰發送給 Alice（他沒有透露他在 C1a 使用的密 鑰，因為這將引起硬幣盜竊）。同樣，Alice 向 Bob 公開了她在 C1a 所有的私有金鑰來使 C1a 無效。
 
+---
+
+If Bob incorrectly broadcasts C1b, then because Alice has all the private keys used in the outputs of C1b, she can take the money. However, only Bob is able to broadcast C1b. To prevent this coin theft risk, Bob should destroy all old Commitment Transactions.
+
 如果 Bob 沒有正確公佈 C1b，因為 Alice 有所有的 C1b 輸出使用的私密金鑰，她可以拿錢。然而， 只有 Bob 能夠公佈 C1b。為了防止這種硬幣被盜風險，Bob 應該銷毀所有舊的承諾交易。
+
+---
 
 ### 3.4 協同關閉管道
 
