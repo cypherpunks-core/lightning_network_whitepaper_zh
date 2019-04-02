@@ -47,7 +47,7 @@ rx@awsomnet.org
     - [8.2 付款金額 | Payment Amount](#82-%E4%BB%98%E6%AC%BE%E9%87%91%E9%A1%8D--payment-amount)
     - [8.3 清除故障和重新路由 | Clearing Failure and Rerouting](#83-%E6%B8%85%E9%99%A4%E6%95%85%E9%9A%9C%E5%92%8C%E9%87%8D%E6%96%B0%E8%B7%AF%E7%94%B1--clearing-failure-and-rerouting)
     - [8.4 付款路由 | Payment Routing](#84-%E4%BB%98%E6%AC%BE%E8%B7%AF%E7%94%B1--payment-routing)
-    - [8.5 費用 | Fees](#85-%E8%B2%BB%E7%94%A8--fees)
+    - [8.5 手續費 | Fees](#85-%E6%89%8B%E7%BA%8C%E8%B2%BB--fees)
   - [9 風險 | Risks](#9-%E9%A2%A8%E9%9A%AA--risks)
     - [9.1 不當 Timelocks | Improper Timelocks](#91-%E4%B8%8D%E7%95%B6-timelocks--improper-timelocks)
     - [9.2 被迫滿期的垃圾郵件 | Forced Expiration Spam](#92-%E8%A2%AB%E8%BF%AB%E6%BB%BF%E6%9C%9F%E7%9A%84%E5%9E%83%E5%9C%BE%E9%83%B5%E4%BB%B6--forced-expiration-spam)
@@ -94,7 +94,7 @@ Clearly, achieving Visa-like capacity on the Bitcoin network isn’t fea- sible 
 
 Having fewer validators due to larger blocks not only implies fewer individuals ensuring ledger accuracy, but also results in fewer entities that would be able to validate the blockchain as part of the mining process, which results in encouraging miner centralization. Extremely large blocks, for example in the above case of 8 gigabytes every 10 minutes on average, would imply that only a few parties would be able to do block validation. This creates a great possibility that entities will end up trusting centralized parties. Having privileged, trusted parties creates a social trap  whereby the central party will not act in the interest of an individual (principal- agent problem), e.g. rentierism by charging higher fees to mitigate the incentive to act dishonestly. In extreme cases, this manifests as individuals sending funds to centralized trusted custodians who have full custody of customers’ funds. Such arrangements, as are common today, create severe counterparty risk. A prerequisite to prevent that kind of centralization from occurring would require the ability for bitcoin to be validated by a  single consumer-level computer on a home broadband connection. By ensuring that full validation can occur cheaply, Bitcoin nodes and miners will be able to prevent extreme centralization and trust, which ensures extremely low transaction fees.
 
-由於較大區塊而只有更少的驗證器不僅意味著更少數量的個人來確保總帳精度，也導致在開采過程中較少的實體能夠驗證 blockchain，這將鼓勵礦工集中化。非常大的區塊，例如在上述情況下平均每 10 分鐘 8 千百萬位元組，將意味著只有少數能夠驗證區塊。這就產生了一個實體會相信集中方的可能性。有特權的，值得信賴的集中方創建一個社交陷阱，由此集中方不 會在以個人（委託-代理問題）的利益為主，如承租人通過收取較高的費用，以減輕行事不誠實的傾向。在極端的情況下，這表現為個人給擁有客戶資金的充分的監管權的集中方發送資金。這樣的安排，如今是非常常見的，產生嚴重的交易對手風險。防止那種集權發生的一個先決條件需要比特幣有這樣一種能力，通過在家用寬頻連線的單一電腦進行驗證。通過 確保以較低的資金獲得充分的驗證，比特幣節點和礦工將能夠避免極端的集權和信任，確保極低的交易費用。
+由於較大區塊而只有更少的驗證器不僅意味著更少數量的個人來確保總帳精度，也導致在開采過程中較少的實體能夠驗證 blockchain，這將鼓勵礦工集中化。非常大的區塊，例如在上述情況下平均每 10 分鐘 8 千百萬位元組，將意味著只有少數能夠驗證區塊。這就產生了一個實體會相信集中方的可能性。有特權的，值得信賴的集中方創建一個社交陷阱，由此集中方不 會在以個人（委託-代理問題）的利益為主，如承租人通過收取較高的手續費，以減輕行事不誠實的傾向。在極端的情況下，這表現為個人給擁有客戶資金的充分的監管權的集中方發送資金。這樣的安排，如今是非常常見的，產生嚴重的交易對手風險。防止那種集權發生的一個先決條件需要比特幣有這樣一種能力，通過在家用寬頻連線的單一電腦進行驗證。通過 確保以較低的資金獲得充分的驗證，比特幣節點和礦工將能夠避免極端的集權和信任，確保極低的交易手續費。
 
 ---
 
@@ -106,13 +106,13 @@ While it is possible that Moore’s Law will continue indefinitely, and the comp
 
 To achieve much higher than 47,000 transactions per second using Bitcoin requires conducting transactions off the Bitcoin blockchain itself. It would be even better if the bitcoin network supported a near-unlimited num- ber of transactions per second with extremely low fees for micropayments. Many micropayments can be sent sequentially between two parties to enable any size of payments. Micropayments would enable unbunding, less trust and commodification of services, such as payments for per-megabyte internet service. To be able to achieve these micropayment use cases, how- ever, would require severely reducing the amount of transactions that end up being broadcast on the global Bitcoin   blockchain.
 
-為了實現用比特幣進行每秒多於 47000 筆交易，需要脫離比特幣 blockchain 本身進行交易。 如果比特幣網路支援以極低的費用每秒進行近乎無限數量的小額交易會更好。許多小額支付 可以按順序在兩方之間發送，使任何大小的付款成為可能。小額支付將使服務變得非捆束， 少信任，商品化。如支付每百萬位元組的互聯網服務。為了能夠實現這些小額用例，將需要嚴重 降低最終被公佈的全球比特幣 blockchain 交易的數量。
+為了實現用比特幣進行每秒多於 47000 筆交易，需要脫離比特幣 blockchain 本身進行交易。 如果比特幣網路支援以極低的手續費每秒進行近乎無限數量的小額交易會更好。許多小額支付 可以按順序在兩方之間發送，使任何大小的付款成為可能。小額支付將使服務變得非捆束， 少信任，商品化。如支付每百萬位元組的互聯網服務。為了能夠實現這些小額用例，將需要嚴重 降低最終被公佈的全球比特幣 blockchain 交易的數量。
 
 ---
 
 While it is possible to scale at a small level, it is absolutely not possible to handle a large amount of micropayments on the network or to encompass all global transactions. For bitcoin to succeed, it requires confidence that if it were to become extremely popular, its current advantages stemming from decentralization will continue to exist. In order for people today to believe that Bitcoin will work tomorrow, Bitcoin needs to resolve the issue of block size centralization effects; large blocks implicitly create trusted custodians and significantly higher fees.
 
-雖然可以在一個小規模水準上進行，在網路上處理大量小額支付或者包含全球交易是絕對不可能的。比特幣若想成功，它需要這樣一種信心，如果它能變得非常流行，其目前的由權力下放所產生的優勢將繼續存在。為了讓今天的人們相信比特幣在將來能有用，比特幣需要解決區塊大小集中效果；大區塊自主創建值得信賴的保管人和高費用的問題。
+雖然可以在一個小規模水準上進行，在網路上處理大量小額支付或者包含全球交易是絕對不可能的。比特幣若想成功，它需要這樣一種信心，如果它能變得非常流行，其目前的由權力下放所產生的優勢將繼續存在。為了讓今天的人們相信比特幣在將來能有用，比特幣需要解決區塊大小集中效果；大區塊自主創建值得信賴的保管人和高手續費的問題。
 
 ---
 
@@ -516,13 +516,13 @@ Greg Maxwell 提出使用停止狀態以減輕對 blockchain 惡意攻擊：
 
 This can be mitigated by allowing the miner to specify whether the current (fee paid) mempool is presently being flooded  with transactions. They can enter a “1” value into the last bit in the version number of the block header. If the last bit in the block header contains a “1”, then that block will not count towards the relative height maturity for the nSequence value and the block is designated as a congested block. There is an uncongested block height (which is always lower than the normal block height). This block height is used for the nSequence value, which only counts block maturity (confirmations).
 
-這可以通過讓礦工確認現有的（費用支付）記憶體池目前是否交易氾濫來得到緩解。他們可以輸入一個“1”值到塊標題的版本號的最後一位。如果在塊標題的最後一位包含一個“1”，則該塊將不計入的相對成熟高度的 nSequence 值，並且該區塊被指定為一個擁擠區塊。有一不擁擠區塊高度（它總是比正常塊高度低）。此區塊高度用於確定 nSequence 價值，這只能算作區塊成熟（確認條件）。
+這可以通過讓礦工確認現有的（手續費支付）記憶體池目前是否交易氾濫來得到緩解。他們可以輸入一個“1”值到塊標題的版本號的最後一位。如果在塊標題的最後一位包含一個“1”，則該塊將不計入的相對成熟高度的 nSequence 值，並且該區塊被指定為一個擁擠區塊。有一不擁擠區塊高度（它總是比正常塊高度低）。此區塊高度用於確定 nSequence 價值，這只能算作區塊成熟（確認條件）。
 
 ---
 
 A miner can elect to define the block as a congested block or not. The default code could automatically set the congested block flag as “1” if the mempool is above some size and the average fee for that set size is above some value. However, a miner has full discretion to change the rules on what automatically sets as a congested block, or can select to permanently set the congestion flag to be permanently on or off. It’s expected that most honest miners would use the default behavior defined in their miner and not organize a 51% attack.
 
-一名礦工可以選擇區塊是否擁擠。如果記憶體池大於一定的規模或者對於確定大小的記憶體池的平均費用大於一定的值，默認代碼可以自動設置擁擠區塊為“1”。然而，一個礦工有完全的決定權來改變確定自動設置為擁擠塊的規則，或者可以選擇是否設置為永久的擁擠。最誠實的礦工將使用默認的行為去定義他們的礦工，而不是組織一次 51％ 的攻擊。
+一名礦工可以選擇區塊是否擁擠。如果記憶體池大於一定的規模或者對於確定大小的記憶體池的平均手續費大於一定的值，默認代碼可以自動設置擁擠區塊為“1”。然而，一個礦工有完全的決定權來改變確定自動設置為擁擠塊的規則，或者可以選擇是否設置為永久的擁擠。最誠實的礦工將使用默認的行為去定義他們的礦工，而不是組織一次 51％ 的攻擊。
 
 ---
 
@@ -699,7 +699,7 @@ However, if Alice does not broadcast BR1b within 1000 blocks, Bob may be able to
 
 For this reason, one should periodically monitor the blockchain to see if one’s counterparty has broadcast an invalidated Commitment Transaction, or delegate a third party to do so. A third party can be delegated by only giving the Breach Remedy transaction to this third party. They can be incentivized to watch the blockchain broadcast such a transaction in the event of counterparty maliciousness by giving these third parties some fee in the output. Since the third party is only able to take action when the counterparty is acting maliciously, this third party does not have any power to force close of the channel.
 
-為此，應定期監測 blockchain，監控其對手是否公佈了無效的承諾交易，或委託協力廠商這樣做。只能通過向這個協力廠商提供違約補救交易來對其進行委託。協力廠商被激勵去監控 blockchain 中這樣的對手惡意公佈的交易，通過給這些協力廠商一些輸出中的費用。由於第三人只能在對方惡意行為時採取行動，該協力廠商沒有任何強制關閉通道的權力。
+為此，應定期監測 blockchain，監控其對手是否公佈了無效的承諾交易，或委託協力廠商這樣做。只能通過向這個協力廠商提供違約補救交易來對其進行委託。協力廠商被激勵去監控 blockchain 中這樣的對手惡意公佈的交易，通過給這些協力廠商一些輸出中的手續費。由於第三人只能在對方惡意行為時採取行動，該協力廠商沒有任何強制關閉通道的權力。
 
 ---
 
@@ -785,7 +785,7 @@ When either party wishes to close out a channel cooperatively, they will be able
 
 Figure 10: If both counterparties are cooperative, they take the balances in the cur- rent Commitment Transaction and spend from the Funding Transaction with a Exercise Settlement Transaction (ES). If the most recent Commitment Transaction gets broadcast instead, the payout (less fees) will be the same.
 
-圖 10：如果雙方是合作的，他們採取當前交易承諾的平衡，並從有運用結算交易（ES）的資金交易中花費。如果最近的承諾交易被公佈，支出（較少費用）將是相同的。
+圖 10：如果雙方是合作的，他們採取當前交易承諾的平衡，並從有運用結算交易（ES）的資金交易中花費。如果最近的承諾交易被公佈，支出（較少手續費）將是相同的。
 
 ---
 
@@ -865,7 +865,7 @@ For clarity of examples, we use days for HTLCs and block height for RSMCs.  In r
 In effect, one desires to construct a payment which is contingent upon knowledge of R by the recipient within a certain timeframe. After this timeframe, the funds are refunded back to the sender. Similar to RSMCs, these contract terms are programatically enforced on the Bitoin blockchain and do not require trust in the counterparty to adhere to the contract terms, as all violations are penalized via unilaterally enforced fidelity bonds, which are constructed using penalty transactions spending from commitment states. If Bob knows R within three days, then he can redeem the funds by broadcasting a transaction; Alice is unable to withhold the funds in any way, because the script returns as valid when the transaction is spent on the Bitcoin blockchain.
 
 事實上，人們希望建立一個支付，這個支付取決於收件人在一定的時間內對 R 的資訊。在此期限後，該基金退還給寄件者。
-類似于 RSMC，這些合約條款是在比特幣 blockchain 上強制性程式設計的，不需要對方服從合約條款的信任，因為所有的違反條款的行為都通過單方面強制網路保真債券基金受到懲罰，承諾交易投入費用設置處罰。如果 Bob 在三天內知道 R，那麼他就可以公佈交易以贖回基金;Alice 是無法以任何方式截留資金的，因為當比特幣 blockchain 上發生了交易，腳本有效地返回。
+類似于 RSMC，這些合約條款是在比特幣 blockchain 上強制性程式設計的，不需要對方服從合約條款的信任，因為所有的違反條款的行為都通過單方面強制網路保真債券基金受到懲罰，承諾交易投入手續費設置處罰。如果 Bob 在三天內知道 R，那麼他就可以公佈交易以贖回基金;Alice 是無法以任何方式截留資金的，因為當比特幣 blockchain 上發生了交易，腳本有效地返回。
 
 ---
 
@@ -1170,19 +1170,19 @@ This enables participants in a channel to have prior output states (transactions
 
 It is possible for each participant to generate different versions of transac- tions to ascribe blame as to who broadcast the transaction on the blockchain. By having knowledge of who broadcast a transaction and the ability to as- cribe blame, a third party service can be used to hold fees in a 2-of-3 multisig escrow. If one wishes to broadcast the transaction chain instead of  agreeing to do a Funding Close or replacement with a new Commitment Transaction, one would communicate with the third party and broadcast the chain to the blockchain. If the counterparty refuses the notice from the third party to cooperate, the penalty is rewarded to the non-cooperative party. In most instances, participants may be indifferent to the transaction fees in the event of  an  uncooperative counterparty.
 
-每個參與者產生不同版本的交易來尋找在 blockchain 上公佈交易的錯誤來源是可能的。通過得知是誰公佈交易並能夠尋找到錯誤的來源，協力廠商服務可以在 2-OF-3 multisig 代管用於持有費用。如果一方希望公佈交易鏈，而不是同意做一個資金關閉或更換新的承諾交易，一方會與協力廠商交流並公佈此交易鏈到 blockchain。如果對方拒絕來自協力廠商合作的通知，非合作方會受到懲罰。在大多數情況下，參與者在對手不合作的情況下不在乎交易費用。
+每個參與者產生不同版本的交易來尋找在 blockchain 上公佈交易的錯誤來源是可能的。通過得知是誰公佈交易並能夠尋找到錯誤的來源，協力廠商服務可以在 2-OF-3 multisig 代管用於持有手續費。如果一方希望公佈交易鏈，而不是同意做一個資金關閉或更換新的承諾交易，一方會與協力廠商交流並公佈此交易鏈到 blockchain。如果對方拒絕來自協力廠商合作的通知，非合作方會受到懲罰。在大多數情況下，參與者在對手不合作的情況下不在乎交易手續費。
 
 ---
 
 One should pick counterparties in the channel who will be cooperative, but is not an absolute necessity for the system to function. Note that this does not require trust among the rest of the network, and is only relevant for the comparatively minor transaction fees. The less trusted party may just be the one responsible for transaction   fees.
 
-每個人都應該挑選通道中合作的對手，但系統不一定能執行功能。需要注意的是，這並不需要網路的其餘部分之間的信任，而只與較為次要的交易費用有關。低信任度的一方可能只是一個對交易費負責的一方。
+每個人都應該挑選通道中合作的對手，但系統不一定能執行功能。需要注意的是，這並不需要網路的其餘部分之間的信任，而只與較為次要的交易手續費有關。低信任度的一方可能只是一個對交易費負責的一方。
 
 ---
 
 The Lightning Network fees will likely be significantly lower than blockchain transaction fees. The fees are largely derived from the time-value of locking up funds for a particular route, as well as paying for the chance of channel close on the blockchain. These should be significantly lower than on-chain transactions, as many transactions on a Lightning Network chan- nel can be settled into one single blockchain transaction. With a sufficiently robust and interconnected network, the fees should asymptotically approach negligibility for many types of transactions. With cheap fees and fast trans- actions, it will be possible to build scalable micropayments, even amongst high-frequency systems such as Internet of Things applications or per-unit micro-billing.
 
-閃電網路費用很可能會顯著低於 blockchain 交易費用。該費用主要來自於用於一個特定路線的對資金的鎖定，以及支付在 blockchain 中的通道機會。這些應該是比 on-chain 交易低，作為一個閃電網路通道中的交易可落戶到一個單一的 blockchain 交易。一個足夠穩健並且互相連接的網路，對於許多類型的交易，資費應該逐漸地接近忽略不計了。隨著廉價的費用和快速的交易，將有可能構建可擴展小額支付，甚至在高頻系統，如物聯網應用或 per-unit-micro-billing。
+閃電網路手續費很可能會顯著低於 blockchain 交易手續費。該手續費主要來自於用於一個特定路線的對資金的鎖定，以及支付在 blockchain 中的通道機會。這些應該是比 on-chain 交易低，作為一個閃電網路通道中的交易可落戶到一個單一的 blockchain 交易。一個足夠穩健並且互相連接的網路，對於許多類型的交易，資費應該逐漸地接近忽略不計了。隨著廉價的手續費和快速的交易，將有可能構建可擴展小額支付，甚至在高頻系統，如物聯網應用或 per-unit-micro-billing。
 
 ---
 
@@ -1270,7 +1270,7 @@ In the event that R gets disclosed to the participants halfway through expiry al
 
 In the event a party outright disconnects, the counterparty will be re- sponsible for broadcasting the current Commitment Transaction state in the channel to the blockchain. Only the failed non-responsive channel state gets closed out on the blockchain, all other channels should continue to update their Commitment Transactions via novation inside the channel. Therefore, counterparty risk for transaction fees are only exposed to direct channel counterparties. If a node along the path decides to become unresponsive, the participants not directly connected to that node suffer only decreased time- value of their funds by not conducting early settlement before the HTLC close.
 
-倘若一方徹底斷開，交易對方將負責目前的通道中的承諾交易的狀態公佈到 blockchain 上。只有 blockchain 上的失敗的非回應通道狀態被關閉，所有其他通道應繼續通過通道內更替阿來更新自己的承諾交易。因此，對於對方交易費用風險只能告知直接通道方。如果沿路徑的節點決定變成無回應，沒有直接連接到該節點的參與者只遭受了其資金的時間價值的降低，因為其在 HTLC 關閉之前沒有過早的結算。
+倘若一方徹底斷開，交易對方將負責目前的通道中的承諾交易的狀態公佈到 blockchain 上。只有 blockchain 上的失敗的非回應通道狀態被關閉，所有其他通道應繼續通過通道內更替阿來更新自己的承諾交易。因此，對於對方交易手續費風險只能告知直接通道方。如果沿路徑的節點決定變成無回應，沒有直接連接到該節點的參與者只遭受了其資金的時間價值的降低，因為其在 HTLC 關閉之前沒有過早的結算。
 
 ---
 
@@ -1286,7 +1286,7 @@ Figure 17: Only the non-responsive channels get broadcast on the blockchain, all
 
 It is preferable to use a small payment per HTLC. One should not use an extremely high payment, in case the payment does not fully route to its destination. If the payment does not reach its destination and one of the participants along the path is uncooperative, it is possible that the sender must wait until the expiry before receiving a refund. Delivery may be lossy, similar to packets on the internet, but the network cannot outright steal funds in transit. Since transactions don’t hit the blockchain with cooperative channel counterparties, it is recommended to use as small of a payment as possible. A tradeoff exists between locking up transaction fees on each hop versus the desire to use as small a transaction amount as possible (the latter of which may incur higher total fees). Smaller transfers with more intermediaries imply a higher percentage paid as Lightning Network fees to the intermediaries.
 
-優先使用每 HTLC 的小額付款。一方不應該使用的極高的支付，以防支付不充分路由到其目的地。如果支付沒有到達其目的地並且沿路徑的參與者之一是不合作的，發送者必須等待，直到接收退款之前的期滿。交付時可能會受損，類似於在互聯網上資料包，但網路不能直接竊取在途資金。由於若通道對手是合作的，交易不會被公佈到 blockchain 上，建議盡可能使用小的支付。在每一次跳躍時鎖定交易費用與希望用盡可能小的交易金額（後者可能會產生較高的總費用）之間存在著權衡。有更多的仲介機構的規模較小的轉移意味著更高比例的支付作為閃電網路費用支付給仲介機構。
+優先使用每 HTLC 的小額付款。一方不應該使用的極高的支付，以防支付不充分路由到其目的地。如果支付沒有到達其目的地並且沿路徑的參與者之一是不合作的，發送者必須等待，直到接收退款之前的期滿。交付時可能會受損，類似於在互聯網上資料包，但網路不能直接竊取在途資金。由於若通道對手是合作的，交易不會被公佈到 blockchain 上，建議盡可能使用小的支付。在每一次跳躍時鎖定交易手續費與希望用盡可能小的交易金額（後者可能會產生較高的總手續費）之間存在著權衡。有更多的仲介機構的規模較小的轉移意味著更高比例的支付作為閃電網路手續費支付給仲介機構。
 
 ### 8.3 清除故障和重新路由 | Clearing Failure and Rerouting
 
@@ -1312,7 +1312,7 @@ If the refund route is the same as the payment route, and there are no half-sign
 
 It is also possible to clear out a channel by creating an alternate route path in which payment will occur in the opposite direction (netting out to zero) and/or creating an entirely alternate route for the payment path. This will create a time-value of money for disclosing inputs to hashes on the Lightning Network. Participants may specialize in high connectivity between nodes and offering to offload contract hashlocks from other nodes for a fee. These participants will agree to payments which net out to zero (plus fees), but are loaning bitcoins  for  a  set  time  period.  Most likely, these entities with low demand for channel resources will be end-users who are already connected to multiple well-connected nodes. When an end-user connects to a node, the node may ask the client to lock up their funds for several days to another  channel the client  has established  for a fee.  This can be achieved by having the new transactions require a new hash(Y) from input Y in addition to the existing hash which may be generated by any participant, but must disclose Y only after a full circle is established. The new participant has the same responsibility as well as the same timelocks as the old participant being replaced. It is also possible that the one new participant replaces multiple hops.
 
-另外，也可以通過創建備用路由路徑來淨出，其中將發生相反方向的付款（淨出到零）和/或創建用於支付路徑的完全備用路由。這將創造錢在閃電網路上披露輸入散列的時間價值。參加者可以專注於連接節點之間的高度聯繫，並且為其他節點清理合約散列收取費用。這些參與者將同意淨輸出為零（加費用）的支付，但給比特幣設定一個時間段。最有可能的是，這些實體對通道資源成為已經連接到多個良好連接節點的最終用戶的需求較低。當最終用戶連接到一個節點，該節點可以要求用戶端將他們的資金鎖定數天到另一個為了收費已經建立起用戶端的通道。這可以通過使新的交易需要除了現有散列，還需要新的來自於輸入 Y 的散列（Y）來實現，其可以通過任何參與者生成，但是必須在完全建立後披露 Y。新的參與者與被替換的舊的參與者有相同的職責和 timelocks。一個新的參與者代替多次跳躍是可能的。
+另外，也可以通過創建備用路由路徑來淨出，其中將發生相反方向的付款（淨出到零）和/或創建用於支付路徑的完全備用路由。這將創造錢在閃電網路上披露輸入散列的時間價值。參加者可以專注於連接節點之間的高度聯繫，並且為其他節點清理合約散列收取手續費。這些參與者將同意淨輸出為零（加手續費）的支付，但給比特幣設定一個時間段。最有可能的是，這些實體對通道資源成為已經連接到多個良好連接節點的最終用戶的需求較低。當最終用戶連接到一個節點，該節點可以要求用戶端將他們的資金鎖定數天到另一個為了收費已經建立起用戶端的通道。這可以通過使新的交易需要除了現有散列，還需要新的來自於輸入 Y 的散列（Y）來實現，其可以通過任何參與者生成，但是必須在完全建立後披露 Y。新的參與者與被替換的舊的參與者有相同的職責和 timelocks。一個新的參與者代替多次跳躍是可能的。
 
 ---
 ![](image/figure19.png)
@@ -1335,23 +1335,23 @@ Node discovery can occur along the edges by pre-selecting and offering partial r
 
 ---
 
-### 8.5 費用 | Fees
+### 8.5 手續費 | Fees
 
 Lightning Network fees, which differ from blockchain fees, are paid directly between participants within the channel. The fees pay for the time-value of money for consuming the channel for a determined maximum period of time, and for counterparty risk of   non-communication.
 
-閃電網路費用，與blockchain 費用不同，是在通道內的參與者之間直接支付。用於支付確定的最大週期內消費通道的資金的時間價值，而對於不通信的交易對手風險。
+閃電網路手續費，與blockchain 手續費不同，是在通道內的參與者之間直接支付。用於支付確定的最大週期內消費通道的資金的時間價值，而對於不通信的交易對手風險。
 
 ---
 
 Counterparty risk for fees only exist with one’s direct channel counter- party. If a node two hops away decides to disconnect and their transaction gets broadcast on the blockchain, one’s direct counterparties should not broadcast on the blockchain, but continue to update via novation with a new Commitment Transaction. See the Decrementing Timelocks entry in the HTLC section for more information about counterparty risk.
 
-費用的對手風險只在與一方的直接通道對手交易時存在。如果兩次跳躍以外的一個節點決定斷開聯繫並且將其交易公佈在 blockchain 上，一方的直接對手不應公佈在 blockchain 上，而是繼續通過更替更新成為一個新的承諾交易。遞減 Timelocks 進入 HTLC 部分，來獲取有關交易對手風險的更多資訊。
+手續費的對手風險只在與一方的直接通道對手交易時存在。如果兩次跳躍以外的一個節點決定斷開聯繫並且將其交易公佈在 blockchain 上，一方的直接對手不應公佈在 blockchain 上，而是繼續通過更替更新成為一個新的承諾交易。遞減 Timelocks 進入 HTLC 部分，來獲取有關交易對手風險的更多資訊。
 
 ---
 
 The time-value of fees pays for consuming time (e.g. 3 days) and is conceptually equivalent to a gold lease rate without custodial risk; it is the time-value for using up the access to money for a very short duration. Since certain paths may become very  profitable  in  one  direction,  it  is possible for fees to be negative to encourage the channel to be available for those profitable  paths.
 
-用於支付消費時間的費用的時間價值（如 3 天），在概念上等同於沒有保管風險的黃金租賃率;它是在一個非常短的時間內訪問資金的時間價值。因為某些路徑在一個方向上可能變得非常有利可圖，費用有可能變成負數，以鼓勵通道可用於那些有利可圖的路徑。
+用於支付消費時間的手續費的時間價值（如 3 天），在概念上等同於沒有保管風險的黃金租賃率;它是在一個非常短的時間內訪問資金的時間價值。因為某些路徑在一個方向上可能變得非常有利可圖，手續費有可能變成負數，以鼓勵通道可用於那些有利可圖的路徑。
 
 ---
 
@@ -1387,7 +1387,7 @@ This may be mitigated by permitting one transaction replacement on all pending t
 
 Additionally, one may attempt to steal HTLC transactions by forcing a timeout transaction to go through when it should not. This can be easily mitigated by having each transfer inside the channel be lower than the total transaction fees used. Since transactions are extremely cheap and do not hit the blockchain with cooperative channel counterparties, large transfers of value can be split into many small transfers. This attempt can only work if the blocks are completely full for a long time. While it is possible to mitigate it using a longer HTLC timeout duration, variable block sizes may become common, which may need mitigations.
 
-此外，人們可能通過強制暫停不應停止的交易試圖竊取 HTLC 交易。如果通道內每一筆交易比所使用的總交易費用低，則可以減輕這種風險。由於交易是非常便宜的，並且如果與合作通道對手交易則不會公佈在 blockchain 上，價值大的傳輸可以分成許多小的傳輸，這只能在區塊很長一段時間內完全充滿才可以實現。雖然可以使用一個較長的 HTLC Timeout 持續時間來減輕它，可變區塊大小可能變得普遍，這可能需要緩解。
+此外，人們可能通過強制暫停不應停止的交易試圖竊取 HTLC 交易。如果通道內每一筆交易比所使用的總交易手續費低，則可以減輕這種風險。由於交易是非常便宜的，並且如果與合作通道對手交易則不會公佈在 blockchain 上，價值大的傳輸可以分成許多小的傳輸，這只能在區塊很長一段時間內完全充滿才可以實現。雖然可以使用一個較長的 HTLC Timeout 持續時間來減輕它，可變區塊大小可能變得普遍，這可能需要緩解。
 
 ---
 
@@ -1401,7 +1401,7 @@ If this type of transaction becomes the dominant form of transactions which are 
 
 As parties must be online and using private keys to sign, there is a possibility that, if the computer where the private keys are stored is compromised, coins will be stolen by the attacker. While there may  be methods to  mitigate the threat for the sender and the receiver, the intermediary nodes must be online and will likely be processing the transaction automatically. For this reason, the intermediary nodes will be at risk and should not be holding a substantial amount of money in this “hot wallet.” Intermediary nodes which have better security will likely be able to out-compete others in the long run and be able to conduct greater transaction volume due to lower fees. Historically, one of the largest component of fees and interest in the financial system are from various forms of counterparty risk – in Bitcoin it is possible that the largest component in fees will be derived from security risk premiums.
 
-各方必須線上，並使用私密金鑰簽署，還有可能，如果其中存儲私密金鑰的電腦被破壞，資金將被攻擊者竊取。雖然可能有方法來減輕對發送者和接收者的威脅，中間節點必須線上，並可能會自動處理交易。出於這個原因，中間節點將處於危險之中，不應該在“熱錢包”中持有如此大量金錢。從長遠來看，具有更好的安全性的中間節點將可能超過其他的節點，並且由於較低的費用，將可能處理更大量的交易。從歷史上看，費用的最大的組成部分和金融體系的利息來自於各種形式的交易對手風險-在比特幣中費用的最大組成部分很可能從安全風險溢價得到。
+各方必須線上，並使用私密金鑰簽署，還有可能，如果其中存儲私密金鑰的電腦被破壞，資金將被攻擊者竊取。雖然可能有方法來減輕對發送者和接收者的威脅，中間節點必須線上，並可能會自動處理交易。出於這個原因，中間節點將處於危險之中，不應該在“熱錢包”中持有如此大量金錢。從長遠來看，具有更好的安全性的中間節點將可能超過其他的節點，並且由於較低的手續費，將可能處理更大量的交易。從歷史上看，手續費的最大的組成部分和金融體系的利息來自於各種形式的交易對手風險-在比特幣中手續費的最大組成部分很可能從安全風險溢價得到。
 
 ---
 
@@ -1466,13 +1466,13 @@ While it may appear as though this system will mitigate the block size increases
 
 To mitigate timelock spam vulnerabilities, non-miner and miners’ con- sensus rules may also differ if the miners’ consensus rules are more restrictive. Non-miners may accept blocks over 1MB, while miners may have different soft-caps on block sizes. If a block size is above that cap, then that is viewed as an invalid block by other miners, but not by non-miners. The miners will only build the chain on blocks which are valid according to the agreed-upon soft-cap. This permits miners to agree on raising the block size limit with- out requiring frequent hard-forks from clients, so long as the amount raised by miners does not go over the clients’ hard limit. This mitigates the risk of mass expiry of transactions at once. All transactions which are not re- deemed via Exercise Settlement (ES) may have a very high fee attached, and miners may use a consensus rule whereby those transactions are exempted from the soft-cap, making it very likely the correct  transactions will  enter the blockchain.
 
-為了減輕 timelock 垃圾郵件的漏洞，非礦工和礦工的共識規則也會不同，如果礦工的共識規則更為嚴格。非礦工可以接受區塊大小超過 1MB，而礦工可能會對區塊大小有不同的soft-cap。如果一個區塊的大小超過該 cap，則將被其他礦工被視為無效區塊，非礦工不會這樣認為。礦工們將只能按照商定的 soft-cap 在區塊上建立有效的鏈。這使得礦工們同意提高區塊大小的限制，而不需要頻繁來自用戶端的 hard-forks，只要礦工提出的金額不超過客戶的硬性限制。這減輕了交易的大規模一次性到期的風險。所有未通過結算（ES）贖回的交易可能有非常高的附加費用，礦工可以使用共識規則，規定一些交易從 soft-cap 中免除，使得很可能正確的交易將進入 blockchain。
+為了減輕 timelock 垃圾郵件的漏洞，非礦工和礦工的共識規則也會不同，如果礦工的共識規則更為嚴格。非礦工可以接受區塊大小超過 1MB，而礦工可能會對區塊大小有不同的soft-cap。如果一個區塊的大小超過該 cap，則將被其他礦工被視為無效區塊，非礦工不會這樣認為。礦工們將只能按照商定的 soft-cap 在區塊上建立有效的鏈。這使得礦工們同意提高區塊大小的限制，而不需要頻繁來自用戶端的 hard-forks，只要礦工提出的金額不超過客戶的硬性限制。這減輕了交易的大規模一次性到期的風險。所有未通過結算（ES）贖回的交易可能有非常高的附加手續費，礦工可以使用共識規則，規定一些交易從 soft-cap 中免除，使得很可能正確的交易將進入 blockchain。
 
 ---
 
 When transactions are viewed as circuits and contracts instead of transaction packets, the consensus risks can be measured by the amount of time available to cover the UTXO set controlled by hostile parties. In effect, the upper bound of the UTXO size is determined by transaction fees and the standard minimum transaction output value. If the bitcoin miners have a deterministic mempool which prioritizes transactions respecting a “weak” local time order of transactions, it could become extremely unprofitable and unlikely for an attack to succeed. Any transaction spam time attack by broadcasting the incorrect Commitment Transaction is extremely high risk for the attacker, as it requires an immense amount of bitcoin and all funds committed in those transactions will be lost if the attacker fails.
 
-當交易被視為電路和合約，而不是交易資料包，共識風險可以通過由敵對方控制的支付 UTXO 的可用時間的數量計量。事實上，UTXO 大小的上界是由交易費用和標準最低交易輸出來確定的。如果比特幣礦工有一個確定的記憶體池，其優先交易考慮“弱”秩序的當地時間的交易，它可能變得極其不受益或者攻擊極不可能成功。通過公佈不正確承諾交易的任何交易時間的垃圾郵件的攻擊對攻擊者來說是非常高風險的，因為它需要比特幣的數額巨大，如果攻擊失敗，用於這些交易的所有資金都將丟失。
+當交易被視為電路和合約，而不是交易資料包，共識風險可以通過由敵對方控制的支付 UTXO 的可用時間的數量計量。事實上，UTXO 大小的上界是由交易手續費和標準最低交易輸出來確定的。如果比特幣礦工有一個確定的記憶體池，其優先交易考慮“弱”秩序的當地時間的交易，它可能變得極其不受益或者攻擊極不可能成功。通過公佈不正確承諾交易的任何交易時間的垃圾郵件的攻擊對攻擊者來說是非常高風險的，因為它需要比特幣的數額巨大，如果攻擊失敗，用於這些交易的所有資金都將丟失。
 
 ---
 
@@ -1494,7 +1494,7 @@ In addition to helping bitcoin scale, there are many uses for transactions on th
 
 * 外匯套利。目前有留住交換基金並為大市場向 3-6 次區塊確認發展的激勵。這一激勵加入網路是可能的，並可立刻為客戶將他們的資金移進或者移出此交換。如果該交換不具有深入的市場深度並且承諾只允許接近訂單數量的上限，資金被盜的風險就低得多。交換事實上將不再需要有任何錢包。這可大大減少盜竊，以及不需要信任的協力廠商管理員。
 
-* 微支付。比特幣 blockchain 費用太高而不能接受小額支付，尤其是以最小的值。有了這個系統，類似即時的小額支付在沒有一個協力廠商的託管人的情況下使用比特幣將成為可能。這將使支付互聯網服務的每百萬位元組或支付報紙的每篇文章成為可能。
+* 微支付。比特幣 blockchain 手續費太高而不能接受小額支付，尤其是以最小的值。有了這個系統，類似即時的小額支付在沒有一個協力廠商的託管人的情況下使用比特幣將成為可能。這將使支付互聯網服務的每百萬位元組或支付報紙的每篇文章成為可能。
 
 * 金融智能合約和託管。金融合約對時間極其敏感並且對 blockchain 計算的要求更高。通過移動絕大多數不可信交易到 off-chain，就可以不通過訪問 blockchain 獲得非常複雜的交易合約條款。
 
