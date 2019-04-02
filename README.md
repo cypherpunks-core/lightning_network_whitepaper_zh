@@ -30,7 +30,7 @@ rx@awsomnet.org
       - [3.3.3 從管道兌換基金：合作交易方 | Redeeming Funds from the Channel: Cooperative Coun- terparties](#333-%E5%BE%9E%E7%AE%A1%E9%81%93%E5%85%8C%E6%8F%9B%E5%9F%BA%E9%87%91%E5%90%88%E4%BD%9C%E4%BA%A4%E6%98%93%E6%96%B9--redeeming-funds-from-the-channel-cooperative-coun--terparties)
       - [3.3.4 創建一個新的交易承諾，並撤銷先前的承諾 | Creating a new Commitment Transaction and Revoking Prior Commitments](#334-%E5%89%B5%E5%BB%BA%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E4%BA%A4%E6%98%93%E6%89%BF%E8%AB%BE%E4%B8%A6%E6%92%A4%E9%8A%B7%E5%85%88%E5%89%8D%E7%9A%84%E6%89%BF%E8%AB%BE--creating-a-new-commitment-transaction-and-revoking-prior-commitments)
       - [3.3.5 創建可撤銷承諾交易流程 | Process for Creating Revocable Commitment Transactions](#335-%E5%89%B5%E5%BB%BA%E5%8F%AF%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B--process-for-creating-revocable-commitment-transactions)
-    - [3.4 協同關閉管道](#34-%E5%8D%94%E5%90%8C%E9%97%9C%E9%96%89%E7%AE%A1%E9%81%93)
+    - [3.4 協同關閉管道 | Cooperatively Closing Out a Channel](#34-%E5%8D%94%E5%90%8C%E9%97%9C%E9%96%89%E7%AE%A1%E9%81%93--cooperatively-closing-out-a-channel)
     - [3.5 雙向管道的啟示與總結 | Bidirectional Channel Implications and Summary](#35-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84%E5%95%9F%E7%A4%BA%E8%88%87%E7%B8%BD%E7%B5%90--bidirectional-channel-implications-and-summary)
   - [4 散列 Timelock 合同（HTLC）| Hashed Timelock Contract (HTLC)](#4-%E6%95%A3%E5%88%97-timelock-%E5%90%88%E5%90%8Chtlc-hashed-timelock-contract-htlc)
     - [4.1 不可撤銷的 HTLC 建設 | Non-revocable HTLC Construction](#41-%E4%B8%8D%E5%8F%AF%E6%92%A4%E9%8A%B7%E7%9A%84-htlc-%E5%BB%BA%E8%A8%AD--non-revocable-htlc-construction)
@@ -44,9 +44,9 @@ rx@awsomnet.org
   - [7 薪酬合約 | Pay to Contract](#7-%E8%96%AA%E9%85%AC%E5%90%88%E7%B4%84--pay-to-contract)
   - [8 比特幣閃電網路 | The Bitcoin Lightning Network](#8-%E6%AF%94%E7%89%B9%E5%B9%A3%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF--the-bitcoin-lightning-network)
     - [8.1 遞減的 Timelocks](#81-%E9%81%9E%E6%B8%9B%E7%9A%84-timelocks)
-    - [8.2 付款金額](#82-%E4%BB%98%E6%AC%BE%E9%87%91%E9%A1%8D)
-    - [8.3 清除故障和重新路由 如果交易無法到達其網路連接最終目的地，接收應以相同散列發送同等數量的支付給發送](#83-%E6%B8%85%E9%99%A4%E6%95%85%E9%9A%9C%E5%92%8C%E9%87%8D%E6%96%B0%E8%B7%AF%E7%94%B1-%E5%A6%82%E6%9E%9C%E4%BA%A4%E6%98%93%E7%84%A1%E6%B3%95%E5%88%B0%E9%81%94%E5%85%B6%E7%B6%B2%E8%B7%AF%E9%80%A3%E6%8E%A5%E6%9C%80%E7%B5%82%E7%9B%AE%E7%9A%84%E5%9C%B0%E6%8E%A5%E6%94%B6%E6%87%89%E4%BB%A5%E7%9B%B8%E5%90%8C%E6%95%A3%E5%88%97%E7%99%BC%E9%80%81%E5%90%8C%E7%AD%89%E6%95%B8%E9%87%8F%E7%9A%84%E6%94%AF%E4%BB%98%E7%B5%A6%E7%99%BC%E9%80%81)
-    - [8.4 付款路由](#84-%E4%BB%98%E6%AC%BE%E8%B7%AF%E7%94%B1)
+    - [8.2 付款金額 | Payment Amount](#82-%E4%BB%98%E6%AC%BE%E9%87%91%E9%A1%8D--payment-amount)
+    - [8.3 清除故障和重新路由 | Clearing Failure and Rerouting](#83-%E6%B8%85%E9%99%A4%E6%95%85%E9%9A%9C%E5%92%8C%E9%87%8D%E6%96%B0%E8%B7%AF%E7%94%B1--clearing-failure-and-rerouting)
+    - [8.4 付款路由 | Payment Routing](#84-%E4%BB%98%E6%AC%BE%E8%B7%AF%E7%94%B1--payment-routing)
     - [8.5 費用](#85-%E8%B2%BB%E7%94%A8)
   - [9 風險](#9-%E9%A2%A8%E9%9A%AA)
     - [9.1 不當 Timelocks](#91-%E4%B8%8D%E7%95%B6-timelocks)
@@ -761,7 +761,7 @@ If Bob incorrectly broadcasts C1b, then because Alice has all the private keys u
 
 ---
 
-### 3.4 協同關閉管道
+### 3.4 協同關閉管道 | Cooperatively Closing Out a Channel
 
 Both parties are able to send as many payments to their counterparty as they wish, as long as they have funds available in the channel, knowing that in the event of disagreements they can broadcast to the blockchain the current  state  at  any time.
 
@@ -1228,45 +1228,110 @@ Bitcoin Transaction Scripting, a form of what some call an implemen- tation of �
 
 ### 8.1 遞減的 Timelocks
 
-假設 Alice 希望發送 0.001 BTC 給 Dave。她通過 Bob 和 Carol 找到途徑。傳輸路徑將是從
-Alice 到 Bob 到 Carol 再到 Dave。
+Presume Alice wishes to send 0.001 BTC to Dave. She locates a route through Bob and Carol. The transfer path would be Alice to Bob to Carol to Dave.
+
+假設 Alice 希望發送 0.001 BTC 給 Dave。她通過 Bob 和 Carol 找到途徑。傳輸路徑將是從Alice 到 Bob 到 Carol 再到 Dave。
+
+---
 
 ![](image/figure15.png)
 
+Figure  15:  Payment over the Lightning Network using  HTLCs.
+
 圖 15：使用 HTLCs 在閃電網路中付款。
+
+---
+
+When Alice sends payment to Dave through Bob and Carol, she re- quests from Dave hash(R) to use for this payment. Alice then counts the amount of hops until the recipient and uses that as the HTLC expiry. In this case, she sets the HTLC expiry at 3 days. Bob then creates an HTLC with Carol with an expiry of 2 days, and Carol does the same with Dave with an expiry of 1 day. Dave is now free to disclose R to Carol, and both parties will likely agree to immediate settlement via novation with a replacement Com- mitment Transaction. This then occurs step-by-step back to Alice. Note that this occurs off-chain, and nothing is broadcast to the blockchain when all parties are cooperative.
 
 當 Alice 通過 Bob 和 Carol 支付給 Dave，她要求 Dave 的雜湊（R）來用於此付款。Alice 然 後計數跳躍的量，直到收件人用其作為 HTLC 屆滿。在這種情況下，設置 HTLC 屆滿為 3 天。然後，Bob 與 Carol 創建 HTLC，屆滿兩天，而 Carol 與 Dave 創建 HTLC，屆滿 1 天。 Dave 現在可以自由地向 Carol 披露 R，雙方可能會同意通過承諾交易更替即時結算。然後就 會一步一步的返回到 Alice。注意，這種情況發生在 off-chain 的情況下，若各方是合作的， 沒有東西被公佈到 blockchain 上。
 
+---
+![](image/figure16.png)
+Figure 16:  Settlement of HTLC, Alice’s funds get sent to Dave.
+
 圖 16：HTLC 結算，Alice 的資金被發送給 Dave。
+
+---
+
+Decrementing timelocks are used so that all parties along the path know that the disclosure of R will allow the disclosing party to pull funds, since they will at worst be pulling funds after the date whereby they must receive R. If Dave does not produce R within 1 day to Carol, then Carol will be able to close out the HTLC. If Dave broadcasts R after 1 day, then he will not be able to pull funds from Carol. Carol’s responsibility to Bob occurs on day 2, so Carol will never be responsible for payment to Dave without an ability to pull funds from Bob provided that she updates her transaction with Dave via transmission to the blockchain or via novation.
 
 遞減 timelocks 用來讓沿著路徑的各方知道 R 的披露將允許披露方收回資金，因為他們如果 在其必須接受 R 之後的日子收回資金，他們會處於最壞的境地。如果 Dave 不能為 Carol 在 一天內產生 R，那麼 Carol 就能夠收出 HTLC。如果戴夫 1 天后公佈 R，那麼他將無法從 Carol 收回資金。Carol 對 Bob 的責任發生在第 2 天，所以 Carol 將不再對給 Dave 的支付負責，並 且不能從 Bob 那裡收回資金，如果她通過傳輸到 blockchain 或通過承諾交易更替來更新她與 Dave 的交易。
 
+---
+
+In the event that R gets disclosed to the participants halfway through expiry along the path (e.g. day 2), then it is possible for some parties along the path to be enriched. The sender will be able to know R, so due to Pay to Contract, the payment will have been fulfilled even though the receiver did not receive the funds. Therefore, the receiver must never disclose R unless they have received an HTLC from their channel counterparty; they are guaranteed to receive payment from one of their channel counterparties upon disclosure of the preimage.
+
 倘若 R 在沿路徑中途（如：第二天）透露給參與者，則沿著路徑某些方有可能被充實。發 送者可以知道 R，所以依照支付給合同，付款已經完成，即使接收者沒有收到這筆資金。因 此，接收者必須永遠不要透露 R，除非他們已經從他們的管道交易對手收到了 HTLC;這樣 可以保證在披露原像時能從自己的管道對方接收付款。
+
+---
+
+In the event a party outright disconnects, the counterparty will be re- sponsible for broadcasting the current Commitment Transaction state in the channel to the blockchain. Only the failed non-responsive channel state gets closed out on the blockchain, all other channels should continue to update their Commitment Transactions via novation inside the channel. Therefore, counterparty risk for transaction fees are only exposed to direct channel counterparties. If a node along the path decides to become unresponsive, the participants not directly connected to that node suffer only decreased time- value of their funds by not conducting early settlement before the HTLC close.
 
 倘若一方徹底斷開，交易對方將負責目前的管道中的承諾交易的狀態公佈到 blockchain 上。 只有 blockchain 上的失敗的非回應管道狀態被關閉，所有其他管道應繼續通過管道內更替阿 來更新自己的承諾交易。因此，對於對方交易費用風險只能告知直接管道方。如果沿路徑的 節點決定變成無回應，沒有直接連接到該節點的參與者只遭受了其資金的時間價值的降低， 因為其在 HTLC 關閉之前沒有過早的結算。
 
+---
+
+![](image/figure17.png)
+
+Figure 17: Only the non-responsive channels get broadcast on the blockchain, all others are settled off-chain via novation.
+
 圖 17：只有無回應管道得以在 blockchain 上公佈，所有其他的通過更替進行 off-chain 的結 算。
 
-### 8.2 付款金額
+---
+
+### 8.2 付款金額 | Payment Amount
+
+It is preferable to use a small payment per HTLC. One should not use an extremely high payment, in case the payment does not fully route to its destination. If the payment does not reach its destination and one of the participants along the path is uncooperative, it is possible that the sender must wait until the expiry before receiving a refund. Delivery may be lossy, similar to packets on the internet, but the network cannot outright steal funds in transit. Since transactions don’t hit the blockchain with cooperative channel counterparties, it is recommended to use as small of a payment as possible. A tradeoff exists between locking up transaction fees on each hop versus the desire to use as small a transaction amount as possible (the latter of which may incur higher total fees). Smaller transfers with more intermediaries imply a higher percentage paid as Lightning Network fees to the intermediaries.
 
 優先使用每 HTLC 的小額付款。一方不應該使用的極高的支付，以防支付不充分路由到其 目的地。如果支付沒有到達其目的地並且沿路徑的參與者之一是不合作的，發送者必須等待， 直到接收退款之前的期滿。交付時可能會受損，類似於在互聯網上資料包，但網路不能直接 竊取在途資金。由於若管道對手是合作的，交易不會被公佈到 blockchain 上，建議盡可能使 用小的支付。在每一次跳躍時鎖定交易費用與希望用盡可能小的交易金額（後者可能會產生 較高的總費用）之間存在著權衡。有更多的仲介機構的規模較小的轉移意味著更高比例的支 付作為閃電網路費用支付給仲介機構。
 
-### 8.3 清除故障和重新路由 如果交易無法到達其網路連接最終目的地，接收應以相同散列發送同等數量的支付給發送
- 
+### 8.3 清除故障和重新路由 | Clearing Failure and Rerouting
 
-且從不公開。如果沿著路徑的一個管道無法聯繫，那麼管道可以選擇等待，直到路徑期滿後， 所有參與者將有可能關閉不穩定，沒有任何支付的 HTLC，創建一個新的承諾交易。
+If a transaction fails to reach its final destination, the receiver should send an equal payment to the sender with the same hash, but not disclose R. This will net out the disclosure of the hash for the sender, but may not for the receiver. The receiver, who generated the hash, should discard R and never broadcast it. If one channel along the path cannot be contacted, then the channels may elect to wait until the path expires, which all participants will likely close out the HTLC as unsettled without any payment with a new Commitment Transaction.
+
+如果交易無法到達其網路連接最終目的地，接收應以相同散列發送同等數量的支付給發送且從不公開。如果沿著路徑的一個管道無法聯繫，那麼管道可以選擇等待，直到路徑期滿後， 所有參與者將有可能關閉不穩定，沒有任何支付的 HTLC，創建一個新的承諾交易。
+
+---
+
+![](image/figure18.png)
+
+Figure 18: Dave creates a path back to Alice after Alice fails to send funds to Dave, because Carol is uncooperative. The input R from hash(R) is never brodcast by Dave, because Carol did not complete her actions. If R was broadcast, Alice will break-even. Dave, who controls R should never broadcast R because he may not receive funds from Carol, he should let the contracts expire. Alice and Bob have the option to net out and close the contract early, as well, in this  diagram.
 
 圖 18：Alice 將資金發送給 Dave 失敗後，Dave 創建一條返回 Alice 的路徑，因為 Carol 是不 合作的。從雜湊值（R）中產生的輸入 R 永遠不會被 Dave 公佈，因為 Carol 沒有完成她的 行動。若 R 公佈，Alice 將盈虧平衡。控制 R 的 Dave 永遠不公佈 R，因為他可能無法從 Carol 獲得資金，他應該讓合同到期。 在此圖中，Alice 和 Bob 也可在早期淨出並關閉合同。
 
+---
+
+If the refund route is the same as the payment route, and there are no half-signed contracts whereby one party may be able to steal funds, it is possible to outright cancel the transaction by replacing it with a new Com- mitment Transaction starting with the most recent node who participated in the HTLC.
+
 如果退回路線與支付途徑是相同的，並且沒有半簽署的合同，在半簽署的合同中一方能夠竊 取資金，也能夠通過用新的承諾交易替換它來徹底取消交易，先從最近參加 HTLC 的節點 開始。
+
+---
+
+It is also possible to clear out a channel by creating an alternate route path in which payment will occur in the opposite direction (netting out to zero) and/or creating an entirely alternate route for the payment path. This will create a time-value of money for disclosing inputs to hashes on the Lightning Network. Participants may specialize in high connectivity between nodes and offering to offload contract hashlocks from other nodes for a fee. These participants will agree to payments which net out to zero (plus fees), but are loaning bitcoins  for  a  set  time  period.  Most likely, these entities with low demand for channel resources will be end-users who are already connected to multiple well-connected nodes. When an end-user connects to a node, the node may ask the client to lock up their funds for several days to another  channel the client  has established  for a fee.  This can be achieved by having the new transactions require a new hash(Y) from input Y in addition to the existing hash which may be generated by any participant, but must disclose Y only after a full circle is established. The new participant has the same responsibility as well as the same timelocks as the old participant being replaced. It is also possible that the one new participant replaces multiple hops.
 
 另外，也可以通過創建備用路由路徑來淨出，其中將發生相反方向的付款（淨出到零）和/ 或創建用於支付路徑的完全備用路由。這將創造錢在閃電網路上披露輸入散列的時間價值。 參加者可以專注於連接節點之間的高度聯繫，並且為其他節點清理合同散列收取費用。這些 參與者將同意淨輸出為零（加費用）的支付，但給比特幣設定一個時間段。最有可能的是， 這些實體對管道資源成為已經連接到多個良好連接節點的最終用戶的需求較低。當最終用戶 連接到一個節點，該節點可以要求用戶端將他們的資金鎖定數天到另一個為了收費已經建立 起用戶端的管道。這可以通過使新的交易需要除了現有散列，還需要新的來自於輸入 Y 的 散列（Y）來實現，其可以通過任何參與者生成，但是必須在完全建立後披露 Y。新的參與 者與被替換的舊的參與者有相同的職責和 timelocks。一個新的參與者代替多次跳躍是可能 的。
 
+---
+![](image/figure19.png)
+
+Figure 19: Erin is connected to both Bob and Dave. If Bob wishes to free up his channel with Carol, since that channel is active and very profitable, Bob can offload the payment to Dave via Erin. Since Erin has extra bitcoin available, she will be able to collect some fee for offloading the channel between Bob and Carol as well as between Carol and Dave. The channels between Bob and Carol as well as Carol and Dave are undone and no longer have the HTLC, nor has payment occurred on that path. Payment will occur on the path involving Erin. This is achieved by creating a new payment from Dave to Carol to Bob contingent upon Erin constructing an HTLC. The payment in dashed lines (red) are netted out to zero and settled via a new Commitment Contract.
+
 圖 19：Erin 同時連接到 Bob 和 Dave。如果 Bob 希望釋放他與 Carol 的管道，因為該管道是 活動的並且非常有利可圖的，Bob 可以通過 Erin 支付給 Dave。由於愛琳有多餘的可用比特 幣，她就可以在 Bob 和 Carol 關閉管道時，同樣在 Carol 和 Dave 之間也可以。Bob 和 Carol， 以及 Carol 和 Dave 之間的管道被撤銷，不再有 HTLC，在這條路徑上也不再有支付。付款 會發生在涉及到 Erin 的路徑上。這是通過創建一個新的付款得以實現的，新的付款從 Dave 到 Carol 到 Bob 再到 Erin，Erin 隨即構建一個 HTLC。虛線（紅色）付款是淨出為零，並通 過一個新的承諾簽約結算。
 
-### 8.4 付款路由
+---
 
-理論上可能建立路由圖，通過觀察 blockchain 上個 2-of-2 multisigs 來建立一個路由表。但是 需要注意得是，這對於 pay-to-script-hash 交易輸出是不可行的，可以通過協力廠商路由服務解 決來自於 out-of-band 比特幣協定。建立一個路由表對大型運營商（如 BGP，Cjdns）是必要 的。最終，優化之後，網路看起來很像代理行網路，或者 Tier-1 ISPs。類似于資料包如何在 您的家用網路連接上到達目的地，不是所有的參與者需要有一個完整的路由表。核心 Tier-1 路由可一直線上，而節點會在邊緣，如普通用戶，會被間歇性的連接起來。 節點發現可通過預選，發生在邊緣，並且給知名節點提供部分路徑。
+### 8.4 付款路由 | Payment Routing
+
+It is theoretically possible to build a route map implicitly from observing 2-of-2 multisigs on the blockchain to build a routing table. Note, however, this is not feasible with pay-to-script-hash transaction outputs, which can be resolved out-of-band from the bitcoin protocol via a third party routing service. Building a routing table will become necessary for large operators (e.g. BGP, Cjdns). Eventually, with optimizations, the network will look a lot like the correspondent banking network, or Tier-1 ISPs. Similar to how packets still reach their destination on your home network connection, not all participants need to have a full routing table. The core Tier-1 routes can be online all the time —while nodes at the edges, such as average users, would be connected intermittently.
+
+Node discovery can occur along the edges by pre-selecting and offering partial routes to well-known  nodes.
+
+理論上可能建立路由圖，通過觀察 blockchain 上個 2-of-2 multisigs 來建立一個路由表。但是 需要注意得是，這對於 pay-to-script-hash 交易輸出是不可行的，可以通過協力廠商路由服務解 決來自於 out-of-band 比特幣協定。建立一個路由表對大型運營商（如 BGP，Cjdns）是必要 的。最終，優化之後，網路看起來很像代理行網路，或者 Tier-1 ISPs。類似于資料包如何在 您的家用網路連接上到達目的地，不是所有的參與者需要有一個完整的路由表。核心 Tier-1 路由可一直線上，而節點會在邊緣，如普通用戶，會被間歇性的連接起來。 
+
+節點發現可通過預選，發生在邊緣，並且給知名節點提供部分路徑。
+
+---
 
 ### 8.5 費用
 
