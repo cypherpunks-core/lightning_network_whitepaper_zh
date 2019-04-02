@@ -762,20 +762,44 @@ If Bob incorrectly broadcasts C1b, then because Alice has all the private keys u
 
 ### 3.4 協同關閉管道
 
+Both parties are able to send as many payments to their counterparty as they wish, as long as they have funds available in the channel, knowing that in the event of disagreements they can broadcast to the blockchain the current  state  at  any time.
+
 雙方都能夠按照自己的意願來發送任何數量的支付給他們的對手，只要他們在管道有可用資 金，因為他們知道在意見分歧的情況下，他們可以在任何時間在 blockchain 上公佈當前的狀 態。
+
+---
+
+In the vast majority of cases, all the outputs from the Funding Trans- action will never be broadcast on the blockchain. They are just there in case the other party is non-cooperative, much like how a contract is rarely enforced in the courts. A proven ability for the contract to be enforced in a deterministic manner is sufficient incentive for both parties to act honestly.
 
 在絕大多數情況下，從資金交易所有輸出將永遠不會在 blockchain 公佈。他們只是在對方不 合作的情況下出現，很像一份在法庭上很少執行的合同。該合同被證明有能力以一個確定的 方式來強制執行有效地激勵雙方誠實守信。
 
+---
+
+When either party wishes to close out a channel cooperatively, they will be able to do  so  by  contacting  the  other  party  and  spending  from the Funding Transaction with an output of the most current Commitment Transaction directly with no script encumbering conditions. No further pay- ments may occur in the   channel.
+
 當一方希望關閉管道，他們將能夠這樣做，通過與對方創建合同，從現有的承諾交易不通過 腳本阻礙條件直接花費。在管道中沒有進一步的付款可能發生。
+
+---
 
 ![](image/figure10.png)
 
+Figure 10: If both counterparties are cooperative, they take the balances in the cur- rent Commitment Transaction and spend from the Funding Transaction with a Exercise Settlement Transaction (ES). If the most recent Commitment Transaction gets broadcast instead, the payout (less fees) will be the same.
+
 圖 10：如果雙方是合作的，他們採取當前交易承諾的平衡，並從有運用結算交易（ES）的 資金交易中花費。如果最近的承諾交易被公佈，支出（較少費用）將是相同的。
+
+---
+
+The purpose of  closing  out  cooperatively  is  to  reduce  the number of transactions that occur on the blockchain and both parties will be able to receive their funds immediately (instead of one party waiting for the Revocation Delivery transaction to become   valid).
 
 合作關閉管道的目的是為了減少發生在 blockchain 上的交易數量，雙方將能夠立即收到他們 的資金（而不是一方等待撤銷交付交易有效）。
 
+---
+
+Channels may remain in perpetuity until they decide to cooperatively close out the transaction, or when one party does not cooperate with another and the channel gets closed out and enforced on the    blockchain.
+
 管道可永久存在，直到他們決定合作關閉交易，或當一方不與另一方相互合作，在 blockchain
 上執行關閉管道。
+
+---
 
 ### 3.5 雙向管道的啟示與總結
  
