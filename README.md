@@ -61,6 +61,7 @@ rx@awsomnet.org
   - [12 結論](#12-%E7%B5%90%E8%AB%96)
   - [13 致謝](#13-%E8%87%B4%E8%AC%9D)
   - [附錄 A 解決延展性](#%E9%99%84%E9%8C%84-a-%E8%A7%A3%E6%B1%BA%E5%BB%B6%E5%B1%95%E6%80%A7)
+  - [References](#references)
 
 ## 摘要 | Abstract
 
@@ -1256,3 +1257,42 @@ SIGHASH NOINPUT 意味著位址重用的風險，因為只要 sigScript 返回�
 要使用 SIGHASH NOINPUT，一方建立一個資金交易，並且不簽署。這個資金交易並不需 要使用 SIGHASH NOINPUT，如果從已經被公佈到 blockchain 上的交易中花費。要從輸出 是 2-of-2 的多重簽名資金交易中花費，此交易還未被簽署和公佈，需要使用 SIGHASH NOINPUT。
  
 使 用 OP CHECKSEQUENCEVERIFY 或 另 一 個 不 太 可 取 得 選 擇 ， 即 使 用 OP CHECKLOCKTIMEVERIFY 的一種權宜的解決方案將通過 Rusty Russell 在以後的論文中描 述。本文的更新版本也將包括這些結構。
+
+## References
+[1] Satoshi Nakamoto. Bitcoin: A Peer-to-peer Electronic Cash System.https://bitcoin.org/bitcoin.pdf, Oct 2008.
+
+[2] Manny Trillo.	Stress Test Prepares VisaNet for the Most Wonderful Time of the Year. http://www.visa.com/blogarchives/us/2013/10/10/stress-test-prepares-visanet-for-the-most-wonderful-time-of-the-year/ index.html, Oct 2013.
+
+[3] Bitcoin Wiki. Contracts: Example 7: Rapidly-adjusted (mi- cro)payments to a pre-determined party. https://en.bitcoin. it/wiki/Contracts#Example_7:Rapidly-adjusted.28micro.29payments_to_a_pre-determined_party.
+
+[4] bitcoinj. Working with micropayment channels. https://bitcoinj. github.io/working-with-micropayments.
+
+[5] Leslie Lamport. The Part-Time Parliament. ACM Transactions on Computer Systems, 21(2):133–169, May 1998.
+
+[6] Leslie Lamport. Time, Clocks, and the Ordering of Events in a Dis- tributed System. Communications of the ACM, 21(7):558–565, Jul 1978.
+
+[7] Alex Akselrod. Draft. https://en.bitcoin.it/wiki/User: Aakselrod/Draft, Mar 2013.
+
+[8] Alex Akselrod. ESCHATON. https://gist.github.com/aakselrod/ 9964667, Apr 2014.
+
+[9] Peter Todd. Near-zero fee transactions with hub-and-spoke micro- payments. http://sourceforge.net/p/bitcoin/mailman/message/ 33144746/, Dec 2014.
+
+[10] C.J. Plooy. Combining Bitcoin and the Ripple to create a fast, scalable, decentralized, anonymous, low-trust payment net- work. http://www.ultimatestunts.nl/bitcoin/ripple_bitcoin_ draft_2.pdf, Jan 2013.
+
+[11] BitPay. Impulse. http://impulse.is/impulse.pdf, Jan 2015.
+
+[12] Mark Friedenbach. BIP 0068: Consensus-enforced transac- tion replacement signaled via sequence numbers (relative lock- time). https://github.com/bitcoin/bips/blob/master/bip-0068. mediawiki, May 2015.
+
+[13] Mark Friedenbach BtcDrak and Eric Lombrozo. BIP 0112: CHECK- SEQUENCEVERIFY. https://github.com/bitcoin/bips/blob/ master/bip-0112.mediawiki, Aug 2015.
+
+[14] Jonas Schnelli.	What does OP CHECKSEQUENCEVERIFY do?http://bitcoin.stackexchange.com/a/38846, Jul 2015.
+
+[15] Greg Maxwell (nullc). reddit. https://www.reddit.com/r/Bitcoin/ comments/37fxqd/it_looks_like_blockstream_is_working_on_ the/crmr5p2, May 2015.
+
+[16] Gavin Andresen. BIP 0016: Pay to Script Hash. https://github. com/bitcoin/bips/blob/master/bip-0016.mediawiki, Jan 2012.
+
+[17] Pieter Wuille. BIP 0032: Hierarchical Deterministic Wallets. https:// github.com/bitcoin/bips/blob/master/bip-0032.mediawiki, Feb 2012.
+
+[18] Ilja Gerhardt and Timo Hanke. Homomorphic Payment Addresses and the Pay-to-Contract Protocol. http://arxiv.org/abs/1212.3257, Dec 2012.
+
+[19] Nick Szabo. Formalizing and Securing Relationships on Public Net- works. http://szabo.best.vwh.net/formalize.html, Sep 1997.
