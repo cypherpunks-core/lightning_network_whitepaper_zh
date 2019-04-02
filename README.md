@@ -54,13 +54,13 @@ rx@awsomnet.org
     - [9.3 通過分裂盜竊資金 | Coin Theft via Cracking](#93-%E9%80%9A%E9%81%8E%E5%88%86%E8%A3%82%E7%9B%9C%E7%AB%8A%E8%B3%87%E9%87%91--coin-theft-via-cracking)
     - [9.4 資料丟失 | Data Loss](#94-%E8%B3%87%E6%96%99%E4%B8%9F%E5%A4%B1--data-loss)
     - [9.5 忘記及時公佈交易 | Forgetting to Broadcast the Transaction in Time](#95-%E5%BF%98%E8%A8%98%E5%8F%8A%E6%99%82%E5%85%AC%E4%BD%88%E4%BA%A4%E6%98%93--forgetting-to-broadcast-the-transaction-in-time)
-    - [9.6 無法做出必要的 Soft-Forks](#96-%E7%84%A1%E6%B3%95%E5%81%9A%E5%87%BA%E5%BF%85%E8%A6%81%E7%9A%84-soft-forks)
-    - [9.7 勾結礦工攻擊](#97-%E5%8B%BE%E7%B5%90%E7%A4%A6%E5%B7%A5%E6%94%BB%E6%93%8A)
-  - [10 區塊大小增加與共識](#10-%E5%8D%80%E5%A1%8A%E5%A4%A7%E5%B0%8F%E5%A2%9E%E5%8A%A0%E8%88%87%E5%85%B1%E8%AD%98)
-  - [11 用例 除了説明比特幣規模，對閃電網路上的交易也是很有用的：](#11-%E7%94%A8%E4%BE%8B-%E9%99%A4%E4%BA%86%E8%AA%AC%E6%98%8E%E6%AF%94%E7%89%B9%E5%B9%A3%E8%A6%8F%E6%A8%A1%E5%B0%8D%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF%E4%B8%8A%E7%9A%84%E4%BA%A4%E6%98%93%E4%B9%9F%E6%98%AF%E5%BE%88%E6%9C%89%E7%94%A8%E7%9A%84)
-  - [12 結論](#12-%E7%B5%90%E8%AB%96)
-  - [13 致謝](#13-%E8%87%B4%E8%AC%9D)
-  - [附錄 A 解決延展性](#%E9%99%84%E9%8C%84-a-%E8%A7%A3%E6%B1%BA%E5%BB%B6%E5%B1%95%E6%80%A7)
+    - [9.6 無法做出必要的 Soft-Forks | Inability to Make Necessary Soft-Forks](#96-%E7%84%A1%E6%B3%95%E5%81%9A%E5%87%BA%E5%BF%85%E8%A6%81%E7%9A%84-soft-forks--inability-to-make-necessary-soft-forks)
+    - [9.7 勾結礦工攻擊 | Colluding Miner Attacks](#97-%E5%8B%BE%E7%B5%90%E7%A4%A6%E5%B7%A5%E6%94%BB%E6%93%8A--colluding-miner-attacks)
+  - [10 區塊大小增加與共識 | Block Size Increases and Consensus](#10-%E5%8D%80%E5%A1%8A%E5%A4%A7%E5%B0%8F%E5%A2%9E%E5%8A%A0%E8%88%87%E5%85%B1%E8%AD%98--block-size-increases-and-consensus)
+  - [11 用例](#11-%E7%94%A8%E4%BE%8B)
+  - [12 結論 | Conclusion](#12-%E7%B5%90%E8%AB%96--conclusion)
+  - [13 致謝 | Acknowledgements](#13-%E8%87%B4%E8%AC%9D--acknowledgements)
+  - [附錄 A 解決延展性 | Resolving Malleability](#%E9%99%84%E9%8C%84-a-%E8%A7%A3%E6%B1%BA%E5%BB%B6%E5%B1%95%E6%80%A7--resolving-malleability)
   - [References](#references)
 
 ## 摘要 | Abstract
@@ -1425,27 +1425,68 @@ If one does not broadcast a transaction at the correct time, the counterparty ma
 
 ---
 
-### 9.6 無法做出必要的 Soft-Forks
+### 9.6 無法做出必要的 Soft-Forks | Inability to Make Necessary Soft-Forks
+
+Changes are necessary to bitcoin, such as the malleability soft-fork. Addi- tionally, if this system becomes popular, it will be necessary for the system to securely transact with many users and some kind of structure like a blockheight timestop will be desirable. This system assumes such changes to enable Lightning Network to exist entirely, as well as soft-forks ensuring the security is robust against attackers will occur. While the system may continue to operate with only some time lock and malleability soft-forks, there will be necessary soft-forks regarding systemic risks. Without proper community foresight, an inability to establish a timestop or similar func- tion will allow systemic attacks to take place and may not be recognized as imperative until an attack actually    occurs.
 
 比特幣必須改變，如延展性的 Soft-Forks。此外，如果此系統變得流行，系統安全地辦理與 許多使用者的交易是必要的，並且期待某種像區塊高度 timestop 的結構。這個系統假定這樣的 改變使閃電網路完全存在，並且 Soft-Forks 確保安全性是可以抵抗攻擊的發生的。 而該系統可能繼續在只有一些時間鎖和延展性的 Soft-Forks 的情況下執行，關於系統性風險 Soft-Forks 是必要的。如果沒有適當的遠見，沒有建立一個 timestop 或相似功能的能力，系 統性攻擊可能會發生，並且直到攻擊實際發生才可被認定為當務之急。
 
-### 9.7 勾結礦工攻擊
+### 9.7 勾結礦工攻擊 | Colluding Miner Attacks
 
-礦工可以選擇拒絕進入特定的交易（如違約補救交易），以協助 Timeout 基金盜賊。攻擊者 可以收買所有礦工拒絕將某些交易包含在自己的交易池或者區塊當中。礦工們可以識別自己的區塊，試圖向付款攻擊者證明自己的行為。 這可以通過鼓勵礦工避免識別自己的區塊來緩解。此外，這種付款給礦工的行為是惡意活動， 並且合同是不可執行的。那麼礦工可能拿走支付並且暗中將交易放在自己的區塊中，不將該 塊確定給攻擊者。由於攻擊者為此支付，他們將很快失去所有的錢，因為將錢支付給礦工， 並且用完管道中所有的錢。這種攻擊是不可能的，並且不具吸引力，因為它實在太困難並且 需要具有高度風險的高度勾結。
+Miners may elect to refuse to enter in particular transactions (e.g. Breach Remedy transactions) in order to assist in timeout coin theft. An attacker can pay off all miners to refuse to include certain transactions in their mem- pool and blocks. The miners can identify their own blocks in an attempt to prove their behavior to the paying attacker.
+
+礦工可以選擇拒絕進入特定的交易（如違約補救交易），以協助 Timeout 基金盜賊。攻擊者 可以收買所有礦工拒絕將某些交易包含在自己的交易池或者區塊當中。礦工們可以識別自己的區塊，試圖向付款攻擊者證明自己的行為。 
+
+---
+
+This can be mitigated by encouraging miners to avoid identifying their own blocks. Further, it should be expected that this kind of payment to miners is malicious activity and the contract is unenforcible. Miners may then take payment and surreptitiously mine a block without identifying the block to the attacker. Since the attacker is paying for this, they will quickly run out of money by losing the fee to the miner, as well as losing all their money in the channel. This attack is unlikely and fairly unattractive as it is far too difficult and requires a high degree of collusion with extreme risk. 
+
+這可以通過鼓勵礦工避免識別自己的區塊來緩解。此外，這種付款給礦工的行為是惡意活動， 並且合同是不可執行的。那麼礦工可能拿走支付並且暗中將交易放在自己的區塊中，不將該 塊確定給攻擊者。由於攻擊者為此支付，他們將很快失去所有的錢，因為將錢支付給礦工， 並且用完管道中所有的錢。這種攻擊是不可能的，並且不具吸引力，因為它實在太困難並且 需要具有高度風險的高度勾結。
+
+The risk model of this attack occurirng is similar to that of miners colluding to do reorg attacks: Extremely unlikely with many uncoordinated
+miners.
 
 這種攻擊發生的風險模型類似于礦工串通進行整編攻擊：極不可能有很多不協調的礦工。
 
-## 10 區塊大小增加與共識
+## 10 區塊大小增加與共識 | Block Size Increases and Consensus
+
+If we presume that a decentralized payment network exists and one user will make 3 blockchain transactions per year on average, Bitcoin will be able to support over 35 million users with 1MB blocks in ideal circumstances (assuming 2000 transactions/MB, or 500 bytes/Tx). This is quite limited, and an increase of the block size may be necessary to support everyone in the world using Bitcoin. A simple increase of the block size would be a hard fork, meaning all nodes will need to update their wallets if they wish to participate in  the network  with  the larger blocks.
 
 如果我們假定一個分散的支付網路存在，一個使用者平均每年將進行 3 筆 blockchain 交易， 在理想的情況下，比特幣就能夠支持超過 3500 萬用戶的 1MB 區塊（假設 2000 交易/ MB 或 500 位元組/ TX ）的交易。這是相當有限的，並且增加區塊大小以支持在比特幣世界交易的 每個人可能是必要的。區塊大小的簡單增加將是一個 hard fork，這意味著所有的節點都需要 更新自己的錢包，如果他們希望參與到具有較大區塊的網路中。
 
+---
+
+While it may appear as though this system will mitigate the block size increases in the short term, if it achieves global scale, it will necessitate a block size increase in the long term. Creating a credible tool to help prevent blockchain spam designed to encourage transactions to timeout becomes imperative.
+
 雖然可能會出現就好像此系統將在短期內緩和塊大小的增加的狀況，如果它達到全球範圍， 在長期內就有必要增加區塊的大小。創建一個可靠的工具，以幫助防止 blockchain 垃圾郵件 旨在鼓勵過期的交易成為當務之急。
+
+---
+
+To mitigate timelock spam vulnerabilities, non-miner and miners’ con- sensus rules may also differ if the miners’ consensus rules are more restrictive. Non-miners may accept blocks over 1MB, while miners may have different soft-caps on block sizes. If a block size is above that cap, then that is viewed as an invalid block by other miners, but not by non-miners. The miners will only build the chain on blocks which are valid according to the agreed-upon soft-cap. This permits miners to agree on raising the block size limit with- out requiring frequent hard-forks from clients, so long as the amount raised by miners does not go over the clients’ hard limit. This mitigates the risk of mass expiry of transactions at once. All transactions which are not re- deemed via Exercise Settlement (ES) may have a very high fee attached, and miners may use a consensus rule whereby those transactions are exempted from the soft-cap, making it very likely the correct  transactions will  enter the blockchain.
 
 為了減輕 timelock 垃圾郵件的漏洞，非礦工和礦工的共識規則也會不同，如果礦工的共識規 則更為嚴格。非礦工可以接受區塊大小超過 1MB，而礦工可能會對區塊大小有不同的 soft-cap。如果一個區塊的大小超過該 cap，則將被其他礦工被視為無效區塊，非礦工不會這 樣認為。礦工們將只能按照商定的 soft-cap 在區塊上建立有效的鏈。這使得礦工們同意提高 區塊大小的限制，而不需要頻繁來自用戶端的 hard-forks，只要礦工提出的金額不超過客戶 的硬性限制。這減輕了交易的大規模一次性到期的風險。所有未通過結算（ES）贖回的交 易可能有非常高的附加費用，礦工可以使用共識規則，規定一些交易從 soft-cap 中免除，使 得很可能正確的交易將進入 blockchain。
 
+---
+
+When transactions are viewed as circuits and contracts instead of transaction packets, the consensus risks can be measured by the amount of time available to cover the UTXO set controlled by hostile parties. In effect, the upper bound of the UTXO size is determined by transaction fees and the standard minimum transaction output value. If the bitcoin miners have a deterministic mempool which prioritizes transactions respecting a “weak” local time order of transactions, it could become extremely unprofitable and unlikely for an attack to succeed. Any transaction spam time attack by broadcasting the incorrect Commitment Transaction is extremely high risk for the attacker, as it requires an immense amount of bitcoin and all funds committed in those transactions will be lost if the attacker fails.
+
 當交易被視為電路和合同，而不是交易資料包，共識風險可以通過由敵對方控制的支付 UTXO 的可用時間的數量計量。事實上，  UTXO 大小的上界是由交易費用和標準最低交易 輸出來確定的。如果比特幣礦工有一個確定的記憶體池，其優先交易考慮“弱”秩序的當地時 間的交易，它可能變得極其不受益或者攻擊極不可能成功。通過公佈不正確承諾交易的任何 交易時間的垃圾郵件的攻擊對攻擊者來說是非常高風險的，因為它需要比特幣的數額巨大， 如果攻擊失敗，用於這些交易的所有資金都將丟失。
 
-## 11 用例 除了説明比特幣規模，對閃電網路上的交易也是很有用的：
+---
+
+## 11 用例 
+
+In addition to helping bitcoin scale, there are many uses for transactions on the Lightning Network:
+* Instant Transactions. Using Lightning, Bitcoin transactions are now nearly instant with any party. It is possible to pay for a cup of coffee with direct non-revocable payment in milliseconds to seconds.
+* Exchange Arbitrage. There is presently incentive to hold funds on exchanges to be ready for large market moves due to 3-6 block con- firmation times. It is possible for the exchange to participate in this network and for clients to move their funds on and off the exchange for orders nearly instantly. If the exchange does not have deep market depth and commits to only permitting limit orders close to the top of the order book, then the risk of coin theft becomes much lower. The exchange, in effect, would no longer have any need for a cold storage wallet. This may substantially reduce thefts and the need for trusted third party custodians.
+* Micropayments. Bitcoin blockchain fees are far too high to accept micropayments, especially with the smallest of values. With this sys- tem, near-instant micropayments using Bitcoin without a 3rd party custodian would be possible. It would enable, for example, paying per-megabyte for internet service or per-article to read a newspaper.
+* Financial Smart Contracts and Escrow. Financial contracts are espe- cially time-sensitive and have higher demands on blockchain computa- tion. By moving the overwhelming majority of trustless transactions off-chain, it is possible to have highly complex transaction contract terms without ever hitting the blockchain.
+
+***未完成：~~Cross-Chain Payments. So long as there are similar hash-functions across chains, it’s possible for transactions to be routed over multi- ple chains with different consensus rules. The sender does not have to trust or even know about the other chains – even the destination chain. Simiarly,  the receiver does not have  to know anything  about the sender’s chain or any other chain. All the receiver cares about is a conditional payment upon knowledge of a secret on their chain. Payment can be routed by participants in both chains in the hop. E.g. Alice is on Bitcoin, Bob is on both Bitcoin and X-Coin and Carol is on a hypothetical X-Coin, Alice can pay Carol without understanding the X-Coin consensus rules.~~***
+
+
+除了説明比特幣規模，對閃電網路上的交易也是很有用的：
+
 * 即時交易。使用閃電網路，比特幣的交易現在幾乎與任何一方即時同步。以毫秒為單位直 接為一杯咖啡支付不可撤銷的付款是可能的。
  
 
@@ -1456,46 +1497,129 @@ If one does not broadcast a transaction at the correct time, the counterparty ma
 * 金融智能合同和託管。金融合同對時間極其敏感並且對 blockchain 計算的要求更高。通過 移動絕大多數不可信交易到 off-chain，就可以不通過訪問 blockchain 獲得非常複雜的交易合 同條款。
 
 
-## 12 結論
+## 12 結論 | Conclusion
+
+Creating a network of micropayment channels enables bitcoin scalability, micropayments down to the satoshi, and near-instant transactions. These channels represent real Bitcoin transactions, using the Bitcoin scripting op- codes to enable the transfer of funds without risk of counterparty theft, especially with long-term miner risk   mitigations.
 
 創建小額管道網路使得比特幣具有可擴展性，小額支付，並接近即時交易。這些管道代表真 實比特幣交易，使用比特幣腳本操作代碼，使資金不受對手盜取資金的風險而轉移，特別是 有長期礦工風險緩解。
 
+---
+
+If all transactions using Bitcoin were on the blockchain, to enable 7 billion people to make two transactions per day, it would require 24GB blocks every ten minutes at best (presuming 250 bytes per transaction and 144 blocks per day). Conducting all global payment transactions on the blockchain today implies miners will need to do an incredible amount of computation, severely limiting bitcoin scalability and full nodes to a few centralized processors.
+
 如果使用比特幣的所有交易都在 blockchain 上，使七十億人每天進行兩筆交易，這最多需要 每十分鐘 24GB 區塊（假設每筆交易 250 位元組，平均每天 144 區塊）。今天開展的所有 blockchain 上的全球支付交易意味著礦工們需要做驚人數量的計算，嚴重限制了比特幣的可 擴展性並且將節點充分的集中到處理器。
+
+---
+
+If all transactions using Bitcoin were conducted inside a network of micropayment channels, to enable 7 billion people to make two channels per year with unlimited transactions inside the channel, it would require 133 MB blocks (presuming 500 bytes per transaction and 52560 blocks per year). Current generation desktop computers will be able to run a full node with old blocks pruned out on 2TB of storage.
 
 如果使用比特幣的所有交易在小額支付的管道網路中進行，以使七十億人創造兩個管道，每 年在管道內進行無限的交易，將需要 133 MB 區塊（假設每筆交易 500 位元組，每年 52560 區 塊）。目前這一代的臺式電腦將能夠運行一個完整的存儲 2TB 的節點。
 
+---
+
+With a network of instantly confirmed micropayment channels whose payments are encumbered by timelocks and hashlock outputs, Bitcoin can scale to billions of users without custodial risk or blockchain centralization when transactions are conducted securely off-chain using bitcoin scripting, with enforcement of non-cooperation by broadcasting signed multisignature transactions  on  the blockchain.
+
 隨著即時確認小額支付管道網路的發展，其支付由 timelocks 和 hashlock 輸出控制，比特幣 可以在沒有保管風險和 blockchain 集中性的情況下擴展到數十億的使用者，當交易使用比特幣 的腳本安全的進行，通過公佈簽署了的 blockchain 上的多重簽名交易來強制實施不合作。
 
-## 13 致謝
+---
+
+## 13 致謝 | Acknowledgements
+
+Micropayment channels have been developed by many parties, and has been discussed on bitcointalk, the bitcoin mailing list, and IRC. The amount of contributors to this idea are immense and much thought have been put into this ability. Effort has been placed into citing and finding similar ideas, however it is absolutely not near complete. In particular, there are many similarities to a proposal by Alex Akselrod by using hashlocking as a method of encumbering a hub-and-spoke payment  channel.
 
 小額支付管道已經被多方研究，並在 bitcointalk，Bitcoin 的郵寄清單和 IRC 進行了討論。對 這一想法的貢獻者的數量是巨大的，許多想法已經投入到了這一可能性中。人們已經開始致 力於尋找類似的想法，雖然這一想法還未被完成。特別是與 Alex Akselrod 的提議，使用哈 希碼作為延遲 hub-and-spoke 支付管道的方法有很多相似之處。
 
-感謝 Peter Todd 在 HTLC 腳本中糾正一個明顯的錯誤，並且優化了操作碼的大小。 感謝 Elizabeth Stark 的審查和修正。
+---
+
+Thanks to Peter Todd for correcting a significant error in the HTLC script, as well as optimizing the opcode  size.
+
+感謝 Peter Todd 在 HTLC 腳本中糾正一個明顯的錯誤，並且優化了操作碼的大小。 
+
+---
+
+Thanks  to Elizabeth  Stark for reviewing and  corrections.
+
+感謝 Elizabeth Stark 的審查和修正。
+
+---
+
+Thanks to Rusty Russell for reviewing this document and suggestions for making the concept more digestible, as well as working on a construction which may provide a stop-gap solution before a long-term malleability fix (to be described in a future   version).
+
 感謝 Rusty Russell 為使這個概念更易理解，對文檔的審閱和建議，並且致力於創造一個結 構，它可以提供在一個長期的可塑性網路出現之前的一個權宜的解決方案（在以後的版本中描述）。
 
-## 附錄 A 解決延展性
+---
+
+## 附錄 A 解決延展性 | Resolving Malleability
+
+In order to create these contracts in Bitcoin without a third party trusted service, Bitcoin must fix the transaction malleability problem. If transac- tions can be mutated, then signatures can be invalidated, thereby making refund transactions and commitment bonds invalidated. This creates an opportunity for hostile actors to use it as an opportunity for a negotiating tactic to steal coins, in effect, a hostage scenario.
 
 為了在比特幣中創造這些合同，並且不需要協力廠商可信服務，比特幣必須解決交易延展性問 題。如果交易可以突變，那麼簽名可以失效，從而使退款交易和承諾債券無效。這將創建一 個機會，讓敵對者利用它來談判盜取資金的策略，事實上是 hostage scenario。
 
+---
+
+To mitigate malleability, it is necessary to make a soft-fork change to bitcoin. Older clients would still work, but miners would need to update. Bitcoin has had several soft forks in the past, including pay-to-script-hash (P2SH).
+
 為了減輕延展性，有必要使比特幣的 soft-fork 變化。舊用戶端將仍然有效，但礦工們將需要 更新。比特幣在過去有過幾次 soft-fork，包括 pay-to-script-hash（P2SH）。
+
+---
+
+To mitigate malleability, it requires changing which contents  are signed by the participants. This is achieved by  creating new sighash  types. In order to accommodate this new  behavior,  a  new  P2SH  type  or  new OP CHECKSIG is necessary to make it a soft-fork rather than a hard-fork.
 
 為了減輕延展性，它需要參與者簽署的這些內容變化。這是通過創建新 sighash 類型來實現 的。為了適應這一新的行為，使其成為一個 soft-fork 而不是 hard-fork，一個新 P2SH 型或新 的 OP CHECKSIG 是必要的。
 
-如果一個新的 P2SH 被定義，它將使用不同的輸出腳本，例如：
+---
+
+If a new P2SH was defined, it would use a different output script such as:
+
+```
 OP DUP OP HASH160 <20-byte hash> OP EQUALVERIFY
+```
+
+如果一個新的 P2SH 被定義，它將使用不同的輸出腳本，例如：
+
+```
+OP DUP OP HASH160 <20-byte hash> OP EQUALVERIFY
+```
+
+---
+
+Since this will  always  resolve to true provided a valid    redeemScript, all existing clients will return true. This allows the scripting system to construct new rules, including new signature validation rules. At least one new sighash would need to exist.
 
 由於這將在有效地贖回腳本的情況下始終為真，所有現有用戶端將變為真。這使得腳本系統 構建新的規則，其中包括新的簽名驗證規則。至少需要一個新的 sighash 存在。
 
+---
+
+SIGHASH NOINPUT would neither sign any input transactions IDs nor sign the index. By using SIGHASH NOINPUT, one can be assured that one’s counterparty cannot invalidate entire trees of chained transactions of potential contract states which were previously agreed upon, using transac- tion ID mutation. With the new sighash flags, it is possible to spend from a parent transaction even though the transaction ID has changed, so long as the script evaluates as true (i.e. a valid  signature).
+
 SIGHASH NOINPUT 既不會簽署任何輸入交易 IDs，也不會簽署其指示。通過使用 SIGHASH NOINPUT，一方可以放心，其交易對手不能使用交易 ID 突變，使之前商定的整個潛在合同 中連結交易的目錄樹失效。有了新的 sighash 標誌，即使該交易 ID 發生了改變，也能夠從 一個父交易中花費，只要腳本評估為真（有效的簽名）。
+
+---
+
+SIGHASH NOINPUT implies significant risk with address reuse, as it can work with any transaction in which the sigScript returns as valid, so multiple transactions with the same outputs are redeemable (provided the output values are less).
 
 SIGHASH NOINPUT 意味著位址重用的風險，因為只要 sigScript 返回是有效的，他就可以 工作，所以有相同輸出的多個交易是可贖回的（如果輸出值變小）。
 
+---
+
+Further, and just as importantly, SIGHASH NOINPUT permits par- ticipants to sign spends of transactions without knowing the signatures of the transaction being spent. By solving malleability in the above manner, two parties may build contracts and spend transactions without either party having the ability to broadcast that original transaction on the blockchain until both parties agree. With the new sighash type, participants may build potential contract states and potential payout conditions and agree  upon all terms, before the contract may be paid, broadcast, and executed upon without the need for a trusted third  party.
+
 另外，同樣重要的是，SIGHASH NOINPUT 允許參與者在不知道該交易的簽署花費的情況 下簽署花費交易。通過上述方式解決延展性，雙方可以建立合同和花費交易，而沒有任何一   方有在 blockchain 上公佈的原始交易的能力，直到雙方同意。有了新的 sighash 類型，參與 者在合同可支付，公佈，並且在無需受信任的協力廠商得條件下執行之前，可以建立一個潛在 的合同狀態和潛在的支付條件，並同意所有條款。
+
+---
+Without SIGHASH NOINPUT, one cannot build outputs before the transaction can be funded. It is as if one cannot make any agreements without committing funds without knowing what one is committing to. SIGHASH NOINPUT allows one to build redemption for transactions which do not yet exist. In other words, one can form agreements before funding the transaction if the output is a 2-of-2 multisignature transaction.
 
 如果沒有 SIGHASH NOINPUT，不能在為交易集資之前生成輸出交易。這是因為如果一方 不知道他將錢投給誰，就不會投資，也就不能達成協議。SIGHASH NOINPUT 允許一方贖 回還未生效的交易。換言之，一方能在為交易集資之前生成輸出交易，如果輸出是 2-of-2 的多重簽名交易。
 
+---
+
+To use SIGHASH NOINPUT, one builds a Funding Transaction, and does not yet sign it. This Funding Transaction does not need to use SIGHASH NOINPUT if it is spending from a transaction which has already been entered into the blockchain. To spend from a Funding Transaction with a 2-of-2 multisignature output which has not yet been signed and broadcast, however, requires using SIGHASH NOINPUT.
+
 要使用 SIGHASH NOINPUT，一方建立一個資金交易，並且不簽署。這個資金交易並不需 要使用 SIGHASH NOINPUT，如果從已經被公佈到 blockchain 上的交易中花費。要從輸出 是 2-of-2 的多重簽名資金交易中花費，此交易還未被簽署和公佈，需要使用 SIGHASH NOINPUT。
- 
+
+---
+
+A  further  stop-gap  solution  using  OP CHECKSEQUENCEVERIFY or a less-optimal use of OP CHECKLOCKTIMEVERIFY will be described in a future paper by Rusty Russell. An updated version of this paper will also include these  constructions.
+
 使 用 OP CHECKSEQUENCEVERIFY 或 另 一 個 不 太 可 取 得 選 擇 ， 即 使 用 OP CHECKLOCKTIMEVERIFY 的一種權宜的解決方案將通過 Rusty Russell 在以後的論文中描 述。本文的更新版本也將包括這些結構。
 
 ## References
