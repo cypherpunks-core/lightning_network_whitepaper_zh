@@ -31,8 +31,8 @@ rx@awsomnet.org
       - [3.3.4 創建一個新的交易承諾，並撤銷先前的承諾 | Creating a new Commitment Transaction and Revoking Prior Commitments](#334-%E5%89%B5%E5%BB%BA%E4%B8%80%E5%80%8B%E6%96%B0%E7%9A%84%E4%BA%A4%E6%98%93%E6%89%BF%E8%AB%BE%E4%B8%A6%E6%92%A4%E9%8A%B7%E5%85%88%E5%89%8D%E7%9A%84%E6%89%BF%E8%AB%BE--creating-a-new-commitment-transaction-and-revoking-prior-commitments)
       - [3.3.5 創建可撤銷承諾交易流程 | Process for Creating Revocable Commitment Transactions](#335-%E5%89%B5%E5%BB%BA%E5%8F%AF%E6%92%A4%E9%8A%B7%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%B5%81%E7%A8%8B--process-for-creating-revocable-commitment-transactions)
     - [3.4 協同關閉管道](#34-%E5%8D%94%E5%90%8C%E9%97%9C%E9%96%89%E7%AE%A1%E9%81%93)
-    - [3.5 雙向管道的啟示與總結](#35-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84%E5%95%9F%E7%A4%BA%E8%88%87%E7%B8%BD%E7%B5%90)
-  - [4 散列 Timelock 合同（HTLC）](#4-%E6%95%A3%E5%88%97-timelock-%E5%90%88%E5%90%8Chtlc)
+    - [3.5 雙向管道的啟示與總結 | Bidirectional Channel Implications and Summary](#35-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84%E5%95%9F%E7%A4%BA%E8%88%87%E7%B8%BD%E7%B5%90--bidirectional-channel-implications-and-summary)
+  - [4 散列 Timelock 合同（HTLC）| Hashed Timelock Contract (HTLC)](#4-%E6%95%A3%E5%88%97-timelock-%E5%90%88%E5%90%8Chtlc-hashed-timelock-contract-htlc)
     - [4.1 不可撤銷的 HTLC 建設](#41-%E4%B8%8D%E5%8F%AF%E6%92%A4%E9%8A%B7%E7%9A%84-htlc-%E5%BB%BA%E8%A8%AD)
     - [4.2	Off-chain 可撤銷 HTLC](#42-off-chain-%E5%8F%AF%E6%92%A4%E9%8A%B7-htlc)
       - [4.2.1 當寄件者播的承諾交易 HTLC](#421-%E7%95%B6%E5%AF%84%E4%BB%B6%E8%80%85%E6%92%AD%E7%9A%84%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93-htlc)
@@ -800,22 +800,47 @@ Channels may remain in perpetuity until they decide to cooperatively close out t
 
 ---
 
-### 3.5 雙向管道的啟示與總結
- 
+### 3.5 雙向管道的啟示與總結 | Bidirectional Channel Implications and Summary
 
+By ensuring channels can update only with the consent of both parties, it is possible to construct channels which perpetually exist in the blockchain. Both parties can update the balance inside the channel with whatever output balances they wish, so long as it’s equal or less than the total funds commit- ted inside the Funding Transaction; balances can move in both directions. If one party becomes malicious, either party may immediately close out the channel and broadcast the most current state to the blockchain. By  using a fidelity bond construction (Revocable Delivery Transactions), if a party violates the terms of the channel, the funds will be sent to the counterparty, provided the proof of violation (Breach Remedy Transaction) is entered into the blockchain in a timely manner. If both parties are cooperative, the chan- nel can remain open indefinitely, possibly for many  years.
 
 通過確保管道只能在雙方當事人的同意的情況下得到更新， 就可以構建永遠存在於 blockchain 上的管道。雙方可以在管道內以他們所希望的輸出更新平衡，只要它是等於或小 於承諾資金交易內的資金總額;平衡可以在兩個方向上移動。如果一方是惡意的，任何一方 都可以立即關閉管道並且公佈最新狀態到 blockchain。通過使用網路保真債券建築（撤銷交 付交易），如果一方當事人違反的管道的條款，資金將被發送給對方，只要違反（違約補救 交易）的證明及時進入 blockchain。如果雙方是合作，管道可以保持無限期地打開，可能很 多年。
+
+---
+
+This type of construction is only possible because adjudication occurs programatically over the blockchain as part  of  the  Bitcoin  consensus, so one does not need to trust the other party. As a result, one’s channel counterparty does not possess full custody or control of the funds.
 
 這種類型的結構是唯一可能的，因為審判程式設計作為比特幣共識的一部分發生在 blockchain
 上，所以人們並不需要信任對方。這樣一來，一方的管道對方不能充分的監管或控制資金。
 
-## 4 散列 Timelock 合同（HTLC）
+---
+
+## 4 散列 Timelock 合同（HTLC）| Hashed Timelock Contract  (HTLC)
+
+A bidirectional payment channel only permits secure transfer of funds inside a channel. To be able to construct secure transfers using a network of channels across multiple hops to the final destination requires an additional construction, a Hashed Timelock Contract    (HTLC).
 
 雙向支付管道只允許資金在管道內安全轉移。為了能夠使用跨多個中繼段通向網路最終目的 地得網路管道建立安全傳輸，需要一個額外的結構，散列 Timelock 合同（HTLC）。
 
+---
+
+The purpose of an HTLC is to allow for global state across multiple nodes via hashes. This global state is ensured by time commitments and time-based unencumbering of resources via disclosure of preimages. Trans- actional “locking” occurs globally via commitments, at any point in time a single participant is responsible for disclosing to the next participant whether they have knowledge of the preimage R. This construction does not require custodial trust in one’s channel counterparty,  nor any  other  participant  in the network.
+
 一個 HTLC 的目的是通過散列允許在多個節點的全域狀態。這種全域狀態通過披露原像由 承諾的時間和以時間為基準的無阻礙資源來確保。交易  “鎖定”通過承諾發生在全域，在 特定時間，一個參與者負責披露給下一參與者他們是否掌握原像 R 的資訊。這種結構並不 要求管道中對方的保管信託，在網路中也沒有任何其他參與者。
 
+---
+
+In order to achieve this, an HTLC must be able to create certain transactions which are only valid after a certain date, using nLockTime, as well as information disclosure to one’s channel counterparty. Additionally, this data must be revocable, as one must be able to undo an HTLC.
+
 為了達到這個，一個 HTLC 必須能夠創建只在特定日期後有效的某些交易，使用 nLockTime， 以及公開給管道對方的資訊。此外，該資料必須是可撤銷的，因為一個人必須能夠撤銷 HTLC。
+
+---
+
+An HTLC is also a channel contract with one’s counterparty which is enforcible via the blockchain. The counterparties in a channel agree to the following terms for a Hashed Timelock Contract:
+
+1.	If Bob can produce to Alice an unknown 20-byte random input data R from a known hash H, within three days, then Alice will settle the contract by paying Bob 0.1 BTC.
+2.	If three days have elapsed, then the above clause is null and void and the clearing process is invalidated, both parties must not attempt to settle and claim payment after three days.
+3.	Either party may (and should) pay out according to the terms of this contract in any method of the participants choosing and close out this contract early so long as both participants in this contract agree.
+4.	Violation of the above terms will incur a maximum penalty of the funds locked up in this contract, to be paid to the non-violating counterparty as a fidelity bond.
 
 HTLC 也是一個可在 blockchain 上執行的與對方簽訂的的管道合同。管道中對方同意散列
 Timelock 合同的以下條款：
@@ -827,6 +852,8 @@ Timelock 合同的以下條款：
 3. 任何一方都可以（也應該）按照本合同的條款以參加者選擇的任何方法支付並且早期關 閉此合同，只要這一合同中的兩個參與者同意。
 
 4. 違反上述條款將導致最大的懲罰，資金被鎖在合同中，被支付給作為保真債券基金的對方。
+
+---
 
 為了闡明例子，我們在 HTLCs 中使用天數，在 RSMC 使用區塊高度。在現實中，HTLC 也 應該被定義為一個區塊高度（例如 3 天相當於 432 區塊）。
 
