@@ -21,7 +21,7 @@ rx@awsomnet.org
     - [3.1 頻道創建中存在的問題](#31-%E9%A0%BB%E9%81%93%E5%89%B5%E5%BB%BA%E4%B8%AD%E5%AD%98%E5%9C%A8%E7%9A%84%E5%95%8F%E9%A1%8C)
       - [3.1.1 創建無簽署的資金交易 | The Problem of Blame in Channel Creation](#311-%E5%89%B5%E5%BB%BA%E7%84%A1%E7%B0%BD%E7%BD%B2%E7%9A%84%E8%B3%87%E9%87%91%E4%BA%A4%E6%98%93--the-problem-of-blame-in-channel-creation)
       - [3.1.2 來自未簽署交易的消費 | Spending from an Unsigned Transaction](#312-%E4%BE%86%E8%87%AA%E6%9C%AA%E7%B0%BD%E7%BD%B2%E4%BA%A4%E6%98%93%E7%9A%84%E6%B6%88%E8%B2%BB--spending-from-an-unsigned-transaction)
-      - [3.1.3 承諾交易：不可執行的建設 | Commitment Transactions: Unenforcible Construction](#313-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E4%B8%8D%E5%8F%AF%E5%9F%B7%E8%A1%8C%E7%9A%84%E5%BB%BA%E8%A8%AD--commitment-transactions-unenforcible-construction)
+      - [3.1.3 承諾交易：不可執行的結構 | Commitment Transactions: Unenforcible Construction](#313-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E4%B8%8D%E5%8F%AF%E5%9F%B7%E8%A1%8C%E7%9A%84%E7%B5%90%E6%A7%8B--commitment-transactions-unenforcible-construction)
       - [3.1.4 承諾交易：指出禍源 | Commitment Transactions: Ascribing Blame](#314-%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%8C%87%E5%87%BA%E7%A6%8D%E6%BA%90--commitment-transactions-ascribing-blame)
     - [3.2 創建撤銷合約的通道 | Creating a Channel with Contract Revocation](#32-%E5%89%B5%E5%BB%BA%E6%92%A4%E9%8A%B7%E5%90%88%E7%B4%84%E7%9A%84%E9%80%9A%E9%81%93--creating-a-channel-with-contract-revocation)
     - [3.3 nSequence 成熟度 | Sequence Number Maturity](#33-nsequence-%E6%88%90%E7%86%9F%E5%BA%A6--sequence-number-maturity)
@@ -33,7 +33,7 @@ rx@awsomnet.org
     - [3.4 協同關閉通道 | Cooperatively Closing Out a Channel](#34-%E5%8D%94%E5%90%8C%E9%97%9C%E9%96%89%E9%80%9A%E9%81%93--cooperatively-closing-out-a-channel)
     - [3.5 雙向通道的啟示與總結 | Bidirectional Channel Implications and Summary](#35-%E9%9B%99%E5%90%91%E9%80%9A%E9%81%93%E7%9A%84%E5%95%9F%E7%A4%BA%E8%88%87%E7%B8%BD%E7%B5%90--bidirectional-channel-implications-and-summary)
   - [4 雜湊 Timelock 合約（HTLC）| Hashed Timelock Contract (HTLC)](#4-%E9%9B%9C%E6%B9%8A-timelock-%E5%90%88%E7%B4%84htlc-hashed-timelock-contract-htlc)
-    - [4.1 不可撤銷的 HTLC 建設 | Non-revocable HTLC Construction](#41-%E4%B8%8D%E5%8F%AF%E6%92%A4%E9%8A%B7%E7%9A%84-htlc-%E5%BB%BA%E8%A8%AD--non-revocable-htlc-construction)
+    - [4.1 不可撤銷的 HTLC 結構 | Non-revocable HTLC Construction](#41-%E4%B8%8D%E5%8F%AF%E6%92%A4%E9%8A%B7%E7%9A%84-htlc-%E7%B5%90%E6%A7%8B--non-revocable-htlc-construction)
     - [4.2	Off-chain 可撤銷 HTLC | Off-chain Revocable HTLC](#42-off-chain-%E5%8F%AF%E6%92%A4%E9%8A%B7-htlc--off-chain-revocable-htlc)
       - [4.2.1 當寄件者播的承諾交易 HTLC | HTLC when the Sender Broadcasts the Commitment Transaction](#421-%E7%95%B6%E5%AF%84%E4%BB%B6%E8%80%85%E6%92%AD%E7%9A%84%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93-htlc--htlc-when-the-sender-broadcasts-the-commitment-transaction)
       - [4.2.2 接收者公佈承諾交易時的 HTLC | HTLC when the Receiver Broadcasts the Commitment Transaction](#422-%E6%8E%A5%E6%94%B6%E8%80%85%E5%85%AC%E4%BD%88%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%99%82%E7%9A%84-htlc--htlc-when-the-receiver-broadcasts-the-commitment-transaction)
@@ -297,7 +297,7 @@ One is not able to broadcast the parent (Step 7) until Step 6 is com- plete. Bot
 
 ---
 
-#### 3.1.3 承諾交易：不可執行的建設 | Commitment Transactions: Unenforcible Construction
+#### 3.1.3 承諾交易：不可執行的結構 | Commitment Transactions: Unenforcible Construction
 
 After the unsigned (and unbroadcasted) Funding Transaction has been cre- ated, both parties sign and exchange an initial Commitment Transaction. These Commitment Transactions spends from the 2-of-2 output of the Fund- ing Transaction (parent). However, only the Funding Transaction is broad- cast on the blockchain.
 
@@ -707,7 +707,7 @@ For this reason, one should periodically monitor the blockchain to see if one’
 
 To create revocable Commitment Transactions, it requires proper construc- tion of the channel from the beginning, and only signing transactions which may be broadcast at any time in the future, while ensuring that one will not lose out due to uncooperative or malicious counterparties. This re- quires determining which public key to use for new commitments, as us- ing SIGHASH NOINPUT requires using unique keys for each Commitment Transaction RSMC (and HTLC) output. We use P to designate pubkeys and K to designate the corresponding private key used to sign.
 
-要創建可撤銷承諾交易，首先它需要正確的建設通道，並且僅僅簽訂可能在未來任何時間公布的交易，同時確保一方不會因不合作或惡意的對手而吃虧。這需要確定新的承諾要使用的公開金鑰，如使用 SIGHASH NOINPUT 要求每一個承諾交易 RSMC（和 HTLC）輸出使用特殊 鑰。我們用 P 來指定公開金鑰，K 來指定用於簽署的相應的私密金鑰。
+要創建可撤銷承諾交易，首先它需要正確的結構通道，並且僅僅簽訂可能在未來任何時間公布的交易，同時確保一方不會因不合作或惡意的對手而吃虧。這需要確定新的承諾要使用的公開金鑰，如使用 SIGHASH NOINPUT 要求每一個承諾交易 RSMC（和 HTLC）輸出使用特殊 鑰。我們用 P 來指定公開金鑰，K 來指定用於簽署的相應的私密金鑰。
 
 ---
 
@@ -725,7 +725,7 @@ Since the Delivery transaction is just a P2PKH output (bitcoin ad- dresses begin
 
 Both parties exchange pubkeys they intend to use for the RSMC (and HTLC described in future sections) for the Commitment Transaction. Each set of Commitment Transactions use their own public keys and are not ever reused.  Both parties may already know all future pubkeys by  using a BIP 0032[17] HD Wallet construction by exchanging Master Public Keys during channel construction. If they wish to generate a new Commitment Transaction pair C2a/C2b, they use multisig(PAliceRSMC2, PBobRSMC2) for the RSMC output.
 
-雙方交換他們打算為承諾交易的 RSMC（和在以後的章節描述的 HTLC）使用的公開金鑰。每套承諾交易用自己的公開金鑰並且永遠不重複使用。雙方可能已經知道未來所有的公開金鑰，通過使用 BIP 0032 [17] HD 錢包建設通道過程中交換主公共金鑰。如果他們希望生成一個新的承諾交易對 C2A / C2b，他們為 RSMC 輸出使用 multisig（PAliceRSMC2，PBobRSMC2）。
+雙方交換他們打算為承諾交易的 RSMC（和在以後的章節描述的 HTLC）使用的公開金鑰。每套承諾交易用自己的公開金鑰並且永遠不重複使用。雙方可能已經知道未來所有的公開金鑰，通過使用 BIP 0032 [17] HD 錢包結構通道過程中交換主公共金鑰。如果他們希望生成一個新的承諾交易對 C2A / C2b，他們為 RSMC 輸出使用 multisig（PAliceRSMC2，PBobRSMC2）。
 
 ---
 
@@ -901,7 +901,7 @@ timelocked 退款給 Alice。為期 3 天的 timelock 使用來自於消費交�
 
 ---
 
-### 4.1 不可撤銷的 HTLC 建設 | Non-revocable HTLC Construction
+### 4.1 不可撤銷的 HTLC 結構 | Non-revocable HTLC Construction
 
 ![](image/figure11.png)
 
@@ -925,7 +925,7 @@ It is within both parties individual responsibility to ensure that they can get 
 
 Yet this kind of simplistic construction has similar problems as an incorrect bidirectional payment channel construction. When an old Com- mitment Transaction gets broadcast, either party may attempt to steal funds as both paths may be valid after the fact. For example, if R gets disclosed 1 year later, and an incorrect Commitment Transaction gets broadcast, both paths are valid and are redeemable by either party; the contract is not yet enforcible on the blockchain. Closing out the HTLC is absolutely necessary, because in order for Alice to get her refund, she must terminate the contract and receive her refund. Otherwise, when Bob discovers R after 3 days have elapsed, he may be able to steal the funds which should be going to Alice. With uncooperative counterparties it’s not possible to terminate an HTLC without broadcasting it to the bitcoin blockchain as the uncooperative party is unwilling to create a new Commitment Transaction.
 
-然而，這種簡單的建設也有類似於不正確的雙向支付通道建設的問題。當舊的承諾交易被公 布，任何一方都可以試圖竊取資金，因為在此事後，兩個路徑可能是有效的。例如，若 R 被公開 1 年以後，並且不正確的承諾交易被公佈，兩個路徑都有效並且可由任何一方贖回;合約還沒有在 blockchain 上被執行。關閉 HTLC 是絕對必要的，因為 Alice 為了得到退款，她必須終止合約，並接受她的退款。否則，當 Bob3 天后發現 R，他可能能夠竊取應給 Alice 的資金。對於不合作的對手，不可能在沒有把它公佈在 blockchain 時終止 HTLC，因為不合作的一方不願建立新的承諾交易。
+然而，這種簡單的結構也有類似於不正確的雙向支付通道結構的問題。當舊的承諾交易被公 布，任何一方都可以試圖竊取資金，因為在此事後，兩個路徑可能是有效的。例如，若 R 被公開 1 年以後，並且不正確的承諾交易被公佈，兩個路徑都有效並且可由任何一方贖回;合約還沒有在 blockchain 上被執行。關閉 HTLC 是絕對必要的，因為 Alice 為了得到退款，她必須終止合約，並接受她的退款。否則，當 Bob3 天后發現 R，他可能能夠竊取應給 Alice 的資金。對於不合作的對手，不可能在沒有把它公佈在 blockchain 時終止 HTLC，因為不合作的一方不願建立新的承諾交易。
 
 ---
 
