@@ -34,8 +34,8 @@ rx@awsomnet.org
     - [3.5 雙向管道的啟示與總結 | Bidirectional Channel Implications and Summary](#35-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84%E5%95%9F%E7%A4%BA%E8%88%87%E7%B8%BD%E7%B5%90--bidirectional-channel-implications-and-summary)
   - [4 散列 Timelock 合同（HTLC）| Hashed Timelock Contract (HTLC)](#4-%E6%95%A3%E5%88%97-timelock-%E5%90%88%E5%90%8Chtlc-hashed-timelock-contract-htlc)
     - [4.1 不可撤銷的 HTLC 建設 | Non-revocable HTLC Construction](#41-%E4%B8%8D%E5%8F%AF%E6%92%A4%E9%8A%B7%E7%9A%84-htlc-%E5%BB%BA%E8%A8%AD--non-revocable-htlc-construction)
-    - [4.2	Off-chain 可撤銷 HTLC](#42-off-chain-%E5%8F%AF%E6%92%A4%E9%8A%B7-htlc)
-      - [4.2.1 當寄件者播的承諾交易 HTLC](#421-%E7%95%B6%E5%AF%84%E4%BB%B6%E8%80%85%E6%92%AD%E7%9A%84%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93-htlc)
+    - [4.2	Off-chain 可撤銷 HTLC | Off-chain Revocable HTLC](#42-off-chain-%E5%8F%AF%E6%92%A4%E9%8A%B7-htlc--off-chain-revocable-htlc)
+      - [4.2.1 當寄件者播的承諾交易 HTLC | HTLC when the Sender Broadcasts the Commitment Transaction](#421-%E7%95%B6%E5%AF%84%E4%BB%B6%E8%80%85%E6%92%AD%E7%9A%84%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93-htlc--htlc-when-the-sender-broadcasts-the-commitment-transaction)
       - [4.2.2 接收者公佈承諾交易時的 HTLC](#422-%E6%8E%A5%E6%94%B6%E8%80%85%E5%85%AC%E4%BD%88%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%99%82%E7%9A%84-htlc)
     - [4.3	HTLC Off-chain 終止](#43-htlc-off-chain-%E7%B5%82%E6%AD%A2)
     - [4.4 HTLC 形成和封閉令](#44-htlc-%E5%BD%A2%E6%88%90%E5%92%8C%E5%B0%81%E9%96%89%E4%BB%A4)
@@ -928,31 +928,80 @@ Yet this kind of simplistic construction has similar problems as an incorrect bi
 
 ---
 
-### 4.2	Off-chain 可撤銷 HTLC
+### 4.2	Off-chain 可撤銷 HTLC | Off-chain Revocable HTLC
+
+To be able to terminate this contract off-chain without a broadcast to the Bitcoin blockchain requires embedding RSMCs in the output, which will have a similar construction to the bidirectional channel.
 
 為了能夠在不公佈到比特幣 blockchain 情況下終止 Off-chain 合同， 需要在輸出中嵌入
 RSMCs，RSMCs 將與雙向管道有類似結構。
 
+---
+
 ![](image/figure12.png)
+
+Figure 12: If Alice broadcasts C2a, then the left half will execute. If Bob broadcasts C2b, then the right half will execute. Either party may broadcast their Commitment transaction at any time. HTLC Timeout is only valid after 3 days. HTLC Executions can only be broadcast if the preimage to the hash R is known. Prior Commitments (and their dependent transactions) are not displayed for brevity.
 
 圖 12：如果 Alice 公佈 C2a，則左半將執行。如果 Bob 公佈 C2b，右半將執行。任何一方都 可以在任何時候公佈其交易承諾。 HTLC Timeout 僅在 3 天后生效。只有雜湊 R 的原像是 已知的，HTLC 執行才能被公佈。為了簡潔，先前的承諾（和它們的相關交易）不顯示。
 
+---
+
+Presume Alice and Bob wish to update their balance in the channel at Commitment 1 with a balance of 0.5 to Alice and 0.5 to Bob.
+
 假設 Alice 和 Bob 希望在承諾 1 管道中以 0.5 給 Alice，0.5 給 Bob 方式更新平衡。
+
+---
+
+Alice wishes to send 0.1 to Bob contingent upon knowledge of R within 3 days, after 3 days she wants her money back if Bob does not produce R. 
 
 Alice 希望在 3 天內在已知 R 的資訊的情況下發送 0.1 給 Bob，三天后，如果 Bob 不產生 R， 她希望要回她的錢。
 
-.新的承諾交易將有一個對於 Alice 和 Bob（輸出 0 和 1）現有的平衡的全額退款，HTLC 中 沒有輸出 2，輸出 2 描述了在途資金。 0.1 將受限於 HTLC 中，Alice 的餘額下降到 0.4，Bob 保持不變為 0.5。
+---
+
+The new Commitment Transaction will have a full refund of the cur-
+rent balance to Alice and Bob (Outputs 0 and 1), with output 2 being the HTLC, which describes the funds in transit. As 0.1 will be encumbered in an HTLC, Alice’s balance is reduced to 0.4 and Bob’s remains the same at 0.5.
+
+新的承諾交易將有一個對於 Alice 和 Bob（輸出 0 和 1）現有的平衡的全額退款，HTLC 中 沒有輸出 2，輸出 2 描述了在途資金。 0.1 將受限於 HTLC 中，Alice 的餘額下降到 0.4，Bob 保持不變為 0.5。
+
+---
+
+This new Commitment Transaction (C2a/C2b) will have an   HTLC
+output with two possible spends. Each spend is different depending on each counterparty’s version of the Commitment Transaction. Similar to the bidirectional payment channel, when one party broadcasts their Commit- ment, payments to the counterparty will be assumed to be valid and not invalidated. This can occur because when one broadcasts a Commitment Transaction, one is attesting this is the most recent Commitment Transac- tion. If it is the most recent, then one is also attesting that the HTLC exists and was not invalidated before, so potential payments to one’s counterparty should be valid.
 
 這一新的承諾交易（C2A / C2b 上）將有一個有兩個可能的花費的 HTLC 輸出。每個支出是 不同的，根據每個交易對手的承諾交易的版本。類似於雙向支付管道，當一方公佈他們的承 諾，給交易對手的支付會被認為是有效的而不是無效的。這可能發生，因為當一方公佈承諾 交易，是證明這是最近的承諾交易。如果它是最近的，也證明該 HTLC 存在並且之前未失 效，所以給另一方的潛在支付應該是有效的。
 
+---
+
+Note that HTLC transaction names (beginning with the letter H) will begin with the number 1, whose values do not correlate with Commitment Transactions. This is simply the first HTLC transaction. HTLC transac- tions may persist between Commitment Transactions. Each HTLC has 4 keys per side of the transaction (C2a and C2b) for a total of 8 keys per counterparty.
+
 注意，HTLC 交易名稱（用字母 H 開始）將以數字 1 開始，其值不與承諾交易相關。這僅 僅是第一個 HTLC 交易。 HTLC 交易在承諾交易之間依然存在。每個 HTLC 在交易的每個 側面（C2A 和 C2B）具有 4 個鍵，總計每個對手 8 鍵。
 
+---
+
+The HTLC output in the Commitment Transaction has two sets of keys per counterparty in the output.
+
 在承諾交易的 HTLC 輸出中每個對手有兩組輸出金鑰。
+
+---
+
+For Alice’s Commitment Transaction (C2a), the HTLC output script requires multisig(PAlice2, PBob2) encumbered by disclosure of R, as well as multisig(PAlice1, PBob1) with no encumbering.
+
 Alice 的承諾交易（C2a）中，HTLC 輸出腳本需要通過公開的 R 受阻礙的 multisig（PAlice2， PBob2），以及不受阻礙的    multisig（PAlice1，PBob1）。
+
+---
+
+For Bob’s Commitment Transaction (C2b), the HTLC output  script requires multisig(PAlice6, PBob6) encumbered by disclosure of R, as well as multisig(PAlice5, PBob5)  with  no encumbering.
+
 Bob 的承諾交易（C2b）中，HTLC 輸出腳本需要通過公開的 R 受阻礙的 multisig（PAlice6， PBob6），以及不受阻礙的    multisig（PAlice5，PBob5）。
+
+---
+
+The HTLC output states are different depending upon which Com- mitment Transaction is broadcast.
+
 該 HTLC 輸出狀態是根據哪個承諾交易被公佈的。
 
-#### 4.2.1 當寄件者播的承諾交易 HTLC
+---
+
+#### 4.2.1 當寄件者播的承諾交易 HTLC | HTLC when the Sender Broadcasts the Commitment Transaction
 
 對於寄件者（Alice），“交付”交易作為 HTLC 執行交付交易（HED1a）被發送，其不受 阻於 RSMC。假定該 HTLC 從未被 Off-chain 終止，因為 Alice 證明公佈的承諾交易是最近 的。如果 Bob 可以產生原像 R，他將能夠在該承諾交易在 blockchain 上公佈之後贖回基金。 如果 Alice 公佈她的承諾 C2a，本次交易需要 multisig（PAlice2，PBob2）。只有 Alice 給 Bob 她的 HED1a 簽名，Bob 才可以公佈 HED1a。
 
