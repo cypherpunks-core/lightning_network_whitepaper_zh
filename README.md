@@ -61,7 +61,7 @@ rx@awsomnet.org
   - [12 結論 | Conclusion](#12-%E7%B5%90%E8%AB%96--conclusion)
   - [13 致謝 | Acknowledgements](#13-%E8%87%B4%E8%AC%9D--acknowledgements)
   - [附錄 A 解決延展性 | Resolving Malleability](#%E9%99%84%E9%8C%84-a-%E8%A7%A3%E6%B1%BA%E5%BB%B6%E5%B1%95%E6%80%A7--resolving-malleability)
-  - [References](#references)
+  - [參考文獻 | References](#%E5%8F%83%E8%80%83%E6%96%87%E7%8D%BB--references)
 
 ## 摘要 | Abstract
 
@@ -1624,7 +1624,7 @@ A  further  stop-gap  solution  using  OP CHECKSEQUENCEVERIFY or a less-optimal 
 
 使用OP CHECKSEQUENCEVERIFY 或另一個不太可取得選擇，即使用 OP CHECKLOCKTIMEVERIFY 的一種權宜的解決方案將通過 Rusty Russell 在以後的論文中描述。本文的更新版本也將包括這些結構。
 
-## References
+## 參考文獻 | References
 [1] Satoshi Nakamoto. Bitcoin: A Peer-to-peer Electronic Cash System.https://bitcoin.org/bitcoin.pdf, Oct 2008.
 
 [2] Manny Trillo.	Stress Test Prepares VisaNet for the Most Wonderful Time of the Year. http://www.visa.com/blogarchives/us/2013/10/10/stress-test-prepares-visanet-for-the-most-wonderful-time-of-the-year/ index.html, Oct 2013.
