@@ -545,21 +545,49 @@ If the block version is used as a flag, the contextual information must match th
 
 #### 3.3.2 撤銷承諾交易 | Revocable Commitment Transactions
 
+By combining the ascribing of blame as well as the revocable transaction, one is able to determine when a party is not abiding by the terms of the contract, and enforce penalties without trusting the counterparty.
+
 通過結合錯誤來源以及可撤銷交易，能夠確定什麼時候一方不遵守合同的條款，並不信任對 方的實施處罰。
+
+---
 
 ![](image/figure4.png)
 
+Figure 4: The Funding Transaction F, designated in green, is broadcast on the blockchain after all other transactions are signed. All transactions which only Alice can broadcast are in purple. All transactions which only Bob can broadcast is are blue. Only the Funding Transaction is broadcast on the blockchain at this time.
+
 圖 4：資金交易 F，用綠色代表，在所有其他交易簽署之後在 blockchain 上公佈。所有交易 只有 Alice 可以公佈的交易由紫色代表。所有只有 Bob 可以公佈的交易由藍色代表。此時， 只有交易資金在 blockchain 上公佈。
+
+---
+
+The intent of creating a new Commitment Transaction is to invalidate all old Commitment Transactions when updating the new balance with a new Commitment Transaction. Invalidation of old transactions can happen by making an output be a Revocable Sequence Maturity Contract (RSMC). To invalidate a transaction, a superseding transaction will be signed and exchanged by both parties that gives all funds to the counterparty in the event an older transaction is incorrectly broadcast. The incorrect broadcast is identified by creating two different Commitment Transactions with the same final balance outputs, however the payment to oneself is encumbered by an RSMC.
 
 創建一個新的承諾交易的目的是在利用新的承諾交易來更新新的平衡，使所有的舊的承諾交 易無效。要使舊的交易失效，要使輸出成為可撤銷的序列到期合同（RSMC）。要使交易無 效，將簽署一個替代的交易，並且雙方交換此交易，規定雙方在不正確的公佈舊交易的情況 下將資金交給對方。不正確的公佈通過創建具有相同的網路最終平衡輸出的兩個不同承諾交 易來鑒定，但是給自己的支付由 RSMC 擔保。
 
+---
+
+In effect, there are two Commitment Transactions from a single Fund- ing Transaction 2-of-2 outputs. Of these two Commitment Transactions, only one can enter into the blockchain. Each party within a channel has one version of this contract. So if this is the first Commitment Transaction pair, Alice’s Commitment Transaction is defined as C1a, and Bob’s Commitment Transaction is defined as C1b. By broadcasting a Commitment Transac- tion, one is requesting for the channel to close out and end. The first two outputs for the Commitment Transaction include a Delivery Transaction (payout) of the present unallocated balance to the channel counterparties. If Alice broadcasts C1a, one of the output is spendable by D1a, which sends funds to Bob. For Bob, C1b is spendable by D1b, which sends funds to Alice. The Delivery Transaction (D1a/D1b) is immediately redeemable and is not encumbered in any way in the event the Commitment Transaction is broadcast.
+
 實際上，2-of-2 資金交易輸出有兩個承諾交易。這兩個承諾交易中，只有一個可以進入到 blockchain。管道內的每一方都有本合同的一個版本。因此，如果這是第一個承諾交易對， Alice 的承諾交易被定義為 C1a， Bob 的承諾交易被定義為 C1b。若要公佈一個承諾交易， 要求的管道關閉並結束。承諾交易的前兩個輸出包括目前未分配的與管道對手不平衡的交貨 交易（派息）。如果 Alice 公佈 C1a，其中一個輸出對 D1a 是可支配的，它發送資金給 Bob。 Bob，C1b 的是可由 D1b 支配的，它發送資金給 Alice。該交貨交易（D1a / D1b）是被立即 贖回的，並以任何方式公佈交易承諾不受到阻礙。
+
+---
+
+For each party’s Commitment Transaction, they are attesting that they are broadcasting the most recent Commitment Transaction which they own. Since they are attesting that this is the current balance, the balance paid to the counterparty is assumed to be true, since one has no direct benefit by paying some funds to the counterparty as a penalty.
 
 對於每一方的承諾交易，他們證明他們正在公佈他們擁有最新的承諾交易。因為他們證明， 這是當前平衡，支付給對方的平衡被認為是真實的，因為作為一種懲罰向對方支付資金對自 己是沒有任何直接好處的。
 
+---
+
+The balance paid to the person who broadcast the Commitment Transaction, however, is unverified. The  participants  on  the  blockchain have no idea if the Commitment Transaction is the most recent or not. If they do not broadcast their most recent version, they will be penalized by taking all the funds in the channel and giving it to the counterparty. Since their own funds are encumbered in their  own  RSMC,  they  will  only be able to claim their funds after some set number of confirmations after the Commitment Transaction has been included in a block  (in  our example, 1000 confirmations). If they do broadcast their most recent Commitment Transaction, there should be no revocation transaction superseding the revocable transaction, so they will be able to receive their funds after some set amount of time (1000  confirmations).
+
 將平衡支付給公佈承諾交易的人是未確認的。Blockchain 上的參與者不知道承諾交易是否是 最近的。如果他們沒有公佈他們的最新版本，他們將被懲罰，承擔管道中所有的資金並給與 交易對方。由於自己的資金都押在自己的 RSMC 中，他們只能在承諾交易已被列入一個區 塊後（在我們的例子中，1000 次確認），經過一定數量的確認後要求自己的基金。如果他 們公佈的是自己的最新承諾交易，應該沒有撤銷交易替換之前可撤銷的交易，所以他們就能 夠在一段時間（1000 次確認）後取回投入的資金。
 
+---
+
+By knowing who broadcast the Commitment Transaction and encum- bering one’s own payouts to be locked up for a predefined period of time,both parties will be able to revoke the Commitment Transaction in the fu- ture.
+
 通過瞭解誰公佈承諾交易，並阻礙自己的支出在提前確定好的的時間內被鎖定，雙方將能夠 在未來撤銷承諾交易。
+
+---
 
 #### 3.3.3 從管道兌換基金：合作交易方
 
