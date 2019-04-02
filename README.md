@@ -669,14 +669,26 @@ When a new pair of Commitment Transactions (C2a/C2b) is agreed upon, both partie
 
 ![](image/figure8.png)
 
+Figure 8: When C2a and C2b exist, both parties exchange Breach Remedy transactions. Both parties now have explicit economic incentive to avoid broadcasting old Commitment Transactions (C1a/C1b). If either party wishes to close out the channel, they will only use C2a (Alice) or C2b (Bob). If Alice broadcasts C1a, all her money will go to Bob. If Bob broadcasts C1b, all his money will go to Alice.  See previous figure for C2a/C2b  outputs.
+
 圖 8：當 C2A 和 C2B 存在，雙方交換違約補救交易。雙方現在都有明確的經濟激勵，避免 公佈舊的承諾交易（C1a / C1b）。如一方要求關閉管道，他們將只使用 C2A（Alice）或 C2b 上（BOB）。如果 Alice 公佈 C1a，所有的錢都會給 Bob。如果 Bob 公佈 C1b，所有的錢都 會給 Alice。C2A / C2b 的輸出請參閱前面的數位。
+
+---
+
+Due to this fact, one will likely delete all prior Commitment Transac- tions when a Breach Remedy Transaction has been passed to the counter- party. If one broadcasts an incorrect (deprecated and invalidated Commit- ment Transaction), all the money will go to one’s counterparty. For example, if Bob broadcasts C1b, so long as Alice watches the blockchain within the predefined number of blocks (in this case, 1000 blocks), Alice will be able to take all the money in this channel by broadcasting RD1b.  Even if the present balance of the Commitment state (C2a/C2b) is 0.4 BTC to Alice and 0.6 BTC to Bob, because Bob violated the terms of the contract, all the money goes to Alice as a penalty. Functionally, the Revocable Transaction acts as a proof to the blockchain that Bob has violated the terms in the channel and this is programatically adjudicated by the blockchain.
 
 由於這一事實，當違約補救交易已經交給交易對手時，人們可能會刪除所有先前的承諾交易。 如果一方公佈不正確（過時的，無效的承諾交易），所有的錢都會給對方。例如，如果 Bob 公佈 C1b，只要 Alice 在事先定好的區塊數量範圍內觀察 blockchain（在此情況下，1000 區 塊），Alice 將能夠通過公佈 RD1b 得到在這個管道的所有的錢。即使當前平衡的承諾狀態
 （C2A / C2b）為 0.4 BTC 給 Alice 和 0.6 BTC 給 Bob，因為 Bob 違反了合同條款，作為懲罰， 所有的錢給 Alice。在功能上，可撤銷交易作為一個 blockchain 上的證明，證明 Bob 違反渠 道中的條款，並且這是由 blockchain 程式設計判定的。
 
+---
+
 ![](image/figure9.png)
 
+Figure 9: Transactions in green are committed to the blockchain. Bob incorrectly broad- casts C1b (only Bob is able to broadcast C1b/C2b). Because both agreed that the current state is the C2a/C2b Commitment pair, and have attested to each party that old commit- ments are invalidated via Breach Remedy Transactions, Alice is able to broadcast BR1b and take all the money in the channel, provided she does it within 1000 blocks after C1b is broadcast.
+
 圖 9：綠色代表被提交到 blockchain 上的交易。Bob 錯誤得公佈 C1b（只有 Bob 能夠公佈 C1b / C2b）。由於雙方都同意目前的狀態是 C2A / C2b 承諾對，並且已經通過違約補救交易 證明了舊的承諾是無效的，Alice 能夠公佈 BR1b，並得到管道中所有的錢，只要她在 C1b 公佈 1000 區塊以後來執行。
+
+---
 
 但是，如果 Alice 不在 C1b 公佈 1000 區塊以後公佈 BR1b，Bob 也許能偷一些錢，因為他的 撤銷交貨交易（RD1b）在 1000 區塊後有效。當一個不正確的交易承諾被公佈，只有違約補 救交易可公佈 1000 區塊（或其他的雙方同意的確認數量）。經過 1000 次確認，無論是違約 補救措施（BR1b）還是可撤銷的交付交易（RD1b）能夠在任何時間公佈。違約補救交易只 有在這個提前定義的時間段內具有排他性，之後的任何時間在功能上受到限制 - 根據比特 幣 blockchain 共識，爭論的時間已經結束。
 
