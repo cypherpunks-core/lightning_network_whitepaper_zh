@@ -47,10 +47,10 @@ rx@awsomnet.org
     - [8.2 付款金額 | Payment Amount](#82-%E4%BB%98%E6%AC%BE%E9%87%91%E9%A1%8D--payment-amount)
     - [8.3 清除故障和重新路由 | Clearing Failure and Rerouting](#83-%E6%B8%85%E9%99%A4%E6%95%85%E9%9A%9C%E5%92%8C%E9%87%8D%E6%96%B0%E8%B7%AF%E7%94%B1--clearing-failure-and-rerouting)
     - [8.4 付款路由 | Payment Routing](#84-%E4%BB%98%E6%AC%BE%E8%B7%AF%E7%94%B1--payment-routing)
-    - [8.5 費用](#85-%E8%B2%BB%E7%94%A8)
-  - [9 風險](#9-%E9%A2%A8%E9%9A%AA)
-    - [9.1 不當 Timelocks](#91-%E4%B8%8D%E7%95%B6-timelocks)
-    - [9.2 被迫滿期的垃圾郵件](#92-%E8%A2%AB%E8%BF%AB%E6%BB%BF%E6%9C%9F%E7%9A%84%E5%9E%83%E5%9C%BE%E9%83%B5%E4%BB%B6)
+    - [8.5 費用 | Fees](#85-%E8%B2%BB%E7%94%A8--fees)
+  - [9 風險 | Risks](#9-%E9%A2%A8%E9%9A%AA--risks)
+    - [9.1 不當 Timelocks | Improper Timelocks](#91-%E4%B8%8D%E7%95%B6-timelocks--improper-timelocks)
+    - [9.2 被迫滿期的垃圾郵件 | Forced Expiration Spam](#92-%E8%A2%AB%E8%BF%AB%E6%BB%BF%E6%9C%9F%E7%9A%84%E5%9E%83%E5%9C%BE%E9%83%B5%E4%BB%B6--forced-expiration-spam)
     - [9.3 通過分裂盜竊資金](#93-%E9%80%9A%E9%81%8E%E5%88%86%E8%A3%82%E7%9B%9C%E7%AB%8A%E8%B3%87%E9%87%91)
     - [9.4 資料丟失](#94-%E8%B3%87%E6%96%99%E4%B8%9F%E5%A4%B1)
     - [9.5 忘記及時公佈交易](#95-%E5%BF%98%E8%A8%98%E5%8F%8A%E6%99%82%E5%85%AC%E4%BD%88%E4%BA%A4%E6%98%93)
@@ -1333,30 +1333,67 @@ Node discovery can occur along the edges by pre-selecting and offering partial r
 
 ---
 
-### 8.5 費用
+### 8.5 費用 | Fees
 
-的最大週期內消費管道的資金的時間價值，而對於不通信的交易對手風險。 費用的對手風險只在與一方的直接管道對手交易時存在。如果兩次跳躍以外的一個節點決定 斷開聯繫並且將其交易公佈在 blockchain 上，一方的直接對手不應公佈在 blockchain 上，而 是繼續通過更替更新成為一個新的承諾交易。遞減 Timelocks 進入 HTLC 部分，來獲取有關 交易對手風險的更多資訊。
+Lightning Network fees, which differ from blockchain fees, are paid directly between participants within the channel. The fees pay for the time-value of money for consuming the channel for a determined maximum period of time, and for counterparty risk of   non-communication.
+
+閃電網路費用，與blockchain 費用不同，是在管道內的參與者之間直接支付。 用於支付確定的最大週期內消費管道的資金的時間價值，而對於不通信的交易對手風險。 
+
+---
+
+Counterparty risk for fees only exist with one’s direct channel counter- party. If a node two hops away decides to disconnect and their transaction gets broadcast on the blockchain, one’s direct counterparties should not broadcast on the blockchain, but continue to update via novation with a new Commitment Transaction. See the Decrementing Timelocks entry in the HTLC section for more information about counterparty risk.
+
+費用的對手風險只在與一方的直接管道對手交易時存在。如果兩次跳躍以外的一個節點決定 斷開聯繫並且將其交易公佈在 blockchain 上，一方的直接對手不應公佈在 blockchain 上，而 是繼續通過更替更新成為一個新的承諾交易。遞減 Timelocks 進入 HTLC 部分，來獲取有關 交易對手風險的更多資訊。
+
+---
+
+The time-value of fees pays for consuming time (e.g. 3 days) and is conceptually equivalent to a gold lease rate without custodial risk; it is the time-value for using up the access to money for a very short duration. Since certain paths may become very  profitable  in  one  direction,  it  is possible for fees to be negative to encourage the channel to be available for those profitable  paths.
 
 用於支付消費時間的費用的時間價值（如 3 天），在概念上等同於沒有保管風險的黃金租賃 率;它是在一個非常短的時間內訪問資金的時間價值。因為某些路徑在一個方向上可能變得 非常有利可圖，費用有可能變成負數，以鼓勵管道可用於那些有利可圖的路徑。
 
+---
 
-## 9 風險
+## 9 風險 | Risks
+
+The primary risks relate to timelock expiration. Additionally, for core nodes and possibly some merchants to be able to route funds, the keys must be held online for lower latency. However, end-users and nodes are able to keep their private keys firewalled off in cold  storage.
 
 主要風險涉及到 timelock 到期。此外，對於核心節點和一些能夠路由資金的可能的商家，為 達到較低的延遲，鑰匙必須保持線上。然而，最終用戶和節點都能夠在防火牆外持有自己的   私密金鑰。
 
-### 9.1 不當 Timelocks
+---
+
+### 9.1 不當 Timelocks | Improper Timelocks
+
+Participants must choose timelocks with sufficient amounts of time. If insuf- ficient time is given, it is possible that timelocked transactions believed to be invalid will become valid, enabling coin theft by the counterparty. There is a trade-off between longer timelocks and the time-value of money. When writing wallet and Lightning Network application software,  it is   necessary to ensure that sufficient time is given and users are able to have their trans- actions enter into the blockchain when interacting with non-cooperative or malicious  channel counterparties.
 
 參賽者必須選擇時間充足的 timelocks。如果不給于充分的時間，被認為是無效 timelocked 交易有可能將成為有效的，可能導致對方盜竊資金。較長的 timelocks 和資金的時間價值之 間存在著權衡。當編寫錢包和閃電網路應用軟體時，確保提供其足夠的時間是必要的，並保 證用戶在與不合作或惡意的管道對手進行交易時能夠在 blockchain 上公佈其交易。
 
-### 9.2 被迫滿期的垃圾郵件
+---
+
+### 9.2 被迫滿期的垃圾郵件 | Forced Expiration Spam
+
+Forced expiration of many transactions may be the greatest systemic risk when using the Lightning Network. If a malicious participant creates many channels and forces them all to expire at once, these may overwhelm block data capacity, forcing expiration and broadcast to the blockchain. The re- sult would be mass spam on the bitcoin network. The spam may delay transactions to the point where other locktimed transactions become valid.
 
 許多交易被迫滿期是使用閃電網路時最大的系統性風險。如果一個惡意的參與者創造了許多 管道，迫使他們全都一次性失效，這可能會超過塊資料容量，迫使其過期並公佈在 blockchain 上。其結果將是比特幣網路上充滿海量垃圾郵件。垃圾郵件可能會在某種程度上延遲交易， 到達其他 locktimed 交易生效的地步。
 
+---
+
+This may be mitigated by permitting one transaction replacement on all pending transactions. Anti-spam can be used by permitting only one transaction replacement of a higher sequence number by the inverse of an even or odd number. For example, if an odd sequence number was broad- cast, permit a replacement to a higher even number only once. Transactions would use the sequence number in an orderly way to replace other trans- actions. This mitigates the risk assuming honest miners. This attack is extremely high risk, as incorrect broadcast of Commitment Transactions entail a full penalty of all funds in the channel.
+
 這可以通過允許一個交易更換所有未決的交易得到緩解。只允許一個交易更換使用偶數或奇 數的倒數的更高順序號才可以使用反垃圾郵件。例如，如果奇數序號被公佈，只允許更換 一次到更高的偶數。交易將使用有序的序號，以取代其他交易。這減輕了誠實的礦工承擔 的風險。這種攻擊是非常高的風險，因為對承諾交易的不正確公佈會帶來的管道內所有基金 全部損失。
+
+---
+
+Additionally, one may attempt to steal HTLC transactions by forcing a timeout transaction to go through when it should not. This can be easily mitigated by having each transfer inside the channel be lower than the total transaction fees used. Since transactions are extremely cheap and do not hit the blockchain with cooperative channel counterparties, large transfers of value can be split into many small transfers. This attempt can only work if the blocks are completely full for a long time. While it is possible to mitigate it using a longer HTLC timeout duration, variable block sizes may become common, which may need mitigations.
 
 此外，人們可能通過強制暫停不應停止的交易試圖竊取 HTLC 交易。如果管道內每一筆交 易比所使用的總交易費用低，則可以減輕這種風險。由於交易是非常便宜的，並且如果與合 作管道對手交易則不會公佈在 blockchain 上，價值大的傳輸可以分成許多小的傳輸，這只能 在區塊很長一段時間內完全充滿才可以實現。雖然可以使用一個較長的 HTLC Timeout 持續 時間來減輕它，可變區塊大小可能變得普遍，這可能需要緩解。
  
+---
+
+If this type of transaction becomes the dominant form of transactions which are included on the blockchain, it may become necessary to increase the block size  and  run  a  variable  blocksize  structure  and  timestop flags as described in the section below. This can create sufficient penalties and disincentives to be highly unprofitable and unsuccessful for attackers, as attackers lose all their funds from broadcasting the wrong transaction, to the point where it will never   occur.
+
 一個可變大小的區塊結構和如下面的部分中描述的 timestop 標誌。這可能會造成足夠多的 處罰，並不激勵高度不獲利和不成功的攻擊，因為攻擊者失去了他們所有的資金，由於公佈 了錯誤的交易，以致再也不會發生的地步。
+
+---
 
 ### 9.3 通過分裂盜竊資金
 
