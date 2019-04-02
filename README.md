@@ -796,8 +796,7 @@ The purpose of  closing  out  cooperatively  is  to  reduce  the number of trans
 
 Channels may remain in perpetuity until they decide to cooperatively close out the transaction, or when one party does not cooperate with another and the channel gets closed out and enforced on the    blockchain.
 
-管道可永久存在，直到他們決定合作關閉交易，或當一方不與另一方相互合作，在 blockchain
-上執行關閉管道。
+管道可永久存在，直到他們決定合作關閉交易，或當一方不與另一方相互合作，在 blockchain 上執行關閉管道。
 
 ---
 
