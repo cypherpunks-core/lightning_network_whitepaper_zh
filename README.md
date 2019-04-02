@@ -51,9 +51,9 @@ rx@awsomnet.org
   - [9 風險 | Risks](#9-%E9%A2%A8%E9%9A%AA--risks)
     - [9.1 不當 Timelocks | Improper Timelocks](#91-%E4%B8%8D%E7%95%B6-timelocks--improper-timelocks)
     - [9.2 被迫滿期的垃圾郵件 | Forced Expiration Spam](#92-%E8%A2%AB%E8%BF%AB%E6%BB%BF%E6%9C%9F%E7%9A%84%E5%9E%83%E5%9C%BE%E9%83%B5%E4%BB%B6--forced-expiration-spam)
-    - [9.3 通過分裂盜竊資金](#93-%E9%80%9A%E9%81%8E%E5%88%86%E8%A3%82%E7%9B%9C%E7%AB%8A%E8%B3%87%E9%87%91)
-    - [9.4 資料丟失](#94-%E8%B3%87%E6%96%99%E4%B8%9F%E5%A4%B1)
-    - [9.5 忘記及時公佈交易](#95-%E5%BF%98%E8%A8%98%E5%8F%8A%E6%99%82%E5%85%AC%E4%BD%88%E4%BA%A4%E6%98%93)
+    - [9.3 通過分裂盜竊資金 | Coin Theft via Cracking](#93-%E9%80%9A%E9%81%8E%E5%88%86%E8%A3%82%E7%9B%9C%E7%AB%8A%E8%B3%87%E9%87%91--coin-theft-via-cracking)
+    - [9.4 資料丟失 | Data Loss](#94-%E8%B3%87%E6%96%99%E4%B8%9F%E5%A4%B1--data-loss)
+    - [9.5 忘記及時公佈交易 | Forgetting to Broadcast the Transaction in Time](#95-%E5%BF%98%E8%A8%98%E5%8F%8A%E6%99%82%E5%85%AC%E4%BD%88%E4%BA%A4%E6%98%93--forgetting-to-broadcast-the-transaction-in-time)
     - [9.6 無法做出必要的 Soft-Forks](#96-%E7%84%A1%E6%B3%95%E5%81%9A%E5%87%BA%E5%BF%85%E8%A6%81%E7%9A%84-soft-forks)
     - [9.7 勾結礦工攻擊](#97-%E5%8B%BE%E7%B5%90%E7%A4%A6%E5%B7%A5%E6%94%BB%E6%93%8A)
   - [10 區塊大小增加與共識](#10-%E5%8D%80%E5%A1%8A%E5%A4%A7%E5%B0%8F%E5%A2%9E%E5%8A%A0%E8%88%87%E5%85%B1%E8%AD%98)
@@ -1395,20 +1395,35 @@ If this type of transaction becomes the dominant form of transactions which are 
 
 ---
 
-### 9.3 通過分裂盜竊資金
+### 9.3 通過分裂盜竊資金 | Coin Theft via Cracking
+
+As parties must be online and using private keys to sign, there is a possibility that, if the computer where the private keys are stored is compromised, coins will be stolen by the attacker. While there may  be methods to  mitigate the threat for the sender and the receiver, the intermediary nodes must be online and will likely be processing the transaction automatically. For this reason, the intermediary nodes will be at risk and should not be holding a substantial amount of money in this “hot wallet.” Intermediary nodes which have better security will likely be able to out-compete others in the long run and be able to conduct greater transaction volume due to lower fees. Historically, one of the largest component of fees and interest in the financial system are from various forms of counterparty risk – in Bitcoin it is possible that the largest component in fees will be derived from security risk premiums.
 
 各方必須線上，並使用私密金鑰簽署，還有可能，如果其中存儲私密金鑰的電腦被破壞，資金將被 攻擊者竊取。雖然可能有方法來減輕對發送者和接收者的威脅，中間節點必須線上，並可能 會自動處理交易。出於這個原因，中間節點將處於危險之中，不應該在“熱錢包”中持有如 此大量金錢。從長遠來看，具有更好的安全性的中間節點將可能超過其他的節點，並且由於 較低的費用，將可能處理更大量的交易。從歷史上看，費用的最大的組成部分和金融體系的 利息來自於各種形式的交易對手風險  -  在比特幣中費用的最大組成部分很可能從安全風險 溢價得到。
 
+---
+
+A Funding Transaction may have multiple outputs with multiple Com- mitment Transactions, with the Funding Transaction key and some Commit- ment Transactions keys stored offline. It is possible to create an equivalent of a “Checking Account” and “Savings Account” by moving funds between outputs from a Funding Transaction, with the “Savings Account” stored offline and requiring additional signatures from security services.
+
 資金交易可能有多路輸出與多個承諾交易，線下儲存著資金交易金鑰和承諾交易金鑰。通過 從資金交易中移動輸出之間的資金來創造 “檢查帳戶”和“儲蓄帳戶”的等價物是可能的， 線下存儲“儲蓄帳戶”，並要求安全服務的其他特徵。
 
-### 9.4 資料丟失
+---
+
+### 9.4 資料丟失 | Data Loss
+
+When one party loses data, it is possible for the counterparty to steal funds. This can be mitigated by having a third party data storage service where encrypted data gets sent to this third party service which the party cannot decrypt. Additionally, one should choose channel counterparties who are responsible and willing to provide the current state, with some periodic tests of honesty.
 
 當一方資料丟失，對方可能竊取資金。這可以通過一個協力廠商資料存儲服務得到緩解，其中 的加密資料被發送到一方不能解密的協力廠商服務。此外，人們應該選擇負責的，並願意提供 當前狀態的管道對手，定期測試其誠實度。
 
-### 9.5 忘記及時公佈交易
+---
+
+### 9.5 忘記及時公佈交易 | Forgetting to Broadcast the Transaction in Time
+
+If one does not broadcast a transaction at the correct time, the counterparty may steal funds. This can be mitigated by having a designated third party to send funds. An output fee can be added to create an incentive for this third party to watch the network. Further, this can also be mitigated by implementing  OP  CHECKSEQUENCEVERIFY.
 
 如果一方沒有在正確的時間公佈交易，交易對手可能會盜取資金。這可以通過由指定的第三 方發送資金來緩解。可以增加輸出費來創造一個激勵協力廠商監控網路。此外，這也可以通過      實施 OP CHECKSEQUENCEVERIFY 減輕。
 
+---
 
 ### 9.6 無法做出必要的 Soft-Forks
 
