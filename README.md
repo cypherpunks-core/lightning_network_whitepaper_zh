@@ -33,7 +33,7 @@ rx@awsomnet.org
     - [3.4 協同關閉管道](#34-%E5%8D%94%E5%90%8C%E9%97%9C%E9%96%89%E7%AE%A1%E9%81%93)
     - [3.5 雙向管道的啟示與總結 | Bidirectional Channel Implications and Summary](#35-%E9%9B%99%E5%90%91%E7%AE%A1%E9%81%93%E7%9A%84%E5%95%9F%E7%A4%BA%E8%88%87%E7%B8%BD%E7%B5%90--bidirectional-channel-implications-and-summary)
   - [4 散列 Timelock 合同（HTLC）| Hashed Timelock Contract (HTLC)](#4-%E6%95%A3%E5%88%97-timelock-%E5%90%88%E5%90%8Chtlc-hashed-timelock-contract-htlc)
-    - [4.1 不可撤銷的 HTLC 建設](#41-%E4%B8%8D%E5%8F%AF%E6%92%A4%E9%8A%B7%E7%9A%84-htlc-%E5%BB%BA%E8%A8%AD)
+    - [4.1 不可撤銷的 HTLC 建設 | Non-revocable HTLC Construction](#41-%E4%B8%8D%E5%8F%AF%E6%92%A4%E9%8A%B7%E7%9A%84-htlc-%E5%BB%BA%E8%A8%AD--non-revocable-htlc-construction)
     - [4.2	Off-chain 可撤銷 HTLC](#42-off-chain-%E5%8F%AF%E6%92%A4%E9%8A%B7-htlc)
       - [4.2.1 當寄件者播的承諾交易 HTLC](#421-%E7%95%B6%E5%AF%84%E4%BB%B6%E8%80%85%E6%92%AD%E7%9A%84%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93-htlc)
       - [4.2.2 接收者公佈承諾交易時的 HTLC](#422-%E6%8E%A5%E6%94%B6%E8%80%85%E5%85%AC%E4%BD%88%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%99%82%E7%9A%84-htlc)
@@ -855,31 +855,78 @@ Timelock 合同的以下條款：
 
 ---
 
+For clarity of examples, we use days for HTLCs and block height for RSMCs.  In reality, the HTLC should also be defined as a block height   (e.g. 3 days is equivalent to 432  blocks).
+
 為了闡明例子，我們在 HTLCs 中使用天數，在 RSMC 使用區塊高度。在現實中，HTLC 也 應該被定義為一個區塊高度（例如 3 天相當於 432 區塊）。
+
+---
+
+In effect, one desires to construct a payment which is contingent upon knowledge of R by the recipient within a certain timeframe. After this timeframe, the funds are refunded back to the sender. Similar to RSMCs, these contract terms are programatically enforced on the Bitoin blockchain and do not require trust in the counterparty to adhere to the contract terms, as all violations are penalized via unilaterally enforced fidelity bonds, which are constructed using penalty transactions spending from commitment states. If Bob knows R within three days, then he can redeem the funds by broadcasting a transaction; Alice is unable to withhold the funds in any way, because the script returns as valid when the transaction is spent on the Bitcoin blockchain.
 
 事實上，人們希望建立一個支付，這個支付取決於收件人在一定的時間內對 R 的資訊。在此期限後，該基金退還給寄件者。
 類似于 RSMC，這些合同條款是在比特幣 blockchain 上強制性程式設計的，不需要對方服從合 同條款的信任，因為所有的違反條款的行為都通過單方面強制網路保真債券基金受到懲罰， 承諾交易投入費用設置處罰。如果 Bob 在三天內知道 R，那麼他就可以公佈交易以贖回基 金;Alice 是無法以任何方式截留資金的，因為當比特幣 blockchain 上發生了交易，腳本有效 地返回。
 
-一個 HTLC 是一個具有獨特的輸出腳本承諾交易的額外的輸出：
+---
+
+An HTLC is an additional output in a Commitment Transaction with a unique output script:
+```
 OP IF
-OP HASH160 <Hash160（R）> OP EQUALVERIFY 2 <Alice2> <Bob2> OP CHECKMULTISIG
+  OP HASH160 <Hash160 (R)> OP EQUALVERIFY
+  2 <Alice 2 > <Bob2> OP CHECKMULTISIG
+
 OP ELSE
-2 < Alice 1> <Bob1> OP CHECKMULTISIG OP ENDIF
-從概念上講，這個腳本從單一的 HTLC 輸出花費有兩種可能的路徑。在第一個路徑（定義
-為 OP IF）將資金發送給 Bob，如果 Bob 可以產生 R.。第二條路徑是被贖回，使用 3 天
+  2 <Alice 1 > <Bob1> OP CHECKMULTISIG
+ 
+OP ENDIF
+```
+一個 HTLC 是一個具有獨特的輸出腳本承諾交易的額外的輸出： 
+```
+OP IF
+  OP HASH160 <Hash160 (R)> OP EQUALVERIFY
+  2 <Alice 2 > <Bob2> OP CHECKMULTISIG
+
+OP ELSE
+  2 <Alice 1 > <Bob1> OP CHECKMULTISIG
+ 
+OP ENDIF
+```
+
+---
+
+Conceptually, this script has two possible paths spending from a single HTLC output. The first path (defined in the OP IF) sends funds to Bob if Bob can produce R. The second path is redeemed using a 3-day timelocked refund to Alice. The 3-day timelock is enforced using nLockTime from the spending  transaction.
+
+從概念上講，這個腳本從單一的 HTLC 輸出花費有兩種可能的路徑。在第一個路徑（定義為 OP IF）將資金發送給 Bob，如果 Bob 可以產生 R.。第二條路徑是被贖回，使用 3 天
 timelocked 退款給 Alice。為期 3 天的 timelock 使用來自於消費交易的 nLockTime 執行。
 
-### 4.1 不可撤銷的 HTLC 建設
+---
+
+### 4.1 不可撤銷的 HTLC 建設 | Non-revocable HTLC Construction
 
 ![](image/figure11.png)
 
+Figure 11: This is a non-functional naive implementation of an HTLC. Only the HTLC path from the Commitment Transaction is displayed. Note that there are two possible spends from an HTLC output. If Bob can produce the preimage R within 3 days and he can redeem path 1. After three days, Alice is able to broadcast path 2. When 3 days have elapsed either is valid. This model, however, doesn’t work with multiple Commitment Transactions.
+
 圖 11：這是一個 HTLC 的非功能性前期執行。只有來自於承諾交易的 HTLC 路徑可以被顯 示。注意有兩種可能的來自於 HTLC 輸出花費。如果 Bob 能在 3 天之內生產原像 R，他可 以贖回路徑 1.三天后，Alice 能夠公佈路徑 2。當 3 天已過或者是有效的。然而，該模型中， 這並不與多個承諾交易工作。
+
+---
+
+If R is produced within 3 days, then Bob can redeem the funds by broadcast- ing the “Delivery” transaction. A requirement for the “Delivery” transaction to be valid requires R to be included with the transaction. If R is not in- cluded, then the “Delivery” transaction is invalid. However, if 3 days have elapsed, the funds can be sent back to Alice by broadcasting transaction “Timeout”. When 3 days have elapsed and R has been disclosed, either transaction may be valid.
 
 如果 R 是在 3 天之內產生的，那麼 Bob 可以通過公佈“交付”交易贖回基金。  “交付”交 易有效的一個要求是 R 被包含在交易內。若 R 不被包括，則“交付”交易無效。但是，如 果 3 天內已過，資金可以通過公佈交易“Timeout”發回給 Alice。3 天后，R 已經被公開， 任何交易可能是有效的。
 
+---
+
+It is within both parties individual responsibility to ensure that they can get their transaction into the blockchain in order to ensure the balances are correct. For Bob, in order to receive the funds, he must either broadcast the “Delivery” transaction on the Bitcoin blockchain,  or  otherwise settle with Alice (while cancelling the HTLC). For Alice, she must broadcast the “Timeout” 3 days from now to receive the refund, or cancel the HTLC entirely with Bob.
+
 這是雙方個人範圍內的責任，以確保他們的交易進入 blockchain，以保證平衡是正確的。對 於 Bob，為了獲得資金，他必須要麼公佈比特幣 blockchain 的“交付”交易，或與 Alice 結 算（同時取消 HTLC）。對於 Alice，她必須從即日起 3 天內公佈的“Timeout”交易，以收 到退款，或與 Bob 完全取消 HTLC。
 
+---
+
+Yet this kind of simplistic construction has similar problems as an incorrect bidirectional payment channel construction. When an old Com- mitment Transaction gets broadcast, either party may attempt to steal funds as both paths may be valid after the fact. For example, if R gets disclosed 1 year later, and an incorrect Commitment Transaction gets broadcast, both paths are valid and are redeemable by either party; the contract is not yet enforcible on the blockchain. Closing out the HTLC is absolutely necessary, because in order for Alice to get her refund, she must terminate the contract and receive her refund. Otherwise, when Bob discovers R after 3 days have elapsed, he may be able to steal the funds which should be going to Alice. With uncooperative counterparties it’s not possible to terminate an HTLC without broadcasting it to the bitcoin blockchain as the uncooperative party is unwilling to create a new Commitment Transaction.
+
 然而，這種簡單的建設也有類似於不正確的雙向支付管道建設的問題。當舊的承諾交易被公 布，任何一方都可以試圖竊取資金，因為在此事後，兩個路徑可能是有效的。例如，若 R 被公開 1 年以後，並且不正確的承諾交易被公佈，兩個路徑都有效並且可由任何一方贖回; 合同還沒有在 blockchain 上被執行。關閉 HTLC 是絕對必要的，因為 Alice 為了得到退款， 她必須終止合同，並接受她的退款。否則，當 Bob3 天后發現 R，他可能能夠竊取應給 Alice 的資金。對於不合作的對手，不可能在沒有把它公佈在 blockchain 時終止 HTLC，因為不合 作的一方不願建立新的承諾交易。
+
+---
 
 ### 4.2	Off-chain 可撤銷 HTLC
 
