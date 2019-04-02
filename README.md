@@ -39,7 +39,7 @@ rx@awsomnet.org
       - [4.2.2 接收者公佈承諾交易時的 HTLC | HTLC when the Receiver Broadcasts the Commitment Transaction](#422-%E6%8E%A5%E6%94%B6%E8%80%85%E5%85%AC%E4%BD%88%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%99%82%E7%9A%84-htlc--htlc-when-the-receiver-broadcasts-the-commitment-transaction)
     - [4.3	HTLC Off-chain 終止 | 4.3	HTLC Off-chain Termination](#43-htlc-off-chain-%E7%B5%82%E6%AD%A2--43-htlc-off-chain-termination)
     - [4.4 HTLC 形成和封閉令 | HTLC Formation and Closing Order](#44-htlc-%E5%BD%A2%E6%88%90%E5%92%8C%E5%B0%81%E9%96%89%E4%BB%A4--htlc-formation-and-closing-order)
-  - [5 金鑰存儲 | Key Storage](#5-%E9%87%91%E9%91%B0%E5%AD%98%E5%84%B2--key-storage)
+  - [5 金鑰儲存 | Key Storage](#5-%E9%87%91%E9%91%B0%E5%84%B2%E5%AD%98--key-storage)
   - [6 雙向通道的 Blockchain 交易費 | Blockchain Transaction Fees for Bidirectional Channels](#6-%E9%9B%99%E5%90%91%E9%80%9A%E9%81%93%E7%9A%84-blockchain-%E4%BA%A4%E6%98%93%E8%B2%BB--blockchain-transaction-fees-for-bidirectional-channels)
   - [7 薪酬合約 | Pay to Contract](#7-%E8%96%AA%E9%85%AC%E5%90%88%E7%B4%84--pay-to-contract)
   - [8 比特幣閃電網路 | The Bitcoin Lightning Network](#8-%E6%AF%94%E7%89%B9%E5%B9%A3%E9%96%83%E9%9B%BB%E7%B6%B2%E8%B7%AF--the-bitcoin-lightning-network)
@@ -88,7 +88,7 @@ The payment network Visa achieved 47,000 peak transactions per sec- ond (tps) on
 
 Clearly, achieving Visa-like capacity on the Bitcoin network isn’t fea- sible today. No home computer in the world can operate with that kind of bandwidth and storage. If Bitcoin is to replace all electronic payments in the future, and not just Visa, it would result in outright collapse of the Bit- coin network, or at best, extreme centralization of Bitcoin nodes and miners to the only ones who could afford it. This centralization would then defeat aspects of network decentralization that make Bitcoin secure, as the abil- ity for entities to validate the chain is what allows Bitcoin to ensure ledger accuracy and security.
 
-顯然，如今在比特幣網路上獲得 Visa 般的能力是不可行的。在世界上沒有家用電腦可以有那樣的頻寬和存儲。如果比特幣在未來替換所有的電子支付，而不僅僅是 Visa，這將導致比特幣網路的徹底崩潰，或者在最好的情況下，只有可以支付得起的比特幣節點和礦工可以使用。這種集中化會再次打敗網路分散化，使比特幣安全成為具有確保總帳的準確性和安全性 的能力的實體。
+顯然，如今在比特幣網路上獲得 Visa 般的能力是不可行的。在世界上沒有家用電腦可以有那樣的頻寬和儲存。如果比特幣在未來替換所有的電子支付，而不僅僅是 Visa，這將導致比特幣網路的徹底崩潰，或者在最好的情況下，只有可以支付得起的比特幣節點和礦工可以使用。這種集中化會再次打敗網路分散化，使比特幣安全成為具有確保總帳的準確性和安全性 的能力的實體。
 
 ---
 
@@ -529,7 +529,7 @@ A miner can elect to define the block as a congested block or not. The default c
 For example, if a parent transaction output is spent by a child with a nSequence value of 10, one must wait 10 confirmations before the transaction becomes valid. However, if the timestop flag has been set, the counting of confirmations stops, even with new blocks. If 6 confirmations have elapsed (4 more are necessary for the transaction to be valid), and the timestop block has been set on the 7th block, that block does not count towards the nSequence requirement of 10 confirmations; the child is still at 6 blocks for the relative confirmation value.
 Functionally, this  will  be stored  as some kind of auxiliary timestop block height which is used only for tracking the timestop value. When the timestop bit is set, all transactions using an nSe- quence value will stop counting until the timestop bit has been unset. This gives sufficient time and block-space for transactions at the current auxil- iary timestop block height to enter into the blockchain, which can prevent systemic attackers from successfully attacking the   system.
 
-例如，如果一個父交易輸出由一個 nSequence 值為 10 的子交易花費，在交易生效之前我們必須等待 10 次確認。然而，如果 timestop 已經確定，即使採用新的區塊，計算的確認也應 當停止。如果 6 次確認已經完成（再需要 4 次確認交易才是有效的），並且 timestop 區塊已設置的第七區塊上，該塊不要求 10 次 nSequence 的確認，孩子目前仍處於第 6 區塊相對確認值。在功能上，這將被存儲為某種輔助 timestop 區塊高度，僅用於跟蹤 timestop 值。當 timestop 位數已經設置，使用 nSequence 值的所有交易將停止計數，直到 timestop 位數恢復未設置狀態。這給當前輔助 timestop 區塊高度中的交易提供了充分的時間和區塊空間來進入 blockchain，它可以防止系統攻擊者成功地攻擊系統。
+例如，如果一個父交易輸出由一個 nSequence 值為 10 的子交易花費，在交易生效之前我們必須等待 10 次確認。然而，如果 timestop 已經確定，即使採用新的區塊，計算的確認也應 當停止。如果 6 次確認已經完成（再需要 4 次確認交易才是有效的），並且 timestop 區塊已設置的第七區塊上，該塊不要求 10 次 nSequence 的確認，孩子目前仍處於第 6 區塊相對確認值。在功能上，這將被儲存為某種輔助 timestop 區塊高度，僅用於跟蹤 timestop 值。當 timestop 位數已經設置，使用 nSequence 值的所有交易將停止計數，直到 timestop 位數恢復未設置狀態。這給當前輔助 timestop 區塊高度中的交易提供了充分的時間和區塊空間來進入 blockchain，它可以防止系統攻擊者成功地攻擊系統。
 
 ---
 
@@ -751,7 +751,7 @@ At this point, the prior Commitment Transaction as well as the new Commitment Tr
 
 However, instead of disclosing the BR1a/BR1b signatures, it’s also possible to just disclose the private keys to the counterparty.  This is more effective as described later in the key storage section. One can disclose the private keys used in one’s own Commitment Transaction. For example, if Bob wishes to invalidate C1b, he sends his private keys used in C1b to Alice (he does NOT disclose his keys used in C1a, as that would permit coin theft). Similarly, Alice discloses all her private key outputs in C1a to Bob to invalidate C1a.
 
-然而，不公開 BR1a / BR1b 簽名，也可能只是透露私密金鑰給對手。在後面介紹的金鑰存儲部分會說明這樣是更有效率的。一方可以公開在自己的承諾交易中使用的私有金鑰。例如，如果 Bob 希望使 C1b 無效，他將他用於 C1b 的私密金鑰發送給 Alice（他沒有透露他在 C1a 使用的密鑰，因為這將引起硬幣盜竊）。同樣，Alice 向 Bob 公開了她在 C1a 所有的私有金鑰來使 C1a 無效。
+然而，不公開 BR1a / BR1b 簽名，也可能只是透露私密金鑰給對手。在後面介紹的金鑰儲存部分會說明這樣是更有效率的。一方可以公開在自己的承諾交易中使用的私有金鑰。例如，如果 Bob 希望使 C1b 無效，他將他用於 C1b 的私密金鑰發送給 Alice（他沒有透露他在 C1a 使用的密鑰，因為這將引起硬幣盜竊）。同樣，Alice 向 Bob 公開了她在 C1a 所有的私有金鑰來使 C1a 無效。
 
 ---
 
@@ -1140,11 +1140,11 @@ The amount of time flexibility with these offers to novate are depen- dent upon 
 
 ---
 
-## 5 金鑰存儲 | Key Storage
+## 5 金鑰儲存 | Key Storage
 
 Keys are generated using BIP 0032 Hierarchical Deterministic Wallets[17]. Keys are pre-generated by both  parties.  Keys  are  generated  in  a merkle tree and are very deep within the tree. For instance, Alice pre-generates one million keys, each key being a child of the previous key. Alice allocates which keys to use according to some deterministic manner. For example, she starts with the child deepest in the tree to generate many sub-keys for day 1. This key is used as a master key for all keys generated on day 1. She gives Bob the address she wishes to use for the next transaction, and discloses the private key to Bob when it becomes invalidated. When Alice discloses to Bob all private keys derived from the day 1 master key and does not wish to continue using that master key, she can disclose the day 1 master key to Bob. At this point, Bob does not need to store all the keys derived from the day 1 master key. Bob does the same for Alice and gives her his day 1 key.
 
-使用 BIP 0032 分層確定性錢包[17]生成金鑰。金鑰是通過雙方預先生成的。在 MERKLE 樹生成金鑰，並且非常深的隱藏在樹內。例如，Alice 預生成百萬個金鑰，每個金鑰是前一個金鑰的子金鑰。Alice 根據一些確定的方式分配使用哪個金鑰。例如，她第 1 天開始用樹最底層的子金鑰來生成更多的金鑰。這一金鑰是在第一天生成的所有金鑰的主金鑰。她給 Bob 她希望使用的下一個交易位址，並在私密金鑰變為無效時公開給 Bob。當 Alice 向 Bob 公開了由主金鑰派生的所有私密金鑰，並且不希望繼續使用該主金鑰時，她可以把每天的主金鑰透露給 Bob。在這一點上，Bob 不需要存儲所有由主金鑰產生的金鑰。Bob 做同樣的事，給 Alice 他第一天的主金鑰。
+使用 BIP 0032 分層確定性錢包[17]生成金鑰。金鑰是通過雙方預先生成的。在 MERKLE 樹生成金鑰，並且非常深的隱藏在樹內。例如，Alice 預生成百萬個金鑰，每個金鑰是前一個金鑰的子金鑰。Alice 根據一些確定的方式分配使用哪個金鑰。例如，她第 1 天開始用樹最底層的子金鑰來生成更多的金鑰。這一金鑰是在第一天生成的所有金鑰的主金鑰。她給 Bob 她希望使用的下一個交易位址，並在私密金鑰變為無效時公開給 Bob。當 Alice 向 Bob 公開了由主金鑰派生的所有私密金鑰，並且不希望繼續使用該主金鑰時，她可以把每天的主金鑰透露給 Bob。在這一點上，Bob 不需要儲存所有由主金鑰產生的金鑰。Bob 做同樣的事，給 Alice 他第一天的主金鑰。
 
 ---
 
@@ -1162,7 +1162,7 @@ If a counterparty broadcasts the wrong Commitment Transaction, which private key
 
 This enables participants in a channel to have prior output states (transactions) invalidated by both parties without using much data at all. By disclosing private keys pre-arranged in a merkle-tree, it is possible to invalidate millions of old transactions with only a few kilobytes of data per channel. Core channels in the Lightning Network can conduct billions of transactions without a need for significant storage costs.
 
-這使得通道參與雙方能夠使之前的輸出狀態（交易）失效，並且不使用大量的資料。通過公開一個 MERKLE 樹中預先安排的私密金鑰，僅僅使用每個通道中幾個千位元組的資料來使百萬舊記錄無效是可能的。閃電網路的核心通道可以進行數十億美元的交易，而不需要大量的存儲成本。
+這使得通道參與雙方能夠使之前的輸出狀態（交易）失效，並且不使用大量的資料。通過公開一個 MERKLE 樹中預先安排的私密金鑰，僅僅使用每個通道中幾個千位元組的資料來使百萬舊記錄無效是可能的。閃電網路的核心通道可以進行數十億美元的交易，而不需要大量的儲存成本。
 
 ---
 
@@ -1401,13 +1401,13 @@ If this type of transaction becomes the dominant form of transactions which are 
 
 As parties must be online and using private keys to sign, there is a possibility that, if the computer where the private keys are stored is compromised, coins will be stolen by the attacker. While there may  be methods to  mitigate the threat for the sender and the receiver, the intermediary nodes must be online and will likely be processing the transaction automatically. For this reason, the intermediary nodes will be at risk and should not be holding a substantial amount of money in this “hot wallet.” Intermediary nodes which have better security will likely be able to out-compete others in the long run and be able to conduct greater transaction volume due to lower fees. Historically, one of the largest component of fees and interest in the financial system are from various forms of counterparty risk – in Bitcoin it is possible that the largest component in fees will be derived from security risk premiums.
 
-各方必須線上，並使用私密金鑰簽署，還有可能，如果其中存儲私密金鑰的電腦被破壞，資金將被攻擊者竊取。雖然可能有方法來減輕對發送者和接收者的威脅，中間節點必須線上，並可能會自動處理交易。出於這個原因，中間節點將處於危險之中，不應該在“熱錢包”中持有如此大量金錢。從長遠來看，具有更好的安全性的中間節點將可能超過其他的節點，並且由於較低的手續費，將可能處理更大量的交易。從歷史上看，手續費的最大的組成部分和金融體系的利息來自於各種形式的交易對手風險-在比特幣中手續費的最大組成部分很可能從安全風險溢價得到。
+各方必須線上，並使用私密金鑰簽署，還有可能，如果其中儲存私密金鑰的電腦被破壞，資金將被攻擊者竊取。雖然可能有方法來減輕對發送者和接收者的威脅，中間節點必須線上，並可能會自動處理交易。出於這個原因，中間節點將處於危險之中，不應該在“熱錢包”中持有如此大量金錢。從長遠來看，具有更好的安全性的中間節點將可能超過其他的節點，並且由於較低的手續費，將可能處理更大量的交易。從歷史上看，手續費的最大的組成部分和金融體系的利息來自於各種形式的交易對手風險-在比特幣中手續費的最大組成部分很可能從安全風險溢價得到。
 
 ---
 
 A Funding Transaction may have multiple outputs with multiple Com- mitment Transactions, with the Funding Transaction key and some Commit- ment Transactions keys stored offline. It is possible to create an equivalent of a “Checking Account” and “Savings Account” by moving funds between outputs from a Funding Transaction, with the “Savings Account” stored offline and requiring additional signatures from security services.
 
-資金交易可能有多路輸出與多個承諾交易，線下儲存著資金交易金鑰和承諾交易金鑰。通過從資金交易中移動輸出之間的資金來創造 “檢查帳戶”和“儲蓄帳戶”的等價物是可能的，線下存儲“儲蓄帳戶”，並要求安全服務的其他特徵。
+資金交易可能有多路輸出與多個承諾交易，線下儲存著資金交易金鑰和承諾交易金鑰。通過從資金交易中移動輸出之間的資金來創造 “檢查帳戶”和“儲蓄帳戶”的等價物是可能的，線下儲存“儲蓄帳戶”，並要求安全服務的其他特徵。
 
 ---
 
@@ -1415,7 +1415,7 @@ A Funding Transaction may have multiple outputs with multiple Com- mitment Trans
 
 When one party loses data, it is possible for the counterparty to steal funds. This can be mitigated by having a third party data storage service where encrypted data gets sent to this third party service which the party cannot decrypt. Additionally, one should choose channel counterparties who are responsible and willing to provide the current state, with some periodic tests of honesty.
 
-當一方資料丟失，對方可能竊取資金。這可以通過一個協力廠商資料存儲服務得到緩解，其中的加密資料被發送到一方不能解密的協力廠商服務。此外，人們應該選擇負責的，並願意提供當前狀態的通道對手，定期測試其誠實度。
+當一方資料丟失，對方可能竊取資金。這可以通過一個協力廠商資料儲存服務得到緩解，其中的加密資料被發送到一方不能解密的協力廠商服務。此外，人們應該選擇負責的，並願意提供當前狀態的通道對手，定期測試其誠實度。
 
 ---
 
@@ -1515,7 +1515,7 @@ If all transactions using Bitcoin were on the blockchain, to enable 7 billion pe
 
 If all transactions using Bitcoin were conducted inside a network of micropayment channels, to enable 7 billion people to make two channels per year with unlimited transactions inside the channel, it would require 133 MB blocks (presuming 500 bytes per transaction and 52560 blocks per year). Current generation desktop computers will be able to run a full node with old blocks pruned out on 2TB of storage.
 
-如果使用比特幣的所有交易在小額支付的通道網路中進行，以使七十億人創造兩個通道，每年在通道內進行無限的交易，將需要 133 MB 區塊（假設每筆交易 500 位元組，每年 52560 區塊）。目前這一代的臺式電腦將能夠運行一個完整的存儲 2TB 的節點。
+如果使用比特幣的所有交易在小額支付的通道網路中進行，以使七十億人創造兩個通道，每年在通道內進行無限的交易，將需要 133 MB 區塊（假設每筆交易 500 位元組，每年 52560 區塊）。目前這一代的臺式電腦將能夠運行一個完整的儲存 2TB 的節點。
 
 ---
 
