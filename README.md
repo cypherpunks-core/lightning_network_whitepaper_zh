@@ -1247,7 +1247,9 @@ When Alice sends payment to Dave through Bob and Carol, she re- quests from Dave
 當 Alice 通過 Bob 和 Carol 支付給 Dave，她要求 Dave 的雜湊（R）來用於此付款。Alice 然 後計數跳躍的量，直到收件人用其作為 HTLC 屆滿。在這種情況下，設置 HTLC 屆滿為 3 天。然後，Bob 與 Carol 創建 HTLC，屆滿兩天，而 Carol 與 Dave 創建 HTLC，屆滿 1 天。 Dave 現在可以自由地向 Carol 披露 R，雙方可能會同意通過承諾交易更替即時結算。然後就 會一步一步的返回到 Alice。注意，這種情況發生在 off-chain 的情況下，若各方是合作的， 沒有東西被公佈到 blockchain 上。
 
 ---
+
 ![](image/figure16.png)
+
 Figure 16:  Settlement of HTLC, Alice’s funds get sent to Dave.
 
 圖 16：HTLC 結算，Alice 的資金被發送給 Dave。
