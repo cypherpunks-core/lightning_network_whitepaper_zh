@@ -163,13 +163,13 @@ If the balance in the channel is 0.05 BTC to Alice and 0.05 BTC to Bob, and the 
 
 Instead, both parties can commit to signing a transaction and not broadcasting this transaction. So if Alice and Bob commit funds into a 2-of-2 multisignature address (where it requires consent from both parties to create spends), they can agree on the current balance state. Alice and Bob can agree to create a refund from that 2-of-2 transaction to themselves, 0.05 BTC to each. This refund is not broadcast on the blockchain. Either party may do so, but they may elect to instead hold onto that transaction, knowing that they are able to redeem funds whenever they feel comfortable doing so. By deferring broadcast of this transaction, they may elect to change this balance at a future date.
 
-相反，雙方可以承諾簽署一個交易，但並不廣播該交易。因此，如果 Alice 和 Bob 投入資金到 2-OF-2 多重簽名位址（其要求雙方同意來產生花費），他們都同意目前的平衡狀態。Alice 和 Bob 可以要求從 2-OF-2 交易中退款給自己，每人 0.05 BTC。這份退款不會被廣播到 blockchain。任何一方都可以這樣做，但他們更可能選擇堅持進行該交易，明知自己有能力在自己希望時撤回基金。通過推遲本次交易的廣播，他們可能會選擇在未來某一日期改變這種平衡。
+相反，雙方可以承諾簽署一個交易，但並不廣播該交易。因此，如果 Alice 和 Bob 投入資金到 2-of-2 多重簽名位址（其要求雙方同意來產生花費），他們都同意目前的平衡狀態。Alice 和 Bob 可以要求從 2-of-2 交易中退款給自己，每人 0.05 BTC。這份退款不會被廣播到 blockchain。任何一方都可以這樣做，但他們更可能選擇堅持進行該交易，明知自己有能力在自己希望時撤回基金。通過推遲本次交易的廣播，他們可能會選擇在未來某一日期改變這種平衡。
 
 ---
 
 To update the balance, both parties create a new spend from the 2-of-2 multisignature address, for example 0.07 to Alice and 0.03 to Bob. Without proper design, though, there is the timestamping problem of not knowing which spend is correct: the new spend or the original refund.
 
-要更新這種平衡，雙方產生 2-OF-2 的多重簽名位址的新支出，例如 0.07 給 Alice 和 0.03 給 Bob。如果沒有適當的設計，會產生時間戳記問題，不知道哪一項花費是正確的：新的支出還是原來的退款。
+要更新這種平衡，雙方產生 2-of-2 的多重簽名位址的新支出，例如 0.07 給 Alice 和 0.03 給 Bob。如果沒有適當的設計，會產生時間戳記問題，不知道哪一項花費是正確的：新的支出還是原來的退款。
 
 ---
 
@@ -250,13 +250,13 @@ An initial channel Funding Transaction is created whereby one or both channel co
 The output for this Funding Transaction is a single 2-of-2 multisigna-
 ture script with both participants in this channel, henceforth named Alice and Bob. Both participants do not exchange signatures for the Funding Transaction until they have created spends from this 2-of-2 output refunding the original amount back to its respective funders. The purpose of not signing the transaction allows for one to spend from a transaction which does not yet exist. If Alice and Bob exchange the signatures from the Funding Transaction without being able to broadcast spends from the Funding Transaction, the funds may be locked up forever if Alice and Bob do not cooperate (or other coin loss may occur through hostage scenarios whereby one pays for the cooperation from the counterparty).
 
-對於這筆資金交易的輸出是參加這個通道雙方的 2-OF-2 的多重簽名，今後命名為 Alice 和 Bob 腳本。這兩個參與者沒有為資金交易交換簽名，直到他們已經從 2-OF-2 得到了與原來金額相等的退還金額。未簽署交易的目的，是允許從一個尚不存在一個交易中花費。如果 Alice 和 Bob 在資金交易中交換了簽名，而不能得到資金交易的廣播，而且如果 Alice 和 Bob 不配合，資金可能會被永久的鎖定（或由一方承擔不合作的損失）。
+對於這筆資金交易的輸出是參加這個通道雙方的 2-of-2 的多重簽名，今後命名為 Alice 和 Bob 腳本。這兩個參與者沒有為資金交易交換簽名，直到他們已經從 2-of-2 得到了與原來金額相等的退還金額。未簽署交易的目的，是允許從一個尚不存在一個交易中花費。如果 Alice 和 Bob 在資金交易中交換了簽名，而不能得到資金交易的廣播，而且如果 Alice 和 Bob 不配合，資金可能會被永久的鎖定（或由一方承擔不合作的損失）。
 
 ---
 
 Alice and Bob both exchange inputs to fund the Funding Transaction (to know which inputs are used to determine the total value of the channel), and exchange one key to use to sign with later. This key is used for the 2-of-2 output for the Funding Transaction; both signatures are needed to spend from the Funding Transaction, in other words, both Alice and Bob need to agree to spend from the Funding Transaction.
 
-Alice 和 Bob 雙方交換輸入來提供資金交易所需基金（知道哪些輸入用於確定通道的總價值），來交換之後用來簽署的鑰匙。此鑰匙用於資金交易的 2-OF-2 輸出;資金花費的產生需要雙方的簽署，換句話說，Alice 和 Bob 必須同意從資金交易中的資金花費。
+Alice 和 Bob 雙方交換輸入來提供資金交易所需基金（知道哪些輸入用於確定通道的總價值），來交換之後用來簽署的鑰匙。此鑰匙用於資金交易的 2-of-2 輸出;資金花費的產生需要雙方的簽署，換句話說，Alice 和 Bob 必須同意從資金交易中的資金花費。
 
 ---
 
@@ -264,7 +264,7 @@ Alice 和 Bob 雙方交換輸入來提供資金交易所需基金（知道哪些
 
 The Lightning Network uses a SIGHASH NOINPUT transaction to spend from this 2-of-2 Funding Transaction output, as it is necessary to spend from a transaction for which the signatures are not yet exchanged. SIGHASH NOINPUT, implemented using a soft-fork, ensures transactions can be spent from before it is signed by all parties, as transactions would need to be signed to get a transaction ID without new sighash flags. Without SIGHASH NOINPUT, Bitcoin transactions cannot be spent from before they may be broadcast —it’s as if one could not draft a contract without paying the other party first. SIGHASH NOINPUT resolves this problem. See Appendix A for more information and implementation.
 
-閃電網路使用的是 SIGHASH NOINPUT 交易，從 2-OF-2 輸出資金交易花費，因為這對於從尚未交換其簽名的交易上花費是必須的。SIGHASH NOINPUT，用 Softfork 實施，確保交易能夠在各方簽署之前執行，因為交易需要登錄才能獲取沒有新的 sighash flags 交易。如果沒有 SIGHASH NOINPUT，比特幣交易無法在廣播之前進行-就好像一個人不能在沒有支付對方的前提下得到草本。 SIGHASH NOINPUT 解決了這一問題。更多的資訊和實施見附錄 A。
+閃電網路使用的是 SIGHASH NOINPUT 交易，從 2-of-2 輸出資金交易花費，因為這對於從尚未交換其簽名的交易上花費是必須的。SIGHASH NOINPUT，用 Softfork 實施，確保交易能夠在各方簽署之前執行，因為交易需要登錄才能獲取沒有新的 sighash flags 交易。如果沒有 SIGHASH NOINPUT，比特幣交易無法在廣播之前進行-就好像一個人不能在沒有支付對方的前提下得到草本。 SIGHASH NOINPUT 解決了這一問題。更多的資訊和實施見附錄 A。
 
 ---
 
@@ -301,19 +301,19 @@ One is not able to broadcast the parent (Step 7) until Step 6 is complete. Both 
 
 After the unsigned (and unbroadcasted) Funding Transaction has been created, both parties sign and exchange an initial Commitment Transaction. These Commitment Transactions spends from the 2-of-2 output of the Funding Transaction (parent). However, only the Funding Transaction is broadcast on the blockchain.
 
-無簽署（和無廣播）資金交易創建後，雙方簽署並交換了最初的承諾交易。這些承諾交易花 費來自於 2-OF-2 的資金交易（父）輸出。但是，只有資金交易在 blockchain 上廣播。
+無簽署（和無廣播）資金交易創建後，雙方簽署並交換了最初的承諾交易。這些承諾交易花 費來自於 2-of-2 的資金交易（父）輸出。但是，只有資金交易在 blockchain 上廣播。
 
 ---
 
 Since the Funding Transaction has already entered into the blockchain, and the output is a 2-of-2 multisignature transaction which requires the agreement of both parties to spend from, Commitment Transactions are used to express the present balance. If only one 2-of-2 signed Commitment Transaction is exchanged between both parties, then both parties will be sure that they are able to get their money back after the Funding Transaction enters the blockchain. Both parties do not broadcast the Commitment Transactions onto the blockchain until they want to close out the current balance in the channel. They do so by broadcasting the present Commitment Transaction.
 
-由於資金交易已經進入 blockchain，輸出為需要雙方的協定的 2-OF-2 的多重簽名交易，承諾交易是用來表達目前的平衡。只有一個 2-OF-2 簽字承諾交易在雙方之間進行交換，那麼雙方將確保他們能拿回自己投入 blockchain 資金交易的錢。雙方不在 blockchain 廣播承諾交易到直到他們想從通道中停止現有的平衡。他們通過廣播現有的承諾交易來達到此目的。
+由於資金交易已經進入 blockchain，輸出為需要雙方的協定的 2-of-2 的多重簽名交易，承諾交易是用來表達目前的平衡。只有一個 2-of-2 簽字承諾交易在雙方之間進行交換，那麼雙方將確保他們能拿回自己投入 blockchain 資金交易的錢。雙方不在 blockchain 廣播承諾交易到直到他們想從通道中停止現有的平衡。他們通過廣播現有的承諾交易來達到此目的。
 
 ---
 
 Commitment Transactions pay out the respective current balances to each party. A naive (broken) implementation would construct an unbroadcasted transaction whereby there is a 2-of-2 spend from a single transaction which have two outputs that return all current balances to both channel counterparties. This will return all funds to the original party when creating an initial Commitment Transaction.
 
-承諾交易支付當前平衡的相應每一方。一個單純（破碎）的實施將構建一個不廣播交易，借此有從單一的交易方到交易對方的 2-OF-2 的支出，這個單一的交易方具有兩個返回當前平衡的輸出。這將創建一個初始的承諾交易，返回原方所有的資金。
+承諾交易支付當前平衡的相應每一方。一個單純（破碎）的實施將構建一個不廣播交易，借此有從單一的交易方到交易對方的 2-of-2 的支出，這個單一的交易方具有兩個返回當前平衡的輸出。這將創建一個初始的承諾交易，返回原方所有的資金。
 
 ---
 
@@ -327,7 +327,7 @@ Figure 1: A naive broken funding transaction is described in this diagram. The F
 
 For instance, if Alice and Bob agree to create a Funding Transaction with a single 2-of-2 output worth 1.0 BTC (with 0.5 BTC contribution from each), they create a Commitment Transaction where there are two 0.5 BTC outputs for Alice and Bob. The Commitment Transactions are signed first and keys are exchanged so either is able to broadcast the Commitment Transaction at any time contingent upon the Funding Transaction entering into the blockchain. At this point, the Funding Transaction signatures can safely be exchanged, as either party is able to redeem their funds by broadcasting the Commitment Transaction.
 
-例如，如果 Alice 和 Bob 同意用 2-OF-2 輸出來創建一個價值 1.0 BTC（各自貢獻 0.5 BTC）的資金交易，他們創造一個有分別來自 Alice 和 Bob 兩個輸出的承諾交易。該承諾首先應被簽署，並且交換金鑰，因此交易雙方能在與資金交易進入 blockchain 的任意合適的時間來公布承諾交易。在這一點上，資金交易簽名可以安全地進行交換，因為任何一方能夠通過廣播的承諾交易贖回自己的資金。
+例如，如果 Alice 和 Bob 同意用 2-of-2 輸出來創建一個價值 1.0 BTC（各自貢獻 0.5 BTC）的資金交易，他們創造一個有分別來自 Alice 和 Bob 兩個輸出的承諾交易。該承諾首先應被簽署，並且交換金鑰，因此交易雙方能在與資金交易進入 blockchain 的任意合適的時間來公布承諾交易。在這一點上，資金交易簽名可以安全地進行交換，因為任何一方能夠通過廣播的承諾交易贖回自己的資金。
 
 ---
 
@@ -379,7 +379,7 @@ This can only be enforced if one is able to ascribe blame for broadcasting an ol
 
 For the Lightning Network, all spends from the Funding Transaction output, Commitment Transactions, have two half-signed transactions. One Commitment Transaction in which Alice signs and gives to Bob (C1b), and another which Bob signs and gives to Alice (C1a). These two Commitment Transactions spend from the same output (Funding Transaction), and have different contents; only one can be broadcast on the blockchain, as both pairs of Commitment Transactions spend from the same Funding Transaction. Either party may broadcast their received Commitment Transaction by signing their version and including the counterparty’s signature. For example, Bob can broadcast Commitment C1b, since he has already received the signature for C1b from Alice —he includes Alice’s signature and signs C1b himself. The transaction will be a valid spend from the Funding Transaction’s 2-of-2 output requiring both Alice and Bob’s signature.
 
-對於閃電網，一切花費從資金交易輸出，承諾交易有兩個半簽名交易。Alice 簽署一份承諾交易，給 Bob（C1b），另一半由 Bob 簽署，給 Alice（C1a）。這兩個承諾的花費來自於相同的輸出（融資交易），並有不同的內容;只有一個可以在 blockchain 廣播，因為交易承諾的兩部分來自同一交易的資金支出。任何一方都可以通過登錄包括交易對方簽名自己的版本，廣播其收到的承諾交易。例如，Bob 可以廣播承諾 C1b，因為他已經從 Alice 那裡收到了 C1b 的簽名-它包含了 Alice 的簽名和 C1b 的自己的簽名。該交易將會從 2-OF-2 資金交易的輸出要求 Alice 和 Bob 的簽名有效支出。
+對於閃電網，一切花費從資金交易輸出，承諾交易有兩個半簽名交易。Alice 簽署一份承諾交易，給 Bob（C1b），另一半由 Bob 簽署，給 Alice（C1a）。這兩個承諾的花費來自於相同的輸出（融資交易），並有不同的內容;只有一個可以在 blockchain 廣播，因為交易承諾的兩部分來自同一交易的資金支出。任何一方都可以通過登錄包括交易對方簽名自己的版本，廣播其收到的承諾交易。例如，Bob 可以廣播承諾 C1b，因為他已經從 Alice 那裡收到了 C1b 的簽名-它包含了 Alice 的簽名和 C1b 的自己的簽名。該交易將會從 2-of-2 資金交易的輸出要求 Alice 和 Bob 的簽名有效支出。
 
 ---
 
@@ -441,7 +441,7 @@ If one wishes to permit revocable transactions with a 1000- confirmation delay, 
 
 2 <Alice 1 > <Bob1> 2 OP CHECKMULTISIG
 
-如果希望允許撤銷交易，這個交易有 1000 個確認延遲，該輸出交易結構將持有 2-OF-2 的多信號結構：
+如果希望允許撤銷交易，這個交易有 1000 個確認延遲，該輸出交易結構將持有 2-of-2 的多信號結構：
 
 ***待修正：~~2	<A L I 權證 1> <Bob1> 2 OP CHECKMULTISIG~~***
 
@@ -1170,7 +1170,7 @@ This enables participants in a channel to have prior output states (transactions
 
 It is possible for each participant to generate different versions of transactions to ascribe blame as to who broadcast the transaction on the blockchain. By having knowledge of who broadcast a transaction and the ability to ascribe blame, a third party service can be used to hold fees in a 2-of-3 multisig escrow. If one wishes to broadcast the transaction chain instead of agreeing to do a Funding Close or replacement with a new Commitment Transaction, one would communicate with the third party and broadcast the chain to the blockchain. If the counterparty refuses the notice from the third party to cooperate, the penalty is rewarded to the non-cooperative party. In most instances, participants may be indifferent to the transaction fees in the event of an uncooperative counterparty.
 
-每個參與者產生不同版本的交易來尋找在 blockchain 上廣播交易的錯誤來源是可能的。通過得知是誰廣播交易並能夠尋找到錯誤的來源，協力廠商服務可以在 2-OF-3 multisig 代管用於持有手續費。如果一方希望廣播交易鏈，而不是同意做一個資金關閉或更換新的承諾交易，一方會與協力廠商交流並廣播此交易鏈到 blockchain。如果對方拒絕來自協力廠商合作的通知，非合作方會受到懲罰。在大多數情況下，參與者在對手不合作的情況下不在乎交易手續費。
+每個參與者產生不同版本的交易來尋找在 blockchain 上廣播交易的錯誤來源是可能的。通過得知是誰廣播交易並能夠尋找到錯誤的來源，協力廠商服務可以在 2-of-3 multisig 代管用於持有手續費。如果一方希望廣播交易鏈，而不是同意做一個資金關閉或更換新的承諾交易，一方會與協力廠商交流並廣播此交易鏈到 blockchain。如果對方拒絕來自協力廠商合作的通知，非合作方會受到懲罰。在大多數情況下，參與者在對手不合作的情況下不在乎交易手續費。
 
 ---
 
