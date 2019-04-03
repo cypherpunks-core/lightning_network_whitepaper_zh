@@ -75,7 +75,7 @@ The bitcoin protocol can encompass the global financial transaction volume in al
 
 The Bitcoin[1] blockchain holds great promise for distributed ledgers, but the blockchain as a payment platform, by itself, cannot cover the world’s commerce anytime in the near future. The blockchain is a gossip protocol whereby all state modifications to the ledger are broadcast to all participants. It is through this “gossip protocol” that consensus of the state, everyone’s balances, is agreed upon. If each node in the bitcoin network must know about every single transaction that occurs globally, that may create a significant drag on the ability of the network to encompass all global financial transactions. It would instead be desirable to encompass all transactions in a way that doesn’t sacrifice the decentralization and security that the network provides.
 
-比特幣[1] blockchain 在擁有分散式分類帳方面很有前景，但在不久將來的某個時間，會出現 blockchain 作為一個支付平臺，其本身不能覆蓋全球的電子商務的情況。blockchain 是一個八卦協議，把所有國家向總帳發的更改發佈給所有的參與者。國家的共識，每個人的平衡通過這種“八卦協定”達成一致。如果在比特幣網路中的每個節點必須瞭解在全球範圍發生的 每一個交易，可能造成阻礙網路涵蓋全球所有金融交易的能力。相反，若能涵蓋全球所有金融交易，並且不會使分散化和安全性受到損害，這才是我們需要的。
+比特幣[1] blockchain 在擁有分散式分類帳方面很有前景，但在不久將來的某個時間，會出現 blockchain 作為一個支付平臺，其本身不能覆蓋全球的電子商務的情況。blockchain 是一個八卦協議，把所有國家向總帳發的更改發佈給所有的參與者。國家的共識，每個人的平衡通過這種“八卦協定”達成一致。如果在比特幣網路中的每個節點必須瞭解在全球範圍發生的每一個交易，可能造成阻礙網路涵蓋全球所有金融交易的能力。相反，若能涵蓋全球所有金融交易，並且不會使分散化和安全性受到損害，這才是我們需要的。
 
 ---
 
