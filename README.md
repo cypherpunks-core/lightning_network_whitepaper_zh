@@ -119,13 +119,13 @@ While it is possible to scale at a small level, it is absolutely not possible to
 ## 2 小額支付通道可以解決可擴展性問題 | A	Network	of	Micropayment	Channels	Can Solve Scalability
 > “If a tree falls in the forest and no one is around to hear it, does it make a sound?”
 > 
-> “如果一棵樹倒在森林中，沒有一個人去其周圍聽聲音，它會發出聲音麼？
+> “如果一棵樹倒在森林裡，周圍沒有人聽到它，它會發出聲音嗎？”
 
 ---
 
 The above quote questions the relevance of unobserved events —if nobody hears the tree fall, whether it made a sound or not is of no consequence. Similarly, in the blockchain, if only two participants care about an everyday recurring transaction, it’s not necessary for all other nodes in the bitcoin network to know about that transaction. It is instead preferable to only have the bare minimum of information on the blockchain. By deferring telling the entire world about every transaction, doing net settlement of their relationship at a later date enables Bitcoin users to conduct many transactions without bloating up the blockchain or creating trust in a centralized counterparty. An effectively trustless structure can be achieved by using time locks as a component to global consensus.
 
-以上引用的問題是與沒有人觀測到的事件是相關的，如果沒有人聽到樹倒，無論其是否發出聲音是沒有意義的。同樣，在 blockchain，如果只有兩個參與者關心日常的經常性交易，是沒有必要讓在比特幣網路的所有節點瞭解該交易的。相反，在 blockchain 上只有一小部分信息是更可取的。通過推遲告訴全世界每一筆交易，在以後的日子解決他們之間的關係的方法，使比特幣使用者進行許多交易不用擴展 blockchain 或與一個集中的交易對手建立信任。一個有效的不可信結構可以通過使用時間鎖作為一個全球共識的組成部分來實現。
+上面的引文質疑未觀察事件的相關性 - 如果沒有人聽到樹倒下，它是否發出聲音是無關緊要的。 類似地，在區塊鏈中，如果只有兩個參與者關心日常重複交易，則比特幣網絡中的所有其他節點不必知道該交易。 相反，最好只有區塊鏈上最少的信息。 通過推遲向全世界講述每筆交易，在以後對其關係進行淨結算使得比特幣用戶能夠進行許多交易，而不會使區塊鏈膨脹或在集中交易對手中建立信任。 通過使用時間鎖作為全球共識的組成部分，可以實現有效無信任的結構。
 
 ---
 
@@ -143,7 +143,7 @@ Instead, using a network of these micropayment channels, Bitcoin can scale to bi
 
 Micropayment channels[3][4] create a relationship between two parties to perpetually update balances, deferring what is broadcast to the blockchain in a single transaction netting out the total balance between those two parties. This permits the financial relationships between two parties to be trustlessly deferred to a later date, without risk of counterparty default. Micropayment channels use real bitcoin transactions, only electing to defer the broadcast to the blockchain in such a way that both parties can guarantee their current balance on the blockchain; this is not a trusted overlay network —payments in micropayment channels are real bitcoin communicated and exchanged off-chain.
 
-小額支付通道[3][4]在雙方之間建立起關係，來更新平衡，決定在雙方交易時產生的總餘額中被推遲廣播到 blockchain 的部分。這使得雙方之間的財務關係被不可信地推遲到以後的日子，沒有交易對方違約的風險。小額支付通道使用真實的比特幣交易，只有通過選舉的方式來決定推遲在 blockchain 中廣播的部分，雙方才可以保證其在 blockchain 上現有的平衡;這不是值得信賴的覆蓋網路-在小額支付通道發生的支付是真正比特幣 off chain 的溝通與交換。
+小額支付通道[3][4]在雙方之間建立起關係，來更新平衡，決定在雙方交易時產生的總餘額中被推遲廣播到 blockchain 的部分。這使得雙方之間的財務關係被不可信地推遲到以後的日子，沒有交易對方違約的風險。小額支付通道使用真實的比特幣交易，只有通過選舉的方式來決定推遲在 blockchain 中廣播的部分，雙方才可以保證其在 blockchain 上現有的平衡;這不是值得信賴的覆蓋網路-在小額支付通道發生的支付是真正比特幣 off-chain 的溝通與交換。
 
 ---
 
@@ -163,13 +163,13 @@ If the balance in the channel is 0.05 BTC to Alice and 0.05 BTC to Bob, and the 
 
 Instead, both parties can commit to signing a transaction and not broadcasting this transaction. So if Alice and Bob commit funds into a 2-of-2 multisignature address (where it requires consent from both parties to create spends), they can agree on the current balance state. Alice and Bob can agree to create a refund from that 2-of-2 transaction to themselves, 0.05 BTC to each. This refund is not broadcast on the blockchain. Either party may do so, but they may elect to instead hold onto that transaction, knowing that they are able to redeem funds whenever they feel comfortable doing so. By deferring broadcast of this transaction, they may elect to change this balance at a future date.
 
-相反，雙方可以承諾簽署一個交易，但並不廣播該交易。因此，如果 Alice 和 Bob 投入資金到 2-of-2 多重簽名位址（其要求雙方同意來產生花費），他們都同意目前的平衡狀態。Alice 和 Bob 可以要求從 2-of-2 交易中退款給自己，每人 0.05 BTC。這份退款不會被廣播到 blockchain。任何一方都可以這樣做，但他們更可能選擇堅持進行該交易，明知自己有能力在自己希望時撤回基金。通過推遲本次交易的廣播，他們可能會選擇在未來某一日期改變這種平衡。
+相反，雙方可以承諾簽署一個交易，但並不廣播該交易。因此，如果 Alice 和 Bob 投入資金到 2-of-2 多重簽名地址（其要求雙方同意來產生花費），他們都同意目前的平衡狀態。Alice 和 Bob 可以要求從 2-of-2 交易中退款給自己，每人 0.05 BTC。這份退款不會被廣播到 blockchain。任何一方都可以這樣做，但他們更可能選擇堅持進行該交易，明知自己有能力在自己希望時撤回基金。通過推遲本次交易的廣播，他們可能會選擇在未來某一日期改變這種平衡。
 
 ---
 
 To update the balance, both parties create a new spend from the 2-of-2 multisignature address, for example 0.07 to Alice and 0.03 to Bob. Without proper design, though, there is the timestamping problem of not knowing which spend is correct: the new spend or the original refund.
 
-要更新這種平衡，雙方產生 2-of-2 的多重簽名位址的新支出，例如 0.07 給 Alice 和 0.03 給 Bob。如果沒有適當的設計，會產生時間戳記問題，不知道哪一項花費是正確的：新的支出還是原來的退款。
+要更新這種平衡，雙方產生 2-of-2 的多重簽名地址的新支出，例如 0.07 給 Alice 和 0.03 給 Bob。如果沒有適當的設計，會產生時間戳記問題，不知道哪一項花費是正確的：新的支出還是原來的退款。
 
 ---
 
@@ -719,7 +719,7 @@ When generating the first Commitment Transaction, Alice and Bob agree to create 
 
 Since the Delivery transaction is just a P2PKH output (bitcoin addresses beginning with 1) or P2SH transaction (commonly recognized as addresses beginning with the 3) which the counterparties designate beforehand, this can be generated as an output of PAliceD and PBobD . For simplicity, these output addresses will remain the same throughout the channel, since its funds are fully controlled by its designated recipient after the Commitment Transaction enters the blockchain. If desired, but not necessary, both parties may update and change PAliceD and PBobD for future Commitment Transactions.
 
-由於交付交易僅僅是一個 P2PKH 輸出（比特幣位址從 1 開始）或 P2SH 交易（通常認為地址從 3 開始），這需要對方事先指定，這可以由 PAliceD 和 PBobD 的輸出生成。簡單起見，這些輸出位址將在整個通道過程保持不變，因為其資金是由它的指定接收方的承諾交易進入 blockchain 後完全控制。如果需要，但不是必要的話，雙方可以為未來的承諾交易更新改變 PAliceD 和 PBobD。
+由於交付交易僅僅是一個 P2PKH 輸出（比特幣地址從 1 開始）或 P2SH 交易（通常認為地址從 3 開始），這需要對方事先指定，這可以由 PAliceD 和 PBobD 的輸出生成。簡單起見，這些輸出地址將在整個通道過程保持不變，因為其資金是由它的指定接收方的承諾交易進入 blockchain 後完全控制。如果需要，但不是必要的話，雙方可以為未來的承諾交易更新改變 PAliceD 和 PBobD。
 
 ---
 
@@ -1144,7 +1144,7 @@ The amount of time flexibility with these offers to novate are dependent upon on
 
 Keys are generated using BIP 0032 Hierarchical Deterministic Wallets[17]. Keys are pre-generated by both parties. Keys are generated in a merkle tree and are very deep within the tree. For instance, Alice pre-generates one million keys, each key being a child of the previous key. Alice allocates which keys to use according to some deterministic manner. For example, she starts with the child deepest in the tree to generate many sub-keys for day 1. This key is used as a master key for all keys generated on day 1. She gives Bob the address she wishes to use for the next transaction, and discloses the private key to Bob when it becomes invalidated. When Alice discloses to Bob all private keys derived from the day 1 master key and does not wish to continue using that master key, she can disclose the day 1 master key to Bob. At this point, Bob does not need to store all the keys derived from the day 1 master key. Bob does the same for Alice and gives her his day 1 key.
 
-使用 BIP 0032 分層確定性錢包[17]生成金鑰。金鑰是通過雙方預先生成的。在 MERKLE 樹生成金鑰，並且非常深的隱藏在樹內。例如，Alice 預生成百萬個金鑰，每個金鑰是前一個金鑰的子金鑰。Alice 根據一些確定的方式分配使用哪個金鑰。例如，她第 1 天開始用樹最底層的子金鑰來生成更多的金鑰。這一金鑰是在第一天生成的所有金鑰的主金鑰。她給 Bob 她希望使用的下一個交易位址，並在私密金鑰變為無效時公開給 Bob。當 Alice 向 Bob 公開了由主金鑰派生的所有私密金鑰，並且不希望繼續使用該主金鑰時，她可以把每天的主金鑰透露給 Bob。在這一點上，Bob 不需要儲存所有由主金鑰產生的金鑰。Bob 做同樣的事，給 Alice 他第一天的主金鑰。
+使用 BIP 0032 分層確定性錢包[17]生成金鑰。金鑰是通過雙方預先生成的。在 MERKLE 樹生成金鑰，並且非常深的隱藏在樹內。例如，Alice 預生成百萬個金鑰，每個金鑰是前一個金鑰的子金鑰。Alice 根據一些確定的方式分配使用哪個金鑰。例如，她第 1 天開始用樹最底層的子金鑰來生成更多的金鑰。這一金鑰是在第一天生成的所有金鑰的主金鑰。她給 Bob 她希望使用的下一個交易地址，並在私密金鑰變為無效時公開給 Bob。當 Alice 向 Bob 公開了由主金鑰派生的所有私密金鑰，並且不希望繼續使用該主金鑰時，她可以把每天的主金鑰透露給 Bob。在這一點上，Bob 不需要儲存所有由主金鑰產生的金鑰。Bob 做同樣的事，給 Alice 他第一天的主金鑰。
 
 ---
 
@@ -1599,7 +1599,7 @@ SIGHASH NOINPUT 既不會簽署任何輸入交易 IDs，也不會簽署其指示
 
 SIGHASH NOINPUT implies significant risk with address reuse, as it can work with any transaction in which the sigScript returns as valid, so multiple transactions with the same outputs are redeemable (provided the output values are less).
 
-SIGHASH NOINPUT 意味著位址重用的風險，因為只要 sigScript 返回是有效的，他就可以工作，所以有相同輸出的多個交易是可贖回的（如果輸出值變小）。
+SIGHASH NOINPUT 意味著地址重用的風險，因為只要 sigScript 返回是有效的，他就可以工作，所以有相同輸出的多個交易是可贖回的（如果輸出值變小）。
 
 ---
 
