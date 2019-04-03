@@ -35,8 +35,8 @@ rx@awsomnet.org
   - [4 雜湊 Timelock 合約（HTLC）| Hashed Timelock Contract (HTLC)](#4-%E9%9B%9C%E6%B9%8A-timelock-%E5%90%88%E7%B4%84htlc-hashed-timelock-contract-htlc)
     - [4.1 不可撤銷的 HTLC 結構 | Non-revocable HTLC Construction](#41-%E4%B8%8D%E5%8F%AF%E6%92%A4%E9%8A%B7%E7%9A%84-htlc-%E7%B5%90%E6%A7%8B--non-revocable-htlc-construction)
     - [4.2	Off-chain 可撤銷 HTLC | Off-chain Revocable HTLC](#42-off-chain-%E5%8F%AF%E6%92%A4%E9%8A%B7-htlc--off-chain-revocable-htlc)
-      - [4.2.1 當寄件者播的承諾交易 HTLC | HTLC when the Sender Broadcasts the Commitment Transaction](#421-%E7%95%B6%E5%AF%84%E4%BB%B6%E8%80%85%E6%92%AD%E7%9A%84%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93-htlc--htlc-when-the-sender-broadcasts-the-commitment-transaction)
-      - [4.2.2 接收者公佈承諾交易時的 HTLC | HTLC when the Receiver Broadcasts the Commitment Transaction](#422-%E6%8E%A5%E6%94%B6%E8%80%85%E5%85%AC%E4%BD%88%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%99%82%E7%9A%84-htlc--htlc-when-the-receiver-broadcasts-the-commitment-transaction)
+      - [4.2.1 當寄件者廣播的承諾交易 HTLC | HTLC when the Sender Broadcasts the Commitment Transaction](#421-%E7%95%B6%E5%AF%84%E4%BB%B6%E8%80%85%E5%BB%A3%E6%92%AD%E7%9A%84%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93-htlc--htlc-when-the-sender-broadcasts-the-commitment-transaction)
+      - [4.2.2 接收者廣播承諾交易時的 HTLC | HTLC when the Receiver Broadcasts the Commitment Transaction](#422-%E6%8E%A5%E6%94%B6%E8%80%85%E5%BB%A3%E6%92%AD%E6%89%BF%E8%AB%BE%E4%BA%A4%E6%98%93%E6%99%82%E7%9A%84-htlc--htlc-when-the-receiver-broadcasts-the-commitment-transaction)
     - [4.3	HTLC Off-chain 終止 | 4.3	HTLC Off-chain Termination](#43-htlc-off-chain-%E7%B5%82%E6%AD%A2--43-htlc-off-chain-termination)
     - [4.4 HTLC 形成和封閉令 | HTLC Formation and Closing Order](#44-htlc-%E5%BD%A2%E6%88%90%E5%92%8C%E5%B0%81%E9%96%89%E4%BB%A4--htlc-formation-and-closing-order)
   - [5 金鑰儲存 | Key Storage](#5-%E9%87%91%E9%91%B0%E5%84%B2%E5%AD%98--key-storage)
@@ -53,7 +53,7 @@ rx@awsomnet.org
     - [9.2 被迫滿期的垃圾郵件 | Forced Expiration Spam](#92-%E8%A2%AB%E8%BF%AB%E6%BB%BF%E6%9C%9F%E7%9A%84%E5%9E%83%E5%9C%BE%E9%83%B5%E4%BB%B6--forced-expiration-spam)
     - [9.3 通過分裂盜竊資金 | Coin Theft via Cracking](#93-%E9%80%9A%E9%81%8E%E5%88%86%E8%A3%82%E7%9B%9C%E7%AB%8A%E8%B3%87%E9%87%91--coin-theft-via-cracking)
     - [9.4 資料丟失 | Data Loss](#94-%E8%B3%87%E6%96%99%E4%B8%9F%E5%A4%B1--data-loss)
-    - [9.5 忘記及時公佈交易 | Forgetting to Broadcast the Transaction in Time](#95-%E5%BF%98%E8%A8%98%E5%8F%8A%E6%99%82%E5%85%AC%E4%BD%88%E4%BA%A4%E6%98%93--forgetting-to-broadcast-the-transaction-in-time)
+    - [9.5 忘記及時廣播交易 | Forgetting to Broadcast the Transaction in Time](#95-%E5%BF%98%E8%A8%98%E5%8F%8A%E6%99%82%E5%BB%A3%E6%92%AD%E4%BA%A4%E6%98%93--forgetting-to-broadcast-the-transaction-in-time)
     - [9.6 無法做出必要的 Soft-Forks | Inability to Make Necessary Soft-Forks](#96-%E7%84%A1%E6%B3%95%E5%81%9A%E5%87%BA%E5%BF%85%E8%A6%81%E7%9A%84-soft-forks--inability-to-make-necessary-soft-forks)
     - [9.7 勾結礦工攻擊 | Colluding Miner Attacks](#97-%E5%8B%BE%E7%B5%90%E7%A4%A6%E5%B7%A5%E6%94%BB%E6%93%8A--colluding-miner-attacks)
   - [10 區塊大小增加與共識 | Block Size Increases and Consensus](#10-%E5%8D%80%E5%A1%8A%E5%A4%A7%E5%B0%8F%E5%A2%9E%E5%8A%A0%E8%88%87%E5%85%B1%E8%AD%98--block-size-increases-and-consensus)
@@ -106,7 +106,7 @@ While it is possible that Moore’s Law will continue indefinitely, and the comp
 
 To achieve much higher than 47,000 transactions per second using Bitcoin requires conducting transactions off the Bitcoin blockchain itself. It would be even better if the bitcoin network supported a near-unlimited number of transactions per second with extremely low fees for micropayments. Many micropayments can be sent sequentially between two parties to enable any size of payments. Micropayments would enable unbunding, less trust and commodification of services, such as payments for per-megabyte internet service. To be able to achieve these micropayment use cases, however, would require severely reducing the amount of transactions that end up being broadcast on the global Bitcoin blockchain.
 
-為了實現用比特幣進行每秒多於 47000 筆交易，需要脫離比特幣 blockchain 本身進行交易。 如果比特幣網路支援以極低的手續費每秒進行近乎無限數量的小額交易會更好。許多小額支付 可以按順序在兩方之間發送，使任何大小的付款成為可能。小額支付將使服務變得非捆束， 少信任，商品化。如支付每百萬位元組的互聯網服務。為了能夠實現這些小額用例，將需要嚴重 降低最終被公佈的全球比特幣 blockchain 交易的數量。
+為了實現用比特幣進行每秒多於 47000 筆交易，需要脫離比特幣 blockchain 本身進行交易。 如果比特幣網路支援以極低的手續費每秒進行近乎無限數量的小額交易會更好。許多小額支付 可以按順序在兩方之間發送，使任何大小的付款成為可能。小額支付將使服務變得非捆束， 少信任，商品化。如支付每百萬位元組的互聯網服務。為了能夠實現這些小額用例，將需要嚴重 降低最終被廣播的全球比特幣 blockchain 交易的數量。
 
 ---
 
@@ -143,7 +143,7 @@ Instead, using a network of these micropayment channels, Bitcoin can scale to bi
 
 Micropayment channels[3][4] create a relationship between two parties to perpetually update balances, deferring what is broadcast to the blockchain in a single transaction netting out the total balance between those two parties. This permits the financial relationships between two parties to be trustlessly deferred to a later date, without risk of counterparty default. Micropayment channels use real bitcoin transactions, only electing to defer the broadcast to the blockchain in such a way that both parties can guarantee their current balance on the blockchain; this is not a trusted overlay network —payments in micropayment channels are real bitcoin communicated and exchanged off-chain.
 
-小額支付通道[3][4]在雙方之間建立起關係，來更新平衡，決定在雙方交易時產生的總餘額中被推遲公佈到 blockchain 的部分。這使得雙方之間的財務關係被不可信地推遲到以後的日子，沒有交易對方違約的風險。小額支付通道使用真實的比特幣交易，只有通過選舉的方式來決定推遲在 blockchain 中公佈的部分，雙方才可以保證其在 blockchain 上現有的平衡;這不是值得信賴的覆蓋網路-在小額支付通道發生的支付是真正比特幣 off chain 的溝通與交換。
+小額支付通道[3][4]在雙方之間建立起關係，來更新平衡，決定在雙方交易時產生的總餘額中被推遲廣播到 blockchain 的部分。這使得雙方之間的財務關係被不可信地推遲到以後的日子，沒有交易對方違約的風險。小額支付通道使用真實的比特幣交易，只有通過選舉的方式來決定推遲在 blockchain 中廣播的部分，雙方才可以保證其在 blockchain 上現有的平衡;這不是值得信賴的覆蓋網路-在小額支付通道發生的支付是真正比特幣 off chain 的溝通與交換。
 
 ---
 
@@ -163,7 +163,7 @@ If the balance in the channel is 0.05 BTC to Alice and 0.05 BTC to Bob, and the 
 
 Instead, both parties can commit to signing a transaction and not broadcasting this transaction. So if Alice and Bob commit funds into a 2-of-2 multisignature address (where it requires consent from both parties to create spends), they can agree on the current balance state. Alice and Bob can agree to create a refund from that 2-of-2 transaction to themselves, 0.05 BTC to each. This refund is not broadcast on the blockchain. Either party may do so, but they may elect to instead hold onto that transaction, knowing that they are able to redeem funds whenever they feel comfortable doing so. By deferring broadcast of this transaction, they may elect to change this balance at a future date.
 
-相反，雙方可以承諾簽署一個交易，但並不公佈該交易。因此，如果 Alice 和 Bob 投入資金到 2-OF-2 多重簽名位址（其要求雙方同意來產生花銷），他們都同意目前的平衡狀態。Alice 和 Bob 可以要求從 2-OF-2 交易中退款給自己，每人 0.05 BTC。這份退款不會被公佈到 blockchain。任何一方都可以這樣做，但他們更可能選擇堅持進行該交易，明知自己有能力在自己希望時撤回基金。通過推遲本次交易的公佈，他們可能會選擇在未來某一日期改變這種平衡。
+相反，雙方可以承諾簽署一個交易，但並不廣播該交易。因此，如果 Alice 和 Bob 投入資金到 2-OF-2 多重簽名位址（其要求雙方同意來產生花銷），他們都同意目前的平衡狀態。Alice 和 Bob 可以要求從 2-OF-2 交易中退款給自己，每人 0.05 BTC。這份退款不會被廣播到 blockchain。任何一方都可以這樣做，但他們更可能選擇堅持進行該交易，明知自己有能力在自己希望時撤回基金。通過推遲本次交易的廣播，他們可能會選擇在未來某一日期改變這種平衡。
 
 ---
 
@@ -201,7 +201,7 @@ Thus, micropayment channels only create a relationship between two parties. Requ
 
 If we presume a large network of channels on the Bitcoin blockchain, and all Bitcoin users are participating on this graph by having at least one channel open on the Bitcoin blockchain, it is possible to create a near-infinite amount of transactions inside this network. The only transactions that are broadcasted on the Bitcoin blockchain prematurely are with uncooperative channel counterparties.
 
-如果我們假定一個比特幣 blockchain 通道的大型網路，並且所有參與的比特幣用戶在比特幣 blockchain 上具有至少一個開放通道，在該網路內可以創建近於無限量的交易。在比特幣 blockchain 上過早地公佈的唯一的交易是存在不合作通道對手的交易。
+如果我們假定一個比特幣 blockchain 通道的大型網路，並且所有參與的比特幣用戶在比特幣 blockchain 上具有至少一個開放通道，在該網路內可以創建近於無限量的交易。在比特幣 blockchain 上過早地廣播的唯一的交易是存在不合作通道對手的交易。
 
 ---
 
@@ -215,13 +215,13 @@ By encumbering the Bitcoin transaction outputs with a hashlock and timelock, the
 
 Micropayment channels permit a simple deferral of a transaction state to be broadcast at a later time. The contracts are enforced by creating a responsibility for one party to broadcast transactions before or after certain dates. If the blockchain is a decentralized timestamping system, it is possible to use clocks as a component of decentralized consensus[5] to determine data validity, as well as present states as a method to order events[6].
 
-小額支付通道允許交易狀態簡單推遲至稍後時間公佈。該合約是以這樣的方式執行，創造一方在一定日期之前或之後公佈交易的責任。如果 blockchain 是一個分散化的時間戳記系統，它可以使用時鐘作為分散共識[5]的組成部分，以確定資料有效性，以及展示當前狀態作為訂購事件的方法[6]。
+小額支付通道允許交易狀態簡單推遲至稍後時間廣播。該合約是以這樣的方式執行，創造一方在一定日期之前或之後廣播交易的責任。如果 blockchain 是一個分散化的時間戳記系統，它可以使用時鐘作為分散共識[5]的組成部分，以確定資料有效性，以及展示當前狀態作為訂購事件的方法[6]。
 
 ---
 
 By creating timeframes where certain states can be broadcast and later invalidated, it is possible to create complex contracts using bitcoin transaction scripts. There has been prior work for Hub-and-Spoke Micro-payment Channels[7][8][9].(and trusted payment channel networks[10][11]) looking at building a hub-and-spoke network today. However, Lightning Network’s bidirectional micropayment channel requires the malleability soft-fork described in Appendix A to enable near-infinite scalability while miti-gating risks of intermediate node default.
 
-通過創建特定狀態的公佈或失效的時間表，就可以使用比特幣交易腳本創建複雜的合約。已經有前期工作的中心輻射型小額支付通道[7][8][9]（和值得信賴的支付通道網路[10][11]）監控今日建立樞紐和輻射網路的過程。然而，閃電定位網路的雙向小額通道要求在附錄 A 中所述的可塑性 Softfork，使在控制中間節點出錯風險時有近乎於無限的可擴展性。
+通過創建特定狀態的廣播或失效的時間表，就可以使用比特幣交易腳本創建複雜的合約。已經有前期工作的中心輻射型小額支付通道[7][8][9]（和值得信賴的支付通道網路[10][11]）監控今日建立樞紐和輻射網路的過程。然而，閃電定位網路的雙向小額通道要求在附錄 A 中所述的可塑性 Softfork，使在控制中間節點出錯風險時有近乎於無限的可擴展性。
 
 ---
 
@@ -250,7 +250,7 @@ An initial channel Funding Transaction is created whereby one or both channel co
 The output for this Funding Transaction is a single 2-of-2 multisigna-
 ture script with both participants in this channel, henceforth named Alice and Bob. Both participants do not exchange signatures for the Funding Transaction until they have created spends from this 2-of-2 output refunding the original amount back to its respective funders. The purpose of not signing the transaction allows for one to spend from a transaction which does not yet exist. If Alice and Bob exchange the signatures from the Funding Transaction without being able to broadcast spends from the Funding Transaction, the funds may be locked up forever if Alice and Bob do not cooperate (or other coin loss may occur through hostage scenarios whereby one pays for the cooperation from the counterparty).
 
-對於這筆資金交易的輸出是參加這個通道雙方的 2-OF-2 的多重簽名，今後命名為 Alice 和 Bob 腳本。這兩個參與者沒有為資金交易交換簽名，直到他們已經從 2-OF-2 得到了與原來金額相等的退還金額。未簽署交易的目的，是允許從一個尚不存在一個交易中花費。如果 Alice 和 Bob 在資金交易中交換了簽名，而不能得到資金交易的公佈，而且如果 Alice 和 Bob 不配合，資金可能會被永久的鎖定（或由一方承擔不合作的損失）。
+對於這筆資金交易的輸出是參加這個通道雙方的 2-OF-2 的多重簽名，今後命名為 Alice 和 Bob 腳本。這兩個參與者沒有為資金交易交換簽名，直到他們已經從 2-OF-2 得到了與原來金額相等的退還金額。未簽署交易的目的，是允許從一個尚不存在一個交易中花費。如果 Alice 和 Bob 在資金交易中交換了簽名，而不能得到資金交易的廣播，而且如果 Alice 和 Bob 不配合，資金可能會被永久的鎖定（或由一方承擔不合作的損失）。
 
 ---
 
@@ -264,7 +264,7 @@ Alice 和 Bob 雙方交換輸入來提供資金交易所需基金（知道哪些
 
 The Lightning Network uses a SIGHASH NOINPUT transaction to spend from this 2-of-2 Funding Transaction output, as it is necessary to spend from a transaction for which the signatures are not yet exchanged. SIGHASH NOINPUT, implemented using a soft-fork, ensures transactions can be spent from before it is signed by all parties, as transactions would need to be signed to get a transaction ID without new sighash flags. Without SIGHASH NOINPUT, Bitcoin transactions cannot be spent from before they may be broadcast —it’s as if one could not draft a contract without paying the other party first. SIGHASH NOINPUT resolves this problem. See Appendix A for more information and implementation.
 
-閃電網路使用的是 SIGHASH NOINPUT 交易，從 2-OF-2 輸出資金交易花費，因為這對於從尚未交換其簽名的交易上花費是必須的。SIGHASH NOINPUT，用 Softfork 實施，確保交易能夠在各方簽署之前執行，因為交易需要登錄才能獲取沒有新的 sighash flags 交易。如果沒有 SIGHASH NOINPUT，比特幣交易無法在公佈之前進行-就好像一個人不能在沒有支付對方的前提下得到草本。 SIGHASH NOINPUT 解決了這一問題。更多的資訊和實施見附錄 A。
+閃電網路使用的是 SIGHASH NOINPUT 交易，從 2-OF-2 輸出資金交易花費，因為這對於從尚未交換其簽名的交易上花費是必須的。SIGHASH NOINPUT，用 Softfork 實施，確保交易能夠在各方簽署之前執行，因為交易需要登錄才能獲取沒有新的 sighash flags 交易。如果沒有 SIGHASH NOINPUT，比特幣交易無法在廣播之前進行-就好像一個人不能在沒有支付對方的前提下得到草本。 SIGHASH NOINPUT 解決了這一問題。更多的資訊和實施見附錄 A。
 
 ---
 
@@ -278,7 +278,7 @@ Without SIGHASH NOINPUT, it is not possible to generate a spend from a transacti
 7. Broadcast the parent on the blockchain
 
 
-如果沒有 SIGHASH NOINPUT，不可能產生在不交換簽名的情況下進行交易支出，因為花費的資金交易需要一個交易 ID 作為子輸入簽名的一部分。交易 ID 的一個組成部分是父（交易資金的來源）的簽名，因此雙方需要交換自己的父簽名子輸入才可以花費。由於一方或雙方必須知道父簽名因而由它來消費，這意味著一方或雙方都能夠在子輸入存在之前公佈父簽名（融資交易）。SIGHASH NOINPUT 通過允許子輸入無需登錄輸入就可消費來解決這個問題。SIGHASH NOINPUT 的操作順序是：
+如果沒有 SIGHASH NOINPUT，不可能產生在不交換簽名的情況下進行交易支出，因為花費的資金交易需要一個交易 ID 作為子輸入簽名的一部分。交易 ID 的一個組成部分是父（交易資金的來源）的簽名，因此雙方需要交換自己的父簽名子輸入才可以花費。由於一方或雙方必須知道父簽名因而由它來消費，這意味著一方或雙方都能夠在子輸入存在之前廣播父簽名（融資交易）。SIGHASH NOINPUT 通過允許子輸入無需登錄輸入就可消費來解決這個問題。SIGHASH NOINPUT 的操作順序是：
 
 1. 創建父輸入（融資交易）
 2. 創建子輸入（承諾交易及從承諾交易的所有花費）
@@ -286,13 +286,13 @@ Without SIGHASH NOINPUT, it is not possible to generate a spend from a transacti
 4. 交換子簽名
 5. 簽署父簽名
 6. 交換父簽名
-7. 公佈 blockchain 上的父簽名
+7. 廣播 blockchain 上的父簽名
 
 ---
 
 One is not able to broadcast the parent (Step 7) until Step 6 is complete. Both parties have not given their signature to spend from the Funding Transaction until step 6. Further, if one party fails during Step 6, the parent can either be spent to become the parent transaction or the inputs to the parent transaction can be double-spent (so that this entire transaction path is invalidated).
 
-一方不能夠公佈父簽名（步驟 7），直到步驟 6 完成。雙方直到步驟 6 才交換他們資金交易
+一方不能夠廣播父簽名（步驟 7），直到步驟 6 完成。雙方直到步驟 6 才交換他們資金交易
 的簽名。此外，如果步驟 6 中一方出現故障，父輸入可以成為父交易或者父交易會產生雙倍的花銷（這樣，整個交易路徑無效）。
 
 ---
@@ -301,19 +301,19 @@ One is not able to broadcast the parent (Step 7) until Step 6 is complete. Both 
 
 After the unsigned (and unbroadcasted) Funding Transaction has been created, both parties sign and exchange an initial Commitment Transaction. These Commitment Transactions spends from the 2-of-2 output of the Funding Transaction (parent). However, only the Funding Transaction is broadcast on the blockchain.
 
-無簽署（和無公佈）資金交易創建後，雙方簽署並交換了最初的承諾交易。這些承諾交易花 費來自於 2-OF-2 的資金交易（父）輸出。但是，只有資金交易在 blockchain 上公佈。
+無簽署（和無廣播）資金交易創建後，雙方簽署並交換了最初的承諾交易。這些承諾交易花 費來自於 2-OF-2 的資金交易（父）輸出。但是，只有資金交易在 blockchain 上廣播。
 
 ---
 
 Since the Funding Transaction has already entered into the blockchain, and the output is a 2-of-2 multisignature transaction which requires the agreement of both parties to spend from, Commitment Transactions are used to express the present balance. If only one 2-of-2 signed Commitment Transaction is exchanged between both parties, then both parties will be sure that they are able to get their money back after the Funding Transaction enters the blockchain. Both parties do not broadcast the Commitment Transactions onto the blockchain until they want to close out the current balance in the channel. They do so by broadcasting the present Commitment Transaction.
 
-由於資金交易已經進入 blockchain，輸出為需要雙方的協定的 2-OF-2 的多重簽名交易，承諾交易是用來表達目前的平衡。只有一個 2-OF-2 簽字承諾交易在雙方之間進行交換，那麼雙方將確保他們能拿回自己投入 blockchain 資金交易的錢。雙方不在 blockchain 公佈承諾交易到直到他們想從通道中停止現有的平衡。他們通過公佈現有的承諾交易來達到此目的。
+由於資金交易已經進入 blockchain，輸出為需要雙方的協定的 2-OF-2 的多重簽名交易，承諾交易是用來表達目前的平衡。只有一個 2-OF-2 簽字承諾交易在雙方之間進行交換，那麼雙方將確保他們能拿回自己投入 blockchain 資金交易的錢。雙方不在 blockchain 廣播承諾交易到直到他們想從通道中停止現有的平衡。他們通過廣播現有的承諾交易來達到此目的。
 
 ---
 
 Commitment Transactions pay out the respective current balances to each party. A naive (broken) implementation would construct an unbroadcasted transaction whereby there is a 2-of-2 spend from a single transaction which have two outputs that return all current balances to both channel counterparties. This will return all funds to the original party when creating an initial Commitment Transaction.
 
-承諾交易支付當前平衡的相應每一方。一個單純（破碎）的實施將構建一個不公佈交易，借此有從單一的交易方到交易對方的 2-OF-2 的支出，這個單一的交易方具有兩個返回當前平衡的輸出。這將創建一個初始的承諾交易，返回原方所有的資金。
+承諾交易支付當前平衡的相應每一方。一個單純（破碎）的實施將構建一個不廣播交易，借此有從單一的交易方到交易對方的 2-OF-2 的支出，這個單一的交易方具有兩個返回當前平衡的輸出。這將創建一個初始的承諾交易，返回原方所有的資金。
 
 ---
 
@@ -321,13 +321,13 @@ Commitment Transactions pay out the respective current balances to each party. A
 
 Figure 1: A naive broken funding transaction is described in this diagram. The Funding Transaction (F), designated in green, is broadcast on the blockchain after all other transactions are signed. All other transactions spending from the funding transactions are not yet broadcast, in case the counterparties wish to update their balance. Only the Funding Transaction is broadcast on the blockchain at this time.
 
-圖 1：一個真正破碎的資金交易將在本圖中描述。資金交易（F），被標記為綠色，在所有其他交易簽署後被公佈被 blockchain 上。從資金交易支出的所有其他交易都還沒有公佈，以防對方想要更新自己的平衡。只有在這個時候，資金交易才能公佈在 blockchain 上。
+圖 1：一個真正破碎的資金交易將在本圖中描述。資金交易（F），被標記為綠色，在所有其他交易簽署後被廣播被 blockchain 上。從資金交易支出的所有其他交易都還沒有廣播，以防對方想要更新自己的平衡。只有在這個時候，資金交易才能廣播在 blockchain 上。
 
 ---
 
 For instance, if Alice and Bob agree to create a Funding Transaction with a single 2-of-2 output worth 1.0 BTC (with 0.5 BTC contribution from each), they create a Commitment Transaction where there are two 0.5 BTC outputs for Alice and Bob. The Commitment Transactions are signed first and keys are exchanged so either is able to broadcast the Commitment Transaction at any time contingent upon the Funding Transaction entering into the blockchain. At this point, the Funding Transaction signatures can safely be exchanged, as either party is able to redeem their funds by broadcasting the Commitment Transaction.
 
-例如，如果 Alice 和 Bob 同意用 2-OF-2 輸出來創建一個價值 1.0 BTC（各自貢獻 0.5 BTC）的資金交易，他們創造一個有分別來自 Alice 和 Bob 兩個輸出的承諾交易。該承諾首先應被簽署，並且交換金鑰，因此交易雙方能在與資金交易進入 blockchain 的任意合適的時間來公布承諾交易。在這一點上，資金交易簽名可以安全地進行交換，因為任何一方能夠通過公佈的承諾交易贖回自己的資金。
+例如，如果 Alice 和 Bob 同意用 2-OF-2 輸出來創建一個價值 1.0 BTC（各自貢獻 0.5 BTC）的資金交易，他們創造一個有分別來自 Alice 和 Bob 兩個輸出的承諾交易。該承諾首先應被簽署，並且交換金鑰，因此交易雙方能在與資金交易進入 blockchain 的任意合適的時間來公布承諾交易。在這一點上，資金交易簽名可以安全地進行交換，因為任何一方能夠通過廣播的承諾交易贖回自己的資金。
 
 ---
 
@@ -339,7 +339,7 @@ This construction breaks, however, when one wishes to update the present balance
 
 When both parties agree to a new Commitment Transaction and exchange signatures for the new Commitment Transaction, either Commitment Transactions can be broadcast. As the output from the Funding Transaction can only be redeemed once, only one of those transactions will be valid. For instance, if Alice and Bob agree that the balance of the channel is now 0.4 to Alice and 0.6 to Bob, and a new Commitment Transaction is created to reflect that, either Commitment Transaction can be broadcast. In effect, one would be unable to restrict which Commitment Transaction is broadcast, since both parties have signed and exchanged the signatures for either balance to be broadcast.
 
-當雙方都同意一個新的承諾交易並且為了新承諾交易交換簽名，任意承諾交易可以被公佈。輸出從資金交易中只能被贖回一次，這些交易中只有一個將是有效的。例如，如果 Alice 和 Bob 同意通道的平衡為 0.4 給 Alice 和 0.6 給 Bob，一個新的交易承諾將被重新創建並且任何承諾交易可以被公佈。事實上，為了被公佈的任何平衡，雙方都已經簽署了並交換了簽名，一方將無法限制其承諾交易是否公佈。
+當雙方都同意一個新的承諾交易並且為了新承諾交易交換簽名，任意承諾交易可以被廣播。輸出從資金交易中只能被贖回一次，這些交易中只有一個將是有效的。例如，如果 Alice 和 Bob 同意通道的平衡為 0.4 給 Alice 和 0.6 給 Bob，一個新的交易承諾將被重新創建並且任何承諾交易可以被廣播。事實上，為了被廣播的任何平衡，雙方都已經簽署了並交換了簽名，一方將無法限制其承諾交易是否廣播。
 
 ---
 
@@ -347,13 +347,13 @@ When both parties agree to a new Commitment Transaction and exchange signatures 
 
 Figure 2: Either of the Commitment Transactions can be broadcast any any time by either party, only one will successfully spend from the single Funding Transaction. This cannot work because one party will not want to broadcast the most recent transaction.
 
-圖 2：承諾交易可由任何一方在任何時間公佈，只有一方會從單一的資金交易中成功花費。這樣不行，因為一方不想公佈最新的交易。
+圖 2：承諾交易可由任何一方在任何時間廣播，只有一方會從單一的資金交易中成功花費。這樣不行，因為一方不想廣播最新的交易。
 
 ---
 
 Since either party may broadcast the Commitment Transaction at any time, the result would be after the new Commitment Transaction is generated, the one who receives less funds has significant incentive to broadcast the transaction which has greater values for themselves in the Commitment Transaction outputs. As a result, the channel would be immediately closed and funds stolen. Therefore, one cannot create payment channels under this model.
 
-因為任何一方都可以在任何時間公佈承諾交易，其結果是，產生了新的承諾後，獲得資金少的人想公佈這承諾交易，在這承諾交易產出中對他們具有更大的價值。其結果是，該通道將被立即關閉並且資金被盜。因此，人們不能在這種模式下建立支付通道。
+因為任何一方都可以在任何時間廣播承諾交易，其結果是，產生了新的承諾後，獲得資金少的人想廣播這承諾交易，在這承諾交易產出中對他們具有更大的價值。其結果是，該通道將被立即關閉並且資金被盜。因此，人們不能在這種模式下建立支付通道。
 
 ---
 
@@ -361,25 +361,25 @@ Since either party may broadcast the Commitment Transaction at any time, the res
 
 Since any signed Commitment Transaction may be broadcast on the blockchain, and only one can be successfully broadcast, it is necessary to prevent old Commitment Transactions from being broadcast. It is not possible to revoke tens of thousands of transactions in Bitcoin, so an alternate method is necessary. Instead of active revocation enforced by the blockchain, it’s necessary to construct the channel itself in similar manner to a Fidelity Bond, whereby both parties make commitments, and violations of these commitments are enforced by penalties. If one party violates their agreement, then they will lose all the money in the channel.
 
-因為任何簽署的承諾交易可以被公佈在 blockchain 上，並且只有一個可以成功地公佈，有必要防止舊承諾交易被公佈。撤銷在比特幣上的幾萬交易是不可能的，所以另一種方法是必要的。相反，主動撤銷 blockchain 強制執行的交易，有必要以與富達債券類似的方式建立通道，即雙方都作出承諾，違反這些承諾被強制實施處罰。如果一方違反了他們的協議，那麼他們將失去所有在通道中的錢。
+因為任何簽署的承諾交易可以被廣播在 blockchain 上，並且只有一個可以成功地廣播，有必要防止舊承諾交易被廣播。撤銷在比特幣上的幾萬交易是不可能的，所以另一種方法是必要的。相反，主動撤銷 blockchain 強制執行的交易，有必要以與富達債券類似的方式建立通道，即雙方都作出承諾，違反這些承諾被強制實施處罰。如果一方違反了他們的協議，那麼他們將失去所有在通道中的錢。
 
 ---
 
 For this payment channel, the contract terms are that both parties commit to broadcasting only the most recent transaction. Any broadcast of older transactions will cause a violation of the contract, and all funds are given to the other party as a penalty.
 
-對於這種支付通道，合約條款是：雙方承諾只公佈最近的交易，對舊交易的任何公佈將導致對合約的違反，所有的資金都作為懲罰送給對方。
+對於這種支付通道，合約條款是：雙方承諾只廣播最近的交易，對舊交易的任何廣播將導致對合約的違反，所有的資金都作為懲罰送給對方。
 
 ---
 
 This can only be enforced if one is able to ascribe blame for broadcasting an old transaction. In order to do so, one must be able to uniquely identify who broadcast an older transaction. This can be done if each counterparty has a uniquely identifiable Commitment Transaction. Both parties must sign the inputs to the Commitment Transaction which the other party is responsible for broadcasting. Since one has a version of the Commitment Transaction that is signed by the other party, one can only broadcast one’s own version of the Commitment Transaction.
 
-這只有在一方能夠將責任歸咎於公佈舊交易的情況下才可以被執行。為了做到這一點，必須能夠準確的識別是誰公佈了一個舊交易。這是可以做到，如果雙方擁有唯一地可鑒定的承諾交易。雙方必須簽署承諾交易，而對方負責公佈。因為一方由對方簽署的一份交易承諾，一方只能公佈自己承諾交易的版本。
+這只有在一方能夠將責任歸咎於廣播舊交易的情況下才可以被執行。為了做到這一點，必須能夠準確的識別是誰廣播了一個舊交易。這是可以做到，如果雙方擁有唯一地可鑒定的承諾交易。雙方必須簽署承諾交易，而對方負責廣播。因為一方由對方簽署的一份交易承諾，一方只能廣播自己承諾交易的版本。
 
 ---
 
 For the Lightning Network, all spends from the Funding Transaction output, Commitment Transactions, have two half-signed transactions. One Commitment Transaction in which Alice signs and gives to Bob (C1b), and another which Bob signs and gives to Alice (C1a). These two Commitment Transactions spend from the same output (Funding Transaction), and have different contents; only one can be broadcast on the blockchain, as both pairs of Commitment Transactions spend from the same Funding Transaction. Either party may broadcast their received Commitment Transaction by signing their version and including the counterparty’s signature. For example, Bob can broadcast Commitment C1b, since he has already received the signature for C1b from Alice —he includes Alice’s signature and signs C1b himself. The transaction will be a valid spend from the Funding Transaction’s 2-of-2 output requiring both Alice and Bob’s signature.
 
-對於閃電網，一切花費從資金交易輸出，承諾交易有兩個半簽名交易。Alice 簽署一份承諾交易，給 Bob（C1b），另一半由 Bob 簽署，給 Alice（C1a）。這兩個承諾的花費來自於相同的輸出（融資交易），並有不同的內容;只有一個可以在 blockchain 公佈，因為交易承諾的兩部分來自同一交易的資金支出。任何一方都可以通過登錄包括交易對方簽名自己的版本，公佈其收到的承諾交易。例如，Bob 可以公佈承諾 C1b，因為他已經從 Alice 那裡收到了 C1b 的簽名-它包含了 Alice 的簽名和 C1b 的自己的簽名。該交易將會從 2-OF-2 資金交易的輸出要求 Alice 和 Bob 的簽名有效支出。
+對於閃電網，一切花費從資金交易輸出，承諾交易有兩個半簽名交易。Alice 簽署一份承諾交易，給 Bob（C1b），另一半由 Bob 簽署，給 Alice（C1a）。這兩個承諾的花費來自於相同的輸出（融資交易），並有不同的內容;只有一個可以在 blockchain 廣播，因為交易承諾的兩部分來自同一交易的資金支出。任何一方都可以通過登錄包括交易對方簽名自己的版本，廣播其收到的承諾交易。例如，Bob 可以廣播承諾 C1b，因為他已經從 Alice 那裡收到了 C1b 的簽名-它包含了 Alice 的簽名和 C1b 的自己的簽名。該交易將會從 2-OF-2 資金交易的輸出要求 Alice 和 Bob 的簽名有效支出。
 
 ---
 
@@ -387,13 +387,13 @@ For the Lightning Network, all spends from the Funding Transaction output, Commi
 
 Figure 3: Purple boxes are unbroadcasted transactions which only Alice can broadcast. Blue boxes are unbroadcasted transaction which only Bob can broadcast. Alice can only broadcast Commitment 1a, Bob can only broadcast Commitment 1b. Only one Commitment Transaction can be spent from the Funding Transaction output. Blame is ascribed, but either one can still be spent with no penalty.
 
-圖 3：紫框裡代表未被公佈只有 Alice 可以公佈的交易。籃框裡代表未被公佈只有 Bob 可以 公佈的交易。Alice 只能公佈承諾 1A，Bob 只能公佈承諾 1B。只有一個承諾交易可以從交易資金輸出中支出。錯誤根源已找出，但任何一方仍然可以花費並且不受懲罰。
+圖 3：紫框裡代表未被廣播只有 Alice 可以廣播的交易。籃框裡代表未被廣播只有 Bob 可以 廣播的交易。Alice 只能廣播承諾 1A，Bob 只能廣播承諾 1B。只有一個承諾交易可以從交易資金輸出中支出。錯誤根源已找出，但任何一方仍然可以花費並且不受懲罰。
 
 ---
 
 However, even with this construction, one has only merely allocated blame. It is not yet possible to enforce this contract on the Bitcoin blockchain. Bob still trusts Alice not to broadcast an old Commitment Transaction. At this time, he is only able to prove that Alice has done so via a half-signed transaction proof.
 
-然而，即使有這樣的結構，一個人僅僅只是被分配了責任。目前尚不可能在比特幣 blockchain 上執行本合約。Bob 仍然相信 Alice 不會公佈舊承諾交易。在這個時候，他只能夠證明，Alice 這樣做已經通過半簽名的交易證明。
+然而，即使有這樣的結構，一個人僅僅只是被分配了責任。目前尚不可能在比特幣 blockchain 上執行本合約。Bob 仍然相信 Alice 不會廣播舊承諾交易。在這個時候，他只能夠證明，Alice 這樣做已經通過半簽名的交易證明。
 
 ---
 
@@ -415,7 +415,7 @@ Mark Freidenbach 曾提出，nSequence 可以由父交易的相對區塊成熟�
 
 To summarize, Bitcoin was released with a sequence number which was only enforced in the mempool of unconfirmed transactions. The original behavior permitted transaction replacement by replacing transactions in the mempool with newer transactions if they have a higher sequence number. Due to transaction replacement rules, it is not enforced due to denial of service attack risks. It appears as though the intended purpose of the sequence number is to replace unbroadcasted transactions. However, this higher sequence number replacement behavior is unenforcible. One cannot be assured that old versions of transactions were replaced in the mempool and a block contains the most recent version of the transaction. A way to enforce transaction versions off-chain is via time commitments.
 
-概括地說，具有順序號的比特幣被發行，這些順序號在無確認條件的記憶體池中被執行。原來的行為允許交易置換，如果他們具有較高的 nSequence，可通過在記憶體池中與較新的交易替換。根據交易替換規則，這不是由拒絕服務攻擊風險來執行。nSequence 的預期目的是替代未公佈的交易。然而，這種較高 nSequence 的替換行為是不可執行的。人們不能得到保證，交易的舊版本在記憶體池內已經被替換，一個區塊包含的是最新的版本。一種以 off-chain 形式執行交易版本的方法是通過時間承諾。
+概括地說，具有順序號的比特幣被發行，這些順序號在無確認條件的記憶體池中被執行。原來的行為允許交易置換，如果他們具有較高的 nSequence，可通過在記憶體池中與較新的交易替換。根據交易替換規則，這不是由拒絕服務攻擊風險來執行。nSequence 的預期目的是替代未廣播的交易。然而，這種較高 nSequence 的替換行為是不可執行的。人們不能得到保證，交易的舊版本在記憶體池內已經被替換，一個區塊包含的是最新的版本。一種以 off-chain 形式執行交易版本的方法是通過時間承諾。
 
 ---
 
@@ -433,7 +433,7 @@ A transaction can be revoked with this sequence number behavior by creating a re
 
 This creates a structure whereby the parent transaction with this output becomes a bonded deposit, attesting that there is no revocation. A time period exists which anyone on the blockchain can refute this attestation by broadcasting a spend immediately after the transaction is broadcast.
 
-這就產生了一個結構，其中父交易和該輸出變成粘結存款，證明沒有撤銷。在一段時間內區塊鏈上的任何人可以通過公佈交易之後立即公佈支出駁斥這種認證。
+這就產生了一個結構，其中父交易和該輸出變成粘結存款，證明沒有撤銷。在一段時間內區塊鏈上的任何人可以通過廣播交易之後立即廣播支出駁斥這種認證。
 
 ---
 
@@ -467,8 +467,8 @@ The contract terms are:
 該合約的條款是：
 1. 所有各方簽訂一份合約，該合約有一個輸出來執行本合約
 ***2. 雙方當事人同意在一個等待期（在我們的示例腳本中是 1000 個確認）內為一些合約集資，有。這是可撤銷的輸出平衡。***
-3. 一方或雙方當事人可以選擇不公佈（執行）的支出，直到將來某個日期;任何一方都可以在等待期後隨時贖回基金。
-4. 如果雙方都沒有公佈本次交易（贖回基金），他們可能會撤銷上述支出，當且僅當雙方都同意通過在取代交易支付中放置一個新的支付期限。新的交易支付可以在該合約披露給世界後立即贖回（公佈在 blockchain 上）。
+3. 一方或雙方當事人可以選擇不廣播（執行）的支出，直到將來某個日期;任何一方都可以在等待期後隨時贖回基金。
+4. 如果雙方都沒有廣播本次交易（贖回基金），他們可能會撤銷上述支出，當且僅當雙方都同意通過在取代交易支付中放置一個新的支付期限。新的交易支付可以在該合約披露給世界後立即贖回（廣播在 blockchain 上）。
 5. 在合約被披露但新的支出結構不贖回的情況下，之前撤銷的支付條款可以由任何一方贖回（所以執行新條款是雙方中任何一方的責任）。
 
 ---
@@ -487,7 +487,7 @@ In order to revoke this signed child transaction, both parties just agree to cre
 
 This new signed spend supersedes the revocable spend so long as the new signed spend enters into the blockchain within 1000 confirmations of the parent transaction entering into the blockchain. In effect, if Alice and Bob agree to monitor the blockchain for incorrect broadcast of Commitment Transactions, the moment the transaction gets broadcast, they are able to spend using the superseding transaction immediately. In order to broadcast the revocable spend (deprecated transaction), which spends from the same output as the superseding transaction, they must wait 1000 confirmations. 
 
-只要新簽署的支出進入父交易已經進入的有 1000 個確認的 blockchain 中，這個新簽署的支出將取代可撤銷的花費。事實上，如果 Alice 和 Bob 同意監測 blockchain，以防其對承諾交易進行不正確公佈，當下交易一公佈，他們能夠立即使用替代交易進行花費。為了公佈可撤銷支出（不建議的交易），其花費與替代交易相同，他們必須等待 1000 個確認。
+只要新簽署的支出進入父交易已經進入的有 1000 個確認的 blockchain 中，這個新簽署的支出將取代可撤銷的花費。事實上，如果 Alice 和 Bob 同意監測 blockchain，以防其對承諾交易進行不正確廣播，當下交易一廣播，他們能夠立即使用替代交易進行花費。為了廣播可撤銷支出（不建議的交易），其花費與替代交易相同，他們必須等待 1000 個確認。
 
 ---
 
@@ -496,7 +496,7 @@ This new signed spend supersedes the revocable spend so long as the new signed s
 
 Using this construction, anyone could create a transaction, not broadcast the transaction, and then later create incentives to not ever broadcast that transaction in the future via penalties. This permits participants on the Bitcoin network to defer many transactions from ever hitting the blockchain.
 
-採用這種結構，任何人都可以創建一個交易，不公佈交易，再後來建立激勵機制，使其在未來不通過處罰來公佈交易。這使得比特幣網路上的參與者可以推遲許多在 blockchain 上的交易。
+採用這種結構，任何人都可以創建一個交易，不廣播交易，再後來建立激勵機制，使其在未來不通過處罰來廣播交易。這使得比特幣網路上的參與者可以推遲許多在 blockchain 上的交易。
 
 #### 3.3.1 Timestop
 
@@ -557,37 +557,37 @@ By combining the ascribing of blame as well as the revocable transaction, one is
 
 Figure 4: The Funding Transaction F, designated in green, is broadcast on the blockchain after all other transactions are signed. All transactions which only Alice can broadcast are in purple. All transactions which only Bob can broadcast is are blue. Only the Funding Transaction is broadcast on the blockchain at this time.
 
-圖 4：資金交易 F，用綠色代表，在所有其他交易簽署之後在 blockchain 上公佈。所有交易只有 Alice 可以公佈的交易由紫色代表。所有只有 Bob 可以公佈的交易由藍色代表。此時，只有交易資金在 blockchain 上公佈。
+圖 4：資金交易 F，用綠色代表，在所有其他交易簽署之後在 blockchain 上廣播。所有交易只有 Alice 可以廣播的交易由紫色代表。所有只有 Bob 可以廣播的交易由藍色代表。此時，只有交易資金在 blockchain 上廣播。
 
 ---
 
 The intent of creating a new Commitment Transaction is to invalidate all old Commitment Transactions when updating the new balance with a new Commitment Transaction. Invalidation of old transactions can happen by making an output be a Revocable Sequence Maturity Contract (RSMC). To invalidate a transaction, a superseding transaction will be signed and exchanged by both parties that gives all funds to the counterparty in the event an older transaction is incorrectly broadcast. The incorrect broadcast is identified by creating two different Commitment Transactions with the same final balance outputs, however the payment to oneself is encumbered by an RSMC.
 
-創建一個新的承諾交易的目的是在利用新的承諾交易來更新新的平衡，使所有的舊的承諾交易無效。要使舊的交易失效，要使輸出成為可撤銷的序列到期合約（RSMC）。要使交易無效，將簽署一個替代的交易，並且雙方交換此交易，規定雙方在不正確的公佈舊交易的情況下將資金交給對方。不正確的公佈通過創建具有相同的網路最終平衡輸出的兩個不同承諾交易來鑒定，但是給自己的支付由 RSMC 擔保。
+創建一個新的承諾交易的目的是在利用新的承諾交易來更新新的平衡，使所有的舊的承諾交易無效。要使舊的交易失效，要使輸出成為可撤銷的序列到期合約（RSMC）。要使交易無效，將簽署一個替代的交易，並且雙方交換此交易，規定雙方在不正確的廣播舊交易的情況下將資金交給對方。不正確的廣播通過創建具有相同的網路最終平衡輸出的兩個不同承諾交易來鑒定，但是給自己的支付由 RSMC 擔保。
 
 ---
 
 In effect, there are two Commitment Transactions from a single Funding Transaction 2-of-2 outputs. Of these two Commitment Transactions, only one can enter into the blockchain. Each party within a channel has one version of this contract. So if this is the first Commitment Transaction pair, Alice’s Commitment Transaction is defined as C1a, and Bob’s Commitment Transaction is defined as C1b. By broadcasting a Commitment Transaction, one is requesting for the channel to close out and end. The first two outputs for the Commitment Transaction include a Delivery Transaction (payout) of the present unallocated balance to the channel counterparties. If Alice broadcasts C1a, one of the output is spendable by D1a, which sends funds to Bob. For Bob, C1b is spendable by D1b, which sends funds to Alice. The Delivery Transaction (D1a/D1b) is immediately redeemable and is not encumbered in any way in the event the Commitment Transaction is broadcast.
 
-實際上，2-of-2 資金交易輸出有兩個承諾交易。這兩個承諾交易中，只有一個可以進入到 blockchain。通道內的每一方都有本合約的一個版本。因此，如果這是第一個承諾交易對， Alice 的承諾交易被定義為 C1a， Bob 的承諾交易被定義為 C1b。若要公佈一個承諾交易，要求的通道關閉並結束。承諾交易的前兩個輸出包括目前未分配的與通道對手不平衡的交貨交易（派息）。如果 Alice 公佈 C1a，其中一個輸出對 D1a 是可支配的，它發送資金給 Bob。 Bob，C1b 的是可由 D1b 支配的，它發送資金給 Alice。該交貨交易（D1a / D1b）是被立即贖回的，並以任何方式公佈交易承諾不受到阻礙。
+實際上，2-of-2 資金交易輸出有兩個承諾交易。這兩個承諾交易中，只有一個可以進入到 blockchain。通道內的每一方都有本合約的一個版本。因此，如果這是第一個承諾交易對， Alice 的承諾交易被定義為 C1a， Bob 的承諾交易被定義為 C1b。若要廣播一個承諾交易，要求的通道關閉並結束。承諾交易的前兩個輸出包括目前未分配的與通道對手不平衡的交貨交易（派息）。如果 Alice 廣播 C1a，其中一個輸出對 D1a 是可支配的，它發送資金給 Bob。 Bob，C1b 的是可由 D1b 支配的，它發送資金給 Alice。該交貨交易（D1a / D1b）是被立即贖回的，並以任何方式廣播交易承諾不受到阻礙。
 
 ---
 
 For each party’s Commitment Transaction, they are attesting that they are broadcasting the most recent Commitment Transaction which they own. Since they are attesting that this is the current balance, the balance paid to the counterparty is assumed to be true, since one has no direct benefit by paying some funds to the counterparty as a penalty.
 
-對於每一方的承諾交易，他們證明他們正在公佈他們擁有最新的承諾交易。因為他們證明，這是當前平衡，支付給對方的平衡被認為是真實的，因為作為一種懲罰向對方支付資金對自己是沒有任何直接好處的。
+對於每一方的承諾交易，他們證明他們正在廣播他們擁有最新的承諾交易。因為他們證明，這是當前平衡，支付給對方的平衡被認為是真實的，因為作為一種懲罰向對方支付資金對自己是沒有任何直接好處的。
 
 ---
 
 The balance paid to the person who broadcast the Commitment Transaction, however, is unverified. The participants on the blockchain have no idea if the Commitment Transaction is the most recent or not. If they do not broadcast their most recent version, they will be penalized by taking all the funds in the channel and giving it to the counterparty. Since their own funds are encumbered in their own RSMC, they will only be able to claim their funds after some set number of confirmations after the Commitment Transaction has been included in a block (in our example, 1000 confirmations). If they do broadcast their most recent Commitment Transaction, there should be no revocation transaction superseding the revocable transaction, so they will be able to receive their funds after some set amount of time (1000 confirmations).
 
-將平衡支付給公佈承諾交易的人是未確認的。Blockchain 上的參與者不知道承諾交易是否是最近的。如果他們沒有公佈他們的最新版本，他們將被懲罰，承擔通道中所有的資金並給與交易對方。由於自己的資金都押在自己的 RSMC 中，他們只能在承諾交易已被列入一個區塊後（在我們的例子中，1000 次確認），經過一定數量的確認後要求自己的基金。如果他們公佈的是自己的最新承諾交易，應該沒有撤銷交易替換之前可撤銷的交易，所以他們就能夠在一段時間（1000 次確認）後取回投入的資金。
+將平衡支付給廣播承諾交易的人是未確認的。Blockchain 上的參與者不知道承諾交易是否是最近的。如果他們沒有廣播他們的最新版本，他們將被懲罰，承擔通道中所有的資金並給與交易對方。由於自己的資金都押在自己的 RSMC 中，他們只能在承諾交易已被列入一個區塊後（在我們的例子中，1000 次確認），經過一定數量的確認後要求自己的基金。如果他們廣播的是自己的最新承諾交易，應該沒有撤銷交易替換之前可撤銷的交易，所以他們就能夠在一段時間（1000 次確認）後取回投入的資金。
 
 ---
 
 By knowing who broadcast the Commitment Transaction and encumbering one’s own payouts to be locked up for a predefined period of time,both parties will be able to revoke the Commitment Transaction in the future.
 
-通過瞭解誰公佈承諾交易，並阻礙自己的支出在提前確定好的的時間內被鎖定，雙方將能夠在未來撤銷承諾交易。
+通過瞭解誰廣播承諾交易，並阻礙自己的支出在提前確定好的的時間內被鎖定，雙方將能夠在未來撤銷承諾交易。
 
 ---
 
@@ -595,13 +595,13 @@ By knowing who broadcast the Commitment Transaction and encumbering one’s own 
 
 Either party may redeem the funds from the channel. However, the party that broadcasts the Commitment Transaction must wait for the predefined number of confirmations described in the RSMC. The counterparty which did not broadcast the Commitment Transaction may redeem the funds immediately.
 
-任何一方都可以從通道贖回基金。然而，公佈承諾交易的一方必須等待在 RSMC 描述的提前確定好的交易數量。沒有公佈的承諾交易的交易對手可以立即贖回基金。
+任何一方都可以從通道贖回基金。然而，廣播承諾交易的一方必須等待在 RSMC 描述的提前確定好的交易數量。沒有廣播的承諾交易的交易對手可以立即贖回基金。
 
 ---
 
 For example, if the Funding Transaction is committed with 1 BTC (half to each counterparty) and Bob broadcasts the most recent Commitment Transaction, C1b, he must wait 1000 confirmations to receive his 0.5 BTC, while Alice can spend 0.5 BTC. For Alice, this transaction is fully closed if Alice agrees that Bob broadcast the correct Commitment Transaction (C1b).
 
-例如，如果資金交易承諾 1 BTC（每個交易對手一半），並且 Bob 公佈最新的承諾交易 C1b，他必須等 1000 次確認才能得到他的 0.5 BTC，Alice 可以花費 0.5 BTC。對於 Alice，本次交 易是完全封閉的，如果 Alice 同意 Bob 公佈的承諾交易（C1b）是正確的。
+例如，如果資金交易承諾 1 BTC（每個交易對手一半），並且 Bob 廣播最新的承諾交易 C1b，他必須等 1000 次確認才能得到他的 0.5 BTC，Alice 可以花費 0.5 BTC。對於 Alice，本次交 易是完全封閉的，如果 Alice 同意 Bob 廣播的承諾交易（C1b）是正確的。
 
 ---
 
@@ -609,13 +609,13 @@ For example, if the Funding Transaction is committed with 1 BTC (half to each co
 
 Figure 5: When Bob broadcasts C1b, Alice can immediately redeem her portion. Bob must wait 1000 confirmations. When the block is immediately broadcast, it is in this state. Transactions in green are transactions which are committed into the blockchain.
 
-圖 5：當 Bob 公佈 C1b 時，Alice 可以立即贖回她的部分。Bob 必須等到 1000 次確認。當區塊被立即公佈，它是在該狀態下。綠色交易是它們提交到 blockchain 的交易。
+圖 5：當 Bob 廣播 C1b 時，Alice 可以立即贖回她的部分。Bob 必須等到 1000 次確認。當區塊被立即廣播，它是在該狀態下。綠色交易是它們提交到 blockchain 的交易。
 
 ---
 
 After the Commitment Transaction has been in the blockchain for 1000 blocks, Bob can then broadcast the Revocable Delivery transaction. He must wait 1000 blocks to prove he has not revoked this Commitment Transaction (C1b). After 1000 blocks, the Revocable Delivery transaction will be able to be included in a block. If a party attempt to include the Revocable Delivery transaction in a block before 1000 confirmations, the transaction will be invalid up until after 1000 confirmations have passed (at which point it will become valid if the output has not yet been redeemed).
 
-承諾交易已經在 blockchain 1000 區塊之後，Bob 就可以公佈可撤銷的交貨交易。他必須等到 1000 區塊，以證明他並沒有撤銷該承諾交易（C1b）。1000 區塊後，可撤銷的交貨交易將能夠被包括在一個區塊中。如果一方企圖包括在 1000 次確認之前將可撤銷的交貨交易納入區塊，1000 次確認後該交易將是無效的（如果輸出尚未贖回，此時它就會成為有效的）。
+承諾交易已經在 blockchain 1000 區塊之後，Bob 就可以廣播可撤銷的交貨交易。他必須等到 1000 區塊，以證明他並沒有撤銷該承諾交易（C1b）。1000 區塊後，可撤銷的交貨交易將能夠被包括在一個區塊中。如果一方企圖包括在 1000 次確認之前將可撤銷的交貨交易納入區塊，1000 次確認後該交易將是無效的（如果輸出尚未贖回，此時它就會成為有效的）。
 
 ---
 
@@ -623,20 +623,20 @@ After the Commitment Transaction has been in the blockchain for 1000 blocks, Bob
 
 Figure 6: Alice agrees that Bob broadcast the correct Commitment Transaction and 1000 confirmations have passed. Bob then is able to broadcast the Revocable Delivery (RD1b) transaction on the blockchain.
 
-圖 6：Alice 同意，Bob 公佈正確的承諾交易並且 1000 次確認已經過去了。Bob 能夠在
-blockchain 上公佈可撤銷交貨交易（RD1b）。
+圖 6：Alice 同意，Bob 廣播正確的承諾交易並且 1000 次確認已經過去了。Bob 能夠在
+blockchain 上廣播可撤銷交貨交易（RD1b）。
 
 ---
 
 After Bob broadcasts the Revocable Delivery transaction, the channel is fully closed for both Alice and Bob, everyone has received the funds which they both agree are the current balance they each own in the channel.
 
-Bob 公佈可撤銷交貨的交易後，對於 Alice 和 Bob，該通道完全關閉，每個人都收到了資金，他們都同意在當前平衡下，他們在通道內分別擁有的資金。
+Bob 廣播可撤銷交貨的交易後，對於 Alice 和 Bob，該通道完全關閉，每個人都收到了資金，他們都同意在當前平衡下，他們在通道內分別擁有的資金。
 
 ---
 
 If it was instead Alice who broadcast the Commitment Transaction (C1a), she is the one who must wait 1000 confirmations instead of Bob.
 
-如果是 Alice 公佈承諾交易（C1a），她必須等到 1000 次確認，而不是Bob。
+如果是 Alice 廣播承諾交易（C1a），她必須等到 1000 次確認，而不是Bob。
 
 ---
 
@@ -658,13 +658,13 @@ Suppose Alice and Bob now want to update their current balances from 0.5 BTC eac
 
 Figure 7: Four possible transactions can exist, a pair with the old commitments, and another pair with the new commitments. Each party inside the channel can only broadcast half of the total commitments (two each). There is no explicit enforcement preventing any particular Commitment being broadcast other than penalty spends, as they are all valid unbroadcasted spends. The Revocable Commitment still exists with the C1a/C1b pair, but are not displayed for brevity.
 
-圖 7：四種可能的交易可以存在，一對舊的承諾，另一對新的承諾。通道內每一方只能公佈一半的承諾。沒有明確的執行防止任何特定的承諾被公佈而不是懲罰花費，因為它們都是有效的未公佈的花費。可撤銷的承諾仍與 C1a / C1b 成對存在，但不顯示簡短。
+圖 7：四種可能的交易可以存在，一對舊的承諾，另一對新的承諾。通道內每一方只能廣播一半的承諾。沒有明確的執行防止任何特定的承諾被廣播而不是懲罰花費，因為它們都是有效的未廣播的花費。可撤銷的承諾仍與 C1a / C1b 成對存在，但不顯示簡短。
 
 ---
 
 When a new pair of Commitment Transactions (C2a/C2b) is agreed upon, both parties will sign and exchange signatures for the new Commitment Transaction, then invalidate the old Commitment Transaction. This invalidation occurs by having both parties sign a Breach Remedy Transaction (BR1), which supersedes the Revocable Delivery Transaction (RD1). Each party hands to the other a half-signed revocation (BR1) from their own Revocable Delivery (RD1), which is a spend from the Commitment Transaction. The Breach Remedy Transaction will send all coins to the counterparty within the current balance of the channel. For example, if Alice and Bob both generate a new pair of Commitment Transactions (C2a/C2b) and invalidate prior commitments (C1a/C1b), and later Bob incorrectly broadcasts C1b on the blockchain, Alice can take all of Bob’s money from the channel. Alice can do this because Bob has proved to Alice via penalty that he will never broadcast C1b, since the moment he broadcasts C1b, Alice is able to take all of Bob’s money in the channel. In effect, by constructing a Breach Remedy transaction for the counterparty, one has attested that one will not be broadcasting any prior commitments. The counterparty can accept this, because they will get all the money in the channel when this agreement is violated.
 
-當一個新的對交易的承諾（C2A / C2b）達成一致，雙方將簽署並交換新承諾交易的簽名，然後舊的承諾交易失效。這種失效通過讓雙方簽署違約補救交易（BR1）發生，它取代了撤銷交貨交易（RD1）。每一方從自己的撤銷交付（RD1）發送給另一方的簽訂一半的撤銷交易（BR1），這是承諾交易的花費。違約補救交易就會把通道現有平衡中所有的現金給對方。例如，如果 Alice 和 Bob 都產生了一對新承諾交易（C2A / C2b）和失效的舊的承諾（C1a / C1b），後來 Bob 在 blockchain 不正確的公佈 C1b，Alice 可以拿走通道中 Bob 所有的錢。 Alice 能做到這一點，因為 Bob 已經通過懲罰向 Alice 證明，他將永遠不會公佈 C1b，因為他公佈 C1b 的那一刻，Alice 可以拿走通道中 Bob 所有的錢。事實上，通過為對手構建違約補救交易，一方已經證明，不會公佈任何事先的承諾。對方可以接受這一點，因為若該協議被違反，他們將得到通道中所有的錢。
+當一個新的對交易的承諾（C2A / C2b）達成一致，雙方將簽署並交換新承諾交易的簽名，然後舊的承諾交易失效。這種失效通過讓雙方簽署違約補救交易（BR1）發生，它取代了撤銷交貨交易（RD1）。每一方從自己的撤銷交付（RD1）發送給另一方的簽訂一半的撤銷交易（BR1），這是承諾交易的花費。違約補救交易就會把通道現有平衡中所有的現金給對方。例如，如果 Alice 和 Bob 都產生了一對新承諾交易（C2A / C2b）和失效的舊的承諾（C1a / C1b），後來 Bob 在 blockchain 不正確的廣播 C1b，Alice 可以拿走通道中 Bob 所有的錢。 Alice 能做到這一點，因為 Bob 已經通過懲罰向 Alice 證明，他將永遠不會廣播 C1b，因為他廣播 C1b 的那一刻，Alice 可以拿走通道中 Bob 所有的錢。事實上，通過為對手構建違約補救交易，一方已經證明，不會廣播任何事先的承諾。對方可以接受這一點，因為若該協議被違反，他們將得到通道中所有的錢。
 
 ---
 
@@ -672,13 +672,13 @@ When a new pair of Commitment Transactions (C2a/C2b) is agreed upon, both partie
 
 Figure 8: When C2a and C2b exist, both parties exchange Breach Remedy transactions. Both parties now have explicit economic incentive to avoid broadcasting old Commitment Transactions (C1a/C1b). If either party wishes to close out the channel, they will only use C2a (Alice) or C2b (Bob). If Alice broadcasts C1a, all her money will go to Bob. If Bob broadcasts C1b, all his money will go to Alice. See previous figure for C2a/C2b outputs.
 
-圖 8：當 C2A 和 C2B 存在，雙方交換違約補救交易。雙方現在都有明確的經濟激勵，避免公佈舊的承諾交易（C1a / C1b）。如一方要求關閉通道，他們將只使用 C2A（Alice）或 C2b 上（BOB）。如果 Alice 公佈 C1a，所有的錢都會給 Bob。如果 Bob 公佈 C1b，所有的錢都會給 Alice。C2A / C2b 的輸出請參閱前面的數位。
+圖 8：當 C2A 和 C2B 存在，雙方交換違約補救交易。雙方現在都有明確的經濟激勵，避免廣播舊的承諾交易（C1a / C1b）。如一方要求關閉通道，他們將只使用 C2A（Alice）或 C2b 上（BOB）。如果 Alice 廣播 C1a，所有的錢都會給 Bob。如果 Bob 廣播 C1b，所有的錢都會給 Alice。C2A / C2b 的輸出請參閱前面的數位。
 
 ---
 
 Due to this fact, one will likely delete all prior Commitment Transactions when a Breach Remedy Transaction has been passed to the counterparty. If one broadcasts an incorrect (deprecated and invalidated Commitment Transaction), all the money will go to one’s counterparty. For example, if Bob broadcasts C1b, so long as Alice watches the blockchain within the predefined number of blocks (in this case, 1000 blocks), Alice will be able to take all the money in this channel by broadcasting RD1b. Even if the present balance of the Commitment state (C2a/C2b) is 0.4 BTC to Alice and 0.6 BTC to Bob, because Bob violated the terms of the contract, all the money goes to Alice as a penalty. Functionally, the Revocable Transaction acts as a proof to the blockchain that Bob has violated the terms in the channel and this is programatically adjudicated by the blockchain.
 
-由於這一事實，當違約補救交易已經交給交易對手時，人們可能會刪除所有先前的承諾交易。如果一方公佈不正確（過時的，無效的承諾交易），所有的錢都會給對方。例如，如果 Bob 公佈 C1b，只要 Alice 在事先定好的區塊數量範圍內觀察 blockchain（在此情況下，1000 區 塊），Alice 將能夠通過公佈 RD1b 得到在這個通道的所有的錢。即使當前平衡的承諾狀態
+由於這一事實，當違約補救交易已經交給交易對手時，人們可能會刪除所有先前的承諾交易。如果一方廣播不正確（過時的，無效的承諾交易），所有的錢都會給對方。例如，如果 Bob 廣播 C1b，只要 Alice 在事先定好的區塊數量範圍內觀察 blockchain（在此情況下，1000 區 塊），Alice 將能夠通過廣播 RD1b 得到在這個通道的所有的錢。即使當前平衡的承諾狀態
 （C2A / C2b）為 0.4 BTC 給 Alice 和 0.6 BTC 給 Bob，因為 Bob 違反了合約條款，作為懲罰，所有的錢給 Alice。在功能上，可撤銷交易作為一個 blockchain 上的證明，證明 Bob 違反渠道中的條款，並且這是由 blockchain 程式設計判定的。
 
 ---
@@ -687,19 +687,19 @@ Due to this fact, one will likely delete all prior Commitment Transactions when 
 
 Figure 9: Transactions in green are committed to the blockchain. Bob incorrectly broadcasts C1b (only Bob is able to broadcast C1b/C2b). Because both agreed that the current state is the C2a/C2b Commitment pair, and have attested to each party that old commitments are invalidated via Breach Remedy Transactions, Alice is able to broadcast BR1b and take all the money in the channel, provided she does it within 1000 blocks after C1b is broadcast.
 
-圖 9：綠色代表被提交到 blockchain 上的交易。Bob 錯誤得公佈 C1b（只有 Bob 能夠公佈 C1b / C2b）。由於雙方都同意目前的狀態是 C2A / C2b 承諾對，並且已經通過違約補救交易證明了舊的承諾是無效的，Alice 能夠公佈 BR1b，並得到通道中所有的錢，只要她在 C1b 公佈 1000 區塊以後來執行。
+圖 9：綠色代表被提交到 blockchain 上的交易。Bob 錯誤得廣播 C1b（只有 Bob 能夠廣播 C1b / C2b）。由於雙方都同意目前的狀態是 C2A / C2b 承諾對，並且已經通過違約補救交易證明了舊的承諾是無效的，Alice 能夠廣播 BR1b，並得到通道中所有的錢，只要她在 C1b 廣播 1000 區塊以後來執行。
 
 ---
 
 However, if Alice does not broadcast BR1b within 1000 blocks, Bob may be able to steal some money, since his Revocable Delivery Transaction (RD1b) becomes valid after 1000 blocks. When an incorrect Commitment Transaction is broadcast, only the Breach Remedy Transaction can be broadcast for 1000 blocks (or whatever number of confirmations both parties agree to). After 1000 block confirmations, both the Breach Remedy (BR1b) and Revocable Delivery Transactions (RD1b) are able to be broadcast at any time. Breach Remedy transactions only have exclusivity within this predefined time period, and any time after of that is functionally an expiration of the statute of limitations —according to Bitcoin blockchain consensus, the time for dispute has ended.
 
-但是，如果 Alice 不在 C1b 公佈 1000 區塊以後公佈 BR1b，Bob 也許能偷一些錢，因為他的撤銷交貨交易（RD1b）在 1000 區塊後有效。當一個不正確的交易承諾被公佈，只有違約補救交易可公佈 1000 區塊（或其他的雙方同意的確認數量）。經過 1000 次確認，無論是違約補救措施（BR1b）還是可撤銷的交付交易（RD1b）能夠在任何時間公佈。違約補救交易只有在這個提前定義的時間段內具有排他性，之後的任何時間在功能上受到限制-根據比特幣 blockchain 共識，爭論的時間已經結束。
+但是，如果 Alice 不在 C1b 廣播 1000 區塊以後廣播 BR1b，Bob 也許能偷一些錢，因為他的撤銷交貨交易（RD1b）在 1000 區塊後有效。當一個不正確的交易承諾被廣播，只有違約補救交易可廣播 1000 區塊（或其他的雙方同意的確認數量）。經過 1000 次確認，無論是違約補救措施（BR1b）還是可撤銷的交付交易（RD1b）能夠在任何時間廣播。違約補救交易只有在這個提前定義的時間段內具有排他性，之後的任何時間在功能上受到限制-根據比特幣 blockchain 共識，爭論的時間已經結束。
 
 ---
 
 For this reason, one should periodically monitor the blockchain to see if one’s counterparty has broadcast an invalidated Commitment Transaction, or delegate a third party to do so. A third party can be delegated by only giving the Breach Remedy transaction to this third party. They can be incentivized to watch the blockchain broadcast such a transaction in the event of counterparty maliciousness by giving these third parties some fee in the output. Since the third party is only able to take action when the counterparty is acting maliciously, this third party does not have any power to force close of the channel.
 
-為此，應定期監測 blockchain，監控其對手是否公佈了無效的承諾交易，或委託協力廠商這樣做。只能通過向這個協力廠商提供違約補救交易來對其進行委託。協力廠商被激勵去監控 blockchain 中這樣的對手惡意公佈的交易，通過給這些協力廠商一些輸出中的手續費。由於第三人只能在對方惡意行為時採取行動，該協力廠商沒有任何強制關閉通道的權力。
+為此，應定期監測 blockchain，監控其對手是否廣播了無效的承諾交易，或委託協力廠商這樣做。只能通過向這個協力廠商提供違約補救交易來對其進行委託。協力廠商被激勵去監控 blockchain 中這樣的對手惡意廣播的交易，通過給這些協力廠商一些輸出中的手續費。由於第三人只能在對方惡意行為時採取行動，該協力廠商沒有任何強制關閉通道的權力。
 
 ---
 
@@ -745,7 +745,7 @@ change signatures for the Commitment Transactions. Bob signs C1a using KBobF and
 
 At this point, the prior Commitment Transaction as well as the new Commitment Transaction can be broadcast; both C1a/C1b and C2a/C2b are valid. (Note that Commitments older than the prior Commitment are invalidated via penalties.) In order to invalidate C1a and C1b, both parties exchange Breach Remedy Transaction (BR1a/BR1b) signatures for the prior commitment C1a/C1b. Alice sends BR1a to Bob using KAliceRSMC1, and Bob sends BR1b to Alice using KBobRSMC1. When both Breach Remedy signatures have been exchanged, the channel state is now at the current Commitment C2a/C2b and the balances are now committed.
 
-在這一點上，先前的承諾交易以及新的承諾交易能夠被公佈; C1a / C1b 和 C2A / C2b 上都是有效的。（注意，早於先前承諾的承諾通過處罰被判定為無效的。）為了使 C1a 和 C1b 無效，雙方為先前承諾 C1a / C1b 交換違約補救交易（ BR1a / BR1b）簽名。 Alice 使用 KAliceRSMC1 發送 BR1a 給 Bob，Bob 使用 KBobRSMC1 發送 BR1b 給 Alice。當兩個違約補救簽名進行了交換，通道狀態是在當前承諾 C2A / C2b 上的平衡。
+在這一點上，先前的承諾交易以及新的承諾交易能夠被廣播; C1a / C1b 和 C2A / C2b 上都是有效的。（注意，早於先前承諾的承諾通過處罰被判定為無效的。）為了使 C1a 和 C1b 無效，雙方為先前承諾 C1a / C1b 交換違約補救交易（ BR1a / BR1b）簽名。 Alice 使用 KAliceRSMC1 發送 BR1a 給 Bob，Bob 使用 KBobRSMC1 發送 BR1b 給 Alice。當兩個違約補救簽名進行了交換，通道狀態是在當前承諾 C2A / C2b 上的平衡。
 
 ---
 
@@ -757,7 +757,7 @@ However, instead of disclosing the BR1a/BR1b signatures, it’s also possible to
 
 If Bob incorrectly broadcasts C1b, then because Alice has all the private keys used in the outputs of C1b, she can take the money. However, only Bob is able to broadcast C1b. To prevent this coin theft risk, Bob should destroy all old Commitment Transactions.
 
-如果 Bob 沒有正確公佈 C1b，因為 Alice 有所有的 C1b 輸出使用的私密金鑰，她可以拿錢。然而，只有 Bob 能夠公佈 C1b。為了防止這種硬幣被盜風險，Bob 應該銷毀所有舊的承諾交易。
+如果 Bob 沒有正確廣播 C1b，因為 Alice 有所有的 C1b 輸出使用的私密金鑰，她可以拿錢。然而，只有 Bob 能夠廣播 C1b。為了防止這種硬幣被盜風險，Bob 應該銷毀所有舊的承諾交易。
 
 ---
 
@@ -765,13 +765,13 @@ If Bob incorrectly broadcasts C1b, then because Alice has all the private keys u
 
 Both parties are able to send as many payments to their counterparty as they wish, as long as they have funds available in the channel, knowing that in the event of disagreements they can broadcast to the blockchain the current state at any time.
 
-雙方都能夠按照自己的意願來發送任何數量的支付給他們的對手，只要他們在通道有可用資金，因為他們知道在意見分歧的情況下，他們可以在任何時間在 blockchain 上公佈當前的狀態。
+雙方都能夠按照自己的意願來發送任何數量的支付給他們的對手，只要他們在通道有可用資金，因為他們知道在意見分歧的情況下，他們可以在任何時間在 blockchain 上廣播當前的狀態。
 
 ---
 
 In the vast majority of cases, all the outputs from the Funding Transaction will never be broadcast on the blockchain. They are just there in case the other party is non-cooperative, much like how a contract is rarely enforced in the courts. A proven ability for the contract to be enforced in a deterministic manner is sufficient incentive for both parties to act honestly.
 
-在絕大多數情況下，從資金交易所有輸出將永遠不會在 blockchain 公佈。他們只是在對方不合作的情況下出現，很像一份在法庭上很少執行的合約。該合約被證明有能力以一個確定的方式來強制執行有效地激勵雙方誠實守信。
+在絕大多數情況下，從資金交易所有輸出將永遠不會在 blockchain 廣播。他們只是在對方不合作的情況下出現，很像一份在法庭上很少執行的合約。該合約被證明有能力以一個確定的方式來強制執行有效地激勵雙方誠實守信。
 
 ---
 
@@ -785,7 +785,7 @@ When either party wishes to close out a channel cooperatively, they will be able
 
 Figure 10: If both counterparties are cooperative, they take the balances in the current Commitment Transaction and spend from the Funding Transaction with a Exercise Settlement Transaction (ES). If the most recent Commitment Transaction gets broadcast instead, the payout (less fees) will be the same.
 
-圖 10：如果雙方是合作的，他們採取當前交易承諾的平衡，並從有運用結算交易（ES）的資金交易中花費。如果最近的承諾交易被公佈，支出（較少手續費）將是相同的。
+圖 10：如果雙方是合作的，他們採取當前交易承諾的平衡，並從有運用結算交易（ES）的資金交易中花費。如果最近的承諾交易被廣播，支出（較少手續費）將是相同的。
 
 ---
 
@@ -805,7 +805,7 @@ Channels may remain in perpetuity until they decide to cooperatively close out t
 
 By ensuring channels can update only with the consent of both parties, it is possible to construct channels which perpetually exist in the blockchain. Both parties can update the balance inside the channel with whatever output balances they wish, so long as it’s equal or less than the total funds committed inside the Funding Transaction; balances can move in both directions. If one party becomes malicious, either party may immediately close out the channel and broadcast the most current state to the blockchain. By using a fidelity bond construction (Revocable Delivery Transactions), if a party violates the terms of the channel, the funds will be sent to the counterparty, provided the proof of violation (Breach Remedy Transaction) is entered into the blockchain in a timely manner. If both parties are cooperative, the channel can remain open indefinitely, possibly for many years.
 
-通過確保通道只能在雙方當事人的同意的情況下得到更新，就可以構建永遠存在於 blockchain 上的通道。雙方可以在通道內以他們所希望的輸出更新平衡，只要它是等於或小於承諾資金交易內的資金總額;平衡可以在兩個方向上移動。如果一方是惡意的，任何一方都可以立即關閉通道並且公佈最新狀態到 blockchain。通過使用網路保真債券建築（撤銷交付交易），如果一方當事人違反的通道的條款，資金將被發送給對方，只要違反（違約補救交易）的證明及時進入 blockchain。如果雙方是合作，通道可以保持無限期地打開，可能很多年。
+通過確保通道只能在雙方當事人的同意的情況下得到更新，就可以構建永遠存在於 blockchain 上的通道。雙方可以在通道內以他們所希望的輸出更新平衡，只要它是等於或小於承諾資金交易內的資金總額;平衡可以在兩個方向上移動。如果一方是惡意的，任何一方都可以立即關閉通道並且廣播最新狀態到 blockchain。通過使用網路保真債券建築（撤銷交付交易），如果一方當事人違反的通道的條款，資金將被發送給對方，只要違反（違約補救交易）的證明及時進入 blockchain。如果雙方是合作，通道可以保持無限期地打開，可能很多年。
 
 ---
 
@@ -865,7 +865,7 @@ For clarity of examples, we use days for HTLCs and block height for RSMCs. In re
 In effect, one desires to construct a payment which is contingent upon knowledge of R by the recipient within a certain timeframe. After this timeframe, the funds are refunded back to the sender. Similar to RSMCs, these contract terms are programatically enforced on the Bitoin blockchain and do not require trust in the counterparty to adhere to the contract terms, as all violations are penalized via unilaterally enforced fidelity bonds, which are constructed using penalty transactions spending from commitment states. If Bob knows R within three days, then he can redeem the funds by broadcasting a transaction; Alice is unable to withhold the funds in any way, because the script returns as valid when the transaction is spent on the Bitcoin blockchain.
 
 事實上，人們希望建立一個支付，這個支付取決於收件人在一定的時間內對 R 的資訊。在此期限後，該基金退還給寄件者。
-類似于 RSMC，這些合約條款是在比特幣 blockchain 上強制性程式設計的，不需要對方服從合約條款的信任，因為所有的違反條款的行為都通過單方面強制網路保真債券基金受到懲罰，承諾交易投入手續費設置處罰。如果 Bob 在三天內知道 R，那麼他就可以公佈交易以贖回基金;Alice 是無法以任何方式截留資金的，因為當比特幣 blockchain 上發生了交易，腳本有效地返回。
+類似于 RSMC，這些合約條款是在比特幣 blockchain 上強制性程式設計的，不需要對方服從合約條款的信任，因為所有的違反條款的行為都通過單方面強制網路保真債券基金受到懲罰，承諾交易投入手續費設置處罰。如果 Bob 在三天內知道 R，那麼他就可以廣播交易以贖回基金;Alice 是無法以任何方式截留資金的，因為當比特幣 blockchain 上發生了交易，腳本有效地返回。
 
 ---
 
@@ -907,25 +907,25 @@ timelocked 退款給 Alice。為期 3 天的 timelock 使用來自於消費交�
 
 Figure 11: This is a non-functional naive implementation of an HTLC. Only the HTLC path from the Commitment Transaction is displayed. Note that there are two possible spends from an HTLC output. If Bob can produce the preimage R within 3 days and he can redeem path 1. After three days, Alice is able to broadcast path 2. When 3 days have elapsed either is valid. This model, however, doesn’t work with multiple Commitment Transactions.
 
-圖 11：這是一個 HTLC 的非功能性前期執行。只有來自於承諾交易的 HTLC 路徑可以被顯示。注意有兩種可能的來自於 HTLC 輸出花費。如果 Bob 能在 3 天之內生產原像 R，他可以贖回路徑 1.三天后，Alice 能夠公佈路徑 2。當 3 天已過或者是有效的。然而，該模型中，這並不與多個承諾交易工作。
+圖 11：這是一個 HTLC 的非功能性前期執行。只有來自於承諾交易的 HTLC 路徑可以被顯示。注意有兩種可能的來自於 HTLC 輸出花費。如果 Bob 能在 3 天之內生產原像 R，他可以贖回路徑 1.三天后，Alice 能夠廣播路徑 2。當 3 天已過或者是有效的。然而，該模型中，這並不與多個承諾交易工作。
 
 ---
 
 If R is produced within 3 days, then Bob can redeem the funds by broadcasting the “Delivery” transaction. A requirement for the “Delivery” transaction to be valid requires R to be included with the transaction. If R is not included, then the “Delivery” transaction is invalid. However, if 3 days have elapsed, the funds can be sent back to Alice by broadcasting transaction “Timeout”. When 3 days have elapsed and R has been disclosed, either transaction may be valid.
 
-如果 R 是在 3 天之內產生的，那麼 Bob 可以通過公佈“交付”交易贖回基金。“交付”交易有效的一個要求是 R 被包含在交易內。若 R 不被包括，則“交付”交易無效。但是，如果 3 天內已過，資金可以通過公佈交易“Timeout”發回給 Alice。3 天后，R 已經被公開，任何交易可能是有效的。
+如果 R 是在 3 天之內產生的，那麼 Bob 可以通過廣播“交付”交易贖回基金。“交付”交易有效的一個要求是 R 被包含在交易內。若 R 不被包括，則“交付”交易無效。但是，如果 3 天內已過，資金可以通過廣播交易“Timeout”發回給 Alice。3 天后，R 已經被公開，任何交易可能是有效的。
 
 ---
 
 It is within both parties individual responsibility to ensure that they can get their transaction into the blockchain in order to ensure the balances are correct. For Bob, in order to receive the funds, he must either broadcast the “Delivery” transaction on the Bitcoin blockchain, or otherwise settle with Alice (while cancelling the HTLC). For Alice, she must broadcast the “Timeout” 3 days from now to receive the refund, or cancel the HTLC entirely with Bob.
 
-這是雙方個人範圍內的責任，以確保他們的交易進入 blockchain，以保證平衡是正確的。對於 Bob，為了獲得資金，他必須要麼公佈比特幣 blockchain 的“交付”交易，或與 Alice 結算（同時取消 HTLC）。對於 Alice，她必須從即日起 3 天內公佈的“Timeout”交易，以收到退款，或與 Bob 完全取消 HTLC。
+這是雙方個人範圍內的責任，以確保他們的交易進入 blockchain，以保證平衡是正確的。對於 Bob，為了獲得資金，他必須要麼廣播比特幣 blockchain 的“交付”交易，或與 Alice 結算（同時取消 HTLC）。對於 Alice，她必須從即日起 3 天內廣播的“Timeout”交易，以收到退款，或與 Bob 完全取消 HTLC。
 
 ---
 
 Yet this kind of simplistic construction has similar problems as an incorrect bidirectional payment channel construction. When an old Commitment Transaction gets broadcast, either party may attempt to steal funds as both paths may be valid after the fact. For example, if R gets disclosed 1 year later, and an incorrect Commitment Transaction gets broadcast, both paths are valid and are redeemable by either party; the contract is not yet enforcible on the blockchain. Closing out the HTLC is absolutely necessary, because in order for Alice to get her refund, she must terminate the contract and receive her refund. Otherwise, when Bob discovers R after 3 days have elapsed, he may be able to steal the funds which should be going to Alice. With uncooperative counterparties it’s not possible to terminate an HTLC without broadcasting it to the bitcoin blockchain as the uncooperative party is unwilling to create a new Commitment Transaction.
 
-然而，這種簡單的結構也有類似於不正確的雙向支付通道結構的問題。當舊的承諾交易被公 布，任何一方都可以試圖竊取資金，因為在此事後，兩個路徑可能是有效的。例如，若 R 被公開 1 年以後，並且不正確的承諾交易被公佈，兩個路徑都有效並且可由任何一方贖回;合約還沒有在 blockchain 上被執行。關閉 HTLC 是絕對必要的，因為 Alice 為了得到退款，她必須終止合約，並接受她的退款。否則，當 Bob3 天后發現 R，他可能能夠竊取應給 Alice 的資金。對於不合作的對手，不可能在沒有把它公佈在 blockchain 時終止 HTLC，因為不合作的一方不願建立新的承諾交易。
+然而，這種簡單的結構也有類似於不正確的雙向支付通道結構的問題。當舊的承諾交易被公 布，任何一方都可以試圖竊取資金，因為在此事後，兩個路徑可能是有效的。例如，若 R 被公開 1 年以後，並且不正確的承諾交易被廣播，兩個路徑都有效並且可由任何一方贖回;合約還沒有在 blockchain 上被執行。關閉 HTLC 是絕對必要的，因為 Alice 為了得到退款，她必須終止合約，並接受她的退款。否則，當 Bob3 天后發現 R，他可能能夠竊取應給 Alice 的資金。對於不合作的對手，不可能在沒有把它廣播在 blockchain 時終止 HTLC，因為不合作的一方不願建立新的承諾交易。
 
 ---
 
@@ -933,7 +933,7 @@ Yet this kind of simplistic construction has similar problems as an incorrect bi
 
 To be able to terminate this contract off-chain without a broadcast to the Bitcoin blockchain requires embedding RSMCs in the output, which will have a similar construction to the bidirectional channel.
 
-為了能夠在不公佈到比特幣 blockchain 情況下終止 Off-chain 合約，需要在輸出中嵌入
+為了能夠在不廣播到比特幣 blockchain 情況下終止 Off-chain 合約，需要在輸出中嵌入
 RSMCs，RSMCs 將與雙向通道有類似結構。
 
 ---
@@ -942,7 +942,7 @@ RSMCs，RSMCs 將與雙向通道有類似結構。
 
 Figure 12: If Alice broadcasts C2a, then the left half will execute. If Bob broadcasts C2b, then the right half will execute. Either party may broadcast their Commitment transaction at any time. HTLC Timeout is only valid after 3 days. HTLC Executions can only be broadcast if the preimage to the hash R is known. Prior Commitments (and their dependent transactions) are not displayed for brevity.
 
-圖 12：如果 Alice 公佈 C2a，則左半將執行。如果 Bob 公佈 C2b，右半將執行。任何一方都可以在任何時候公佈其交易承諾。 HTLC Timeout 僅在 3 天后生效。只有雜湊 R 的原像是 已知的，HTLC 執行才能被公佈。為了簡潔，先前的承諾（和它們的相關交易）不顯示。
+圖 12：如果 Alice 廣播 C2a，則左半將執行。如果 Bob 廣播 C2b，右半將執行。任何一方都可以在任何時候廣播其交易承諾。 HTLC Timeout 僅在 3 天后生效。只有雜湊 R 的原像是 已知的，HTLC 執行才能被廣播。為了簡潔，先前的承諾（和它們的相關交易）不顯示。
 
 ---
 
@@ -968,7 +968,7 @@ rent balance to Alice and Bob (Outputs 0 and 1), with output 2 being the HTLC, w
 This new Commitment Transaction (C2a/C2b) will have an HTLC
 output with two possible spends. Each spend is different depending on each counterparty’s version of the Commitment Transaction. Similar to the bidirectional payment channel, when one party broadcasts their Commitment, payments to the counterparty will be assumed to be valid and not invalidated. This can occur because when one broadcasts a Commitment Transaction, one is attesting this is the most recent Commitment Transaction. If it is the most recent, then one is also attesting that the HTLC exists and was not invalidated before, so potential payments to one’s counterparty should be valid.
 
-這一新的承諾交易（C2A / C2b 上）將有一個有兩個可能的花費的 HTLC 輸出。每個支出是不同的，根據每個交易對手的承諾交易的版本。類似於雙向支付通道，當一方公佈他們的承諾，給交易對手的支付會被認為是有效的而不是無效的。這可能發生，因為當一方公佈承諾交易，是證明這是最近的承諾交易。如果它是最近的，也證明該 HTLC 存在並且之前未失效，所以給另一方的潛在支付應該是有效的。
+這一新的承諾交易（C2A / C2b 上）將有一個有兩個可能的花費的 HTLC 輸出。每個支出是不同的，根據每個交易對手的承諾交易的版本。類似於雙向支付通道，當一方廣播他們的承諾，給交易對手的支付會被認為是有效的而不是無效的。這可能發生，因為當一方廣播承諾交易，是證明這是最近的承諾交易。如果它是最近的，也證明該 HTLC 存在並且之前未失效，所以給另一方的潛在支付應該是有效的。
 
 ---
 
@@ -998,49 +998,49 @@ Bob 的承諾交易（C2b）中，HTLC 輸出腳本需要通過公開的 R 受�
 
 The HTLC output states are different depending upon which Commitment Transaction is broadcast.
 
-該 HTLC 輸出狀態是根據哪個承諾交易被公佈的。
+該 HTLC 輸出狀態是根據哪個承諾交易被廣播的。
 
 ---
 
-#### 4.2.1 當寄件者播的承諾交易 HTLC | HTLC when the Sender Broadcasts the Commitment Transaction
+#### 4.2.1 當寄件者廣播的承諾交易 HTLC | HTLC when the Sender Broadcasts the Commitment Transaction
 
 For the sender (Alice), the “Delivery” transaction is sent as an HTLC Execution Delivery transaction (HED1a), which is not encumbered in an RSMC. It assumes that this HTLC has never been terminated off-chain, as Alice is attesting that the broadcasted Commitment Transaction is the most recent. If Bob can produce the preimage R, he will be able to redeem funds from the HTLC after the Commitment Transaction is broadcast on the blockchain. This transaction consumes multisig(PAlice2, PBob2) if Alice broadcasts her Commitment C2a. Only Bob can broadcast HED1a since only Alice gave her signature for HED1a to Bob.
 
-對於寄件者（Alice），“交付”交易作為 HTLC 執行交付交易（HED1a）被發送，其不受阻於 RSMC。假定該 HTLC 從未被 Off-chain 終止，因為 Alice 證明公佈的承諾交易是最近的。如果 Bob 可以產生原像 R，他將能夠在該承諾交易在 blockchain 上公佈之後贖回基金。如果 Alice 公佈她的承諾 C2a，本次交易需要 multisig（PAlice2，PBob2）。只有 Alice 給 Bob 她的 HED1a 簽名，Bob 才可以公佈 HED1a。
+對於寄件者（Alice），“交付”交易作為 HTLC 執行交付交易（HED1a）被發送，其不受阻於 RSMC。假定該 HTLC 從未被 Off-chain 終止，因為 Alice 證明廣播的承諾交易是最近的。如果 Bob 可以產生原像 R，他將能夠在該承諾交易在 blockchain 上廣播之後贖回基金。如果 Alice 廣播她的承諾 C2a，本次交易需要 multisig（PAlice2，PBob2）。只有 Alice 給 Bob 她的 HED1a 簽名，Bob 才可以廣播 HED1a。
 
 ---
 
 However, if 3 days have elapsed since forming the HTLC, then Alice will be able broadcast a “Timeout” transaction, the HTLC Timeout transaction (HT1a). This transaction is an RSMC. It consumes the output multisig(PAlice1, PBob1) without requiring disclosure of R if Alice broadcasts C2a. This transaction cannot enter into the blockchain until 3 days have elapsed. The output for this transaction is an RSMC with multisig(PAlice3, PBob3) with relative maturity of 1000 blocks, and multisig(PAlice4, PBob4) with no requirement for confirmation maturity. Only Alice can broadcast HT1a since only Bob gave his signature for HT1a to Alice.
 
-但是，如果形成 HTLC 三天已經過去了，Alice 就可以公佈“Timeout”交易了，HTLC Timeout
-交易（HT1a）。這項交易是一個 RSMC。它在 Alice 公佈 C2a 的情況下需要輸出 multisig （PAlice1，PBob1），而無需披露 R。本次交易無法進入 blockchain 直到 3 天過後。此交易的輸出是一個有 1000 個區塊相對成熟的 multisig（PAlice3，PBob3）的 RSMC，和不需要區塊確認成熟的 multisig（PAlice4，PBob4）。只有 Bob 給 Alice 他 HT1a 的簽名，Alice 才可以公佈 HT1a。
+但是，如果形成 HTLC 三天已經過去了，Alice 就可以廣播“Timeout”交易了，HTLC Timeout
+交易（HT1a）。這項交易是一個 RSMC。它在 Alice 廣播 C2a 的情況下需要輸出 multisig （PAlice1，PBob1），而無需披露 R。本次交易無法進入 blockchain 直到 3 天過後。此交易的輸出是一個有 1000 個區塊相對成熟的 multisig（PAlice3，PBob3）的 RSMC，和不需要區塊確認成熟的 multisig（PAlice4，PBob4）。只有 Bob 給 Alice 他 HT1a 的簽名，Alice 才可以廣播 HT1a。
 
 ---
 
 After HT1a enters into the blockchain and 1000 block confirmations occur, an HTLC Timeout Revocable Delivery transaction (HTRD1a) may be broadcast by Alice which consumes multisig(PAlice3, PBob3). Only Alice can broadcast HTRD1a 1000 blocks after HT1a is broadcast since only Bob gave his signature for HTRD1a to Alice. This transaction can be revocable when another transaction supersedes HTRD1a using multisig(PAlice4, PBob4) which does not have any block maturity requirements.
 
-HT1A 進入 blockchain 並且 1000 次確認完成後，一個 HTLC Timeout 撤銷交付交易（HTRD1a）可以由 Alice 通過消耗 multisig（PAlice3，PBob3）公佈。只有 Bob 給 Alice 他 HTRD1a 的簽名，Alice 可以在公佈 HT1a1000 區塊後公佈 HTRD1a。本次交易可以撤銷，當另一個使用 multisig（PAlice4，PBob4）的交易取代 HTRD1a，它沒有對任何區塊的成熟度要求。
+HT1A 進入 blockchain 並且 1000 次確認完成後，一個 HTLC Timeout 撤銷交付交易（HTRD1a）可以由 Alice 通過消耗 multisig（PAlice3，PBob3）廣播。只有 Bob 給 Alice 他 HTRD1a 的簽名，Alice 可以在廣播 HT1a1000 區塊後廣播 HTRD1a。本次交易可以撤銷，當另一個使用 multisig（PAlice4，PBob4）的交易取代 HTRD1a，它沒有對任何區塊的成熟度要求。
 
 ---
 
-#### 4.2.2 接收者公佈承諾交易時的 HTLC | HTLC when the Receiver Broadcasts the Commitment Transaction
+#### 4.2.2 接收者廣播承諾交易時的 HTLC | HTLC when the Receiver Broadcasts the Commitment Transaction
 
 For the potential receiver (Bob), the “Timeout” of receipt is refunded as an HTLC Timeout Delivery transaction (HTD1b). This transaction directly refunds the funds to the original sender (Alice) and is not encumbered in an RSMC. It assumes that this HTLC has never been terminated off-chain, as Bob is attesting that the broadcasted Commitment Transaction (C2b) is the most recent. If 3 days have elapsed, Alice can broadcast HTD1b and take the refund. This transaction consumes multisig(PAlice5, PAlice5) if Bob broadcasts C2b. Only Alice can broadcast HTD1b since Bob gave his signature for HTD1b to Alice.
 
-對於潛在的接收者（Bob），收到的“Timeout”作為 HTLC Timeout 交付交易（HTD1b） 被退還。本次交易直接返還資金給原始寄件者（Alice），並不受 RSMC 的阻礙。假定該 HTLC 從未被 Off-chain 終止，因為 Bob 證明公佈的承諾交易（C2b）是最新的。如果 3 天已經過 去，Alice 可以公佈 HTD1b 並拿到退款。如果 Bob 公佈 C2b，本次交易需要 multisig（PAlice5， PAlice5）。只有 Alice 可以公佈 HTD1b，因為 Bob 給了 Alice 他 HTD1b 交易的簽名。
+對於潛在的接收者（Bob），收到的“Timeout”作為 HTLC Timeout 交付交易（HTD1b） 被退還。本次交易直接返還資金給原始寄件者（Alice），並不受 RSMC 的阻礙。假定該 HTLC 從未被 Off-chain 終止，因為 Bob 證明廣播的承諾交易（C2b）是最新的。如果 3 天已經過 去，Alice 可以廣播 HTD1b 並拿到退款。如果 Bob 廣播 C2b，本次交易需要 multisig（PAlice5， PAlice5）。只有 Alice 可以廣播 HTD1b，因為 Bob 給了 Alice 他 HTD1b 交易的簽名。
 
 ---
 
 However, if HTD1b is not broadcast (3 days have not elapsed) and Bob knows the preimage R, then Bob will be able to broadcast the HTLC Execution transaction (HE1b) if he can produce R. This transaction is an RSMC. It consumes the output multisig(PAlice6, PBob6) and requires disclosure of R if Bob broadcasts C2b. The output for this transaction is an RSMC with multisig(PAlice7, PBob7) with relative maturity of 1000 blocks, and multisig(PAlice8, PBob8) which does not have any block maturity requirements. Only Bob can broadcast HE1b since only Alice gave her signature for HE1b to Bob.
 
-但是，如果 HTD1b 沒有被公佈（沒有經過 3 天時間）並且 Bob 知道原像 R，如果他能產生 R.，則 Bob 將能夠公佈 HTLC 執行交易（HE1b）。這項交易是一個 RSMC。如果 Bob 公佈 C2b，它需要輸出 multisig（PAlice6，PBob6），並要求披露 R。此交易的輸出是一個有 1000 個區塊相對成熟的 multisig（PAlice7，PBob7）的 RSMC，和不需要區塊確認成熟的 multisig
-（PAlice8，PBob8）。只有 Alice 給 Bob 她 HT1a 的簽名，Bob 才可以公佈 HT1a。
+但是，如果 HTD1b 沒有被廣播（沒有經過 3 天時間）並且 Bob 知道原像 R，如果他能產生 R.，則 Bob 將能夠廣播 HTLC 執行交易（HE1b）。這項交易是一個 RSMC。如果 Bob 廣播 C2b，它需要輸出 multisig（PAlice6，PBob6），並要求披露 R。此交易的輸出是一個有 1000 個區塊相對成熟的 multisig（PAlice7，PBob7）的 RSMC，和不需要區塊確認成熟的 multisig
+（PAlice8，PBob8）。只有 Alice 給 Bob 她 HT1a 的簽名，Bob 才可以廣播 HT1a。
 
 ---
 
 After HE1b enters into the blockchain and 1000 block confirmations occur, an HTLC Execution Revocable Delivery transaction (HERD1b) may be broadcast by Bob which consumes multisig(PAlice7, PBob7). Only Bob can broadcast HERD1b 1000 blocks after HE1b is broadcast since only Alice gave her signature for HERD1b to Bob. This transaction can be revocable when another transaction supersedes HERD1b using multisig(PAlice8, PBob8) which does not have any block maturity requirements.
 
-HT1A 進入 blockchain 並且 1000 次確認完成後，一個 HTLC Timeout 撤銷交付交易（HERD1b）可以由 Bob 通過消耗 multisig（PAlice7，PBob7）公佈。只有 Alice 給 Bob 他 HERD1b 的簽名，Bob 可以在公佈 HE1b 1000 區塊後公佈 HERD1b。本次交易可以撤銷，當另一個使用 multisig（PAlice8，PBob8）的交易取代 HERD1b，它沒有對任何區塊的成熟度要求。
+HT1A 進入 blockchain 並且 1000 次確認完成後，一個 HTLC Timeout 撤銷交付交易（HERD1b）可以由 Bob 通過消耗 multisig（PAlice7，PBob7）廣播。只有 Alice 給 Bob 他 HERD1b 的簽名，Bob 可以在廣播 HE1b 1000 區塊後廣播 HERD1b。本次交易可以撤銷，當另一個使用 multisig（PAlice8，PBob8）的交易取代 HERD1b，它沒有對任何區塊的成熟度要求。
 
 ---
 
@@ -1056,7 +1056,7 @@ HTLC 構造之後，為了終止 HTLC Off-chain 需要雙方同意通道的狀�
 
 Figure 13: Since Bob proved to Alice he knows R by telling Alice R, Alice is willing to update the balance with a new Commitment Transaction. The payout will be the same whether C2 or C3 is broadcast at this time.
 
-圖 13：由於 Bob 向 Alice 證明，以告訴 Alice R 的有關資訊來告訴 Alice，Alice 願意用新的承諾交易更新平衡。此時不管公佈 C2 或 C3，支付將是相同的。
+圖 13：由於 Bob 向 Alice 證明，以告訴 Alice R 的有關資訊來告訴 Alice，Alice 願意用新的承諾交易更新平衡。此時不管廣播 C2 或 C3，支付將是相同的。
 
 ---
 
@@ -1068,7 +1068,7 @@ Similarly, if the recipient is not able to prove knowledge of R by disclosing R,
 
 If the counterparties cannot come to an agreement or become otherwise unresponsive, they should close out the channel by broadcasting the necessary channel transactions on the Bitcoin blockchain.
 
-如果交易對手不能達成協議或不回應，他們應該通過在比特幣 blockchain 公佈必需的通道交易來關閉通道。
+如果交易對手不能達成協議或不回應，他們應該通過在比特幣 blockchain 廣播必需的通道交易來關閉通道。
 
 ---
 
@@ -1080,7 +1080,7 @@ However, if they are cooperative, they can do so by first generating a new Commi
 
 For example, Alice wishes to terminate the HTLC, Alice will disclose KAlice1 and KAlice4 to Bob. Correspondingly if Bob wishes to terminate the HTLC, Bob will disclose KBob6 and KBob8 to Alice. After the private keys are disclosed to the counterparty, if Alice broadcasts C2a, Bob will be able to take all the funds from the HTLC immediately. If Bob broadcasts C2b, Alice will be able to take all funds from the HTLC immediately. Note that when an HTLC is terminated, the older Commitment Transaction must be revoked as well.
 
-例如，Alice 希望終止 HTLC，Alice 將披露 KAlice1 和 KAlice4 給 Bob。相應地，如果 Bob 希望終止 HTLC，Bob 將披露 KBob6 和 KBob8 給 Alice。私密金鑰透露給對方之後，如果 Alice 公佈 C2A，Bob 就能夠立即從 HTLC 拿走一切資金。如果 Bob 公佈 C2b，Alice 將能夠立即拿走 HTLC 上的一切資金。需要注意的是，當一個 HTLC 終止時，較舊的承諾交易必須也被撤銷。
+例如，Alice 希望終止 HTLC，Alice 將披露 KAlice1 和 KAlice4 給 Bob。相應地，如果 Bob 希望終止 HTLC，Bob 將披露 KBob6 和 KBob8 給 Alice。私密金鑰透露給對方之後，如果 Alice 廣播 C2A，Bob 就能夠立即從 HTLC 拿走一切資金。如果 Bob 廣播 C2b，Alice 將能夠立即拿走 HTLC 上的一切資金。需要注意的是，當一個 HTLC 終止時，較舊的承諾交易必須也被撤銷。
 
 ---
 
@@ -1088,13 +1088,13 @@ For example, Alice wishes to terminate the HTLC, Alice will disclose KAlice1 and
 
 Figure 14: A fully revoked Commitment Transaction and terminated HTLC. If either party broadcasts Commitment 2, they will lose all their money to the counterparty. Other commitments (e.g. if Commitment 3 is the current Commitment) are not displayed for brevity.
 
-圖 14：一個完全撤銷的承諾交易及終止的 HTLC。如果任何一方公佈承諾 2，他們將失去所有的錢，交給對方。簡潔為了，其他承諾（例如，如果承諾 3 是當前承諾）不顯示。
+圖 14：一個完全撤銷的承諾交易及終止的 HTLC。如果任何一方廣播承諾 2，他們將失去所有的錢，交給對方。簡潔為了，其他承諾（例如，如果承諾 3 是當前承諾）不顯示。
 
 ---
 
 Since both parties are able to prove the current state to each other, they can come to agreement on the current balance inside the channel. Since they may broadcast the current state on the blockchain, they are able to come to agreement on netting out and terminating the HTLC with a new Commitment Transaction.
 
-因為雙方都能夠彼此證明當前狀態，他們可以就現有通道中的平衡達成一致意見。因為它們可以在 blockchain 上公佈目前的狀態，他們能就用一個新的承諾交易剔除並終止 HTLC 達成一致意見。
+因為雙方都能夠彼此證明當前狀態，他們可以就現有通道中的平衡達成一致意見。因為它們可以在 blockchain 上廣播目前的狀態，他們能就用一個新的承諾交易剔除並終止 HTLC 達成一致意見。
 
 ---
 
@@ -1114,29 +1114,29 @@ To close out an HTLC, the process is as follows (from C2 to C3):
 
 關閉一個 HTLC，該過程如下（從 C2 至 C3）：
 
-1. Alice 簽署並發送她 RD3b 和 C3b 的簽名。此時 Bob 可以選擇公佈的 C3b 或 C2b（與 HTLC），其具有相同的支出。Bob 願意接收 C3b 並關閉 C2b。
+1. Alice 簽署並發送她 RD3b 和 C3b 的簽名。此時 Bob 可以選擇廣播的 C3b 或 C2b（與 HTLC），其具有相同的支出。Bob 願意接收 C3b 並關閉 C2b。
 
-2. Bob 簽署並發送他 RD3a 及 C3a 的簽名，以及他用於承諾 2 的私人金鑰並且 HTLC 被終止; 他發送 KBobRSMC2，KBob5 和 KBob8 給 Alice。在這一點上 Bob 只能公佈的 C3b，不應公布 C2b，如果他這樣做他將失去他所有的錢。 Bob 已經完全撤銷 C2b 和 HTLC。 Alice 願意接受 C3a 並關閉 C2b。
+2. Bob 簽署並發送他 RD3a 及 C3a 的簽名，以及他用於承諾 2 的私人金鑰並且 HTLC 被終止; 他發送 KBobRSMC2，KBob5 和 KBob8 給 Alice。在這一點上 Bob 只能廣播的 C3b，不應公布 C2b，如果他這樣做他將失去他所有的錢。 Bob 已經完全撤銷 C2b 和 HTLC。 Alice 願意接受 C3a 並關閉 C2b。
 
-3. Alice 簽署並發送她 RD3b 和 C3b 的簽名，以及她用於承諾 2 的私人金鑰並且 HTLC 被終止;她發送 KAliceRSMC2，KBob1 和 KBob4 給 Bob。此時，任何一方應公佈承諾 2，如果他們這樣做，他們的資金將流向對方。舊的承諾和舊的 HTLC 現已撤銷並完全終止。只有沒有 HTLC 的新承諾 3 遺留下來。
+3. Alice 簽署並發送她 RD3b 和 C3b 的簽名，以及她用於承諾 2 的私人金鑰並且 HTLC 被終止;她發送 KAliceRSMC2，KBob1 和 KBob4 給 Bob。此時，任何一方應廣播承諾 2，如果他們這樣做，他們的資金將流向對方。舊的承諾和舊的 HTLC 現已撤銷並完全終止。只有沒有 HTLC 的新承諾 3 遺留下來。
 
 ---
 
 When the HTLC has been closed, the funds are updated so that the present balance in the channel is what would occur had the HTLC contract been completed and broadcast on the blockchain. Instead, both parties elect to do off-chain novation and update their payments inside the channel.
 
-當 HTLC 已被關閉，資金被更新，使得在通道內現有的平衡是在完成並在 blockchain 上公佈HTLC 合約會發生的。相反，雙方都選擇 Off-chain 更新並在通道內更新自己的付款。
+當 HTLC 已被關閉，資金被更新，使得在通道內現有的平衡是在完成並在 blockchain 上廣播HTLC 合約會發生的。相反，雙方都選擇 Off-chain 更新並在通道內更新自己的付款。
 
 ---
 
 It is absolutely necessary for both parties to complete off-chain novation within their designated time window. For the receiver (Bob), he must know R and update his balance with Alice within 3 days (or whatever time was selected), else Alice will be able to redeem it within 3 days. For Alice, very soon after her timeout becomes valid, she must novate or broadcast the HTLC Timeout transaction. She must also novate or broadcast the HTLC Timeout Revocable Delivery transaction as soon as it becomes valid. If the counterparty is unwilling to novate or is stalling, then one must broadcast the current channel state, including HTLC transactions) onto the Bitcoin blockchain.
 
-雙方當事人在其指定的時間範圍內完成 Off-chain 更新是絕對必要的。對於接收者（Bob），他必須知道 R 和與 Alice 之間的 3 天之內的平衡（或任何被選中的時間），否則 Alice 將能夠在 3 天內贖回。對於 Alice，她的 Timeout 有效後不久，她必須更替或公佈的 HTLC Timeout 交易。她還必須更替或公佈 HTLC Timeout 撤銷交貨交易，一旦它成為有效的。如果對方不
+雙方當事人在其指定的時間範圍內完成 Off-chain 更新是絕對必要的。對於接收者（Bob），他必須知道 R 和與 Alice 之間的 3 天之內的平衡（或任何被選中的時間），否則 Alice 將能夠在 3 天內贖回。對於 Alice，她的 Timeout 有效後不久，她必須更替或廣播的 HTLC Timeout 交易。她還必須更替或廣播 HTLC Timeout 撤銷交貨交易，一旦它成為有效的。如果對方不
 
 ---
 
 The amount of time flexibility with these offers to novate are dependent upon one’s contingent dependencies on the hashlock R. If one establishes a contract that the HTLC must be resolved within 1 day, then if the transaction times out Alice must resolve it by day 4 (3 days plus 1), else Alice risks losing funds.
 
-願意更替或延遲，那麼就必須公佈當前通道狀態(包括 HTLC 交易）到比特幣 blockchain。時間的靈活性與這些更替的提供取決於一方對 hashlock R 偶然依賴性.，一方如果發佈一個合約，HTLC 必須在 1 天之內解決，那麼如果交易超時，Alice 必須在 4 天內解決它（3 天加 1 天），否則 Alice 可能失去資金。
+願意更替或延遲，那麼就必須廣播當前通道狀態(包括 HTLC 交易）到比特幣 blockchain。時間的靈活性與這些更替的提供取決於一方對 hashlock R 偶然依賴性.，一方如果發佈一個合約，HTLC 必須在 1 天之內解決，那麼如果交易超時，Alice 必須在 4 天內解決它（3 天加 1 天），否則 Alice 可能失去資金。
 
 ---
 
@@ -1150,13 +1150,13 @@ Keys are generated using BIP 0032 Hierarchical Deterministic Wallets[17]. Keys a
 
 When all Day 2 private keys have been exchanged, for example by day 5, Alice discloses her Day 2 key. Bob is able to generate the Day 1 key from the Day 2 key, as the Day 1 key is a child of the Day 2 key as well.
 
-當所有的第 2 天的私密金鑰交換完成，例如在第 5 天之前，Alice 公佈了她第 2 天的主金鑰。Bob 是能夠從第一天的主金鑰產生第 2 天的主金鑰，因為第 2 天主金鑰也是第一天的主金鑰的子金鑰。
+當所有的第 2 天的私密金鑰交換完成，例如在第 5 天之前，Alice 廣播了她第 2 天的主金鑰。Bob 是能夠從第一天的主金鑰產生第 2 天的主金鑰，因為第 2 天主金鑰也是第一天的主金鑰的子金鑰。
 
 ---
 
 If a counterparty broadcasts the wrong Commitment Transaction, which private key to use in a transaction to recover funds can either be brute forced, or if both parties agree, they can use the sequence id number when creating the transaction to identify which sets of keys are used.
 
-如果對方公佈了錯誤的承諾交易，在交易中回收資金使用的私有金鑰既可以被強制執行，或者如果雙方同意，他們可以在創建交易時使用 id 序列數位來確定哪些金鑰可以被使用。
+如果對方廣播了錯誤的承諾交易，在交易中回收資金使用的私有金鑰既可以被強制執行，或者如果雙方同意，他們可以在創建交易時使用 id 序列數位來確定哪些金鑰可以被使用。
 
 ---
 
@@ -1170,7 +1170,7 @@ This enables participants in a channel to have prior output states (transactions
 
 It is possible for each participant to generate different versions of transactions to ascribe blame as to who broadcast the transaction on the blockchain. By having knowledge of who broadcast a transaction and the ability to ascribe blame, a third party service can be used to hold fees in a 2-of-3 multisig escrow. If one wishes to broadcast the transaction chain instead of agreeing to do a Funding Close or replacement with a new Commitment Transaction, one would communicate with the third party and broadcast the chain to the blockchain. If the counterparty refuses the notice from the third party to cooperate, the penalty is rewarded to the non-cooperative party. In most instances, participants may be indifferent to the transaction fees in the event of an uncooperative counterparty.
 
-每個參與者產生不同版本的交易來尋找在 blockchain 上公佈交易的錯誤來源是可能的。通過得知是誰公佈交易並能夠尋找到錯誤的來源，協力廠商服務可以在 2-OF-3 multisig 代管用於持有手續費。如果一方希望公佈交易鏈，而不是同意做一個資金關閉或更換新的承諾交易，一方會與協力廠商交流並公佈此交易鏈到 blockchain。如果對方拒絕來自協力廠商合作的通知，非合作方會受到懲罰。在大多數情況下，參與者在對手不合作的情況下不在乎交易手續費。
+每個參與者產生不同版本的交易來尋找在 blockchain 上廣播交易的錯誤來源是可能的。通過得知是誰廣播交易並能夠尋找到錯誤的來源，協力廠商服務可以在 2-OF-3 multisig 代管用於持有手續費。如果一方希望廣播交易鏈，而不是同意做一個資金關閉或更換新的承諾交易，一方會與協力廠商交流並廣播此交易鏈到 blockchain。如果對方拒絕來自協力廠商合作的通知，非合作方會受到懲罰。在大多數情況下，參與者在對手不合作的情況下不在乎交易手續費。
 
 ---
 
@@ -1244,7 +1244,7 @@ Figure 15: Payment over the Lightning Network using HTLCs.
 
 When Alice sends payment to Dave through Bob and Carol, she requests from Dave hash(R) to use for this payment. Alice then counts the amount of hops until the recipient and uses that as the HTLC expiry. In this case, she sets the HTLC expiry at 3 days. Bob then creates an HTLC with Carol with an expiry of 2 days, and Carol does the same with Dave with an expiry of 1 day. Dave is now free to disclose R to Carol, and both parties will likely agree to immediate settlement via novation with a replacement Commitment Transaction. This then occurs step-by-step back to Alice. Note that this occurs off-chain, and nothing is broadcast to the blockchain when all parties are cooperative.
 
-當 Alice 通過 Bob 和 Carol 支付給 Dave，她要求 Dave 的雜湊（R）來用於此付款。Alice 然後計數跳躍的量，直到收件人用其作為 HTLC 屆滿。在這種情況下，設置 HTLC 屆滿為 3 天。然後，Bob 與 Carol 創建 HTLC，屆滿兩天，而 Carol 與 Dave 創建 HTLC，屆滿 1 天。Dave 現在可以自由地向 Carol 披露 R，雙方可能會同意通過承諾交易更替即時結算。然後就會一步一步的返回到 Alice。注意，這種情況發生在 off-chain 的情況下，若各方是合作的，沒有東西被公佈到 blockchain 上。
+當 Alice 通過 Bob 和 Carol 支付給 Dave，她要求 Dave 的雜湊（R）來用於此付款。Alice 然後計數跳躍的量，直到收件人用其作為 HTLC 屆滿。在這種情況下，設置 HTLC 屆滿為 3 天。然後，Bob 與 Carol 創建 HTLC，屆滿兩天，而 Carol 與 Dave 創建 HTLC，屆滿 1 天。Dave 現在可以自由地向 Carol 披露 R，雙方可能會同意通過承諾交易更替即時結算。然後就會一步一步的返回到 Alice。注意，這種情況發生在 off-chain 的情況下，若各方是合作的，沒有東西被廣播到 blockchain 上。
 
 ---
 
@@ -1258,7 +1258,7 @@ Figure 16: Settlement of HTLC, Alice’s funds get sent to Dave.
 
 Decrementing timelocks are used so that all parties along the path know that the disclosure of R will allow the disclosing party to pull funds, since they will at worst be pulling funds after the date whereby they must receive R. If Dave does not produce R within 1 day to Carol, then Carol will be able to close out the HTLC. If Dave broadcasts R after 1 day, then he will not be able to pull funds from Carol. Carol’s responsibility to Bob occurs on day 2, so Carol will never be responsible for payment to Dave without an ability to pull funds from Bob provided that she updates her transaction with Dave via transmission to the blockchain or via novation.
 
-遞減 timelocks 用來讓沿著路徑的各方知道 R 的披露將允許披露方收回資金，因為他們如果在其必須接受 R 之後的日子收回資金，他們會處於最壞的境地。如果 Dave 不能為 Carol 在一天內產生 R，那麼 Carol 就能夠收出 HTLC。如果戴夫 1 天后公佈 R，那麼他將無法從 Carol 收回資金。Carol 對 Bob 的責任發生在第 2 天，所以 Carol 將不再對給 Dave 的支付負責，並且不能從 Bob 那裡收回資金，如果她通過傳輸到 blockchain 或通過承諾交易更替來更新她與 Dave 的交易。
+遞減 timelocks 用來讓沿著路徑的各方知道 R 的披露將允許披露方收回資金，因為他們如果在其必須接受 R 之後的日子收回資金，他們會處於最壞的境地。如果 Dave 不能為 Carol 在一天內產生 R，那麼 Carol 就能夠收出 HTLC。如果戴夫 1 天后廣播 R，那麼他將無法從 Carol 收回資金。Carol 對 Bob 的責任發生在第 2 天，所以 Carol 將不再對給 Dave 的支付負責，並且不能從 Bob 那裡收回資金，如果她通過傳輸到 blockchain 或通過承諾交易更替來更新她與 Dave 的交易。
 
 ---
 
@@ -1270,7 +1270,7 @@ In the event that R gets disclosed to the participants halfway through expiry al
 
 In the event a party outright disconnects, the counterparty will be responsible for broadcasting the current Commitment Transaction state in the channel to the blockchain. Only the failed non-responsive channel state gets closed out on the blockchain, all other channels should continue to update their Commitment Transactions via novation inside the channel. Therefore, counterparty risk for transaction fees are only exposed to direct channel counterparties. If a node along the path decides to become unresponsive, the participants not directly connected to that node suffer only decreased timevalue of their funds by not conducting early settlement before the HTLC close.
 
-倘若一方徹底斷開，交易對方將負責目前的通道中的承諾交易的狀態公佈到 blockchain 上。只有 blockchain 上的失敗的非回應通道狀態被關閉，所有其他通道應繼續通過通道內更替阿來更新自己的承諾交易。因此，對於對方交易手續費風險只能告知直接通道方。如果沿路徑的節點決定變成無回應，沒有直接連接到該節點的參與者只遭受了其資金的時間價值的降低，因為其在 HTLC 關閉之前沒有過早的結算。
+倘若一方徹底斷開，交易對方將負責目前的通道中的承諾交易的狀態廣播到 blockchain 上。只有 blockchain 上的失敗的非回應通道狀態被關閉，所有其他通道應繼續通過通道內更替阿來更新自己的承諾交易。因此，對於對方交易手續費風險只能告知直接通道方。如果沿路徑的節點決定變成無回應，沒有直接連接到該節點的參與者只遭受了其資金的時間價值的降低，因為其在 HTLC 關閉之前沒有過早的結算。
 
 ---
 
@@ -1278,7 +1278,7 @@ In the event a party outright disconnects, the counterparty will be responsible 
 
 Figure 17: Only the non-responsive channels get broadcast on the blockchain, all others are settled off-chain via novation.
 
-圖 17：只有無回應通道得以在 blockchain 上公佈，所有其他的通過更替進行 off-chain 的結算。
+圖 17：只有無回應通道得以在 blockchain 上廣播，所有其他的通過更替進行 off-chain 的結算。
 
 ---
 
@@ -1286,7 +1286,7 @@ Figure 17: Only the non-responsive channels get broadcast on the blockchain, all
 
 It is preferable to use a small payment per HTLC. One should not use an extremely high payment, in case the payment does not fully route to its destination. If the payment does not reach its destination and one of the participants along the path is uncooperative, it is possible that the sender must wait until the expiry before receiving a refund. Delivery may be lossy, similar to packets on the internet, but the network cannot outright steal funds in transit. Since transactions don’t hit the blockchain with cooperative channel counterparties, it is recommended to use as small of a payment as possible. A tradeoff exists between locking up transaction fees on each hop versus the desire to use as small a transaction amount as possible (the latter of which may incur higher total fees). Smaller transfers with more intermediaries imply a higher percentage paid as Lightning Network fees to the intermediaries.
 
-優先使用每 HTLC 的小額付款。一方不應該使用的極高的支付，以防支付不充分路由到其目的地。如果支付沒有到達其目的地並且沿路徑的參與者之一是不合作的，發送者必須等待，直到接收退款之前的期滿。交付時可能會受損，類似於在互聯網上資料包，但網路不能直接竊取在途資金。由於若通道對手是合作的，交易不會被公佈到 blockchain 上，建議盡可能使用小的支付。在每一次跳躍時鎖定交易手續費與希望用盡可能小的交易金額（後者可能會產生較高的總手續費）之間存在著權衡。有更多的仲介機構的規模較小的轉移意味著更高比例的支付作為閃電網路手續費支付給仲介機構。
+優先使用每 HTLC 的小額付款。一方不應該使用的極高的支付，以防支付不充分路由到其目的地。如果支付沒有到達其目的地並且沿路徑的參與者之一是不合作的，發送者必須等待，直到接收退款之前的期滿。交付時可能會受損，類似於在互聯網上資料包，但網路不能直接竊取在途資金。由於若通道對手是合作的，交易不會被廣播到 blockchain 上，建議盡可能使用小的支付。在每一次跳躍時鎖定交易手續費與希望用盡可能小的交易金額（後者可能會產生較高的總手續費）之間存在著權衡。有更多的仲介機構的規模較小的轉移意味著更高比例的支付作為閃電網路手續費支付給仲介機構。
 
 ### 8.3 清除故障和重新路由 | Clearing Failure and Rerouting
 
@@ -1300,7 +1300,7 @@ If a transaction fails to reach its final destination, the receiver should send 
 
 Figure 18: Dave creates a path back to Alice after Alice fails to send funds to Dave, because Carol is uncooperative. The input R from hash(R) is never brodcast by Dave, because Carol did not complete her actions. If R was broadcast, Alice will break-even. Dave, who controls R should never broadcast R because he may not receive funds from Carol, he should let the contracts expire. Alice and Bob have the option to net out and close the contract early, as well, in this diagram.
 
-圖 18：Alice 將資金發送給 Dave 失敗後，Dave 創建一條返回 Alice 的路徑，因為 Carol 是不合作的。從雜湊值（R）中產生的輸入 R 永遠不會被 Dave 公佈，因為 Carol 沒有完成她的行動。若 R 公佈，Alice 將盈虧平衡。控制 R 的 Dave 永遠不公佈 R，因為他可能無法從 Carol 獲得資金，他應該讓合約到期。在此圖中，Alice 和 Bob 也可在早期淨出並關閉合約。
+圖 18：Alice 將資金發送給 Dave 失敗後，Dave 創建一條返回 Alice 的路徑，因為 Carol 是不合作的。從雜湊值（R）中產生的輸入 R 永遠不會被 Dave 廣播，因為 Carol 沒有完成她的行動。若 R 廣播，Alice 將盈虧平衡。控制 R 的 Dave 永遠不廣播 R，因為他可能無法從 Carol 獲得資金，他應該讓合約到期。在此圖中，Alice 和 Bob 也可在早期淨出並關閉合約。
 
 ---
 
@@ -1345,7 +1345,7 @@ Lightning Network fees, which differ from blockchain fees, are paid directly bet
 
 Counterparty risk for fees only exist with one’s direct channel counterparty. If a node two hops away decides to disconnect and their transaction gets broadcast on the blockchain, one’s direct counterparties should not broadcast on the blockchain, but continue to update via novation with a new Commitment Transaction. See the Decrementing Timelocks entry in the HTLC section for more information about counterparty risk.
 
-手續費的對手風險只在與一方的直接通道對手交易時存在。如果兩次跳躍以外的一個節點決定斷開聯繫並且將其交易公佈在 blockchain 上，一方的直接對手不應公佈在 blockchain 上，而是繼續通過更替更新成為一個新的承諾交易。遞減 Timelocks 進入 HTLC 部分，來獲取有關交易對手風險的更多資訊。
+手續費的對手風險只在與一方的直接通道對手交易時存在。如果兩次跳躍以外的一個節點決定斷開聯繫並且將其交易廣播在 blockchain 上，一方的直接對手不應廣播在 blockchain 上，而是繼續通過更替更新成為一個新的承諾交易。遞減 Timelocks 進入 HTLC 部分，來獲取有關交易對手風險的更多資訊。
 
 ---
 
@@ -1367,7 +1367,7 @@ The primary risks relate to timelock expiration. Additionally, for core nodes an
 
 Participants must choose timelocks with sufficient amounts of time. If insufficient time is given, it is possible that timelocked transactions believed to be invalid will become valid, enabling coin theft by the counterparty. There is a trade-off between longer timelocks and the time-value of money. When writing wallet and Lightning Network application software, it is necessary to ensure that sufficient time is given and users are able to have their transactions enter into the blockchain when interacting with non-cooperative or malicious channel counterparties.
 
-參賽者必須選擇時間充足的 timelocks。如果不給于充分的時間，被認為是無效 timelocked 交易有可能將成為有效的，可能導致對方盜竊資金。較長的 timelocks 和資金的時間價值之間存在著權衡。當編寫錢包和閃電網路應用軟體時，確保提供其足夠的時間是必要的，並保證用戶在與不合作或惡意的通道對手進行交易時能夠在 blockchain 上公佈其交易。
+參賽者必須選擇時間充足的 timelocks。如果不給于充分的時間，被認為是無效 timelocked 交易有可能將成為有效的，可能導致對方盜竊資金。較長的 timelocks 和資金的時間價值之間存在著權衡。當編寫錢包和閃電網路應用軟體時，確保提供其足夠的時間是必要的，並保證用戶在與不合作或惡意的通道對手進行交易時能夠在 blockchain 上廣播其交易。
 
 ---
 
@@ -1375,25 +1375,25 @@ Participants must choose timelocks with sufficient amounts of time. If insuffici
 
 Forced expiration of many transactions may be the greatest systemic risk when using the Lightning Network. If a malicious participant creates many channels and forces them all to expire at once, these may overwhelm block data capacity, forcing expiration and broadcast to the blockchain. The result would be mass spam on the bitcoin network. The spam may delay transactions to the point where other locktimed transactions become valid.
 
-許多交易被迫滿期是使用閃電網路時最大的系統性風險。如果一個惡意的參與者創造了許多通道，迫使他們全都一次性失效，這可能會超過塊資料容量，迫使其過期並公佈在 blockchain 上。其結果將是比特幣網路上充滿海量垃圾郵件。垃圾郵件可能會在某種程度上延遲交易，到達其他 locktimed 交易生效的地步。
+許多交易被迫滿期是使用閃電網路時最大的系統性風險。如果一個惡意的參與者創造了許多通道，迫使他們全都一次性失效，這可能會超過塊資料容量，迫使其過期並廣播在 blockchain 上。其結果將是比特幣網路上充滿海量垃圾郵件。垃圾郵件可能會在某種程度上延遲交易，到達其他 locktimed 交易生效的地步。
 
 ---
 
 This may be mitigated by permitting one transaction replacement on all pending transactions. Anti-spam can be used by permitting only one transaction replacement of a higher sequence number by the inverse of an even or odd number. For example, if an odd sequence number was broadcast, permit a replacement to a higher even number only once. Transactions would use the sequence number in an orderly way to replace other transactions. This mitigates the risk assuming honest miners. This attack is extremely high risk, as incorrect broadcast of Commitment Transactions entail a full penalty of all funds in the channel.
 
-這可以通過允許一個交易更換所有未決的交易得到緩解。只允許一個交易更換使用偶數或奇數的倒數的更高順序號才可以使用反垃圾郵件。例如，如果奇數序號被公佈，只允許更換一次到更高的偶數。交易將使用有序的序號，以取代其他交易。這減輕了誠實的礦工承擔的風險。這種攻擊是非常高的風險，因為對承諾交易的不正確公佈會帶來的通道內所有基金全部損失。
+這可以通過允許一個交易更換所有未決的交易得到緩解。只允許一個交易更換使用偶數或奇數的倒數的更高順序號才可以使用反垃圾郵件。例如，如果奇數序號被廣播，只允許更換一次到更高的偶數。交易將使用有序的序號，以取代其他交易。這減輕了誠實的礦工承擔的風險。這種攻擊是非常高的風險，因為對承諾交易的不正確廣播會帶來的通道內所有基金全部損失。
 
 ---
 
 Additionally, one may attempt to steal HTLC transactions by forcing a timeout transaction to go through when it should not. This can be easily mitigated by having each transfer inside the channel be lower than the total transaction fees used. Since transactions are extremely cheap and do not hit the blockchain with cooperative channel counterparties, large transfers of value can be split into many small transfers. This attempt can only work if the blocks are completely full for a long time. While it is possible to mitigate it using a longer HTLC timeout duration, variable block sizes may become common, which may need mitigations.
 
-此外，人們可能通過強制暫停不應停止的交易試圖竊取 HTLC 交易。如果通道內每一筆交易比所使用的總交易手續費低，則可以減輕這種風險。由於交易是非常便宜的，並且如果與合作通道對手交易則不會公佈在 blockchain 上，價值大的傳輸可以分成許多小的傳輸，這只能在區塊很長一段時間內完全充滿才可以實現。雖然可以使用一個較長的 HTLC Timeout 持續時間來減輕它，可變區塊大小可能變得普遍，這可能需要緩解。
+此外，人們可能通過強制暫停不應停止的交易試圖竊取 HTLC 交易。如果通道內每一筆交易比所使用的總交易手續費低，則可以減輕這種風險。由於交易是非常便宜的，並且如果與合作通道對手交易則不會廣播在 blockchain 上，價值大的傳輸可以分成許多小的傳輸，這只能在區塊很長一段時間內完全充滿才可以實現。雖然可以使用一個較長的 HTLC Timeout 持續時間來減輕它，可變區塊大小可能變得普遍，這可能需要緩解。
 
 ---
 
 If this type of transaction becomes the dominant form of transactions which are included on the blockchain, it may become necessary to increase the block size and run a variable blocksize structure and timestop flags as described in the section below. This can create sufficient penalties and disincentives to be highly unprofitable and unsuccessful for attackers, as attackers lose all their funds from broadcasting the wrong transaction, to the point where it will never occur.
 
-一個可變大小的區塊結構和如下面的部分中描述的 timestop 標誌。這可能會造成足夠多的處罰，並不激勵高度不獲利和不成功的攻擊，因為攻擊者失去了他們所有的資金，由於公佈了錯誤的交易，以致再也不會發生的地步。
+一個可變大小的區塊結構和如下面的部分中描述的 timestop 標誌。這可能會造成足夠多的處罰，並不激勵高度不獲利和不成功的攻擊，因為攻擊者失去了他們所有的資金，由於廣播了錯誤的交易，以致再也不會發生的地步。
 
 ---
 
@@ -1419,11 +1419,11 @@ When one party loses data, it is possible for the counterparty to steal funds. T
 
 ---
 
-### 9.5 忘記及時公佈交易 | Forgetting to Broadcast the Transaction in Time
+### 9.5 忘記及時廣播交易 | Forgetting to Broadcast the Transaction in Time
 
 If one does not broadcast a transaction at the correct time, the counterparty may steal funds. This can be mitigated by having a designated third party to send funds. An output fee can be added to create an incentive for this third party to watch the network. Further, this can also be mitigated by implementing OP CHECKSEQUENCEVERIFY.
 
-如果一方沒有在正確的時間公佈交易，交易對手可能會盜取資金。這可以通過由指定的第三方發送資金來緩解。可以增加輸出費來創造一個激勵協力廠商監控網路。此外，這也可以通過實施 OP CHECKSEQUENCEVERIFY 減輕。
+如果一方沒有在正確的時間廣播交易，交易對手可能會盜取資金。這可以通過由指定的第三方發送資金來緩解。可以增加輸出費來創造一個激勵協力廠商監控網路。此外，這也可以通過實施 OP CHECKSEQUENCEVERIFY 減輕。
 
 ---
 
@@ -1472,7 +1472,7 @@ To mitigate timelock spam vulnerabilities, non-miner and miners’ consensus rul
 
 When transactions are viewed as circuits and contracts instead of transaction packets, the consensus risks can be measured by the amount of time available to cover the UTXO set controlled by hostile parties. In effect, the upper bound of the UTXO size is determined by transaction fees and the standard minimum transaction output value. If the bitcoin miners have a deterministic mempool which prioritizes transactions respecting a “weak” local time order of transactions, it could become extremely unprofitable and unlikely for an attack to succeed. Any transaction spam time attack by broadcasting the incorrect Commitment Transaction is extremely high risk for the attacker, as it requires an immense amount of bitcoin and all funds committed in those transactions will be lost if the attacker fails.
 
-當交易被視為電路和合約，而不是交易資料包，共識風險可以通過由敵對方控制的支付 UTXO 的可用時間的數量計量。事實上，UTXO 大小的上界是由交易手續費和標準最低交易輸出來確定的。如果比特幣礦工有一個確定的記憶體池，其優先交易考慮“弱”秩序的當地時間的交易，它可能變得極其不受益或者攻擊極不可能成功。通過公佈不正確承諾交易的任何交易時間的垃圾郵件的攻擊對攻擊者來說是非常高風險的，因為它需要比特幣的數額巨大，如果攻擊失敗，用於這些交易的所有資金都將丟失。
+當交易被視為電路和合約，而不是交易資料包，共識風險可以通過由敵對方控制的支付 UTXO 的可用時間的數量計量。事實上，UTXO 大小的上界是由交易手續費和標準最低交易輸出來確定的。如果比特幣礦工有一個確定的記憶體池，其優先交易考慮“弱”秩序的當地時間的交易，它可能變得極其不受益或者攻擊極不可能成功。通過廣播不正確承諾交易的任何交易時間的垃圾郵件的攻擊對攻擊者來說是非常高風險的，因為它需要比特幣的數額巨大，如果攻擊失敗，用於這些交易的所有資金都將丟失。
 
 ---
 
@@ -1521,7 +1521,7 @@ If all transactions using Bitcoin were conducted inside a network of micropaymen
 
 With a network of instantly confirmed micropayment channels whose payments are encumbered by timelocks and hashlock outputs, Bitcoin can scale to billions of users without custodial risk or blockchain centralization when transactions are conducted securely off-chain using bitcoin scripting, with enforcement of non-cooperation by broadcasting signed multisignature transactions on the blockchain.
 
-隨著即時確認小額支付通道網路的發展，其支付由 timelocks 和 hashlock 輸出控制，比特幣可以在沒有保管風險和 blockchain 集中性的情況下擴展到數十億的使用者，當交易使用比特幣的腳本安全的進行，通過公佈簽署了的 blockchain 上的多重簽名交易來強制實施不合作。
+隨著即時確認小額支付通道網路的發展，其支付由 timelocks 和 hashlock 輸出控制，比特幣可以在沒有保管風險和 blockchain 集中性的情況下擴展到數十億的使用者，當交易使用比特幣的腳本安全的進行，通過廣播簽署了的 blockchain 上的多重簽名交易來強制實施不合作。
 
 ---
 
@@ -1605,7 +1605,7 @@ SIGHASH NOINPUT 意味著位址重用的風險，因為只要 sigScript 返回�
 
 Further, and just as importantly, SIGHASH NOINPUT permits participants to sign spends of transactions without knowing the signatures of the transaction being spent. By solving malleability in the above manner, two parties may build contracts and spend transactions without either party having the ability to broadcast that original transaction on the blockchain until both parties agree. With the new sighash type, participants may build potential contract states and potential payout conditions and agree upon all terms, before the contract may be paid, broadcast, and executed upon without the need for a trusted third party.
 
-另外，同樣重要的是，SIGHASH NOINPUT 允許參與者在不知道該交易的簽署花費的情況下簽署花費交易。通過上述方式解決延展性，雙方可以建立合約和花費交易，而沒有任何一方有在 blockchain 上公佈的原始交易的能力，直到雙方同意。有了新的 sighash 類型，參與者在合約可支付，公佈，並且在無需受信任的協力廠商得條件下執行之前，可以建立一個潛在的合約狀態和潛在的支付條件，並同意所有條款。
+另外，同樣重要的是，SIGHASH NOINPUT 允許參與者在不知道該交易的簽署花費的情況下簽署花費交易。通過上述方式解決延展性，雙方可以建立合約和花費交易，而沒有任何一方有在 blockchain 上廣播的原始交易的能力，直到雙方同意。有了新的 sighash 類型，參與者在合約可支付，廣播，並且在無需受信任的協力廠商得條件下執行之前，可以建立一個潛在的合約狀態和潛在的支付條件，並同意所有條款。
 
 ---
 Without SIGHASH NOINPUT, one cannot build outputs before the transaction can be funded. It is as if one cannot make any agreements without committing funds without knowing what one is committing to. SIGHASH NOINPUT allows one to build redemption for transactions which do not yet exist. In other words, one can form agreements before funding the transaction if the output is a 2-of-2 multisignature transaction.
@@ -1616,7 +1616,7 @@ Without SIGHASH NOINPUT, one cannot build outputs before the transaction can be 
 
 To use SIGHASH NOINPUT, one builds a Funding Transaction, and does not yet sign it. This Funding Transaction does not need to use SIGHASH NOINPUT if it is spending from a transaction which has already been entered into the blockchain. To spend from a Funding Transaction with a 2-of-2 multisignature output which has not yet been signed and broadcast, however, requires using SIGHASH NOINPUT.
 
-要使用 SIGHASH NOINPUT，一方建立一個資金交易，並且不簽署。這個資金交易並不需要使用 SIGHASH NOINPUT，如果從已經被公佈到 blockchain 上的交易中花費。要從輸出是 2-of-2 的多重簽名資金交易中花費，此交易還未被簽署和公佈，需要使用 SIGHASH NOINPUT。
+要使用 SIGHASH NOINPUT，一方建立一個資金交易，並且不簽署。這個資金交易並不需要使用 SIGHASH NOINPUT，如果從已經被廣播到 blockchain 上的交易中花費。要從輸出是 2-of-2 的多重簽名資金交易中花費，此交易還未被簽署和廣播，需要使用 SIGHASH NOINPUT。
 
 ---
 
