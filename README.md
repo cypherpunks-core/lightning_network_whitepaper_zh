@@ -181,7 +181,7 @@ The restriction on timestamping and dates, however, is not as complex as full or
 
 Therefore, it is possible in bitcoin to devise a bitcoin script whereby all old transactions are invalidated, and only the new transaction is valid. Invalidation is enforced by a bitcoin output script and dependent transactions which force the other party to give all their funds to the channel counterparty. By taking all funds as a penalty to give to the other, all old transactions are thereby invalidated.
 
-因此，有可能在比特幣中設計一種比特幣腳本來判定所有舊的交易被視為無效，只有新的交易是有效的。失效是由比特幣輸出腳本，並迫使對方把他們的所有資金給通道對方。通過采取所有資金作為一個懲罰給對方的方法，從而使所有舊的交易失效。
+因此，在比特幣中可以設計比特幣腳本，從而使所有舊交易無效，並且只有新交易有效。 失效由比特幣輸出腳本和依賴交易強制執行，這迫使另一方將所有資金提供給通道對手方。 通過將所有資金作為懲罰給予對方，所有舊交易因此無效。
 
 ---
 
