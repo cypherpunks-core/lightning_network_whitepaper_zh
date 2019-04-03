@@ -82,7 +82,7 @@ The Bitcoin[1] blockchain holds great promise for distributed ledgers, but the b
 The payment network Visa achieved 47,000 peak transactions per second (tps) on its network during the 2013 holidays[2], and currently averages hundreds of millions per day. Currently, Bitcoin supports less than 7 transactions per second with a 1 megabyte block limit. If we use an average of 300 bytes per bitcoin transaction and assumed unlimited block sizes, an equivalent capacity to peak Visa transaction volume of 47,000/tps would be nearly 8 gigabytes per Bitcoin block, every ten minutes on average. Continuously, that would be over 400 terabytes of data per year.
 
 支付網路 Visa 在 2013 假期期間[2]，在其網路上每秒實現 47000 交易（TPS），目前實現平
-均每天數億筆交易。目前，比特幣因為 1 百萬位元組塊的限制，每秒僅支持小於 7 筆交易。如果 每次比特幣交易我們平均用 300 位元組，並假設塊大小無限制，達到與 Visa 峰值 47000 / TPS 的交易量同等資料容量意味著每十分鐘每比特幣區塊將近 8 GB資料。持續下去，每年的資料將超過 400 TB。
+均每天數億筆交易。目前，比特幣因為 1 MB塊的限制，每秒僅支持小於 7 筆交易。如果 每次比特幣交易我們平均用 300 位元組，並假設塊大小無限制，達到與 Visa 峰值 47000 / TPS 的交易量同等資料容量意味著每十分鐘每比特幣區塊將近 8 GB資料。持續下去，每年的資料將超過 400 TB。
 
 ---
 
@@ -106,7 +106,7 @@ While it is possible that Moore’s Law will continue indefinitely, and the comp
 
 To achieve much higher than 47,000 transactions per second using Bitcoin requires conducting transactions off the Bitcoin blockchain itself. It would be even better if the bitcoin network supported a near-unlimited number of transactions per second with extremely low fees for micropayments. Many micropayments can be sent sequentially between two parties to enable any size of payments. Micropayments would enable unbunding, less trust and commodification of services, such as payments for per-megabyte internet service. To be able to achieve these micropayment use cases, however, would require severely reducing the amount of transactions that end up being broadcast on the global Bitcoin blockchain.
 
-為了實現用比特幣進行每秒多於 47000 筆交易，需要脫離比特幣 blockchain 本身進行交易。 如果比特幣網路支援以極低的手續費每秒進行近乎無限數量的小額交易會更好。許多小額支付 可以按順序在兩方之間發送，使任何大小的付款成為可能。小額支付將使服務變得非捆束， 少信任，商品化。如支付每百萬位元組的互聯網服務。為了能夠實現這些小額用例，將需要嚴重 降低最終被廣播的全球比特幣 blockchain 交易的數量。
+為了實現用比特幣進行每秒多於 47000 筆交易，需要脫離比特幣 blockchain 本身進行交易。 如果比特幣網路支援以極低的手續費每秒進行近乎無限數量的小額交易會更好。許多小額支付 可以按順序在兩方之間發送，使任何大小的付款成為可能。小額支付將使服務變得非捆束， 少信任，商品化。如支付每MB的互聯網服務。為了能夠實現這些小額用例，將需要嚴重 降低最終被廣播的全球比特幣 blockchain 交易的數量。
 
 ---
 
@@ -1494,7 +1494,7 @@ In addition to helping bitcoin scale, there are many uses for transactions on th
 
 * 外匯套利。目前有留住交換基金並為大市場向 3-6 次區塊確認發展的激勵。這一激勵加入網路是可能的，並可立刻為客戶將他們的資金移進或者移出此交換。如果該交換不具有深入的市場深度並且承諾只允許接近訂單數量的上限，資金被盜的風險就低得多。交換事實上將不再需要有任何錢包。這可大大減少盜竊，以及不需要信任的協力廠商管理員。
 
-* 微支付。比特幣 blockchain 手續費太高而不能接受小額支付，尤其是以最小的值。有了這個系統，類似即時的小額支付在沒有一個協力廠商的託管人的情況下使用比特幣將成為可能。這將使支付互聯網服務的每百萬位元組或支付報紙的每篇文章成為可能。
+* 微支付。比特幣 blockchain 手續費太高而不能接受小額支付，尤其是以最小的值。有了這個系統，類似即時的小額支付在沒有一個協力廠商的託管人的情況下使用比特幣將成為可能。這將使支付互聯網服務的每MB或支付報紙的每篇文章成為可能。
 
 * 金融智能合約和託管。金融合約對時間極其敏感並且對 blockchain 計算的要求更高。通過移動絕大多數不可信交易到 off-chain，就可以不通過訪問 blockchain 獲得非常複雜的交易合約條款。
 
