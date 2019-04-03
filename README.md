@@ -82,7 +82,7 @@ The Bitcoin[1] blockchain holds great promise for distributed ledgers, but the b
 The payment network Visa achieved 47,000 peak transactions per second (tps) on its network during the 2013 holidays[2], and currently averages hundreds of millions per day. Currently, Bitcoin supports less than 7 transactions per second with a 1 megabyte block limit. If we use an average of 300 bytes per bitcoin transaction and assumed unlimited block sizes, an equivalent capacity to peak Visa transaction volume of 47,000/tps would be nearly 8 gigabytes per Bitcoin block, every ten minutes on average. Continuously, that would be over 400 terabytes of data per year.
 
 支付網路 Visa 在 2013 假期期間[2]，在其網路上每秒實現 47000 交易（TPS），目前實現平
-均每天數億筆交易。目前，比特幣因為 1 百萬位元組塊的限制，每秒僅支持小於 7 筆交易。如果 每次比特幣交易我們平均用 300 位元組，並假設塊大小無限制，達到與 Visa 峰值 47000 / TPS 的交易量同等資料容量意味著每十分鐘每比特幣區塊將近 8 千百萬位元組資料。持續下去，每年的資料將超過 400 萬億位元組。
+均每天數億筆交易。目前，比特幣因為 1 百萬位元組塊的限制，每秒僅支持小於 7 筆交易。如果 每次比特幣交易我們平均用 300 位元組，並假設塊大小無限制，達到與 Visa 峰值 47000 / TPS 的交易量同等資料容量意味著每十分鐘每比特幣區塊將近 8 GB資料。持續下去，每年的資料將超過 400 萬億位元組。
 
 ---
 
@@ -94,13 +94,13 @@ Clearly, achieving Visa-like capacity on the Bitcoin network isn’t feasible to
 
 Having fewer validators due to larger blocks not only implies fewer individuals ensuring ledger accuracy, but also results in fewer entities that would be able to validate the blockchain as part of the mining process, which results in encouraging miner centralization. Extremely large blocks, for example in the above case of 8 gigabytes every 10 minutes on average, would imply that only a few parties would be able to do block validation. This creates a great possibility that entities will end up trusting centralized parties. Having privileged, trusted parties creates a social trap whereby the central party will not act in the interest of an individual (principalagent problem), e.g. rentierism by charging higher fees to mitigate the incentive to act dishonestly. In extreme cases, this manifests as individuals sending funds to centralized trusted custodians who have full custody of customers’ funds. Such arrangements, as are common today, create severe counterparty risk. A prerequisite to prevent that kind of centralization from occurring would require the ability for bitcoin to be validated by a single consumer-level computer on a home broadband connection. By ensuring that full validation can occur cheaply, Bitcoin nodes and miners will be able to prevent extreme centralization and trust, which ensures extremely low transaction fees.
 
-由於較大區塊而只有更少的驗證器不僅意味著更少數量的個人來確保總帳精度，也導致在開采過程中較少的實體能夠驗證 blockchain，這將鼓勵礦工集中化。非常大的區塊，例如在上述情況下平均每 10 分鐘 8 千百萬位元組，將意味著只有少數能夠驗證區塊。這就產生了一個實體會相信集中方的可能性。有特權的，值得信賴的集中方創建一個社交陷阱，由此集中方不 會在以個人（委託-代理問題）的利益為主，如承租人通過收取較高的手續費，以減輕行事不誠實的傾向。在極端的情況下，這表現為個人給擁有客戶資金的充分的監管權的集中方發送資金。這樣的安排，如今是非常常見的，產生嚴重的交易對手風險。防止那種集權發生的一個先決條件需要比特幣有這樣一種能力，通過在家用寬頻連線的單一電腦進行驗證。通過 確保以較低的資金獲得充分的驗證，比特幣節點和礦工將能夠避免極端的集權和信任，確保極低的交易手續費。
+由於較大區塊而只有更少的驗證器不僅意味著更少數量的個人來確保總帳精度，也導致在開采過程中較少的實體能夠驗證 blockchain，這將鼓勵礦工集中化。非常大的區塊，例如在上述情況下平均每 10 分鐘 8 GB，將意味著只有少數能夠驗證區塊。這就產生了一個實體會相信集中方的可能性。有特權的，值得信賴的集中方創建一個社交陷阱，由此集中方不 會在以個人（委託-代理問題）的利益為主，如承租人通過收取較高的手續費，以減輕行事不誠實的傾向。在極端的情況下，這表現為個人給擁有客戶資金的充分的監管權的集中方發送資金。這樣的安排，如今是非常常見的，產生嚴重的交易對手風險。防止那種集權發生的一個先決條件需要比特幣有這樣一種能力，通過在家用寬頻連線的單一電腦進行驗證。通過 確保以較低的資金獲得充分的驗證，比特幣節點和礦工將能夠避免極端的集權和信任，確保極低的交易手續費。
 
 ---
 
 While it is possible that Moore’s Law will continue indefinitely, and the computational capacity for nodes to cost-effectively compute multigigabyte blocks may exist in the future, it is not a certainty.
 
-摩爾定律無限期地繼續是有可能的，並且在未來，能使節點具有以低成本高效益的計算多千百萬位元組的區塊的計算能力，但是那不是確定的。
+摩爾定律無限期地繼續是有可能的，並且在未來，能使節點具有以低成本高效益的計算多GB的區塊的計算能力，但是那不是確定的。
 
 ---
 
