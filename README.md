@@ -82,7 +82,7 @@ The Bitcoin[1] blockchain holds great promise for distributed ledgers, but the b
 The payment network Visa achieved 47,000 peak transactions per second (tps) on its network during the 2013 holidays[2], and currently averages hundreds of millions per day. Currently, Bitcoin supports less than 7 transactions per second with a 1 megabyte block limit. If we use an average of 300 bytes per bitcoin transaction and assumed unlimited block sizes, an equivalent capacity to peak Visa transaction volume of 47,000/tps would be nearly 8 gigabytes per Bitcoin block, every ten minutes on average. Continuously, that would be over 400 terabytes of data per year.
 
 支付網路 Visa 在 2013 假期期間[2]，在其網路上每秒實現 47000 交易（TPS），目前實現平
-均每天數億筆交易。目前，比特幣因為 1 MB塊的限制，每秒僅支持小於 7 筆交易。如果 每次比特幣交易我們平均用 300 位元組，並假設塊大小無限制，達到與 Visa 峰值 47000 / TPS 的交易量同等資料容量意味著每十分鐘每比特幣區塊將近 8 GB資料。持續下去，每年的資料將超過 400 TB。
+均每天數億筆交易。目前，比特幣因為 1 MB塊的限制，每秒僅支持小於 7 筆交易。如果 每次比特幣交易我們平均用 300 Byte，並假設塊大小無限制，達到與 Visa 峰值 47000 / TPS 的交易量同等資料容量意味著每十分鐘每比特幣區塊將近 8 GB資料。持續下去，每年的資料將超過 400 TB。
 
 ---
 
@@ -535,7 +535,7 @@ Functionally, this will be stored as some kind of auxiliary timestop block heigh
 
 However, this requires some kind of flag in the block to designate whether it is a timestop block. For full SPV compatibility (Simple Payment Verification; lightweight clients), it is desirable for this to be within the 80 byte block header instead of in the coinbase. There are two places which may be a good place to put in this flag in the block header: in the block time and in the block version. The block time may not be safe due to the last bits being used as an entropy source for some ASIC miners, therefore a bit may need to be consumed for timestop flags. Another option would be to hardcode timestop activation as a hard consensus rule (e.g. via block size), however this may make things less flexible. By setting sane defaults for timestop rules, these rules can be changed without consensus soft-forks.
 
-然而，這需要區塊中的某種標誌指定它是否是一個 timestop 區塊。對於 SPV 完全相容性（簡單付款確認;羽量級用戶端），它要求在 80 位元組的區塊標頭內，而不是在 coinbase。在區塊標頭存放這一標誌的可能的兩個地方：區塊時間和區塊版本。區塊時間可能不安全，由於最後一位被一些 ASIC 的礦工用作熵源，因此可能需要一位元被消耗用於 timestop 標誌。另一種選擇是硬編碼 timestop 啟動，作為硬協商一致規則（例如，通過區塊大小），但是這可能使 事情變得不太靈活。通過設置 timestop 的健全的預設規則，這些規則可以不通過一致的 soft-forks 來改變。
+然而，這需要區塊中的某種標誌指定它是否是一個 timestop 區塊。對於 SPV 完全相容性（簡單付款確認;羽量級用戶端），它要求在 80 Byte的區塊標頭內，而不是在 coinbase。在區塊標頭存放這一標誌的可能的兩個地方：區塊時間和區塊版本。區塊時間可能不安全，由於最後一位被一些 ASIC 的礦工用作熵源，因此可能需要一位元被消耗用於 timestop 標誌。另一種選擇是硬編碼 timestop 啟動，作為硬協商一致規則（例如，通過區塊大小），但是這可能使 事情變得不太靈活。通過設置 timestop 的健全的預設規則，這些規則可以不通過一致的 soft-forks 來改變。
 
 ---
 
@@ -845,7 +845,7 @@ An HTLC is also a channel contract with one’s counterparty which is enforcible
 HTLC 也是一個可在區塊鏈上執行的與對方簽訂的的通道合約。通道中對方同意雜湊
 Timelock 合約的以下條款：
 
-1. 如果 Bob 可以為 Alice 從已知的雜湊值 H 中產生未知的 20 位元組的的隨機輸入資料 R，在三天之內，Alice 將通過支付 Bob0.1 BTC 結算合約。
+1. 如果 Bob 可以為 Alice 從已知的雜湊值 H 中產生未知的 20 Byte的的隨機輸入資料 R，在三天之內，Alice 將通過支付 Bob0.1 BTC 結算合約。
 
 2. 如果三天已經過去了，那麼上述條款無效，清算過程也無效，雙方三天后都不能結算和要求付款。
 
@@ -1161,7 +1161,7 @@ If a counterparty broadcasts the wrong Commitment Transaction, which private key
 
 This enables participants in a channel to have prior output states (transactions) invalidated by both parties without using much data at all. By disclosing private keys pre-arranged in a merkle-tree, it is possible to invalidate millions of old transactions with only a few kilobytes of data per channel. Core channels in the Lightning Network can conduct billions of transactions without a need for significant storage costs.
 
-這使得通道參與雙方能夠使之前的輸出狀態（交易）失效，並且不使用大量的資料。通過公開一個 MERKLE 樹中預先安排的私密金鑰，僅僅使用每個通道中幾個千位元組的資料來使百萬舊記錄無效是可能的。閃電網路的核心通道可以進行數十億美元的交易，而不需要大量的儲存成本。
+這使得通道參與雙方能夠使之前的輸出狀態（交易）失效，並且不使用大量的資料。通過公開一個 MERKLE 樹中預先安排的私密金鑰，僅僅使用每個通道中幾個KB的資料來使百萬舊記錄無效是可能的。閃電網路的核心通道可以進行數十億美元的交易，而不需要大量的儲存成本。
 
 ---
 
@@ -1453,7 +1453,7 @@ miners.
 
 If we presume that a decentralized payment network exists and one user will make 3 blockchain transactions per year on average, Bitcoin will be able to support over 35 million users with 1MB blocks in ideal circumstances (assuming 2000 transactions/MB, or 500 bytes/Tx). This is quite limited, and an increase of the block size may be necessary to support everyone in the world using Bitcoin. A simple increase of the block size would be a hard fork, meaning all nodes will need to update their wallets if they wish to participate in the network with the larger blocks.
 
-如果我們假定一個分散的支付網路存在，一個使用者平均每年將進行 3 筆區塊鏈交易，在理想的情況下，比特幣就能夠支持超過 3500 萬用戶的 1MB 區塊（假設 2000 交易/ MB 或 500 位元組/ TX ）的交易。這是相當有限的，並且增加區塊大小以支持在比特幣世界交易的每個人可能是必要的。區塊大小的簡單增加將是一個 hard fork，這意味著所有的節點都需要更新自己的錢包，如果他們希望參與到具有較大區塊的網路中。
+如果我們假定一個分散的支付網路存在，一個使用者平均每年將進行 3 筆區塊鏈交易，在理想的情況下，比特幣就能夠支持超過 3500 萬用戶的 1MB 區塊（假設 2000 交易/ MB 或 500 Byte/ TX ）的交易。這是相當有限的，並且增加區塊大小以支持在比特幣世界交易的每個人可能是必要的。區塊大小的簡單增加將是一個 hard fork，這意味著所有的節點都需要更新自己的錢包，如果他們希望參與到具有較大區塊的網路中。
 
 ---
 
@@ -1508,13 +1508,13 @@ Creating a network of micropayment channels enables bitcoin scalability, micropa
 
 If all transactions using Bitcoin were on the blockchain, to enable 7 billion people to make two transactions per day, it would require 24GB blocks every ten minutes at best (presuming 250 bytes per transaction and 144 blocks per day). Conducting all global payment transactions on the blockchain today implies miners will need to do an incredible amount of computation, severely limiting bitcoin scalability and full nodes to a few centralized processors.
 
-如果使用比特幣的所有交易都在區塊鏈上，使七十億人每天進行兩筆交易，這最多需要 每十分鐘 24GB 區塊（假設每筆交易 250 位元組，平均每天 144 區塊）。今天開展的所有區塊鏈上的全球支付交易意味著礦工們需要做驚人數量的計算，嚴重限制了比特幣的可 擴展性並且將節點充分的集中到處理器。
+如果使用比特幣的所有交易都在區塊鏈上，使七十億人每天進行兩筆交易，這最多需要 每十分鐘 24GB 區塊（假設每筆交易 250 Byte，平均每天 144 區塊）。今天開展的所有區塊鏈上的全球支付交易意味著礦工們需要做驚人數量的計算，嚴重限制了比特幣的可 擴展性並且將節點充分的集中到處理器。
 
 ---
 
 If all transactions using Bitcoin were conducted inside a network of micropayment channels, to enable 7 billion people to make two channels per year with unlimited transactions inside the channel, it would require 133 MB blocks (presuming 500 bytes per transaction and 52560 blocks per year). Current generation desktop computers will be able to run a full node with old blocks pruned out on 2TB of storage.
 
-如果使用比特幣的所有交易在小額支付的通道網路中進行，以使七十億人創造兩個通道，每年在通道內進行無限的交易，將需要 133 MB 區塊（假設每筆交易 500 位元組，每年 52560 區塊）。目前這一代的臺式電腦將能夠運行一個完整的儲存 2TB 的節點。
+如果使用比特幣的所有交易在小額支付的通道網路中進行，以使七十億人創造兩個通道，每年在通道內進行無限的交易，將需要 133 MB 區塊（假設每筆交易 500 Byte，每年 52560 區塊）。目前這一代的臺式電腦將能夠運行一個完整的儲存 2TB 的節點。
 
 ---
 
